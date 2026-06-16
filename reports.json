@@ -1,16 +1,16 @@
 {
-  "generated_at": "2026-06-16T16:20:00.000Z",
+  "generated_at": "2026-06-16T10:33:51.959Z",
   "base_url": "https://ai-news.camphausen.eu",
   "reports": [
     {
       "id": "2026-06-16",
       "type": "daily",
       "label": "16.06.2026",
-      "title": "Beispiel-Daily: EU AI Intelligence Briefing",
-      "summary": "Technischer Platzhalter zur Prüfung von GitHub Pages, Index und Archiv. Kein echtes Intelligence Briefing.",
+      "title": "AI Intelligence Daily - 16. Juni 2026",
+      "summary": "Enterprise-Governance im Fokus: Microsoft macht Work IQ für Agenten allgemein verfügbar, KPMG zeigt Halluzinationsrisiken in Beratungsreports, und Microsofts Partnerprogramm verschiebt Agentic AI Richtung Audit und Zertifizierung.",
       "path": "daily/2026-06-16.html",
       "url": "https://ai-news.camphausen.eu/daily/2026-06-16.html",
-      "published_at": "2026-06-16T16:20:00.000Z"
+      "published_at": "2026-06-16T10:33:51.959Z"
     }
   ]
 }
