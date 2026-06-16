@@ -2,7 +2,13 @@
 
 Öffentliches GitHub-Pages-Repository für veröffentlichte Daily- und Weekly-Reports des EU AI Intelligence Briefing Agenten.
 
-Erwartete Pages-URL nach Aktivierung:
+Primäre Report-URL:
+
+```text
+https://ai-news.camphausen.eu/
+```
+
+GitHub-Pages-Fallback:
 
 ```text
 https://camphomie.github.io/ai-news-digest/
