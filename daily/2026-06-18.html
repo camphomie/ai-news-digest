@@ -1,0 +1,1153 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Intelligence Daily: Europas KI-Lücke wird messbar</title>
+  <style>
+    :root {
+      --bg: #eef3f9;
+      --bg-radial: radial-gradient(circle at top left, rgba(49, 91, 217, 0.14), transparent 32rem), radial-gradient(circle at top right, rgba(31, 122, 77, 0.10), transparent 28rem), #eef3f9;
+      --surface: #ffffff;
+      --surface-soft: #f7f9fd;
+      --surface-blue: #f1f5ff;
+      --text: #111b2e;
+      --muted: #66748c;
+      --muted-2: #8190a8;
+      --border: #d9e2ef;
+      --border-strong: #bfcae0;
+      --accent: #244ed8;
+      --accent-strong: #1739a8;
+      --accent-soft: #e8efff;
+      --success: #1f7a4d;
+      --success-soft: #e7f5ee;
+      --warning: #b26a00;
+      --warning-soft: #fff3dc;
+      --risk: #a63f3f;
+      --risk-soft: #fdecec;
+      --watch: #2563eb;
+      --watch-soft: #eaf1ff;
+      --shadow: 0 18px 45px rgba(17, 30, 58, 0.10);
+      --shadow-soft: 0 8px 24px rgba(17, 30, 58, 0.07);
+      --radius-xl: 26px;
+      --radius-lg: 18px;
+      --radius-md: 14px;
+      --radius-sm: 10px;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      padding: 34px;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--bg-radial);
+      color: var(--text);
+      line-height: 1.55;
+    }
+
+    h1, h2, h3, h4, p { margin: 0; }
+    h1 { max-width: 920px; font-size: clamp(32px, 5vw, 56px); line-height: 0.98; letter-spacing: -0.045em; }
+    h2 { font-size: clamp(22px, 3vw, 34px); line-height: 1.08; letter-spacing: -0.03em; }
+    h3 { font-size: 20px; line-height: 1.18; letter-spacing: -0.02em; }
+    h4 { font-size: 15px; line-height: 1.25; }
+    a { color: var(--accent-strong); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    .daily-briefing {
+      max-width: 1220px;
+      margin: 0 auto;
+      display: grid;
+      gap: 24px;
+    }
+
+    .hero,
+    .top-story,
+    .story-card,
+    .sidebar-block {
+      background: rgba(255, 255, 255, 0.92);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow-soft);
+      backdrop-filter: blur(12px);
+    }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      padding: 30px;
+      display: grid;
+      gap: 18px;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      height: 5px;
+      background: linear-gradient(90deg, #244ed8, #1f7a4d, #b26a00);
+      pointer-events: none;
+    }
+
+    .hero > * { position: relative; }
+
+    .eyebrow,
+    .story-kicker,
+    .section-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      line-height: 1;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-weight: 800;
+    }
+
+    .eyebrow::before,
+    .section-label::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 0 5px var(--accent-soft);
+      flex: 0 0 auto;
+    }
+
+    .briefing-summary {
+      max-width: 880px;
+      color: var(--muted);
+      font-size: 17px;
+    }
+
+    .meta-row,
+    .story-meta,
+    .filter-row,
+    .source-meta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .chip,
+    .badge,
+    .filter-button,
+    .source-pill {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 800;
+      line-height: 1;
+      white-space: nowrap;
+    }
+
+    .chip {
+      padding: 9px 11px;
+      background: var(--accent-soft);
+      color: var(--accent-strong);
+      border: 1px solid rgba(36, 78, 216, 0.12);
+    }
+
+    .badge {
+      padding: 8px 10px;
+      border: 1px solid var(--border);
+      background: var(--surface-soft);
+      color: var(--muted);
+    }
+
+    .badge[data-trust="hoch"] { background: var(--success-soft); color: var(--success); border-color: rgba(31, 122, 77, 0.20); }
+    .badge[data-trust="mittel"], .badge[data-trust="gemischt"] { background: var(--warning-soft); color: var(--warning); border-color: rgba(178, 106, 0, 0.22); }
+    .badge[data-trust="niedrig"] { background: var(--risk-soft); color: var(--risk); border-color: rgba(166, 63, 63, 0.22); }
+    .badge[data-trust="watchlist"] { background: var(--watch-soft); color: var(--watch); border-color: rgba(37, 99, 235, 0.18); }
+
+    .main-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 2.05fr) minmax(300px, 0.95fr);
+      gap: 24px;
+      align-items: start;
+    }
+
+    .main-column,
+    .priority-stories,
+    .sidebar {
+      display: grid;
+      gap: 18px;
+      min-width: 0;
+    }
+
+    .top-story,
+    .story-card {
+      padding: 22px;
+      display: grid;
+      gap: 15px;
+      min-width: 0;
+    }
+
+    .top-story {
+      border-color: rgba(36, 78, 216, 0.24);
+      box-shadow: var(--shadow);
+    }
+
+    .story-header {
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      align-items: flex-start;
+      min-width: 0;
+    }
+
+    .story-title-block,
+    .story-text-stack {
+      display: grid;
+      gap: 8px;
+      min-width: 0;
+    }
+
+    .story-title-block h2,
+    .story-title-block h3 {
+      overflow-wrap: anywhere;
+    }
+
+    .field-note { color: var(--muted); }
+    .field-note strong { color: var(--text); }
+
+    .takeaway {
+      border: 1px solid var(--border);
+      background: linear-gradient(180deg, #fbfcff, #f6f8fc);
+      border-radius: var(--radius-lg);
+      padding: 16px;
+      display: grid;
+      gap: 6px;
+    }
+
+    .takeaway strong {
+      font-size: 13px;
+      letter-spacing: 0.02em;
+    }
+
+    .score-strip {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 10px;
+      max-width: 100%;
+      min-width: 0;
+    }
+
+    .score-item {
+      --score: 1;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      background: var(--surface-soft);
+      padding: 12px;
+      display: grid;
+      gap: 8px;
+      min-height: 88px;
+      min-width: 0;
+      overflow: hidden;
+    }
+
+    .score-topline {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 6px;
+      min-width: 0;
+      max-width: 100%;
+    }
+
+    .score-value {
+      min-width: 0;
+      max-width: 100%;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      font-size: 24px;
+      line-height: 1;
+      font-weight: 900;
+      letter-spacing: -0.04em;
+    }
+
+    .score-max {
+      color: var(--muted-2);
+      font-size: 11px;
+      font-weight: 800;
+      flex: 0 0 auto;
+    }
+
+    .score-label {
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.15;
+      font-weight: 750;
+      overflow-wrap: anywhere;
+      hyphens: auto;
+    }
+
+    .meter {
+      width: 100%;
+      min-width: 0;
+      height: 7px;
+      border-radius: 999px;
+      background: #e4e9f2;
+      overflow: hidden;
+    }
+
+    .meter > span {
+      display: block;
+      height: 100%;
+      width: clamp(0%, calc(var(--score) * 20%), 100%);
+      max-width: 100%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, var(--accent), #1f7a4d);
+    }
+
+    .filter-panel {
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      background: rgba(255, 255, 255, 0.78);
+      box-shadow: var(--shadow-soft);
+      padding: 14px;
+      display: grid;
+      gap: 10px;
+    }
+
+    .filter-label {
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 850;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .filter-button {
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--muted);
+      padding: 8px 10px;
+      cursor: pointer;
+      transition: background 0.18s ease, color 0.18s ease, border-color 0.18s ease, transform 0.18s ease;
+    }
+
+    .filter-button:hover {
+      transform: translateY(-1px);
+      border-color: var(--border-strong);
+    }
+
+    .filter-button.active,
+    .filter-button[aria-pressed="true"] {
+      background: var(--text);
+      color: #ffffff;
+      border-color: var(--text);
+    }
+
+    .is-filtered-out { display: none !important; }
+
+    .filter-empty-state {
+      display: none;
+      border: 1px dashed var(--border-strong);
+      border-radius: var(--radius-lg);
+      background: rgba(255, 255, 255, 0.7);
+      padding: 16px;
+      color: var(--muted);
+    }
+
+    .filter-empty-state.is-visible { display: block; }
+
+    .sidebar-status-grid,
+    .compact-source-summary,
+    .compact-source-details,
+    .compact-role-row {
+      display: grid;
+      gap: 10px;
+    }
+
+    .sidebar-status-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .status-card {
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      background: var(--surface-soft);
+      padding: 12px;
+      display: grid;
+      gap: 5px;
+    }
+
+    .status-card-label {
+      font-size: 11px;
+      font-weight: 850;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--muted-2);
+    }
+
+    .status-card-value {
+      font-size: 14px;
+      font-weight: 800;
+      color: var(--text);
+    }
+
+    .compact-source-header {
+      display: grid;
+      gap: 8px;
+    }
+
+    .compact-source-stats {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .compact-source-list {
+      margin: 0;
+      padding-left: 18px;
+      color: var(--muted);
+      display: grid;
+      gap: 6px;
+    }
+
+    .compact-source-list a,
+    .compact-source-list .source-label-fallback {
+      font-weight: 750;
+    }
+
+    .story-card { box-shadow: var(--shadow-soft); }
+    .story-card[data-category="regulation"] { border-left: 5px solid var(--accent); }
+    .story-card[data-category="governance"] { border-left: 5px solid var(--success); }
+    .story-card[data-category="enterprise_ai"] { border-left: 5px solid #5b5fd6; }
+    .story-card[data-category="product"] { border-left: 5px solid #6b55c9; }
+    .story-card[data-category="global_eu"] { border-left: 5px solid #2d8aa6; }
+    .story-card[data-category="watchlist"] { border-left: 5px solid var(--watch); }
+
+    details.evidence {
+      border-top: 1px solid var(--border);
+      padding-top: 10px;
+    }
+
+    details.evidence summary,
+    .source-item summary {
+      cursor: pointer;
+      list-style: none;
+      color: var(--accent-strong);
+      font-size: 13px;
+      font-weight: 850;
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      align-items: center;
+    }
+
+    details.evidence summary::-webkit-details-marker,
+    .source-item summary::-webkit-details-marker { display: none; }
+
+    details.evidence summary::after,
+    .source-item summary::after {
+      content: "+";
+      display: grid;
+      place-items: center;
+      width: 22px;
+      height: 22px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: var(--accent-strong);
+      font-size: 15px;
+      line-height: 1;
+      flex: 0 0 auto;
+    }
+
+    details.evidence[open] summary::after,
+    .source-item details[open] summary::after { content: "–"; }
+
+    .sources {
+      margin-top: 10px;
+      display: grid;
+      gap: 8px;
+      padding: 12px;
+      border-radius: var(--radius-md);
+      background: var(--surface-soft);
+      border: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 13px;
+      min-width: 0;
+    }
+
+    .source-link-card {
+      display: grid;
+      gap: 7px;
+      padding: 10px;
+      border: 1px solid rgba(191, 202, 224, 0.75);
+      border-radius: var(--radius-sm);
+      background: #ffffff;
+      min-width: 0;
+    }
+
+    .source-link-card a,
+    .source-link-card .source-label-fallback {
+      font-weight: 850;
+      overflow-wrap: anywhere;
+    }
+
+    .source-label-fallback { color: var(--text); }
+
+    .source-pill {
+      align-self: start;
+      justify-self: start;
+      padding: 5px 7px;
+      border: 1px solid var(--border);
+      background: #eef2ff;
+      color: #3730a3;
+      font-size: 10.5px;
+      letter-spacing: 0.01em;
+    }
+
+    .source-meta {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 6px 10px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .source-meta span { overflow-wrap: anywhere; }
+    .source-meta strong { color: var(--text); }
+
+    .sidebar-block {
+      padding: 18px;
+      display: grid;
+      gap: 12px;
+    }
+
+    .watch-item,
+    .source-item,
+    .archive-item {
+      border: 1px solid var(--border);
+      background: var(--surface-soft);
+      border-radius: var(--radius-md);
+      padding: 13px;
+      display: grid;
+      gap: 7px;
+      min-width: 0;
+    }
+
+    .sidebar-meta {
+      color: var(--muted);
+      font-size: 13px;
+      overflow-wrap: anywhere;
+    }
+
+    .source-item { padding: 0; overflow: hidden; }
+    .source-item details { padding: 12px 13px; }
+    .source-item summary { color: var(--text); overflow-wrap: anywhere; }
+    .source-item .source-detail {
+      margin-top: 9px;
+      display: grid;
+      gap: 8px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+    .archive-item .relation-type { justify-self: start; background: #eef2ff; color: #3730a3; }
+
+    @media (max-width: 980px) {
+      body { padding: 18px; }
+      .hero, .top-story, .story-card, .sidebar-block { border-radius: var(--radius-lg); }
+      .main-layout { grid-template-columns: 1fr; }
+      .score-strip {
+        grid-template-columns: repeat(5, minmax(78px, 1fr));
+        gap: 7px;
+        overflow-x: auto;
+        overflow-y: hidden;
+        padding-bottom: 2px;
+        scrollbar-width: thin;
+      }
+      .score-item { min-height: 58px; padding: 7px 8px; gap: 5px; }
+      .score-value { font-size: 16px; }
+      .score-max { font-size: 10px; }
+      .score-label { font-size: 10px; line-height: 1.1; }
+      .meter { height: 4px; }
+      .chip, .badge, .filter-button { padding: 6px 8px; font-size: 11px; }
+      .filter-panel { padding: 12px; }
+      .filter-row { gap: 7px; }
+      .source-meta { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 560px) {
+      body { padding: 12px; }
+      .daily-briefing { gap: 14px; }
+      .hero { padding: 22px; }
+      .story-header { display: grid; gap: 10px; }
+      .story-meta { gap: 7px; }
+      .score-strip { grid-template-columns: repeat(5, minmax(72px, 1fr)); }
+      .score-item { min-height: 54px; padding: 6px 7px; }
+      .score-value { font-size: 15px; }
+      .score-max { font-size: 10px; }
+      .score-label { font-size: 9.5px; }
+      .filter-row {
+        display: flex;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        padding-bottom: 2px;
+        scrollbar-width: thin;
+      }
+      .filter-button { flex: 0 0 auto; }
+      .sources { padding: 10px; }
+      .source-link-card { padding: 9px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="daily-briefing">
+    <section class="hero">
+      <div class="eyebrow">Daily AI Intelligence Briefing</div>
+      <h1>AI Intelligence Daily: Europas KI-Lücke wird messbar</h1>
+      <p class="briefing-summary">Der Digital-Decade-Report macht KI-Adoption, Compute-Druck und Souveränitätslücken zur operativen EU-Priorität. Parallel zeigen Estland, OpenAI und Anthropic, wie Agenten-Governance von Strategie zu Admin- und Identitätskontrollen wandert.</p>
+      <div class="meta-row">
+        <span class="chip">Datum: 2026-06-18</span>
+        <span class="chip">Fenster: 18. Juni 2026, 00:00-23:59 CEST</span>
+        <span class="chip">Fokus: Deutschland / EU</span>
+        <span class="badge" data-trust="hoch" data-ui-map="overall-trust" data-raw-value="hoch">Status: hoch</span>
+      </div>
+    </section>
+
+    <section class="main-layout">
+      <section class="main-column">
+        <article class="top-story">
+          <div class="story-header">
+            <div class="story-title-block">
+              <div class="story-kicker">Top Story</div>
+              <h2>EU Digital Decade: KI-Adoption steigt, aber Infrastruktur bleibt Engpass</h2>
+            </div>
+            <span class="chip" data-ui-map="priority" data-raw-value="P1">P1</span>
+          </div>
+          <p>Die Kommission aktualisierte am 18. Juni ihr Digital-Decade-Paket 2026. Fast 20 Prozent der EU-Unternehmen nutzen demnach KI; zugleich bleiben Cloud-, Cybersecurity- und Compute-Abhängigkeiten von Nicht-EU-Anbietern deutlich. Besonders relevant ist die Kombination: KI-Adoption wächst, aber der Bericht nennt SMEs, Datenzugang, Skills, Infrastruktur und Rechenkapazität als Hürden. Für Deutschland heißt das: AI-Governance darf nicht nur Modell- und Toolfreigaben verwalten, sondern muss Beschaffung, Compute-Strategie, Skills und Souveränitätsanforderungen zusammen denken.</p>
+          <div class="score-strip">
+            <div class="score-item" style="--score: 5"><div class="score-topline"><span class="score-value">5</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">EU / DE-Relevanz</div></div>
+            <div class="score-item" style="--score: 5"><div class="score-topline"><span class="score-value">5</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Business Impact</div></div>
+            <div class="score-item" style="--score: 4"><div class="score-topline"><span class="score-value">4</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Regulatorik</div></div>
+            <div class="score-item" style="--score: 4"><div class="score-topline"><span class="score-value">4</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Technologie</div></div>
+            <div class="score-item" style="--score: 5"><div class="score-topline"><span class="score-value">5</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Lernwert</div></div>
+          </div>
+          <div class="takeaway">
+            <strong>Einschätzung</strong>
+            <p class="field-note">Das ist weniger eine News über eine einzelne Kennzahl als ein Steuerungssignal: Wer in Deutschland KI skaliert, braucht jetzt belastbare Antworten auf Kosten, Datenzugang, Anbieterabhängigkeit, Fachkräfte und EU-konforme Infrastruktur.</p>
+          </div>
+          <details class="evidence">
+            <summary>Quellen</summary>
+            <div class="sources">
+              
+              <article class="source-link-card">
+                
+                <a href="https://digital-strategy.ec.europa.eu/en/policies/2026-state-digital-decade-package" target="_blank" rel="noopener noreferrer">2026 State of the Digital Decade package</a>
+                
+                <div class="source-meta-row">
+                  <span class="source-pill" data-ui-map="role" data-raw-value="faktenanker">faktenanker</span>
+                  <span class="source-pill" data-ui-map="source-type" data-raw-value="official">official</span>
+                </div>
+                <div class="source-meta">
+                  <span><strong>Publisher:</strong> European Commission</span>
+                  <span><strong>Veröffentlicht:</strong> 2026-06-18</span>
+                  <span><strong>Abgerufen:</strong> 2026-06-19</span>
+                </div>
+              </article>
+              
+            </div>
+          </details>
+          <details class="evidence">
+            <summary>Weitere Recherche</summary>
+            <div class="sources">
+              <p class="field-note">Vertiefe für 18.06.2026 den EC Digital-Decade-Report 2026 und DESI-Daten: Welche konkreten KI-, Cloud-, Compute- und Skill-Lücken betreffen deutsche Unternehmen und Behörden?</p>
+            </div>
+          </details>
+        </article>
+
+        <section class="priority-stories">
+          <div class="section-label">Weitere priorisierte Entwicklungen</div>
+          <div class="filter-panel" aria-label="Story-Filter">
+            <div class="filter-label">Filter</div>
+            <div class="filter-row" id="story-filter-row">
+              <button class="filter-button active" type="button" data-filter="all" aria-pressed="true">Alle</button>
+            </div>
+          </div>
+
+          
+          <article class="story-card" data-id="estonia-ai-agent-id-2026-06-18" data-category="governance" data-trust-status="hoch">
+            <div class="story-header">
+              <div class="story-title-block">
+                <div class="story-kicker">Governance</div>
+                <h3>Estland plant offizielle digitale Identitäten für KI-Agenten</h3>
+              </div>
+              <div class="story-meta">
+                <span class="chip" data-ui-map="category" data-raw-value="governance">governance</span>
+                <span class="chip" data-ui-map="priority" data-raw-value="P1">P1</span>
+              </div>
+            </div>
+            <div class="story-text-stack">
+              <p>Estlands Regierung unterstützt den Vorschlag des Eesti.ai-Beirats, KI-Agenten eigene AI-ID-Codes zu geben. Agenten sollen damit begrenzte, prüfbare und auditierbare Rechte erhalten, statt Nutzeridentitäten vollständig zu übernehmen.</p>
+              <p class="field-note"><strong>Warum relevant:</strong> Estland testet einen Governance-Baustein, der für eIDAS, Behördenprozesse, Banken, Zahlungen und Agentic-AI-Beschaffung in der EU richtungsweisend werden kann.</p>
+              <p class="field-note"><strong>EU-/DE-Impact:</strong> Für deutsche Organisationen ist das ein konkretes Muster für delegierte Agentenrechte, Audit-Trails und Haftungszuordnung in digitalen Verwaltungs- und Unternehmensprozessen.</p>
+              <p class="field-note"><strong>Einordnung:</strong> Agenten-Governance rückt vom Policy-Papier in Identitätsarchitektur: Rechte müssen granular delegiert, widerrufen und protokolliert werden.</p>
+            </div>
+            <div class="score-strip">
+              <div class="score-item" style="--score: 5"><div class="score-topline"><span class="score-value">5</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">EU / DE-Relevanz</div></div>
+              <div class="score-item" style="--score: 4"><div class="score-topline"><span class="score-value">4</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Business Impact</div></div>
+              <div class="score-item" style="--score: 4"><div class="score-topline"><span class="score-value">4</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Regulatorik</div></div>
+              <div class="score-item" style="--score: 4"><div class="score-topline"><span class="score-value">4</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Technologie</div></div>
+              <div class="score-item" style="--score: 5"><div class="score-topline"><span class="score-value">5</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Lernwert</div></div>
+            </div>
+            <details class="evidence">
+              <summary>Quellen & Unsicherheit</summary>
+              <div class="sources">
+                <p class="field-note"><strong>Quellenlage:</strong> <span data-ui-map="trust" data-raw-value="hoch">hoch</span></p>
+                
+                <article class="source-link-card">
+                  
+                  <a href="https://valitsus.ee/en/news/prime-minister-michal-estonia-become-first-country-create-digital-identities-ai-agents" target="_blank" rel="noopener noreferrer">Prime Minister Michal: Estonia to become first country to create digital identities for AI agents</a>
+                  
+                  <div class="source-meta-row">
+                    <span class="source-pill" data-ui-map="role" data-raw-value="faktenanker">faktenanker</span>
+                    <span class="source-pill" data-ui-map="source-type" data-raw-value="official">official</span>
+                  </div>
+                  <div class="source-meta">
+                    <span><strong>Publisher:</strong> Government of Estonia</span>
+                    <span><strong>Veröffentlicht:</strong> 2026-06-17</span>
+                    <span><strong>Abgerufen:</strong> 2026-06-19</span>
+                  </div>
+                </article>
+                
+                <article class="source-link-card">
+                  
+                  <a href="https://www.theregister.com/ai-and-ml/2026/06/18/estonia-intends-to-recognize-ai-agents-with-digital-ids/5258087" target="_blank" rel="noopener noreferrer">Estonia intends to recognize AI agents with digital IDs</a>
+                  
+                  <div class="source-meta-row">
+                    <span class="source-pill" data-ui-map="role" data-raw-value="enterprise_signal">enterprise_signal</span>
+                    <span class="source-pill" data-ui-map="source-type" data-raw-value="media">media</span>
+                  </div>
+                  <div class="source-meta">
+                    <span><strong>Publisher:</strong> The Register</span>
+                    <span><strong>Veröffentlicht:</strong> 2026-06-18</span>
+                    <span><strong>Abgerufen:</strong> 2026-06-19</span>
+                  </div>
+                </article>
+                
+                <p class="field-note"><strong>Unsicherheit:</strong> Zeitplan, technische Spezifikation und Haftungsmodell sind noch offen.</p>
+              </div>
+            </details>
+            <details class="evidence">
+              <summary>Weitere Recherche</summary>
+              <div class="sources">
+                <p class="field-note">Untersuche für 17.-18.06.2026 die estnische AI-ID-Initiative anhand der Valitsus-Mitteilung und The Register: Welche eIDAS- und Haftungsfragen ergeben sich für EU-Agenten?</p>
+              </div>
+            </details>
+          </article>
+          
+          <article class="story-card" data-id="openai-enterprise-spend-controls-2026-06-18" data-category="enterprise_ai" data-trust-status="hoch">
+            <div class="story-header">
+              <div class="story-title-block">
+                <div class="story-kicker">Produkt</div>
+                <h3>OpenAI ergänzt Enterprise-Analytik und Credit-Kontrollen</h3>
+              </div>
+              <div class="story-meta">
+                <span class="chip" data-ui-map="category" data-raw-value="enterprise_ai">enterprise_ai</span>
+                <span class="chip" data-ui-map="priority" data-raw-value="P2">P2</span>
+              </div>
+            </div>
+            <div class="story-text-stack">
+              <p>OpenAI veröffentlichte neue Nutzungsanalysen und Spend Controls für ChatGPT Enterprise. Admins sollen ChatGPT- und Codex-Credit-Verbrauch nach Nutzern, Produkten und Modellen sehen und Limits für Workspace, Gruppen oder einzelne Personen setzen können.</p>
+              <p class="field-note"><strong>Warum relevant:</strong> Kostensteuerung und Nachvollziehbarkeit werden zum Kern von KI-Rollouts, besonders wenn Codex und ChatGPT in breiteren Enterprise-Flows produktiv genutzt werden.</p>
+              <p class="field-note"><strong>EU-/DE-Impact:</strong> Für EU-Unternehmen ist das relevant für Budgetkontrolle, interne Freigaben, Procurement und Betriebsrats-/Compliance-Diskussionen; Datenschutz- und Datenresidenzfragen bleiben separat zu prüfen.</p>
+              <p class="field-note"><strong>Einordnung:</strong> OpenAI adressiert ein echtes Skalierungsproblem: Ohne feine Kosten- und Nutzungsdaten bleiben Enterprise-Rollouts politisch und finanziell schwer steuerbar.</p>
+            </div>
+            <div class="score-strip">
+              <div class="score-item" style="--score: 4"><div class="score-topline"><span class="score-value">4</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">EU / DE-Relevanz</div></div>
+              <div class="score-item" style="--score: 4"><div class="score-topline"><span class="score-value">4</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Business Impact</div></div>
+              <div class="score-item" style="--score: 3"><div class="score-topline"><span class="score-value">3</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Regulatorik</div></div>
+              <div class="score-item" style="--score: 3"><div class="score-topline"><span class="score-value">3</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Technologie</div></div>
+              <div class="score-item" style="--score: 4"><div class="score-topline"><span class="score-value">4</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Lernwert</div></div>
+            </div>
+            <details class="evidence">
+              <summary>Quellen & Unsicherheit</summary>
+              <div class="sources">
+                <p class="field-note"><strong>Quellenlage:</strong> <span data-ui-map="trust" data-raw-value="hoch">hoch</span></p>
+                
+                <article class="source-link-card">
+                  
+                  <a href="https://openai.com/index/chatgpt-enterprise-spend-controls/" target="_blank" rel="noopener noreferrer">New usage analytics and updated spend controls for enterprises</a>
+                  
+                  <div class="source-meta-row">
+                    <span class="source-pill" data-ui-map="role" data-raw-value="produktquelle">produktquelle</span>
+                    <span class="source-pill" data-ui-map="source-type" data-raw-value="vendor">vendor</span>
+                  </div>
+                  <div class="source-meta">
+                    <span><strong>Publisher:</strong> OpenAI</span>
+                    <span><strong>Veröffentlicht:</strong> 2026-06-18</span>
+                    <span><strong>Abgerufen:</strong> 2026-06-19</span>
+                  </div>
+                </article>
+                
+                <p class="field-note"><strong>Unsicherheit:</strong> Die Quelle belegt Funktionsumfang; unabhängige Wirksamkeits- oder EU-Compliance-Bewertungen fehlen noch.</p>
+              </div>
+            </details>
+            <details class="evidence">
+              <summary>Weitere Recherche</summary>
+              <div class="sources">
+                <p class="field-note">Prüfe für 18.06.2026 OpenAIs Enterprise-Spend-Controls: Welche Admin-Daten, Limits und APIs sind verfügbar, und welche EU-Compliance-Fragen bleiben offen?</p>
+              </div>
+            </details>
+          </article>
+          
+          <article class="story-card" data-id="anthropic-mcp-managed-auth-2026-06-18" data-category="product" data-trust-status="hoch">
+            <div class="story-header">
+              <div class="story-title-block">
+                <div class="story-kicker">Agenten</div>
+                <h3>Anthropic zentralisiert MCP-Connector-Autorisierung für Unternehmen</h3>
+              </div>
+              <div class="story-meta">
+                <span class="chip" data-ui-map="category" data-raw-value="product">product</span>
+                <span class="chip" data-ui-map="priority" data-raw-value="P2">P2</span>
+              </div>
+            </div>
+            <div class="story-text-stack">
+              <p>Anthropic startet Enterprise-managed Authorization für MCP-Connectors in Claude Team und Enterprise. Admins können Connectors über Identitätsanbieter provisionieren; Okta ist zum Start unterstützt, weitere IdPs sollen folgen.</p>
+              <p class="field-note"><strong>Warum relevant:</strong> MCP-Connectors machen Agenten produktiver, erzeugen aber neue Zugriffs- und Datenabflussflächen. Zentrales IdP-Scoping ist daher ein wichtiger Governance-Schritt.</p>
+              <p class="field-note"><strong>EU-/DE-Impact:</strong> Für deutsche Enterprise-Tenants zählt, ob IdP-basierte Rollen, Revocation, Token-Lebensdauer und Trennung privater/work Accounts später in Audit- und Datenschutzprüfungen belastbar dokumentierbar sind.</p>
+              <p class="field-note"><strong>Einordnung:</strong> Das Update zeigt, wohin Agentic-AI-Plattformen gehen: weniger Einzel-OAuth, mehr zentral verwaltete Identität und Connector-Policy als Kontrollschicht.</p>
+            </div>
+            <div class="score-strip">
+              <div class="score-item" style="--score: 4"><div class="score-topline"><span class="score-value">4</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">EU / DE-Relevanz</div></div>
+              <div class="score-item" style="--score: 4"><div class="score-topline"><span class="score-value">4</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Business Impact</div></div>
+              <div class="score-item" style="--score: 3"><div class="score-topline"><span class="score-value">3</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Regulatorik</div></div>
+              <div class="score-item" style="--score: 4"><div class="score-topline"><span class="score-value">4</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Technologie</div></div>
+              <div class="score-item" style="--score: 4"><div class="score-topline"><span class="score-value">4</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Lernwert</div></div>
+            </div>
+            <details class="evidence">
+              <summary>Quellen & Unsicherheit</summary>
+              <div class="sources">
+                <p class="field-note"><strong>Quellenlage:</strong> <span data-ui-map="trust" data-raw-value="hoch">hoch</span></p>
+                
+                <article class="source-link-card">
+                  
+                  <a href="https://claude.com/blog/enterprise-managed-auth" target="_blank" rel="noopener noreferrer">Centrally manage authorization for MCP connectors</a>
+                  
+                  <div class="source-meta-row">
+                    <span class="source-pill" data-ui-map="role" data-raw-value="produktquelle">produktquelle</span>
+                    <span class="source-pill" data-ui-map="source-type" data-raw-value="vendor">vendor</span>
+                  </div>
+                  <div class="source-meta">
+                    <span><strong>Publisher:</strong> Anthropic</span>
+                    <span><strong>Veröffentlicht:</strong> 2026-06-18</span>
+                    <span><strong>Abgerufen:</strong> 2026-06-19</span>
+                  </div>
+                </article>
+                
+                <article class="source-link-card">
+                  
+                  <a href="https://modelcontextprotocol.io" target="_blank" rel="noopener noreferrer">Enterprise-Managed Authorization extension</a>
+                  
+                  <div class="source-meta-row">
+                    <span class="source-pill" data-ui-map="role" data-raw-value="developer_dokumentation">developer_dokumentation</span>
+                    <span class="source-pill" data-ui-map="source-type" data-raw-value="documentation">documentation</span>
+                  </div>
+                  <div class="source-meta">
+                    <span><strong>Publisher:</strong> Model Context Protocol</span>
+                    <span><strong>Veröffentlicht:</strong> </span>
+                    <span><strong>Abgerufen:</strong> 2026-06-19</span>
+                  </div>
+                </article>
+                
+                <p class="field-note"><strong>Unsicherheit:</strong> Beta-Verfügbarkeit; EU-spezifische Datenschutz- und Datenresidenzdetails sind nicht belegt.</p>
+              </div>
+            </details>
+            <details class="evidence">
+              <summary>Weitere Recherche</summary>
+              <div class="sources">
+                <p class="field-note">Analysiere für 18.06.2026 Anthropics Enterprise-managed MCP Authorization und MCP-Spezifikation: Welche Kontrollen helfen EU-Unternehmen gegen Connector-Risiken?</p>
+              </div>
+            </details>
+          </article>
+          
+          <article class="story-card" data-id="iapp-gdpr-ai-act-guidelines-2026-06-18" data-category="regulation" data-trust-status="mittel">
+            <div class="story-header">
+              <div class="story-title-block">
+                <div class="story-kicker">Policy</div>
+                <h3>IAPP signalisiert kommende Leitlinien zur DSGVO- und AI-Act-Schnittstelle</h3>
+              </div>
+              <div class="story-meta">
+                <span class="chip" data-ui-map="category" data-raw-value="regulation">regulation</span>
+                <span class="chip" data-ui-map="priority" data-raw-value="P3">P3</span>
+              </div>
+            </div>
+            <div class="story-text-stack">
+              <p>IAPP berichtet aus Dublin, dass kommende Leitlinien das Zusammenspiel von Datenschutz und AI Act etwa bei Transparenz, Risikoanalysen, Bias-Erkennung und Accountability praxisnäher adressieren sollen.</p>
+              <p class="field-note"><strong>Warum relevant:</strong> Die Schnittstelle zwischen DSGVO und AI Act ist eine der größten Unsicherheiten für KI-Governance-Programme in Europa.</p>
+              <p class="field-note"><strong>EU-/DE-Impact:</strong> Für deutsche Datenschutz- und Compliance-Teams ist das ein Frühhinweis, aber noch keine verbindliche Rechtsquelle; konkrete EDPB/EDPS-Veröffentlichung bleibt abzuwarten.</p>
+              <p class="field-note"><strong>Einordnung:</strong> Als Hauptmeldung noch zu weich, aber als Signal nützlich: Governance-Teams sollten Nachweisdokumentation so bauen, dass Datenschutz- und AI-Act-Belege zusammenlaufen.</p>
+            </div>
+            <div class="score-strip">
+              <div class="score-item" style="--score: 5"><div class="score-topline"><span class="score-value">5</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">EU / DE-Relevanz</div></div>
+              <div class="score-item" style="--score: 3"><div class="score-topline"><span class="score-value">3</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Business Impact</div></div>
+              <div class="score-item" style="--score: 5"><div class="score-topline"><span class="score-value">5</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Regulatorik</div></div>
+              <div class="score-item" style="--score: 2"><div class="score-topline"><span class="score-value">2</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Technologie</div></div>
+              <div class="score-item" style="--score: 4"><div class="score-topline"><span class="score-value">4</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Lernwert</div></div>
+            </div>
+            <details class="evidence">
+              <summary>Quellen & Unsicherheit</summary>
+              <div class="sources">
+                <p class="field-note"><strong>Quellenlage:</strong> <span data-ui-map="trust" data-raw-value="mittel">mittel</span></p>
+                
+                <article class="source-link-card">
+                  
+                  <a href="https://iapp.org/news/a/a-view-from-brussels-a-sneak-peek-into-upcoming-guidelines-on-gdpr-ai-act-interplay" target="_blank" rel="noopener noreferrer">A view from Brussels: A sneak peek into upcoming guidelines on GDPR, AI Act interplay</a>
+                  
+                  <div class="source-meta-row">
+                    <span class="source-pill" data-ui-map="role" data-raw-value="policy_interpretation">policy_interpretation</span>
+                    <span class="source-pill" data-ui-map="source-type" data-raw-value="media">media</span>
+                  </div>
+                  <div class="source-meta">
+                    <span><strong>Publisher:</strong> IAPP</span>
+                    <span><strong>Veröffentlicht:</strong> 2026-06-18</span>
+                    <span><strong>Abgerufen:</strong> 2026-06-19</span>
+                  </div>
+                </article>
+                
+                <p class="field-note"><strong>Unsicherheit:</strong> Bericht beruht auf Konferenzäußerung; offizielle Leitlinie liegt noch nicht vor.</p>
+              </div>
+            </details>
+            <details class="evidence">
+              <summary>Weitere Recherche</summary>
+              <div class="sources">
+                <p class="field-note">Recherchiere nach dem 18.06.2026 anhand IAPP und EDPB/EDPS, ob offizielle Leitlinien zur DSGVO-/AI-Act-Schnittstelle erschienen sind und welche Beispiele sie enthalten.</p>
+              </div>
+            </details>
+          </article>
+          
+          <div class="filter-empty-state" id="story-filter-empty-state">
+            Keine Stories für diesen Filter sichtbar. Wähle einen anderen Filter oder prüfe, ob in diesem Lauf nur andere Kategorien vorkommen.
+          </div>
+        </section>
+      </section>
+
+      <aside class="sidebar">
+        <section class="sidebar-block">
+          <h3>Tageslage</h3>
+          <p class="sidebar-meta">Der Digital-Decade-Report macht KI-Adoption, Compute-Druck und Souveränitätslücken zur operativen EU-Priorität. Parallel zeigen Estland, OpenAI und Anthropic, wie Agenten-Governance von Strategie zu Admin- und Identitätskontrollen wandert.</p>
+          <div class="sidebar-status-grid">
+            <div class="status-card">
+              <span class="status-card-label">Fenster</span>
+              <span class="status-card-value">18. Juni 2026, 00:00-23:59 CEST</span>
+            </div>
+            <div class="status-card">
+              <span class="status-card-label">Quellenlage</span>
+              <span class="status-card-value" data-ui-map="trust" data-raw-value="hoch">hoch</span>
+            </div>
+          </div>
+        </section>
+
+        <section class="sidebar-block watchlist">
+          <h3>Watchlist</h3>
+          
+          <article class="watch-item" data-id="uk-police-ai-paperwork-review">
+            <div class="story-meta"><span class="badge" data-trust="watchlist" data-ui-map="trust" data-raw-value="watchlist">watchlist</span></div>
+            <h4>UK prüft Verurteilungen nach angeblicher KI-Nutzung in Polizeipapieren</h4>
+            <p class="sidebar-meta">FT berichtet über eine Überprüfung von Verurteilungen nach mutmaßlichem Chatbot-Einsatz durch einen Ermittler.</p>
+            <p class="sidebar-meta"><strong>Warum beobachten:</strong> Relevanz für Beweisführung, Auditierbarkeit und Public-Sector-KI, aber noch UK-spezifisch und nicht primär belegt.</p>
+            <p class="sidebar-meta"><strong>Nächstes Signal:</strong> Offizielle Stellungnahmen von Polizei, CPS, Gericht oder Aufsicht.</p>
+          </article>
+          
+          <article class="watch-item" data-id="accenture-ai-consulting-pressure">
+            <div class="story-meta"><span class="badge" data-trust="watchlist" data-ui-map="trust" data-raw-value="watchlist">watchlist</span></div>
+            <h4>Accenture unter Druck durch KI-Automatisierung</h4>
+            <p class="sidebar-meta">FT meldet Kursdruck und Sorgen, dass KI das IT-Consulting-Modell belastet.</p>
+            <p class="sidebar-meta"><strong>Warum beobachten:</strong> Relevant für europäische Dienstleister und AI-Transformation, aber heute eher Marktstimmung als belastbarer Strukturbeleg.</p>
+            <p class="sidebar-meta"><strong>Nächstes Signal:</strong> Quartalszahlen, europäische Kundenkommentare oder unabhängige Marktanalyse.</p>
+          </article>
+          
+          <article class="watch-item" data-id="openai-health-intelligence-chatgpt">
+            <div class="story-meta"><span class="badge" data-trust="watchlist" data-ui-map="trust" data-raw-value="watchlist">watchlist</span></div>
+            <h4>OpenAI positioniert ChatGPT stärker im Gesundheitskontext</h4>
+            <p class="sidebar-meta">OpenAI veröffentlichte ein Produktstück zu verbesserter Health Intelligence in ChatGPT.</p>
+            <p class="sidebar-meta"><strong>Warum beobachten:</strong> Für EU-Health-Deployments potenziell relevant, aber medizinische Wirkung und regulatorische Einordnung brauchen unabhängige Evidenz.</p>
+            <p class="sidebar-meta"><strong>Nächstes Signal:</strong> Klinische Studien, EU-Dokumentation, MDR/DSGVO-Einordnung oder Anbieterhinweise zur Region.</p>
+          </article>
+          
+        </section>
+
+        <section class="sidebar-block archive-panel">
+          <h3>Archivbezug</h3>
+          
+          <article class="archive-item" data-id="weekly-2026-w24-sovereignty">
+            <span class="badge relation-type" data-ui-map="relation-type" data-raw-value="trendline">trendline</span>
+            <h4>KW24: CADA und Tech-Souveränität</h4>
+            <p class="sidebar-meta">Digital-Decade-Report konkretisiert dieselbe Linie: Souveränität hängt an Cloud, Compute, Skills und Umsetzung.</p>
+          </article>
+          
+          <article class="archive-item" data-id="weekly-2026-w24-agentic-payments">
+            <span class="badge relation-type" data-ui-map="relation-type" data-raw-value="recurring_theme">recurring_theme</span>
+            <h4>KW24: Agentic Payments</h4>
+            <p class="sidebar-meta">Estlands AI-ID-Vorstoß passt zur Frage, wie Agenten Zahlungs- und Verwaltungsrechte begrenzt delegieren.</p>
+          </article>
+          
+          <article class="archive-item" data-id="daily-2026-06-16-microsoft-work-iq">
+            <span class="badge relation-type" data-ui-map="relation-type" data-raw-value="follow_up">follow_up</span>
+            <h4>16.06.: Microsoft Work IQ</h4>
+            <p class="sidebar-meta">OpenAI und Anthropic zeigen denselben Enterprise-Trend: Agenten brauchen Admin-, Kosten- und Zugriffskontrollen.</p>
+          </article>
+          
+        </section>
+      </aside>
+    </section>
+  </main>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const labelMaps = {
+        category: {
+          regulation: 'REGULIERUNG',
+          product: 'PRODUKTE & PLATTFORMEN',
+          global_eu: 'GLOBAL MIT EU-IMPACT',
+          enterprise_ai: 'ENTERPRISE AI',
+          governance: 'GOVERNANCE',
+          watchlist: 'WATCHLIST'
+        },
+        priority: {
+          P1: 'SEHR WICHTIG',
+          P2: 'RELEVANT',
+          P3: 'KURZ NOTIERT'
+        },
+        trust: {
+          hoch: 'HOHE QUELLENLAGE',
+          mittel: 'MITTLERE QUELLENLAGE',
+          niedrig: 'NIEDRIGE QUELLENLAGE',
+          gemischt: 'GEMISCHTE QUELLENLAGE',
+          watchlist: 'WATCHLIST'
+        },
+        role: {
+          faktenanker: 'FAKTENANKER',
+          policy_interpretation: 'POLICY-INTERPRETATION',
+          marktverifikation: 'MARKTVERIFIKATION',
+          produktquelle: 'PRODUKTQUELLE',
+          enterprise_signal: 'ENTERPRISE-SIGNAL',
+          'frühindikator': 'FRÜHINDIKATOR',
+          unternehmensquelle: 'UNTERNEHMENSQUELLE',
+          developer_dokumentation: 'ENTWICKLERDOKUMENTATION'
+        },
+        'source-type': {
+          official: 'OFFIZIELLE QUELLE',
+          vendor: 'ANBIETERQUELLE',
+          media: 'MEDIENBERICHT',
+          research: 'RESEARCH',
+          community: 'COMMUNITY',
+          documentation: 'DOKUMENTATION',
+          legal: 'RECHTSTEXT'
+        },
+        'relation-type': {
+          follow_up: 'FOLLOW-UP',
+          recurring_theme: 'WIEDERKEHRENDES THEMA',
+          precedent: 'PRÄZEDENZFALL',
+          trendline: 'TRENDLINIE'
+        }
+      };
+
+      const mapLabel = (group, rawValue) => {
+        if (!rawValue) return '';
+        return (labelMaps[group] && labelMaps[group][rawValue]) || rawValue;
+      };
+
+      document.querySelectorAll('[data-ui-map]').forEach((element) => {
+        const group = element.dataset.uiMap;
+        const rawValue = element.dataset.rawValue || element.textContent.trim();
+        const mappedValue = mapLabel(group === 'overall-trust' ? 'trust' : group, rawValue);
+
+        if (group === 'overall-trust') {
+          element.textContent = `Status: ${mappedValue}`;
+          return;
+        }
+
+        element.textContent = mappedValue;
+      });
+
+      document.querySelectorAll('[data-derived-from-story]').forEach((element) => {
+        const rawValue = element.dataset.derivedFromStory;
+        element.textContent = rawValue === 'true' ? 'Aus Story-Quellen abgeleitet' : 'Eigenständig zusammengeführt';
+      });
+
+      document.querySelectorAll('.source-item').forEach((item) => {
+        const roleSummary = item.querySelector('[data-role-summary]');
+        const roleNodes = Array.from(item.querySelectorAll('[data-source-role]'));
+        const sourceCountNode = item.querySelector('[data-source-count]');
+        const uniqueRoles = [...new Set(roleNodes.map((node) => node.dataset.rawValue).filter(Boolean))];
+
+        if (sourceCountNode) sourceCountNode.textContent = String(roleNodes.length);
+
+        if (roleSummary) {
+          roleSummary.innerHTML = '';
+          uniqueRoles.forEach((role) => {
+            const pill = document.createElement('span');
+            pill.className = 'source-pill';
+            pill.textContent = mapLabel('role', role);
+            roleSummary.appendChild(pill);
+          });
+        }
+      });
+
+      const cards = Array.from(document.querySelectorAll('.priority-stories .story-card'));
+      const filterRow = document.getElementById('story-filter-row');
+      const emptyState = document.getElementById('story-filter-empty-state');
+      const categoryCounts = cards.reduce((acc, card) => {
+        const category = card.dataset.category;
+        if (!category) return acc;
+        acc[category] = (acc[category] || 0) + 1;
+        return acc;
+      }, {});
+
+      const createButton = (filter, label) => {
+        const button = document.createElement('button');
+        button.type = 'button';
+        button.className = 'filter-button';
+        button.dataset.filter = filter;
+        button.setAttribute('aria-pressed', 'false');
+        button.textContent = label;
+        return button;
+      };
+
+      Object.keys(categoryCounts).forEach((category) => {
+        const button = createButton(category, `${mapLabel('category', category)} · ${categoryCounts[category]}`);
+        filterRow.appendChild(button);
+      });
+
+      const buttons = Array.from(document.querySelectorAll('.filter-button'));
+
+      const applyFilter = (filter) => {
+        buttons.forEach((button) => {
+          const isActive = button.dataset.filter === filter;
+          button.classList.toggle('active', isActive);
+          button.setAttribute('aria-pressed', isActive ? 'true' : 'false');
+        });
+
+        let visibleCount = 0;
+        cards.forEach((card) => {
+          const isVisible = filter === 'all' || card.dataset.category === filter;
+          card.classList.toggle('is-filtered-out', !isVisible);
+          if (isVisible) visibleCount += 1;
+        });
+
+        if (emptyState) {
+          emptyState.classList.toggle('is-visible', visibleCount === 0);
+        }
+      };
+
+      buttons.forEach((button) => {
+        button.addEventListener('click', () => applyFilter(button.dataset.filter || 'all'));
+      });
+
+      applyFilter('all');
+    });
+  </script>
+</body>
+</html>
