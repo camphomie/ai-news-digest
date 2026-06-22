@@ -1,0 +1,1483 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Intelligence Weekly 2026-W25</title>
+  <style>
+    :root {
+      --bg: #eef3f9;
+      --bg-radial: radial-gradient(circle at top left, rgba(49, 91, 217, 0.14), transparent 32rem), radial-gradient(circle at top right, rgba(31, 122, 77, 0.10), transparent 28rem), #eef3f9;
+      --surface: #ffffff;
+      --surface-soft: #f7f9fd;
+      --surface-blue: #f1f5ff;
+      --text: #111b2e;
+      --muted: #66748c;
+      --muted-2: #8190a8;
+      --border: #d9e2ef;
+      --border-strong: #bfcae0;
+      --accent: #244ed8;
+      --accent-strong: #1739a8;
+      --accent-soft: #e8efff;
+      --success: #1f7a4d;
+      --success-soft: #e7f5ee;
+      --warning: #b26a00;
+      --warning-soft: #fff3dc;
+      --risk: #a63f3f;
+      --risk-soft: #fdecec;
+      --watch: #2563eb;
+      --watch-soft: #eaf1ff;
+      --shadow: 0 18px 45px rgba(17, 30, 58, 0.10);
+      --shadow-soft: 0 8px 24px rgba(17, 30, 58, 0.07);
+      --radius-xl: 26px;
+      --radius-lg: 18px;
+      --radius-md: 14px;
+      --radius-sm: 10px;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      padding: 34px;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--bg-radial);
+      color: var(--text);
+      line-height: 1.58;
+    }
+
+    h1, h2, h3, h4, p { margin: 0; }
+    h1 { max-width: 940px; font-size: clamp(32px, 5vw, 56px); line-height: 0.98; letter-spacing: -0.045em; }
+    h2 { font-size: clamp(22px, 3vw, 34px); line-height: 1.08; letter-spacing: -0.03em; }
+    h3 { font-size: 20px; line-height: 1.18; letter-spacing: -0.02em; }
+    h4 { font-size: 15px; line-height: 1.25; }
+    a { color: var(--accent-strong); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    .weekly-briefing {
+      max-width: 1220px;
+      margin: 0 auto;
+      display: grid;
+      gap: 24px;
+    }
+
+    .hero,
+    .executive-summary,
+    .weekly-assessment,
+    .theme-block,
+    .sidebar-block {
+      background: rgba(255, 255, 255, 0.92);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow-soft);
+      backdrop-filter: blur(12px);
+      min-width: 0;
+    }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      padding: 30px;
+      display: grid;
+      gap: 18px;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      height: 5px;
+      background: linear-gradient(90deg, #244ed8, #1f7a4d, #b26a00);
+      pointer-events: none;
+    }
+
+    .hero > * { position: relative; }
+
+    .eyebrow,
+    .story-kicker,
+    .section-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      line-height: 1;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-weight: 800;
+    }
+
+    .eyebrow::before,
+    .section-label::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 0 5px var(--accent-soft);
+      flex: 0 0 auto;
+    }
+
+    .weekly-summary,
+    .field-note,
+    .sidebar-meta {
+      color: var(--muted);
+    }
+
+    .weekly-summary {
+      max-width: 880px;
+      font-size: 17px;
+    }
+
+    .meta-row,
+    .story-meta,
+    .source-meta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .chip,
+    .badge,
+    .source-pill {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 800;
+      line-height: 1;
+      white-space: nowrap;
+    }
+
+    .chip {
+      padding: 9px 11px;
+      background: var(--accent-soft);
+      color: var(--accent-strong);
+      border: 1px solid rgba(36, 78, 216, 0.12);
+    }
+
+    .badge {
+      padding: 8px 10px;
+      border: 1px solid var(--border);
+      background: var(--surface-soft);
+      color: var(--muted);
+    }
+
+    .badge[data-trust="hoch"] { background: var(--success-soft); color: var(--success); border-color: rgba(31, 122, 77, 0.20); }
+    .badge[data-trust="mittel"], .badge[data-trust="gemischt"] { background: var(--warning-soft); color: var(--warning); border-color: rgba(178, 106, 0, 0.22); }
+    .badge[data-trust="niedrig"] { background: var(--risk-soft); color: var(--risk); border-color: rgba(166, 63, 63, 0.22); }
+    .badge[data-trust="watchlist"] { background: var(--watch-soft); color: var(--watch); border-color: rgba(37, 99, 235, 0.18); }
+
+    .main-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 2.05fr) minmax(300px, 0.95fr);
+      gap: 24px;
+      align-items: start;
+    }
+
+    .main-column,
+    .main-developments,
+    .sidebar,
+    .section-stack {
+      display: grid;
+      gap: 18px;
+      min-width: 0;
+    }
+
+    .executive-summary,
+    .weekly-assessment,
+    .theme-block,
+    .sidebar-block {
+      padding: 22px;
+      display: grid;
+      gap: 15px;
+    }
+
+    .weekly-assessment {
+      border-color: rgba(36, 78, 216, 0.24);
+      box-shadow: var(--shadow);
+    }
+
+    .story-header {
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      align-items: flex-start;
+      min-width: 0;
+    }
+
+    .story-title-block,
+    .story-text-stack {
+      display: grid;
+      gap: 8px;
+      min-width: 0;
+    }
+
+    .story-title-block h3,
+    .sidebar-block h3,
+    .sidebar-block h4 {
+      overflow-wrap: anywhere;
+    }
+
+    .takeaway,
+    .analysis-note {
+      border: 1px solid var(--border);
+      background: linear-gradient(180deg, #fbfcff, #f6f8fc);
+      border-radius: var(--radius-lg);
+      padding: 16px;
+      display: grid;
+      gap: 6px;
+    }
+
+    .takeaway strong,
+    .analysis-note strong {
+      font-size: 13px;
+      letter-spacing: 0.02em;
+    }
+
+    .score-strip {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 10px;
+      max-width: 100%;
+      min-width: 0;
+    }
+
+    .score-item {
+      --score: 1;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      background: var(--surface-soft);
+      padding: 12px;
+      display: grid;
+      gap: 8px;
+      min-height: 88px;
+      min-width: 0;
+      overflow: hidden;
+    }
+
+    .score-topline {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 6px;
+      min-width: 0;
+      max-width: 100%;
+    }
+
+    .score-value {
+      min-width: 0;
+      max-width: 100%;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      font-size: 24px;
+      line-height: 1;
+      font-weight: 900;
+      letter-spacing: -0.04em;
+    }
+
+    .score-max {
+      color: var(--muted-2);
+      font-size: 11px;
+      font-weight: 800;
+      flex: 0 0 auto;
+    }
+
+    .score-label {
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.15;
+      font-weight: 750;
+      overflow-wrap: anywhere;
+      hyphens: auto;
+    }
+
+    .meter {
+      width: 100%;
+      min-width: 0;
+      height: 7px;
+      border-radius: 999px;
+      background: #e4e9f2;
+      overflow: hidden;
+    }
+
+    .meter > span {
+      display: block;
+      height: 100%;
+      width: clamp(0%, calc(var(--score) * 20%), 100%);
+      max-width: 100%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, var(--accent), #1f7a4d);
+    }
+
+    .theme-block { box-shadow: var(--shadow-soft); }
+    .theme-block[data-category="regulation"] { border-left: 5px solid var(--accent); }
+    .theme-block[data-category="governance"] { border-left: 5px solid var(--success); }
+    .theme-block[data-category="enterprise_ai"] { border-left: 5px solid #5b5fd6; }
+    .theme-block[data-category="product"] { border-left: 5px solid #6b55c9; }
+    .theme-block[data-category="global_eu"] { border-left: 5px solid #2d8aa6; }
+    .theme-block[data-category="watchlist"] { border-left: 5px solid var(--watch); }
+
+    .sidebar-status-grid,
+    .compact-panel-summary,
+    .compact-panel-details,
+    .compact-role-row {
+      display: grid;
+      gap: 10px;
+    }
+
+    .sidebar-status-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .status-card {
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      background: var(--surface-soft);
+      padding: 12px;
+      display: grid;
+      gap: 5px;
+    }
+
+    .status-card-label {
+      font-size: 11px;
+      font-weight: 850;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--muted-2);
+    }
+
+    .status-card-value {
+      font-size: 14px;
+      font-weight: 800;
+      color: var(--text);
+    }
+
+    .compact-panel-stats {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .compact-source-list {
+      margin: 0;
+      padding-left: 18px;
+      color: var(--muted);
+      display: grid;
+      gap: 6px;
+    }
+
+    .compact-source-list a,
+    .compact-source-list .source-label-fallback {
+      font-weight: 750;
+    }
+
+    details.evidence {
+      border-top: 1px solid var(--border);
+      padding-top: 10px;
+    }
+
+    details.evidence summary,
+    .panel-item summary {
+      cursor: pointer;
+      list-style: none;
+      color: var(--accent-strong);
+      font-size: 13px;
+      font-weight: 850;
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      align-items: center;
+    }
+
+    details.evidence summary::-webkit-details-marker,
+    .panel-item summary::-webkit-details-marker { display: none; }
+
+    details.evidence summary::after,
+    .panel-item summary::after {
+      content: "+";
+      display: grid;
+      place-items: center;
+      width: 22px;
+      height: 22px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: var(--accent-strong);
+      font-size: 15px;
+      line-height: 1;
+      flex: 0 0 auto;
+    }
+
+    details.evidence[open] summary::after,
+    .panel-item details[open] summary::after { content: "–"; }
+
+    .sources {
+      margin-top: 10px;
+      display: grid;
+      gap: 8px;
+      padding: 12px;
+      border-radius: var(--radius-md);
+      background: var(--surface-soft);
+      border: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 13px;
+      min-width: 0;
+    }
+
+    .source-link-card {
+      display: grid;
+      gap: 7px;
+      padding: 10px;
+      border: 1px solid rgba(191, 202, 224, 0.75);
+      border-radius: var(--radius-sm);
+      background: #ffffff;
+      min-width: 0;
+    }
+
+    .source-link-card a,
+    .source-link-card .source-label-fallback {
+      font-weight: 850;
+      overflow-wrap: anywhere;
+    }
+
+    .source-label-fallback { color: var(--text); }
+
+    .source-pill {
+      align-self: start;
+      justify-self: start;
+      padding: 5px 7px;
+      border: 1px solid var(--border);
+      background: #eef2ff;
+      color: #3730a3;
+      font-size: 10.5px;
+      letter-spacing: 0.01em;
+    }
+
+    .source-meta {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 6px 10px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .source-meta span { overflow-wrap: anywhere; }
+    .source-meta strong { color: var(--text); }
+
+    .panel-item,
+    .archive-item {
+      border: 1px solid var(--border);
+      background: var(--surface-soft);
+      border-radius: var(--radius-md);
+      padding: 13px;
+      display: grid;
+      gap: 8px;
+      min-width: 0;
+    }
+
+    .panel-item { padding: 0; overflow: hidden; }
+    .panel-item details { padding: 12px 13px; }
+    .panel-item summary { color: var(--text); overflow-wrap: anywhere; }
+    .panel-detail {
+      margin-top: 9px;
+      display: grid;
+      gap: 8px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .archive-item .relation-type { justify-self: start; background: #eef2ff; color: #3730a3; }
+
+    @media (max-width: 980px) {
+      body { padding: 18px; }
+      .hero, .executive-summary, .weekly-assessment, .theme-block, .sidebar-block { border-radius: var(--radius-lg); }
+      .main-layout { grid-template-columns: 1fr; }
+      .score-strip {
+        grid-template-columns: repeat(5, minmax(78px, 1fr));
+        gap: 7px;
+        overflow-x: auto;
+        overflow-y: hidden;
+        padding-bottom: 2px;
+        scrollbar-width: thin;
+      }
+      .score-item { min-height: 58px; padding: 7px 8px; gap: 5px; }
+      .score-value { font-size: 16px; }
+      .score-max { font-size: 10px; }
+      .score-label { font-size: 10px; line-height: 1.1; }
+      .meter { height: 4px; }
+      .chip, .badge { padding: 6px 8px; font-size: 11px; }
+      .source-meta { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 560px) {
+      body { padding: 12px; }
+      .weekly-briefing { gap: 14px; }
+      .hero { padding: 22px; }
+      .story-header { display: grid; gap: 10px; }
+      .story-meta { gap: 7px; }
+      .score-strip { grid-template-columns: repeat(5, minmax(72px, 1fr)); }
+      .score-item { min-height: 54px; padding: 6px 7px; }
+      .score-value { font-size: 15px; }
+      .score-max { font-size: 10px; }
+      .score-label { font-size: 9.5px; }
+      .sources { padding: 10px; }
+      .source-link-card { padding: 9px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="weekly-briefing">
+    <section class="hero">
+      <div class="eyebrow">Weekly AI Intelligence Briefing</div>
+      <h1>AI Intelligence Weekly 2026-W25</h1>
+      <p class="weekly-summary">Die Woche zeigt Europas KI-Souveränität als Praxisfrage: eigene Modelle, robuste Agenten-Governance und strengere Transparenzpflichten rücken zusammen.</p>
+      <div class="meta-row">
+        <span class="chip">Woche: 15. Juni bis 19. Juni 2026</span>
+        <span class="chip">Fokus: Deutschland / EU</span>
+        <span class="badge" data-trust="hoch" data-ui-map="weekly-trust" data-raw-value="hoch">Vertrauensbild: hoch</span>
+        <span class="chip">Leitmuster: Souveränität wird operativ</span>
+      </div>
+    </section>
+
+    <section class="main-layout">
+      <section class="main-column">
+        <article class="executive-summary">
+          <div class="section-label">Executive Summary</div>
+          <h2>Wöchentliche Lage in Kürze</h2>
+          <p class="field-note">In KW 25 verschob sich der Schwerpunkt von Grundsatzdebatten zu Umsetzungsfragen. Die Kommission wählte mit EUROPA ein Konsortium für ein offenes Frontier-Modell in allen 24 EU-Sprachen. Parallel machte die Anthropic-Sperre bei G7-Gesprächen sichtbar, dass Modellzugang selbst für Partner politisch begrenzt werden kann. Für Unternehmen verdichtet sich das Bild: Agenten werden produktiver, aber auch kosten-, sicherheits- und compliance-intensiver.</p>
+        </article>
+
+        <article class="weekly-assessment">
+          <div class="section-label">Wocheneinschätzung</div>
+          <h2>Souveränität wird operativ</h2>
+          <p class="field-note">Die wichtigste Lehre der Woche: KI-Strategie braucht jetzt technische Redundanz, Governance-Fähigkeit und transparente Inhaltsprozesse. Für Deutschland/EU ist weniger entscheidend, welches Modell kurzfristig vorn liegt, sondern ob Organisationen Zugriff, Nachweise, Kosten und Risiken kontrollieren können.</p>
+          <div class="score-strip">
+            <div class="score-item" style="--score: 5"><div class="score-topline"><span class="score-value">5</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">EU / DE-Relevanz</div></div>
+            <div class="score-item" style="--score: 5"><div class="score-topline"><span class="score-value">5</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Business Impact</div></div>
+            <div class="score-item" style="--score: 4"><div class="score-topline"><span class="score-value">4</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Regulatorik</div></div>
+            <div class="score-item" style="--score: 5"><div class="score-topline"><span class="score-value">5</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Technologie</div></div>
+            <div class="score-item" style="--score: 5"><div class="score-topline"><span class="score-value">5</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Lernwert</div></div>
+          </div>
+        </article>
+
+        <section class="main-developments">
+          <div class="section-label">Hauptentwicklungen der Woche</div>
+          
+          <article class="theme-block" data-id="europa-frontier-ai-grand-challenge" data-category="global_eu">
+            <div class="story-header">
+              <div class="story-title-block">
+                <div class="story-kicker">Top-Entwicklung</div>
+                <h3>EUROPA soll Europas offenes Frontier-Modell in 24 EU-Sprachen bauen</h3>
+              </div>
+              <div class="story-meta">
+                <span class="chip" data-ui-map="category" data-raw-value="global_eu">global_eu</span>
+                <span class="chip" data-ui-map="priority" data-raw-value="P1">P1</span>
+              </div>
+            </div>
+            <div class="story-text-stack">
+              <p class="field-note"><strong>Thema:</strong> Europäische KI-Souveränität</p>
+              <p>Die Kommission wählte EUROPA, ein von Domyn geführtes Konsortium, als Gewinner der Frontier AI Grand Challenge. Geplant ist ein offen verfügbares Modell mit Abdeckung aller 24 EU-Amtssprachen.</p>
+              <p class="field-note"><strong>Strategische Relevanz:</strong> Das ist kein fertiger Marktbeweis, aber ein starkes Infrastruktur-Signal: Europa will eigene Kapazität, Mehrsprachigkeit und offene Verfügbarkeit verbinden.</p>
+              <p class="field-note"><strong>EU-/DE-Impact:</strong> Für deutsche Organisationen ist relevant, ob daraus belastbare Modelle, Compute-Zugang, Lizenzklarheit und öffentliche Beschaffungsfähigkeit entstehen.</p>
+              <p class="field-note"><strong>Einordnung:</strong> EU-KI-Souveränität wird konkreter, bleibt aber an Ausführung, Benchmarking und Betriebskosten zu messen.</p>
+            </div>
+            <div class="score-strip">
+              <div class="score-item" style="--score: 5"><div class="score-topline"><span class="score-value">5</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">EU / DE-Relevanz</div></div>
+              <div class="score-item" style="--score: 5"><div class="score-topline"><span class="score-value">5</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Business Impact</div></div>
+              <div class="score-item" style="--score: 3"><div class="score-topline"><span class="score-value">3</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Regulatorik</div></div>
+              <div class="score-item" style="--score: 5"><div class="score-topline"><span class="score-value">5</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Technologie</div></div>
+              <div class="score-item" style="--score: 5"><div class="score-topline"><span class="score-value">5</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Lernwert</div></div>
+            </div>
+            <details class="evidence">
+              <summary>Quellen & Unsicherheit</summary>
+              <div class="sources">
+                <p class="field-note"><strong>Quellenlage:</strong> <span data-ui-map="trust" data-raw-value="hoch">hoch</span></p>
+                
+                <article class="source-link-card">
+                  
+                  <a href="https://digital-strategy.ec.europa.eu/en/news/commission-selects-europa-consortium-winner-frontier-ai-grande-challenge-project-build-european" target="_blank" rel="noopener noreferrer">Commission selects EUROPA consortium as winner of the Frontier AI Grand Challenge</a>
+                  
+                  <div class="source-meta-row">
+                    <span class="source-pill" data-ui-map="role" data-raw-value="faktenanker">faktenanker</span>
+                    <span class="source-pill" data-ui-map="source-type" data-raw-value="official">official</span>
+                  </div>
+                  <div class="source-meta">
+                    <span><strong>Publisher:</strong> European Commission</span>
+                    <span><strong>Veröffentlicht:</strong> 2026-06-19</span>
+                    <span><strong>Abgerufen:</strong> 2026-06-20</span>
+                  </div>
+                </article>
+                
+                <article class="source-link-card">
+                  
+                  <a href="https://digital-strategy.ec.europa.eu/en/news/2026-state-digital-decade-report-shows-progress-urges-closing-structural-gaps-reach-2030-goals" target="_blank" rel="noopener noreferrer">2026 State of the Digital Decade report</a>
+                  
+                  <div class="source-meta-row">
+                    <span class="source-pill" data-ui-map="role" data-raw-value="policy_interpretation">policy_interpretation</span>
+                    <span class="source-pill" data-ui-map="source-type" data-raw-value="official">official</span>
+                  </div>
+                  <div class="source-meta">
+                    <span><strong>Publisher:</strong> European Commission</span>
+                    <span><strong>Veröffentlicht:</strong> 2026-06-17</span>
+                    <span><strong>Abgerufen:</strong> 2026-06-20</span>
+                  </div>
+                </article>
+                
+                <p class="field-note"><strong>Unsicherheit:</strong> Bestätigt ist die Auswahl; Leistungsfähigkeit, Zeitplan und reale Nutzung sind noch offen.</p>
+              </div>
+            </details>
+            <details class="evidence">
+              <summary>Weitere Recherche</summary>
+              <div class="sources">
+                <p class="field-note">Vertiefe EUROPA/Frontier AI Grand Challenge für 15.-19.06.2026 anhand der Kommissionsmeldung vom 19.06.2026 und prüfe Konsortium, Modelllizenz, Compute, Benchmarks und deutsche Beteiligung.</p>
+              </div>
+            </details>
+          </article>
+          
+          <article class="theme-block" data-id="anthropic-g7-model-access" data-category="global_eu">
+            <div class="story-header">
+              <div class="story-title-block">
+                <div class="story-kicker">Souveränität</div>
+                <h3>Anthropic-Sperre macht Modellzugang zum G7-Souveränitätsthema</h3>
+              </div>
+              <div class="story-meta">
+                <span class="chip" data-ui-map="category" data-raw-value="global_eu">global_eu</span>
+                <span class="chip" data-ui-map="priority" data-raw-value="P1">P1</span>
+              </div>
+            </div>
+            <div class="story-text-stack">
+              <p class="field-note"><strong>Thema:</strong> Frontier-Model-Zugang</p>
+              <p>Anthropic bestätigte eine US-Anweisung, Fable 5 und Mythos 5 für ausländische Staatsangehörige zu sperren. Beim G7 wurde daraus ein sichtbarer Streit über Partnerzugang, Sicherheit und Abhängigkeit.</p>
+              <p class="field-note"><strong>Strategische Relevanz:</strong> Die Episode zeigt, dass Modellzugang nicht nur Vertrags- oder Cloud-Frage ist, sondern geopolitische Betriebsabhängigkeit werden kann.</p>
+              <p class="field-note"><strong>EU-/DE-Impact:</strong> Für EU-Unternehmen spricht das für Exit-Pläne, Modellportfolios, lokale Alternativen und rechtlich geprüfte Zugriffsszenarien.</p>
+              <p class="field-note"><strong>Einordnung:</strong> Frontier-AI-Beschaffung braucht ab sofort ein Lieferketten- und Zugriffsrisiko-Modell.</p>
+            </div>
+            <div class="score-strip">
+              <div class="score-item" style="--score: 5"><div class="score-topline"><span class="score-value">5</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">EU / DE-Relevanz</div></div>
+              <div class="score-item" style="--score: 5"><div class="score-topline"><span class="score-value">5</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Business Impact</div></div>
+              <div class="score-item" style="--score: 4"><div class="score-topline"><span class="score-value">4</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Regulatorik</div></div>
+              <div class="score-item" style="--score: 4"><div class="score-topline"><span class="score-value">4</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Technologie</div></div>
+              <div class="score-item" style="--score: 5"><div class="score-topline"><span class="score-value">5</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Lernwert</div></div>
+            </div>
+            <details class="evidence">
+              <summary>Quellen & Unsicherheit</summary>
+              <div class="sources">
+                <p class="field-note"><strong>Quellenlage:</strong> <span data-ui-map="trust" data-raw-value="mittel">mittel</span></p>
+                
+                <article class="source-link-card">
+                  
+                  <a href="https://www.anthropic.com/news/fable-mythos-access" target="_blank" rel="noopener noreferrer">Statement on US directive to suspend access to Fable 5 and Mythos 5</a>
+                  
+                  <div class="source-meta-row">
+                    <span class="source-pill" data-ui-map="role" data-raw-value="unternehmensquelle">unternehmensquelle</span>
+                    <span class="source-pill" data-ui-map="source-type" data-raw-value="vendor">vendor</span>
+                  </div>
+                  <div class="source-meta">
+                    <span><strong>Publisher:</strong> Anthropic</span>
+                    <span><strong>Veröffentlicht:</strong> 2026-06-12</span>
+                    <span><strong>Abgerufen:</strong> 2026-06-20</span>
+                  </div>
+                </article>
+                
+                <article class="source-link-card">
+                  
+                  <a href="https://www.euronews.com/my-europe/2026/06/17/ai-takes-centre-stage-at-g7-as-western-fears-over-us-kill-switch-get-real" target="_blank" rel="noopener noreferrer">AI takes centre stage at G7 as Western fears over US kill switch get real</a>
+                  
+                  <div class="source-meta-row">
+                    <span class="source-pill" data-ui-map="role" data-raw-value="marktverifikation">marktverifikation</span>
+                    <span class="source-pill" data-ui-map="source-type" data-raw-value="media">media</span>
+                  </div>
+                  <div class="source-meta">
+                    <span><strong>Publisher:</strong> Euronews</span>
+                    <span><strong>Veröffentlicht:</strong> 2026-06-17</span>
+                    <span><strong>Abgerufen:</strong> 2026-06-20</span>
+                  </div>
+                </article>
+                
+                <p class="field-note"><strong>Unsicherheit:</strong> Sperre ist bestätigt; politische Folgeregelungen und technische Sicherheitsgründe bleiben teilweise umstritten.</p>
+              </div>
+            </details>
+            <details class="evidence">
+              <summary>Weitere Recherche</summary>
+              <div class="sources">
+                <p class="field-note">Analysiere die Anthropic-Fable-5/Mythos-5-Sperre vom 12.-17.06.2026 mit Anthropic-Statement und Euronews-G7-Bericht: Was bedeutet sie für EU-Beschaffung und Souveränität?</p>
+              </div>
+            </details>
+          </article>
+          
+          <article class="theme-block" data-id="microsoft-agent-365-cowork-ga" data-category="enterprise_ai">
+            <div class="story-header">
+              <div class="story-title-block">
+                <div class="story-kicker">Enterprise</div>
+                <h3>Microsoft verknüpft Copilot Cowork, Agent 365 und KI-FinOps</h3>
+              </div>
+              <div class="story-meta">
+                <span class="chip" data-ui-map="category" data-raw-value="enterprise_ai">enterprise_ai</span>
+                <span class="chip" data-ui-map="priority" data-raw-value="P1">P1</span>
+              </div>
+            </div>
+            <div class="story-text-stack">
+              <p class="field-note"><strong>Thema:</strong> Agentensteuerung</p>
+              <p>Microsoft kündigte die weltweite Verfügbarkeit von Copilot Cowork an und positioniert Agent 365 als Steuerungsebene für Beobachtung, Sicherheit, Governance und Kosten von Agenten.</p>
+              <p class="field-note"><strong>Strategische Relevanz:</strong> Agenten werden damit vom Experiment zur verwalteten Betriebsressource: Identität, Datenzugriff, Kosten und Auditierbarkeit rücken ins Zentrum.</p>
+              <p class="field-note"><strong>EU-/DE-Impact:</strong> Für deutsche M365-Organisationen steigen Anforderungen an Betriebsrat, Datenschutzprüfung, Kostenkontrolle und Rollenmodelle.</p>
+              <p class="field-note"><strong>Einordnung:</strong> Agentenstrategie ohne FinOps- und Kontrollmodell wird im Enterprise-Kontext schnell fragil.</p>
+            </div>
+            <div class="score-strip">
+              <div class="score-item" style="--score: 4"><div class="score-topline"><span class="score-value">4</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">EU / DE-Relevanz</div></div>
+              <div class="score-item" style="--score: 5"><div class="score-topline"><span class="score-value">5</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Business Impact</div></div>
+              <div class="score-item" style="--score: 3"><div class="score-topline"><span class="score-value">3</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Regulatorik</div></div>
+              <div class="score-item" style="--score: 5"><div class="score-topline"><span class="score-value">5</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Technologie</div></div>
+              <div class="score-item" style="--score: 5"><div class="score-topline"><span class="score-value">5</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Lernwert</div></div>
+            </div>
+            <details class="evidence">
+              <summary>Quellen & Unsicherheit</summary>
+              <div class="sources">
+                <p class="field-note"><strong>Quellenlage:</strong> <span data-ui-map="trust" data-raw-value="hoch">hoch</span></p>
+                
+                <article class="source-link-card">
+                  
+                  <a href="https://blogs.microsoft.com/blog/2026/06/16/achieving-success-with-ai/" target="_blank" rel="noopener noreferrer">Achieving success with AI</a>
+                  
+                  <div class="source-meta-row">
+                    <span class="source-pill" data-ui-map="role" data-raw-value="produktquelle">produktquelle</span>
+                    <span class="source-pill" data-ui-map="source-type" data-raw-value="vendor">vendor</span>
+                  </div>
+                  <div class="source-meta">
+                    <span><strong>Publisher:</strong> Microsoft</span>
+                    <span><strong>Veröffentlicht:</strong> 2026-06-16</span>
+                    <span><strong>Abgerufen:</strong> 2026-06-20</span>
+                  </div>
+                </article>
+                
+                <article class="source-link-card">
+                  
+                  <a href="https://github.blog/changelog/2026-06-17-github-copilot-app-generally-available/" target="_blank" rel="noopener noreferrer">GitHub Copilot app generally available</a>
+                  
+                  <div class="source-meta-row">
+                    <span class="source-pill" data-ui-map="role" data-raw-value="developer_dokumentation">developer_dokumentation</span>
+                    <span class="source-pill" data-ui-map="source-type" data-raw-value="documentation">documentation</span>
+                  </div>
+                  <div class="source-meta">
+                    <span><strong>Publisher:</strong> GitHub</span>
+                    <span><strong>Veröffentlicht:</strong> 2026-06-17</span>
+                    <span><strong>Abgerufen:</strong> 2026-06-20</span>
+                  </div>
+                </article>
+                
+                <p class="field-note"><strong>Unsicherheit:</strong> Produkt- und Positionierungsfakten sind bestätigt; unabhängige Wirksamkeitsnachweise fehlen noch.</p>
+              </div>
+            </details>
+            <details class="evidence">
+              <summary>Weitere Recherche</summary>
+              <div class="sources">
+                <p class="field-note">Prüfe Microsofts Copilot-Cowork/Agent-365-Ankündigung vom 16.06.2026: Welche EU-Tenant-, Audit-, Entra-, Purview- und Kostenkontrollen sind dokumentiert?</p>
+              </div>
+            </details>
+          </article>
+          
+          <article class="theme-block" data-id="github-agent-finder-ard" data-category="product">
+            <div class="story-header">
+              <div class="story-title-block">
+                <div class="story-kicker">Developer</div>
+                <h3>GitHub macht Agenten-Discovery über ARD zum Governance-Baustein</h3>
+              </div>
+              <div class="story-meta">
+                <span class="chip" data-ui-map="category" data-raw-value="product">product</span>
+                <span class="chip" data-ui-map="priority" data-raw-value="P2">P2</span>
+              </div>
+            </div>
+            <div class="story-text-stack">
+              <p class="field-note"><strong>Thema:</strong> Agentic Resource Discovery</p>
+              <p>GitHub Copilot kann mit Agent Finder passende MCP-Server, Skills, Tools und Agenten aus erlaubten Registries suchen. Die ARD-Spezifikation wird mit Google, Hugging Face, Microsoft und GoDaddy erwähnt.</p>
+              <p class="field-note"><strong>Strategische Relevanz:</strong> Discovery wird zur Governance-Frage: Unternehmen müssen definieren, welche Agentenressourcen auffindbar und installierbar sind.</p>
+              <p class="field-note"><strong>EU-/DE-Impact:</strong> EU-Engineering-Teams bekommen einen Hebel für kontrollierte Toolkataloge, aber auch neue Prüfpflichten für interne Registries.</p>
+              <p class="field-note"><strong>Einordnung:</strong> Agentenfähigkeit wandert vom Prompt in verwaltete Ressourcenkataloge.</p>
+            </div>
+            <div class="score-strip">
+              <div class="score-item" style="--score: 3"><div class="score-topline"><span class="score-value">3</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">EU / DE-Relevanz</div></div>
+              <div class="score-item" style="--score: 4"><div class="score-topline"><span class="score-value">4</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Business Impact</div></div>
+              <div class="score-item" style="--score: 2"><div class="score-topline"><span class="score-value">2</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Regulatorik</div></div>
+              <div class="score-item" style="--score: 5"><div class="score-topline"><span class="score-value">5</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Technologie</div></div>
+              <div class="score-item" style="--score: 4"><div class="score-topline"><span class="score-value">4</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Lernwert</div></div>
+            </div>
+            <details class="evidence">
+              <summary>Quellen & Unsicherheit</summary>
+              <div class="sources">
+                <p class="field-note"><strong>Quellenlage:</strong> <span data-ui-map="trust" data-raw-value="hoch">hoch</span></p>
+                
+                <article class="source-link-card">
+                  
+                  <a href="https://github.blog/changelog/2026-06-17-agent-finder-for-github-copilot-now-available/" target="_blank" rel="noopener noreferrer">Agent finder for GitHub Copilot now available</a>
+                  
+                  <div class="source-meta-row">
+                    <span class="source-pill" data-ui-map="role" data-raw-value="developer_dokumentation">developer_dokumentation</span>
+                    <span class="source-pill" data-ui-map="source-type" data-raw-value="documentation">documentation</span>
+                  </div>
+                  <div class="source-meta">
+                    <span><strong>Publisher:</strong> GitHub</span>
+                    <span><strong>Veröffentlicht:</strong> 2026-06-17</span>
+                    <span><strong>Abgerufen:</strong> 2026-06-20</span>
+                  </div>
+                </article>
+                
+                <article class="source-link-card">
+                  
+                  <a href="https://github.blog/changelog/2026-06-17-github-copilot-app-generally-available/" target="_blank" rel="noopener noreferrer">GitHub Copilot app generally available</a>
+                  
+                  <div class="source-meta-row">
+                    <span class="source-pill" data-ui-map="role" data-raw-value="produktquelle">produktquelle</span>
+                    <span class="source-pill" data-ui-map="source-type" data-raw-value="documentation">documentation</span>
+                  </div>
+                  <div class="source-meta">
+                    <span><strong>Publisher:</strong> GitHub</span>
+                    <span><strong>Veröffentlicht:</strong> 2026-06-17</span>
+                    <span><strong>Abgerufen:</strong> 2026-06-20</span>
+                  </div>
+                </article>
+                
+                <p class="field-note"><strong>Unsicherheit:</strong> Verfügbarkeit ist bestätigt; Enterprise-Adoption und Prüfprozesse sind offen.</p>
+              </div>
+            </details>
+            <details class="evidence">
+              <summary>Weitere Recherche</summary>
+              <div class="sources">
+                <p class="field-note">Untersuche GitHub Agent Finder und ARD für 17.06.2026 anhand GitHub-Changelog und ARD-Ankündigung: Welche Enterprise-Policies, Auditlogs und EU-Datenschutzfragen entstehen?</p>
+              </div>
+            </details>
+          </article>
+          
+          <article class="theme-block" data-id="aws-bedrock-managed-knowledge-base" data-category="enterprise_ai">
+            <div class="story-header">
+              <div class="story-title-block">
+                <div class="story-kicker">RAG</div>
+                <h3>AWS bringt verwaltete RAG-Infrastruktur mit MCP- und AgentCore-Anschluss</h3>
+              </div>
+              <div class="story-meta">
+                <span class="chip" data-ui-map="category" data-raw-value="enterprise_ai">enterprise_ai</span>
+                <span class="chip" data-ui-map="priority" data-raw-value="P2">P2</span>
+              </div>
+            </div>
+            <div class="story-text-stack">
+              <p class="field-note"><strong>Thema:</strong> Enterprise Knowledge</p>
+              <p>Amazon Bedrock Managed Knowledge Base ergänzt Smart Parsing, agentische Retrieval-Logik und eine native Integration in AgentCore Gateway über MCP-kompatible Tools.</p>
+              <p class="field-note"><strong>Strategische Relevanz:</strong> RAG wird stärker zur Plattformfunktion: weniger Eigenbau-Orchestrierung, mehr Anbieterabhängigkeit und Governance über Cloud-Kontrollen.</p>
+              <p class="field-note"><strong>EU-/DE-Impact:</strong> Die Verfügbarkeit in Frankfurt, Dublin und London ist für EU-Datenresidenz und Architekturentscheidungen besonders relevant.</p>
+              <p class="field-note"><strong>Einordnung:</strong> Enterprise-RAG verlagert sich in kontrollierte Plattformdienste, bleibt aber prüfpflichtig.</p>
+            </div>
+            <div class="score-strip">
+              <div class="score-item" style="--score: 4"><div class="score-topline"><span class="score-value">4</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">EU / DE-Relevanz</div></div>
+              <div class="score-item" style="--score: 4"><div class="score-topline"><span class="score-value">4</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Business Impact</div></div>
+              <div class="score-item" style="--score: 2"><div class="score-topline"><span class="score-value">2</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Regulatorik</div></div>
+              <div class="score-item" style="--score: 5"><div class="score-topline"><span class="score-value">5</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Technologie</div></div>
+              <div class="score-item" style="--score: 4"><div class="score-topline"><span class="score-value">4</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Lernwert</div></div>
+            </div>
+            <details class="evidence">
+              <summary>Quellen & Unsicherheit</summary>
+              <div class="sources">
+                <p class="field-note"><strong>Quellenlage:</strong> <span data-ui-map="trust" data-raw-value="hoch">hoch</span></p>
+                
+                <article class="source-link-card">
+                  
+                  <a href="https://aws.amazon.com/blogs/aws/introducing-amazon-bedrock-managed-knowledge-base-for-faster-more-accurate-enterprise-ai-applications/" target="_blank" rel="noopener noreferrer">Introducing Amazon Bedrock Managed Knowledge Base</a>
+                  
+                  <div class="source-meta-row">
+                    <span class="source-pill" data-ui-map="role" data-raw-value="produktquelle">produktquelle</span>
+                    <span class="source-pill" data-ui-map="source-type" data-raw-value="vendor">vendor</span>
+                  </div>
+                  <div class="source-meta">
+                    <span><strong>Publisher:</strong> AWS</span>
+                    <span><strong>Veröffentlicht:</strong> 2026-06-17</span>
+                    <span><strong>Abgerufen:</strong> 2026-06-20</span>
+                  </div>
+                </article>
+                
+                <p class="field-note"><strong>Unsicherheit:</strong> Produktstart und Regionen sind bestätigt; Qualität, Kosten und Compliance hängen vom konkreten Setup ab.</p>
+              </div>
+            </details>
+            <details class="evidence">
+              <summary>Weitere Recherche</summary>
+              <div class="sources">
+                <p class="field-note">Bewerte AWS Bedrock Managed Knowledge Base vom 17.06.2026 mit Fokus auf Frankfurt-Region, MCP/AgentCore, Datenflüsse, Berechtigungen und EU-Compliance.</p>
+              </div>
+            </details>
+          </article>
+          
+          <article class="theme-block" data-id="g7-minors-ai-safety" data-category="governance">
+            <div class="story-header">
+              <div class="story-title-block">
+                <div class="story-kicker">Governance</div>
+                <h3>G7 fordert sichere KI-Interaktion und Provenienz für Minderjährige</h3>
+              </div>
+              <div class="story-meta">
+                <span class="chip" data-ui-map="category" data-raw-value="governance">governance</span>
+                <span class="chip" data-ui-map="priority" data-raw-value="P2">P2</span>
+              </div>
+            </div>
+            <div class="story-text-stack">
+              <p class="field-note"><strong>Thema:</strong> Kinder- und Plattformschutz</p>
+              <p>Die G7-Erklärung zu einem sichereren digitalen Raum für Minderjährige adressiert konversationelle KI, Safety-by-Default, Age Assurance, Provenienz und synthetische Inhalte.</p>
+              <p class="field-note"><strong>Strategische Relevanz:</strong> Das passt direkt zu EU-Linien aus DSA, Kinderschutz und AI-Act-Transparenz: Schutzdesign wird zum Produktkriterium.</p>
+              <p class="field-note"><strong>EU-/DE-Impact:</strong> Für Anbieter in Deutschland/EU ist relevant, ob G7-Prinzipien in Plattformaufsicht, Produkthaftung und Beschaffung einfließen.</p>
+              <p class="field-note"><strong>Einordnung:</strong> Kinder- und Jugend-Schutz wird ein konkreter Prüfpunkt für KI-Assistenten.</p>
+            </div>
+            <div class="score-strip">
+              <div class="score-item" style="--score: 4"><div class="score-topline"><span class="score-value">4</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">EU / DE-Relevanz</div></div>
+              <div class="score-item" style="--score: 4"><div class="score-topline"><span class="score-value">4</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Business Impact</div></div>
+              <div class="score-item" style="--score: 4"><div class="score-topline"><span class="score-value">4</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Regulatorik</div></div>
+              <div class="score-item" style="--score: 3"><div class="score-topline"><span class="score-value">3</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Technologie</div></div>
+              <div class="score-item" style="--score: 4"><div class="score-topline"><span class="score-value">4</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Lernwert</div></div>
+            </div>
+            <details class="evidence">
+              <summary>Quellen & Unsicherheit</summary>
+              <div class="sources">
+                <p class="field-note"><strong>Quellenlage:</strong> <span data-ui-map="trust" data-raw-value="hoch">hoch</span></p>
+                
+                <article class="source-link-card">
+                  
+                  <a href="https://www.elysee.fr/en/G7evian/2026/06/17/leaderscall-on-a-safer-digital-space-for-minors" target="_blank" rel="noopener noreferrer">G7 Leaders&#x27; call on a safer digital space for minors</a>
+                  
+                  <div class="source-meta-row">
+                    <span class="source-pill" data-ui-map="role" data-raw-value="faktenanker">faktenanker</span>
+                    <span class="source-pill" data-ui-map="source-type" data-raw-value="official">official</span>
+                  </div>
+                  <div class="source-meta">
+                    <span><strong>Publisher:</strong> G7 France / Elysee</span>
+                    <span><strong>Veröffentlicht:</strong> 2026-06-17</span>
+                    <span><strong>Abgerufen:</strong> 2026-06-20</span>
+                  </div>
+                </article>
+                
+                <article class="source-link-card">
+                  
+                  <a href="https://digital-strategy.ec.europa.eu/en/policies/code-practice-ai-generated-content" target="_blank" rel="noopener noreferrer">Code of Practice on Transparency of AI-Generated Content</a>
+                  
+                  <div class="source-meta-row">
+                    <span class="source-pill" data-ui-map="role" data-raw-value="faktenanker">faktenanker</span>
+                    <span class="source-pill" data-ui-map="source-type" data-raw-value="official">official</span>
+                  </div>
+                  <div class="source-meta">
+                    <span><strong>Publisher:</strong> European Commission</span>
+                    <span><strong>Veröffentlicht:</strong> 2026-06-10</span>
+                    <span><strong>Abgerufen:</strong> 2026-06-20</span>
+                  </div>
+                </article>
+                
+                <p class="field-note"><strong>Unsicherheit:</strong> Politische Erklärung ist bestätigt; konkrete Umsetzungspflichten entstehen erst durch nationale/EU-Regeln.</p>
+              </div>
+            </details>
+            <details class="evidence">
+              <summary>Weitere Recherche</summary>
+              <div class="sources">
+                <p class="field-note">Analysiere die G7-Erklärung vom 17.06.2026 zu Minderjährigen, conversational AI und Provenienz im Abgleich mit EU DSA und AI Act Article 50.</p>
+              </div>
+            </details>
+          </article>
+          
+        </section>
+      </section>
+
+      <aside class="sidebar">
+        <section class="sidebar-block">
+          <h3>Wochenlage</h3>
+          <p class="sidebar-meta">Die Woche zeigt Europas KI-Souveränität als Praxisfrage: eigene Modelle, robuste Agenten-Governance und strengere Transparenzpflichten rücken zusammen.</p>
+          <div class="sidebar-status-grid">
+            <div class="status-card">
+              <span class="status-card-label">Woche</span>
+              <span class="status-card-value">15. Juni bis 19. Juni 2026</span>
+            </div>
+            <div class="status-card">
+              <span class="status-card-label">Quellenlage</span>
+              <span class="status-card-value" data-ui-map="trust" data-raw-value="hoch">hoch</span>
+            </div>
+          </div>
+        </section>
+
+        <section class="sidebar-block regulation-panel">
+          <h3>Regulatorik</h3>
+          
+          <article class="panel-item regulation-item" data-id="article50-transparency-code" data-category="regulation">
+            <details>
+              <summary>Article-50-Transparenzcode bleibt der kurzfristige Compliance-Taktgeber</summary>
+              <div class="panel-detail compact-panel-details">
+                <div class="compact-panel-summary">
+                  <div class="story-meta"><span class="badge" data-trust="hoch" data-ui-map="trust" data-raw-value="hoch">hoch</span></div>
+                  <div class="compact-panel-stats">
+                    <span class="chip">Quellen: <span data-source-count>0</span></span>
+                    <span class="chip">Rollen</span>
+                  </div>
+                  <div class="compact-role-row" data-role-summary></div>
+                </div>
+                <p>Die Kommissionsseite bestätigt den Code, die laufende Angemessenheitsbewertung und die Anwendung der Transparenzpflichten ab 2. August 2026.</p>
+                <p><strong>EU-/DE-Impact:</strong> Kommunikation, Medien, Marketing, Public Sector und Produktteams sollten Labeling, Provenienz und Deepfake-Prozesse jetzt operationalisieren.</p>
+                <div class="sources">
+                  <ol class="compact-source-list">
+                  
+                  <li>
+                    
+                    <a href="https://digital-strategy.ec.europa.eu/en/policies/code-practice-ai-generated-content" target="_blank" rel="noopener noreferrer">Code of Practice on Transparency of AI-Generated Content</a>
+                    
+                    <div class="source-meta-row"><span class="source-pill" data-ui-map="role" data-raw-value="faktenanker" data-source-role>faktenanker</span></div>
+                  </li>
+                  
+                  </ol>
+                </div>
+              </div>
+            </details>
+          </article>
+          
+          <article class="panel-item regulation-item" data-id="high-risk-guidelines-consultation" data-category="regulation">
+            <details>
+              <summary>High-Risk-Guidelines bleiben die nächste AI-Act-Auslegungsbaustelle</summary>
+              <div class="panel-detail compact-panel-details">
+                <div class="compact-panel-summary">
+                  <div class="story-meta"><span class="badge" data-trust="hoch" data-ui-map="trust" data-raw-value="hoch">hoch</span></div>
+                  <div class="compact-panel-stats">
+                    <span class="chip">Quellen: <span data-source-count>0</span></span>
+                    <span class="chip">Rollen</span>
+                  </div>
+                  <div class="compact-role-row" data-role-summary></div>
+                </div>
+                <p>Die Kommission beschreibt die Entwürfe zur Klassifizierung von Hochrisiko-KI nach Artikel 6 und verweist auf Stakeholder-Feedback.</p>
+                <p><strong>EU-/DE-Impact:</strong> Für Anbieter und Betreiber in Deutschland geht es um frühe Klassifizierung, Dokumentation und spätere Marktüberwachung.</p>
+                <div class="sources">
+                  <ol class="compact-source-list">
+                  
+                  <li>
+                    
+                    <a href="https://digital-strategy.ec.europa.eu/en/library/draft-commission-guidelines-classification-high-risk-ai-systems" target="_blank" rel="noopener noreferrer">Draft Commission guidelines on classification of high-risk AI systems</a>
+                    
+                    <div class="source-meta-row"><span class="source-pill" data-ui-map="role" data-raw-value="faktenanker" data-source-role>faktenanker</span></div>
+                  </li>
+                  
+                  </ol>
+                </div>
+              </div>
+            </details>
+          </article>
+          
+          <article class="panel-item regulation-item" data-id="g7-ai-minors-safety" data-category="governance">
+            <details>
+              <summary>G7 verbindet Kinderschutz, Age Assurance und KI-Provenienz</summary>
+              <div class="panel-detail compact-panel-details">
+                <div class="compact-panel-summary">
+                  <div class="story-meta"><span class="badge" data-trust="hoch" data-ui-map="trust" data-raw-value="hoch">hoch</span></div>
+                  <div class="compact-panel-stats">
+                    <span class="chip">Quellen: <span data-source-count>0</span></span>
+                    <span class="chip">Rollen</span>
+                  </div>
+                  <div class="compact-role-row" data-role-summary></div>
+                </div>
+                <p>Die G7-Erklärung fordert sichere Voreinstellungen, elterliche Kontrollen, altersgerechte Erfahrungen und Transparenz zu synthetischen Inhalten.</p>
+                <p><strong>EU-/DE-Impact:</strong> Das stärkt den politischen Druck auf Plattform- und KI-Anbieter, Schutzkonzepte für Minderjährige technisch nachweisbar zu machen.</p>
+                <div class="sources">
+                  <ol class="compact-source-list">
+                  
+                  <li>
+                    
+                    <a href="https://www.elysee.fr/en/G7evian/2026/06/17/leaderscall-on-a-safer-digital-space-for-minors" target="_blank" rel="noopener noreferrer">G7 Leaders&#x27; call on a safer digital space for minors</a>
+                    
+                    <div class="source-meta-row"><span class="source-pill" data-ui-map="role" data-raw-value="faktenanker" data-source-role>faktenanker</span></div>
+                  </li>
+                  
+                  </ol>
+                </div>
+              </div>
+            </details>
+          </article>
+          
+        </section>
+
+        <section class="sidebar-block product-panel">
+          <h3>Produkte & Plattformen</h3>
+          
+          <article class="panel-item product-item" data-id="copilot-cowork-agent365" data-category="enterprise_ai">
+            <details>
+              <summary>Copilot Cowork wird weltweiter Agenten-Baustein</summary>
+              <div class="panel-detail compact-panel-details">
+                <div class="compact-panel-summary">
+                  <div class="story-meta"><span class="chip">Microsoft</span><span class="badge" data-trust="hoch" data-ui-map="trust" data-raw-value="hoch">hoch</span></div>
+                  <div class="compact-panel-stats">
+                    <span class="chip">Quellen: <span data-source-count>0</span></span>
+                    <span class="chip">Rollen</span>
+                  </div>
+                  <div class="compact-role-row" data-role-summary></div>
+                </div>
+                <p>Microsoft setzt auf modell-diverse Agenten, Nutzungspreise und Agent 365 als Kontrollschicht für Sicherheit, Governance und Kosten.</p>
+                <p><strong>Business-Relevanz:</strong> Für EU-Unternehmen wird die Frage zentral, wie Agenten-Verbrauch, Datenzugriff und Prüfpfade in M365 sauber begrenzt werden.</p>
+                <div class="sources">
+                  <ol class="compact-source-list">
+                  
+                  <li>
+                    
+                    <a href="https://blogs.microsoft.com/blog/2026/06/16/achieving-success-with-ai/" target="_blank" rel="noopener noreferrer">Achieving success with AI</a>
+                    
+                    <div class="source-meta-row"><span class="source-pill" data-ui-map="role" data-raw-value="produktquelle" data-source-role>produktquelle</span></div>
+                  </li>
+                  
+                  </ol>
+                </div>
+              </div>
+            </details>
+          </article>
+          
+          <article class="panel-item product-item" data-id="github-copilot-app-agent-finder" data-category="product">
+            <details>
+              <summary>GitHub bündelt Copilot-App, Agent Finder und Modellrouting</summary>
+              <div class="panel-detail compact-panel-details">
+                <div class="compact-panel-summary">
+                  <div class="story-meta"><span class="chip">GitHub Copilot</span><span class="badge" data-trust="hoch" data-ui-map="trust" data-raw-value="hoch">hoch</span></div>
+                  <div class="compact-panel-stats">
+                    <span class="chip">Quellen: <span data-source-count>0</span></span>
+                    <span class="chip">Rollen</span>
+                  </div>
+                  <div class="compact-role-row" data-role-summary></div>
+                </div>
+                <p>Die Copilot-App ist allgemein verfügbar; Agent Finder entdeckt erlaubte Ressourcen, während neue Modelloptionen in Copilot-Flächen ausgerollt werden.</p>
+                <p><strong>Business-Relevanz:</strong> Engineering-Organisationen sollten Policies für Agentenressourcen, Modelle, Kosten und Pull-Request-Prüfungen zusammen betrachten.</p>
+                <div class="sources">
+                  <ol class="compact-source-list">
+                  
+                  <li>
+                    
+                    <a href="https://github.blog/changelog/2026-06-17-github-copilot-app-generally-available/" target="_blank" rel="noopener noreferrer">GitHub Copilot app generally available</a>
+                    
+                    <div class="source-meta-row"><span class="source-pill" data-ui-map="role" data-raw-value="developer_dokumentation" data-source-role>developer_dokumentation</span></div>
+                  </li>
+                  
+                  <li>
+                    
+                    <a href="https://github.blog/changelog/2026-06-17-agent-finder-for-github-copilot-now-available/" target="_blank" rel="noopener noreferrer">Agent finder for GitHub Copilot now available</a>
+                    
+                    <div class="source-meta-row"><span class="source-pill" data-ui-map="role" data-raw-value="developer_dokumentation" data-source-role>developer_dokumentation</span></div>
+                  </li>
+                  
+                  </ol>
+                </div>
+              </div>
+            </details>
+          </article>
+          
+          <article class="panel-item product-item" data-id="aws-bedrock-mkb" data-category="enterprise_ai">
+            <details>
+              <summary>Bedrock Managed Knowledge Base startet mit EU-Regionen</summary>
+              <div class="panel-detail compact-panel-details">
+                <div class="compact-panel-summary">
+                  <div class="story-meta"><span class="chip">AWS Bedrock</span><span class="badge" data-trust="hoch" data-ui-map="trust" data-raw-value="hoch">hoch</span></div>
+                  <div class="compact-panel-stats">
+                    <span class="chip">Quellen: <span data-source-count>0</span></span>
+                    <span class="chip">Rollen</span>
+                  </div>
+                  <div class="compact-role-row" data-role-summary></div>
+                </div>
+                <p>AWS bietet verwaltete Knowledge Bases mit agentischer Retrieval-Logik, MCP-Anbindung und Verfügbarkeit unter anderem in Frankfurt, Dublin und London.</p>
+                <p><strong>Business-Relevanz:</strong> Das erleichtert RAG-Betrieb, verschiebt aber Governance-Fragen zu Datenflüssen, Berechtigungen, Kosten und Cloud-Abhängigkeit.</p>
+                <div class="sources">
+                  <ol class="compact-source-list">
+                  
+                  <li>
+                    
+                    <a href="https://aws.amazon.com/blogs/aws/introducing-amazon-bedrock-managed-knowledge-base-for-faster-more-accurate-enterprise-ai-applications/" target="_blank" rel="noopener noreferrer">Introducing Amazon Bedrock Managed Knowledge Base</a>
+                    
+                    <div class="source-meta-row"><span class="source-pill" data-ui-map="role" data-raw-value="produktquelle" data-source-role>produktquelle</span></div>
+                  </li>
+                  
+                  </ol>
+                </div>
+              </div>
+            </details>
+          </article>
+          
+        </section>
+
+        <section class="sidebar-block global-panel">
+          <h3>Global mit EU-Impact</h3>
+          
+          <article class="panel-item global-item" data-id="digital-decade-2026" data-category="global_eu">
+            <details>
+              <summary>Digital Decade Report macht Skalierungslücken zum KI-Kontext</summary>
+              <div class="panel-detail compact-panel-details">
+                <div class="compact-panel-summary">
+                  <div class="story-meta"><span class="chip">EU</span><span class="badge" data-trust="hoch" data-ui-map="trust" data-raw-value="hoch">hoch</span></div>
+                  <div class="compact-panel-stats">
+                    <span class="chip">Quellen: <span data-source-count>0</span></span>
+                    <span class="chip">Rollen</span>
+                  </div>
+                  <div class="compact-role-row" data-role-summary></div>
+                </div>
+                <p>Die Kommission meldet Fortschritte, mahnt aber strukturelle Lücken bei Tempo, Skalierung und Konsistenz der digitalen Transformation an.</p>
+                <p><strong>EU-/DE-Impact:</strong> AI Factories, Cloud, Open Source und digitale Infrastruktur werden stärker in Budget- und Investitionsentscheidungen eingeordnet.</p>
+                <div class="sources">
+                  <ol class="compact-source-list">
+                  
+                  <li>
+                    
+                    <a href="https://digital-strategy.ec.europa.eu/en/news/2026-state-digital-decade-report-shows-progress-urges-closing-structural-gaps-reach-2030-goals" target="_blank" rel="noopener noreferrer">2026 State of the Digital Decade report</a>
+                    
+                    <div class="source-meta-row"><span class="source-pill" data-ui-map="role" data-raw-value="faktenanker" data-source-role>faktenanker</span></div>
+                  </li>
+                  
+                  </ol>
+                </div>
+              </div>
+            </details>
+          </article>
+          
+          <article class="panel-item global-item" data-id="g7-transatlantic-ai-access" data-category="global_eu">
+            <details>
+              <summary>G7-Debatte verschiebt KI-Zugang in die Außenwirtschaftspolitik</summary>
+              <div class="panel-detail compact-panel-details">
+                <div class="compact-panel-summary">
+                  <div class="story-meta"><span class="chip">G7 / USA / EU</span><span class="badge" data-trust="mittel" data-ui-map="trust" data-raw-value="mittel">mittel</span></div>
+                  <div class="compact-panel-stats">
+                    <span class="chip">Quellen: <span data-source-count>0</span></span>
+                    <span class="chip">Rollen</span>
+                  </div>
+                  <div class="compact-role-row" data-role-summary></div>
+                </div>
+                <p>Die Anthropic-Sperre prägte die G7-Diskussion über vertrauenswürdige Partner, Sicherheitsrisiken und europäische Abhängigkeit von US-Frontier-Modellen.</p>
+                <p><strong>EU-/DE-Impact:</strong> Europa muss Kooperation und Eigenständigkeit gleichzeitig planen: Zugriff auf US-Modelle, europäische Alternativen und technische Resilienz.</p>
+                <div class="sources">
+                  <ol class="compact-source-list">
+                  
+                  <li>
+                    
+                    <a href="https://www.euronews.com/my-europe/2026/06/17/ai-takes-centre-stage-at-g7-as-western-fears-over-us-kill-switch-get-real" target="_blank" rel="noopener noreferrer">AI takes centre stage at G7 as Western fears over US kill switch get real</a>
+                    
+                    <div class="source-meta-row"><span class="source-pill" data-ui-map="role" data-raw-value="marktverifikation" data-source-role>marktverifikation</span></div>
+                  </li>
+                  
+                  <li>
+                    
+                    <a href="https://www.anthropic.com/news/fable-mythos-access" target="_blank" rel="noopener noreferrer">Statement on US directive to suspend access to Fable 5 and Mythos 5</a>
+                    
+                    <div class="source-meta-row"><span class="source-pill" data-ui-map="role" data-raw-value="unternehmensquelle" data-source-role>unternehmensquelle</span></div>
+                  </li>
+                  
+                  </ol>
+                </div>
+              </div>
+            </details>
+          </article>
+          
+        </section>
+
+        <section class="sidebar-block watchlist-archive-panel">
+          <h3>Watchlist & Archiv</h3>
+          <div class="section-stack watchlist">
+            
+            <article class="panel-item watch-item" data-id="europa-benchmarks-license">
+              <details>
+                <summary>EUROPA: Lizenz, Benchmarks und deutsche Beteiligung</summary>
+                <div class="panel-detail compact-panel-details">
+                  <div class="compact-panel-summary">
+                    <div class="story-meta"><span class="badge" data-trust="watchlist" data-ui-map="trust" data-raw-value="watchlist">watchlist</span></div>
+                    <div class="compact-panel-stats">
+                      <span class="chip">Quellen: <span data-source-count>0</span></span>
+                      <span class="chip">Rollen</span>
+                    </div>
+                    <div class="compact-role-row" data-role-summary></div>
+                  </div>
+                  <p>Die Auswahl ist bestätigt, aber technische Details, Zeitplan, Datenbasis, Lizenz und deutsche Nutzbarkeit sind noch zu prüfen.</p>
+                  <p><strong>Warum beobachten:</strong> EU-Souveränität hängt an belastbarer Ausführung, nicht an der Auswahlmeldung.</p>
+                  <p><strong>Nächstes Signal:</strong> Konsortiumsdetails, Modellkarte, Benchmarks, Compute-Plan oder Fördervertrag.</p>
+                  <div class="sources">
+                    <ol class="compact-source-list">
+                    
+                    <li>
+                      
+                      <a href="https://digital-strategy.ec.europa.eu/en/news/commission-selects-europa-consortium-winner-frontier-ai-grande-challenge-project-build-european" target="_blank" rel="noopener noreferrer">Commission selects EUROPA consortium</a>
+                      
+                      <div class="source-meta-row"><span class="source-pill" data-ui-map="role" data-raw-value="faktenanker" data-source-role>faktenanker</span></div>
+                    </li>
+                    
+                    </ol>
+                  </div>
+                </div>
+              </details>
+            </article>
+            
+            <article class="panel-item watch-item" data-id="anthropic-access-resolution">
+              <details>
+                <summary>Anthropic-Zugang: Ausnahmen oder Partnerregime</summary>
+                <div class="panel-detail compact-panel-details">
+                  <div class="compact-panel-summary">
+                    <div class="story-meta"><span class="badge" data-trust="watchlist" data-ui-map="trust" data-raw-value="watchlist">watchlist</span></div>
+                    <div class="compact-panel-stats">
+                      <span class="chip">Quellen: <span data-source-count>0</span></span>
+                      <span class="chip">Rollen</span>
+                    </div>
+                    <div class="compact-role-row" data-role-summary></div>
+                  </div>
+                  <p>Die Sperre ist bestätigt, aber eine mögliche G7- oder US-EU-Lösung ist noch offen.</p>
+                  <p><strong>Warum beobachten:</strong> Eine Ausnahmeregel könnte Beschaffungsrisiken dämpfen; ein Dauerregime würde sie verschärfen.</p>
+                  <p><strong>Nächstes Signal:</strong> US-Regierungsstatement, Anthropic-Update oder EU-Kommissionsposition.</p>
+                  <div class="sources">
+                    <ol class="compact-source-list">
+                    
+                    <li>
+                      
+                      <a href="https://www.anthropic.com/news/fable-mythos-access" target="_blank" rel="noopener noreferrer">Statement on US directive to suspend access</a>
+                      
+                      <div class="source-meta-row"><span class="source-pill" data-ui-map="role" data-raw-value="unternehmensquelle" data-source-role>unternehmensquelle</span></div>
+                    </li>
+                    
+                    </ol>
+                  </div>
+                </div>
+              </details>
+            </article>
+            
+            <article class="panel-item watch-item" data-id="copilot-agent365-eu-controls">
+              <details>
+                <summary>Agent 365: EU-Tenant- und Audit-Details</summary>
+                <div class="panel-detail compact-panel-details">
+                  <div class="compact-panel-summary">
+                    <div class="story-meta"><span class="badge" data-trust="watchlist" data-ui-map="trust" data-raw-value="watchlist">watchlist</span></div>
+                    <div class="compact-panel-stats">
+                      <span class="chip">Quellen: <span data-source-count>0</span></span>
+                      <span class="chip">Rollen</span>
+                    </div>
+                    <div class="compact-role-row" data-role-summary></div>
+                  </div>
+                  <p>Microsoft nennt Governance und Kostenkontrolle, doch konkrete EU-spezifische Nachweise sollten weiter geprüft werden.</p>
+                  <p><strong>Warum beobachten:</strong> Enterprise-Freigaben hängen an Datenflüssen, Logs, Rollen, Lösch- und Betriebsmodellen.</p>
+                  <p><strong>Nächstes Signal:</strong> Microsoft Learn-Dokumentation, DPA-Update oder Admin-Guide.</p>
+                  <div class="sources">
+                    <ol class="compact-source-list">
+                    
+                    <li>
+                      
+                      <a href="https://blogs.microsoft.com/blog/2026/06/16/achieving-success-with-ai/" target="_blank" rel="noopener noreferrer">Achieving success with AI</a>
+                      
+                      <div class="source-meta-row"><span class="source-pill" data-ui-map="role" data-raw-value="produktquelle" data-source-role>produktquelle</span></div>
+                    </li>
+                    
+                    </ol>
+                  </div>
+                </div>
+              </details>
+            </article>
+            
+          </div>
+
+          <div class="section-stack archive-references">
+            
+            <article class="archive-item" data-id="weekly-2026-W24-transparency-code">
+              <span class="badge relation-type" data-ui-map="relation-type" data-raw-value="follow_up">follow_up</span>
+              <h4>Weekly 2026-W24: Article-50-Transparenzcode</h4>
+              <p class="sidebar-meta">Der neue Weekly knüpft an den finalen Transparenzcode und dessen Umsetzung bis August 2026 an.</p>
+            </article>
+            
+            <article class="archive-item" data-id="weekly-2026-W24-sovereignty-cada">
+              <span class="badge relation-type" data-ui-map="relation-type" data-raw-value="trendline">trendline</span>
+              <h4>Weekly 2026-W24: CADA und Tech-Souveränität</h4>
+              <p class="sidebar-meta">EUROPA und der Anthropic/G7-Konflikt konkretisieren die in W24 beschriebene Souveränitätslinie.</p>
+            </article>
+            
+            <article class="archive-item" data-id="daily-2026-06-16-work-iq">
+              <span class="badge relation-type" data-ui-map="relation-type" data-raw-value="recurring_theme">recurring_theme</span>
+              <h4>Daily 2026-06-16: Microsoft Work IQ</h4>
+              <p class="sidebar-meta">Agent 365, Cowork und GitHub Copilot führen die Work-IQ-/Agenten-Governance-Linie weiter.</p>
+            </article>
+            
+          </div>
+        </section>
+      </aside>
+    </section>
+  </main>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const labelMaps = {
+        category: {
+          regulation: 'REGULIERUNG',
+          product: 'PRODUKTE & PLATTFORMEN',
+          global_eu: 'GLOBAL MIT EU-IMPACT',
+          enterprise_ai: 'ENTERPRISE AI',
+          governance: 'GOVERNANCE',
+          watchlist: 'WATCHLIST'
+        },
+        priority: {
+          P1: 'SEHR WICHTIG',
+          P2: 'RELEVANT',
+          P3: 'KURZ NOTIERT'
+        },
+        trust: {
+          hoch: 'HOHE QUELLENLAGE',
+          mittel: 'MITTLERE QUELLENLAGE',
+          niedrig: 'NIEDRIGE QUELLENLAGE',
+          gemischt: 'GEMISCHTE QUELLENLAGE',
+          watchlist: 'WATCHLIST'
+        },
+        role: {
+          faktenanker: 'FAKTENANKER',
+          policy_interpretation: 'POLICY-INTERPRETATION',
+          marktverifikation: 'MARKTVERIFIKATION',
+          produktquelle: 'PRODUKTQUELLE',
+          enterprise_signal: 'ENTERPRISE-SIGNAL',
+          'frühindikator': 'FRÜHINDIKATOR',
+          unternehmensquelle: 'UNTERNEHMENSQUELLE',
+          developer_dokumentation: 'ENTWICKLERDOKUMENTATION'
+        },
+        'source-type': {
+          official: 'OFFIZIELLE QUELLE',
+          vendor: 'ANBIETERQUELLE',
+          media: 'MEDIENBERICHT',
+          research: 'RESEARCH',
+          community: 'COMMUNITY',
+          documentation: 'DOKUMENTATION',
+          legal: 'RECHTSTEXT'
+        },
+        'relation-type': {
+          follow_up: 'FOLLOW-UP',
+          recurring_theme: 'WIEDERKEHRENDES THEMA',
+          precedent: 'PRÄZEDENZFALL',
+          trendline: 'TRENDLINIE'
+        }
+      };
+
+      const mapLabel = (group, rawValue) => {
+        if (!rawValue) return '';
+        return (labelMaps[group] && labelMaps[group][rawValue]) || rawValue;
+      };
+
+      document.querySelectorAll('[data-ui-map]').forEach((element) => {
+        const group = element.dataset.uiMap;
+        const rawValue = element.dataset.rawValue || element.textContent.trim();
+        const mappedValue = mapLabel(group === 'weekly-trust' ? 'trust' : group, rawValue);
+
+        if (group === 'weekly-trust') {
+          element.textContent = `Vertrauensbild: ${mappedValue}`;
+          return;
+        }
+
+        element.textContent = mappedValue;
+      });
+
+      document.querySelectorAll('.panel-item').forEach((item) => {
+        const roleSummary = item.querySelector('[data-role-summary]');
+        const roleNodes = Array.from(item.querySelectorAll('[data-source-role]'));
+        const sourceCountNode = item.querySelector('[data-source-count]');
+        const uniqueRoles = [...new Set(roleNodes.map((node) => node.dataset.rawValue).filter(Boolean))];
+
+        if (sourceCountNode) sourceCountNode.textContent = String(roleNodes.length);
+
+        if (roleSummary) {
+          roleSummary.innerHTML = '';
+          uniqueRoles.forEach((role) => {
+            const pill = document.createElement('span');
+            pill.className = 'source-pill';
+            pill.textContent = mapLabel('role', role);
+            roleSummary.appendChild(pill);
+          });
+        }
+      });
+    });
+  </script>
+</body>
+</html>
