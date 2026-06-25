@@ -1,6 +1,17 @@
 {
   "reports": [
     {
+      "id": "daily-2026-06-24",
+      "mode": "daily",
+      "title": "AI Intelligence Daily - Transparenzpflichten werden konkret",
+      "date_label": "24.06.2026",
+      "public_url": "https://ai-news.camphausen.eu/daily/2026-06-24.html",
+      "published_at": "2026-06-25T02:06:01Z",
+      "summary": "Der 24. Juni schärft vor allem den Blick auf AI-Act-Transparenz: Article 50 bleibt für viele Teams ein naher Umsetzungspunkt. Dazu kommen produktnahe Signale zu ChatGPT, EU Apply AI, AI-Infrastruktur und Enterprise-Agenten.",
+      "trust_status": "hoch",
+      "tags": ["AI Act", "Article 50", "Transparenz", "Enterprise AI", "Infrastruktur"]
+    },
+    {
       "id": "daily-2026-06-16",
       "mode": "daily",
       "title": "Daily AI Intelligence Briefing - 16. Juni 2026",
