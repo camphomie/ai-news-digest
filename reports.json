@@ -1,6 +1,17 @@
 {
   "reports": [
     {
+      "id": "daily-2026-06-25",
+      "mode": "daily",
+      "title": "AI Intelligence Daily - Cloud-Gatekeeper und Agenten-Governance",
+      "date_label": "25.06.2026",
+      "public_url": "https://ai-news.camphausen.eu/daily/2026-06-25.html",
+      "published_at": "2026-06-26T02:06:01Z",
+      "summary": "Der 25. Juni setzt zwei operative Linien: Die EU zieht Cloud als KI-Infrastrukturschicht in die DMA-Logik, während agentische Computersteuerung produktnäher wird. Datenschutzrechte bleiben der Governance-Prüfstein.",
+      "trust_status": "hoch",
+      "tags": ["DMA", "Cloud", "Agentic AI", "Datenschutz", "Enterprise AI"]
+    },
+    {
       "id": "daily-2026-06-24",
       "mode": "daily",
       "title": "AI Intelligence Daily - Transparenzpflichten werden konkret",
