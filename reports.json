@@ -1,6 +1,17 @@
 {
   "reports": [
     {
+      "id": "daily-2026-06-29",
+      "mode": "daily",
+      "title": "AI Intelligence Daily - AI-Omnibus verschiebt High-Risk-Pflichten",
+      "date_label": "29.06.2026",
+      "public_url": "https://ai-news.camphausen.eu/daily/2026-06-29.html",
+      "published_at": "2026-06-30T02:16:00Z",
+      "summary": "Der 29. Juni bringt eine harte AI-Act-Weiche: Der Rat gibt dem Digital Omnibus auf AI final grünes Licht. High-Risk-Pflichten werden verschoben, Transparenzfristen bleiben nah, Skills-Programme werden ausgebaut.",
+      "trust_status": "hoch",
+      "tags": ["AI Act", "Omnibus", "High-Risk AI", "Transparenz", "Skills"]
+    },
+    {
       "id": "daily-2026-06-25",
       "mode": "daily",
       "title": "AI Intelligence Daily - Cloud-Gatekeeper und Agenten-Governance",
