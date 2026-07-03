@@ -1,0 +1,1238 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Intelligence Daily - Enterprise-Agenten, Modellzugang und Governance</title>
+  <style>
+    :root {
+      --bg: #eef3f9;
+      --bg-radial: radial-gradient(circle at top left, rgba(49, 91, 217, 0.14), transparent 32rem), radial-gradient(circle at top right, rgba(31, 122, 77, 0.10), transparent 28rem), #eef3f9;
+      --surface: #ffffff;
+      --surface-soft: #f7f9fd;
+      --surface-blue: #f1f5ff;
+      --text: #111b2e;
+      --muted: #66748c;
+      --muted-2: #8190a8;
+      --border: #d9e2ef;
+      --border-strong: #bfcae0;
+      --accent: #244ed8;
+      --accent-strong: #1739a8;
+      --accent-soft: #e8efff;
+      --success: #1f7a4d;
+      --success-soft: #e7f5ee;
+      --warning: #b26a00;
+      --warning-soft: #fff3dc;
+      --risk: #a63f3f;
+      --risk-soft: #fdecec;
+      --watch: #2563eb;
+      --watch-soft: #eaf1ff;
+      --shadow: 0 18px 45px rgba(17, 30, 58, 0.10);
+      --shadow-soft: 0 8px 24px rgba(17, 30, 58, 0.07);
+      --radius-xl: 26px;
+      --radius-lg: 18px;
+      --radius-md: 14px;
+      --radius-sm: 10px;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      padding: 34px;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--bg-radial);
+      color: var(--text);
+      line-height: 1.55;
+    }
+
+    h1, h2, h3, h4, p { margin: 0; }
+    h1 { max-width: 920px; font-size: clamp(32px, 5vw, 56px); line-height: 0.98; letter-spacing: -0.045em; }
+    h2 { font-size: clamp(22px, 3vw, 34px); line-height: 1.08; letter-spacing: -0.03em; }
+    h3 { font-size: 20px; line-height: 1.18; letter-spacing: -0.02em; }
+    h4 { font-size: 15px; line-height: 1.25; }
+    a { color: var(--accent-strong); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    .daily-briefing {
+      max-width: 1220px;
+      margin: 0 auto;
+      display: grid;
+      gap: 24px;
+    }
+
+    .hero,
+    .top-story,
+    .story-card,
+    .sidebar-block {
+      background: rgba(255, 255, 255, 0.92);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow-soft);
+      backdrop-filter: blur(12px);
+    }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      padding: 30px;
+      display: grid;
+      gap: 18px;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      height: 5px;
+      background: linear-gradient(90deg, #244ed8, #1f7a4d, #b26a00);
+      pointer-events: none;
+    }
+
+    .hero > * { position: relative; }
+
+    .eyebrow,
+    .story-kicker,
+    .section-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      line-height: 1;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-weight: 800;
+    }
+
+    .eyebrow::before,
+    .section-label::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 0 5px var(--accent-soft);
+      flex: 0 0 auto;
+    }
+
+    .briefing-summary {
+      max-width: 880px;
+      color: var(--muted);
+      font-size: 17px;
+    }
+
+    .meta-row,
+    .story-meta,
+    .filter-row,
+    .source-meta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .chip,
+    .badge,
+    .filter-button,
+    .source-pill {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 800;
+      line-height: 1;
+      white-space: nowrap;
+    }
+
+    .chip {
+      padding: 9px 11px;
+      background: var(--accent-soft);
+      color: var(--accent-strong);
+      border: 1px solid rgba(36, 78, 216, 0.12);
+    }
+
+    .badge {
+      padding: 8px 10px;
+      border: 1px solid var(--border);
+      background: var(--surface-soft);
+      color: var(--muted);
+    }
+
+    .badge[data-trust="hoch"] { background: var(--success-soft); color: var(--success); border-color: rgba(31, 122, 77, 0.20); }
+    .badge[data-trust="mittel"], .badge[data-trust="gemischt"] { background: var(--warning-soft); color: var(--warning); border-color: rgba(178, 106, 0, 0.22); }
+    .badge[data-trust="niedrig"] { background: var(--risk-soft); color: var(--risk); border-color: rgba(166, 63, 63, 0.22); }
+    .badge[data-trust="watchlist"] { background: var(--watch-soft); color: var(--watch); border-color: rgba(37, 99, 235, 0.18); }
+
+    .main-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 2.05fr) minmax(300px, 0.95fr);
+      gap: 24px;
+      align-items: start;
+    }
+
+    .main-column,
+    .priority-stories,
+    .sidebar {
+      display: grid;
+      gap: 18px;
+      min-width: 0;
+    }
+
+    .top-story,
+    .story-card {
+      padding: 22px;
+      display: grid;
+      gap: 15px;
+      min-width: 0;
+    }
+
+    .top-story {
+      border-color: rgba(36, 78, 216, 0.24);
+      box-shadow: var(--shadow);
+    }
+
+    .story-header {
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      align-items: flex-start;
+      min-width: 0;
+    }
+
+    .story-title-block,
+    .story-text-stack {
+      display: grid;
+      gap: 8px;
+      min-width: 0;
+    }
+
+    .story-title-block h2,
+    .story-title-block h3 {
+      overflow-wrap: anywhere;
+    }
+
+    .field-note { color: var(--muted); }
+    .field-note strong { color: var(--text); }
+
+    .takeaway {
+      border: 1px solid var(--border);
+      background: linear-gradient(180deg, #fbfcff, #f6f8fc);
+      border-radius: var(--radius-lg);
+      padding: 16px;
+      display: grid;
+      gap: 6px;
+    }
+
+    .takeaway strong {
+      font-size: 13px;
+      letter-spacing: 0.02em;
+    }
+
+    .score-strip {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 10px;
+      max-width: 100%;
+      min-width: 0;
+    }
+
+    .score-item {
+      --score: 1;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      background: var(--surface-soft);
+      padding: 12px;
+      display: grid;
+      gap: 8px;
+      min-height: 88px;
+      min-width: 0;
+      overflow: hidden;
+    }
+
+    .score-topline {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 6px;
+      min-width: 0;
+      max-width: 100%;
+    }
+
+    .score-value {
+      min-width: 0;
+      max-width: 100%;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      font-size: 24px;
+      line-height: 1;
+      font-weight: 900;
+      letter-spacing: -0.04em;
+    }
+
+    .score-max {
+      color: var(--muted-2);
+      font-size: 11px;
+      font-weight: 800;
+      flex: 0 0 auto;
+    }
+
+    .score-label {
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.15;
+      font-weight: 750;
+      overflow-wrap: anywhere;
+      hyphens: auto;
+    }
+
+    .meter {
+      width: 100%;
+      min-width: 0;
+      height: 7px;
+      border-radius: 999px;
+      background: #e4e9f2;
+      overflow: hidden;
+    }
+
+    .meter > span {
+      display: block;
+      height: 100%;
+      width: clamp(0%, calc(var(--score) * 20%), 100%);
+      max-width: 100%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, var(--accent), #1f7a4d);
+    }
+
+    .filter-panel {
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      background: rgba(255, 255, 255, 0.78);
+      box-shadow: var(--shadow-soft);
+      padding: 14px;
+      display: grid;
+      gap: 10px;
+    }
+
+    .filter-label {
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 850;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .filter-button {
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--muted);
+      padding: 8px 10px;
+      cursor: pointer;
+      transition: background 0.18s ease, color 0.18s ease, border-color 0.18s ease, transform 0.18s ease;
+    }
+
+    .filter-button:hover {
+      transform: translateY(-1px);
+      border-color: var(--border-strong);
+    }
+
+    .filter-button.active,
+    .filter-button[aria-pressed="true"] {
+      background: var(--text);
+      color: #ffffff;
+      border-color: var(--text);
+    }
+
+    .is-filtered-out { display: none !important; }
+
+    .filter-empty-state {
+      display: none;
+      border: 1px dashed var(--border-strong);
+      border-radius: var(--radius-lg);
+      background: rgba(255, 255, 255, 0.7);
+      padding: 16px;
+      color: var(--muted);
+    }
+
+    .filter-empty-state.is-visible { display: block; }
+
+    .sidebar-status-grid,
+    .compact-source-summary,
+    .compact-source-details,
+    .compact-role-row {
+      display: grid;
+      gap: 10px;
+    }
+
+    .sidebar-status-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .status-card {
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      background: var(--surface-soft);
+      padding: 12px;
+      display: grid;
+      gap: 5px;
+    }
+
+    .status-card-label {
+      font-size: 11px;
+      font-weight: 850;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--muted-2);
+    }
+
+    .status-card-value {
+      font-size: 14px;
+      font-weight: 800;
+      color: var(--text);
+    }
+
+    .compact-source-header {
+      display: grid;
+      gap: 8px;
+    }
+
+    .compact-source-stats {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .compact-source-list {
+      margin: 0;
+      padding-left: 18px;
+      color: var(--muted);
+      display: grid;
+      gap: 6px;
+    }
+
+    .compact-source-list a,
+    .compact-source-list .source-label-fallback {
+      font-weight: 750;
+    }
+
+    .story-card { box-shadow: var(--shadow-soft); }
+    .story-card[data-category="regulation"] { border-left: 5px solid var(--accent); }
+    .story-card[data-category="governance"] { border-left: 5px solid var(--success); }
+    .story-card[data-category="enterprise_ai"] { border-left: 5px solid #5b5fd6; }
+    .story-card[data-category="product"] { border-left: 5px solid #6b55c9; }
+    .story-card[data-category="global_eu"] { border-left: 5px solid #2d8aa6; }
+    .story-card[data-category="watchlist"] { border-left: 5px solid var(--watch); }
+
+    details.evidence {
+      border-top: 1px solid var(--border);
+      padding-top: 10px;
+    }
+
+    details.evidence summary,
+    .source-item summary {
+      cursor: pointer;
+      list-style: none;
+      color: var(--accent-strong);
+      font-size: 13px;
+      font-weight: 850;
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      align-items: center;
+    }
+
+    details.evidence summary::-webkit-details-marker,
+    .source-item summary::-webkit-details-marker { display: none; }
+
+    details.evidence summary::after,
+    .source-item summary::after {
+      content: "+";
+      display: grid;
+      place-items: center;
+      width: 22px;
+      height: 22px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: var(--accent-strong);
+      font-size: 15px;
+      line-height: 1;
+      flex: 0 0 auto;
+    }
+
+    details.evidence[open] summary::after,
+    .source-item details[open] summary::after { content: "–"; }
+
+    .sources {
+      margin-top: 10px;
+      display: grid;
+      gap: 8px;
+      padding: 12px;
+      border-radius: var(--radius-md);
+      background: var(--surface-soft);
+      border: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 13px;
+      min-width: 0;
+    }
+
+    .source-link-card {
+      display: grid;
+      gap: 7px;
+      padding: 10px;
+      border: 1px solid rgba(191, 202, 224, 0.75);
+      border-radius: var(--radius-sm);
+      background: #ffffff;
+      min-width: 0;
+    }
+
+    .source-link-card a,
+    .source-link-card .source-label-fallback {
+      font-weight: 850;
+      overflow-wrap: anywhere;
+    }
+
+    .source-label-fallback { color: var(--text); }
+
+    .source-pill {
+      align-self: start;
+      justify-self: start;
+      padding: 5px 7px;
+      border: 1px solid var(--border);
+      background: #eef2ff;
+      color: #3730a3;
+      font-size: 10.5px;
+      letter-spacing: 0.01em;
+    }
+
+    .source-meta {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 6px 10px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .source-meta span { overflow-wrap: anywhere; }
+    .source-meta strong { color: var(--text); }
+
+    .sidebar-block {
+      padding: 18px;
+      display: grid;
+      gap: 12px;
+    }
+
+    .watch-item,
+    .source-item,
+    .archive-item {
+      border: 1px solid var(--border);
+      background: var(--surface-soft);
+      border-radius: var(--radius-md);
+      padding: 13px;
+      display: grid;
+      gap: 7px;
+      min-width: 0;
+    }
+
+    .sidebar-meta {
+      color: var(--muted);
+      font-size: 13px;
+      overflow-wrap: anywhere;
+    }
+
+    .source-item { padding: 0; overflow: hidden; }
+    .source-item details { padding: 12px 13px; }
+    .source-item summary { color: var(--text); overflow-wrap: anywhere; }
+    .source-item .source-detail {
+      margin-top: 9px;
+      display: grid;
+      gap: 8px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+    .archive-item .relation-type { justify-self: start; background: #eef2ff; color: #3730a3; }
+
+    @media (max-width: 980px) {
+      body { padding: 18px; }
+      .hero, .top-story, .story-card, .sidebar-block { border-radius: var(--radius-lg); }
+      .main-layout { grid-template-columns: 1fr; }
+      .score-strip {
+        grid-template-columns: repeat(5, minmax(78px, 1fr));
+        gap: 7px;
+        overflow-x: auto;
+        overflow-y: hidden;
+        padding-bottom: 2px;
+        scrollbar-width: thin;
+      }
+      .score-item { min-height: 58px; padding: 7px 8px; gap: 5px; }
+      .score-value { font-size: 16px; }
+      .score-max { font-size: 10px; }
+      .score-label { font-size: 10px; line-height: 1.1; }
+      .meter { height: 4px; }
+      .chip, .badge, .filter-button { padding: 6px 8px; font-size: 11px; }
+      .filter-panel { padding: 12px; }
+      .filter-row { gap: 7px; }
+      .source-meta { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 560px) {
+      body { padding: 12px; }
+      .daily-briefing { gap: 14px; }
+      .hero { padding: 22px; }
+      .story-header { display: grid; gap: 10px; }
+      .story-meta { gap: 7px; }
+      .score-strip { grid-template-columns: repeat(5, minmax(72px, 1fr)); }
+      .score-item { min-height: 54px; padding: 6px 7px; }
+      .score-value { font-size: 15px; }
+      .score-max { font-size: 10px; }
+      .score-label { font-size: 9.5px; }
+      .filter-row {
+        display: flex;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        padding-bottom: 2px;
+        scrollbar-width: thin;
+      }
+      .filter-button { flex: 0 0 auto; }
+      .sources { padding: 10px; }
+      .source-link-card { padding: 9px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="daily-briefing">
+    <section class="hero">
+      <div class="eyebrow">Daily AI Intelligence Briefing</div>
+      <h1>AI Intelligence Daily - Enterprise-Agenten, Modellzugang und Governance</h1>
+      <p class="briefing-summary">Der Tag zeigt KI-Umsetzung als Management- und Kontrollthema: Microsoft professionalisiert Enterprise-AI-Engineering, GitHub ergänzt Copilot-Auditierbarkeit, Anthropic bringt Fable 5 zurück und die EU schärft ihren Apply-AI-Fokus.</p>
+      <div class="meta-row">
+        <span class="chip">Datum: 2026-07-02</span>
+        <span class="chip">Fenster: 2026-07-02 00:00-23:59 CEST</span>
+        <span class="chip">Fokus: Deutschland / EU</span>
+        <span class="badge" data-trust="hoch" data-ui-map="overall-trust" data-raw-value="hoch">Status: hoch</span>
+      </div>
+    </section>
+
+    <section class="main-layout">
+      <section class="main-column">
+        <article class="top-story">
+          <div class="story-header">
+            <div class="story-title-block">
+              <div class="story-kicker">Top Story</div>
+              <h2>Microsoft baut Frontier Company als Enterprise-AI-Umsetzungsmaschine</h2>
+            </div>
+            <span class="chip" data-ui-map="priority" data-raw-value="P1">P1</span>
+          </div>
+          <p>Microsoft kündigt mit Microsoft Frontier Company eine neue operative Einheit für KI-Transformation bei Großkunden an. Das Unternehmen stellt eine Investition von 2,5 Milliarden US-Dollar und 6.000 Industrie- und Engineering-Experten in Aussicht, die bei Kunden KI-Systeme co-designen, deployen und laufend verbessern sollen. Wichtig ist weniger der Beratungsbegriff als das Governance-Signal: Microsoft positioniert Enterprise AI als dauerhaftes Engineering-, FinOps-, IP- und Modellwahlproblem, nicht als Tool-Rollout.</p>
+          <div class="score-strip">
+            <div class="score-item" style="--score: 4"><div class="score-topline"><span class="score-value">4</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">EU / DE-Relevanz</div></div>
+            <div class="score-item" style="--score: 5"><div class="score-topline"><span class="score-value">5</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Business Impact</div></div>
+            <div class="score-item" style="--score: 3"><div class="score-topline"><span class="score-value">3</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Regulatorik</div></div>
+            <div class="score-item" style="--score: 4"><div class="score-topline"><span class="score-value">4</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Technologie</div></div>
+            <div class="score-item" style="--score: 5"><div class="score-topline"><span class="score-value">5</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Lernwert</div></div>
+          </div>
+          <div class="takeaway">
+            <strong>Einschätzung</strong>
+            <p class="field-note">Für deutsche und europäische Organisationen ist das ein klares Beschaffungssignal: KI-Projekte werden als Produktionssysteme mit Modellmix, Kostensteuerung, Datenhoheit und messbaren Outcomes verkauft. Wer Copilot, Azure AI oder Partnerlösungen evaluiert, sollte Auditierbarkeit, IP-Schutz, Modellwahl, Exit-Pfade und Betriebsverantwortung prüfen.</p>
+          </div>
+          <details class="evidence">
+            <summary>Quellen</summary>
+            <div class="sources">
+              
+              <article class="source-link-card">
+                
+                <a href="https://blogs.microsoft.com/blog/2026/07/02/microsoft-frontier-company-ai-engineering-that-amplifies-and-protects-your-intelligence/" target="_blank" rel="noopener noreferrer">Microsoft Frontier Company: AI engineering that amplifies and protects your intelligence</a>
+                
+                <div class="source-meta-row">
+                  <span class="source-pill" data-ui-map="role" data-raw-value="produktquelle">produktquelle</span>
+                  <span class="source-pill" data-ui-map="source-type" data-raw-value="vendor">vendor</span>
+                </div>
+                <div class="source-meta">
+                  <span><strong>Publisher:</strong> Microsoft</span>
+                  <span><strong>Veröffentlicht:</strong> 2026-07-02</span>
+                  <span><strong>Abgerufen:</strong> 2026-07-03</span>
+                </div>
+              </article>
+              
+              <article class="source-link-card">
+                
+                <a href="https://virginiabusiness.com/microsoft-launches-company-25-billion-ai-adoption/" target="_blank" rel="noopener noreferrer">Microsoft launches firm to help companies adopt AI with $2.5B</a>
+                
+                <div class="source-meta-row">
+                  <span class="source-pill" data-ui-map="role" data-raw-value="marktverifikation">marktverifikation</span>
+                  <span class="source-pill" data-ui-map="source-type" data-raw-value="media">media</span>
+                </div>
+                <div class="source-meta">
+                  <span><strong>Publisher:</strong> Virginia Business / Reuters</span>
+                  <span><strong>Veröffentlicht:</strong> 2026-07-02</span>
+                  <span><strong>Abgerufen:</strong> 2026-07-03</span>
+                </div>
+              </article>
+              
+            </div>
+          </details>
+          <details class="evidence">
+            <summary>Weitere Recherche</summary>
+            <div class="sources">
+              <p class="field-note">Vertiefe Microsoft Frontier Company für EU-Enterprise-Kunden im Zeitraum 2026-07-02; nutze Microsoft Blog und Reuters/Virginia Business als Referenzen und prüfe IP-Schutz, Modellwahl, FinOps und DPA-Fragen.</p>
+            </div>
+          </details>
+        </article>
+
+        <section class="priority-stories">
+          <div class="section-label">Weitere priorisierte Entwicklungen</div>
+          <div class="filter-panel" aria-label="Story-Filter">
+            <div class="filter-label">Filter</div>
+            <div class="filter-row" id="story-filter-row">
+              <button class="filter-button active" type="button" data-filter="all" aria-pressed="true">Alle</button>
+            </div>
+          </div>
+
+          
+          <article class="story-card" data-id="github-copilot-session-governance-2026-07-02" data-category="enterprise_ai" data-trust-status="hoch">
+            <div class="story-header">
+              <div class="story-title-block">
+                <div class="story-kicker">Developer Governance</div>
+                <h3>GitHub macht Copilot-Agenten besser auditierbar</h3>
+              </div>
+              <div class="story-meta">
+                <span class="chip" data-ui-map="category" data-raw-value="enterprise_ai">enterprise_ai</span>
+                <span class="chip" data-ui-map="priority" data-raw-value="P1">P1</span>
+              </div>
+            </div>
+            <div class="story-text-stack">
+              <p>GitHub stellt Copilot Agent Session Streaming in die Public Preview. Enterprise-Cloud-Kunden mit Enterprise Managed Users können Sessiondaten über alle Copilot-Clients hinweg streamen oder per REST API abrufen.</p>
+              <p class="field-note"><strong>Warum relevant:</strong> Agentische Entwicklungsarbeit braucht Nachvollziehbarkeit: Prompts, Antworten, Tool Calls und Nutzungskontext werden für Security, Betriebsrat, Audit und Kostenkontrolle wichtiger.</p>
+              <p class="field-note"><strong>EU-/DE-Impact:</strong> Relevant für europäische Engineering-Organisationen, die Copilot in regulierten Umgebungen, mit Datenresidenz-Deployments oder Microsoft-Purview-Anbindung betreiben.</p>
+              <p class="field-note"><strong>Einordnung:</strong> Das Update verschiebt Copilot von Assistenzwerkzeug zu kontrollierbarer Arbeitsinfrastruktur. Prüfe früh, ob Logs vollständig genug für interne Policies und Datenschutz-Folgenabschätzungen sind.</p>
+            </div>
+            <div class="score-strip">
+              <div class="score-item" style="--score: 4"><div class="score-topline"><span class="score-value">4</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">EU / DE-Relevanz</div></div>
+              <div class="score-item" style="--score: 4"><div class="score-topline"><span class="score-value">4</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Business Impact</div></div>
+              <div class="score-item" style="--score: 3"><div class="score-topline"><span class="score-value">3</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Regulatorik</div></div>
+              <div class="score-item" style="--score: 4"><div class="score-topline"><span class="score-value">4</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Technologie</div></div>
+              <div class="score-item" style="--score: 4"><div class="score-topline"><span class="score-value">4</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Lernwert</div></div>
+            </div>
+            <details class="evidence">
+              <summary>Quellen & Unsicherheit</summary>
+              <div class="sources">
+                <p class="field-note"><strong>Quellenlage:</strong> <span data-ui-map="trust" data-raw-value="hoch">hoch</span></p>
+                
+                <article class="source-link-card">
+                  
+                  <a href="https://github.blog/changelog/2026-07-02-copilot-agent-session-streaming-is-now-in-public-preview/" target="_blank" rel="noopener noreferrer">Copilot agent session streaming is now in public preview</a>
+                  
+                  <div class="source-meta-row">
+                    <span class="source-pill" data-ui-map="role" data-raw-value="developer_dokumentation">developer_dokumentation</span>
+                    <span class="source-pill" data-ui-map="source-type" data-raw-value="documentation">documentation</span>
+                  </div>
+                  <div class="source-meta">
+                    <span><strong>Publisher:</strong> GitHub</span>
+                    <span><strong>Veröffentlicht:</strong> 2026-07-02</span>
+                    <span><strong>Abgerufen:</strong> 2026-07-03</span>
+                  </div>
+                </article>
+                
+                <article class="source-link-card">
+                  
+                  <a href="https://github.blog/changelog/2026-07-02-improved-accuracy-and-coverage-in-copilot-usage-metrics-reports/" target="_blank" rel="noopener noreferrer">Improved accuracy and coverage in Copilot usage metrics reports</a>
+                  
+                  <div class="source-meta-row">
+                    <span class="source-pill" data-ui-map="role" data-raw-value="developer_dokumentation">developer_dokumentation</span>
+                    <span class="source-pill" data-ui-map="source-type" data-raw-value="documentation">documentation</span>
+                  </div>
+                  <div class="source-meta">
+                    <span><strong>Publisher:</strong> GitHub</span>
+                    <span><strong>Veröffentlicht:</strong> 2026-07-02</span>
+                    <span><strong>Abgerufen:</strong> 2026-07-03</span>
+                  </div>
+                </article>
+                
+                <p class="field-note"><strong>Unsicherheit:</strong> Funktion ist belegt; praktische Vollständigkeit der Logs und EU-Datenschutzbewertung müssen kundenspezifisch geprüft werden.</p>
+              </div>
+            </details>
+            <details class="evidence">
+              <summary>Weitere Recherche</summary>
+              <div class="sources">
+                <p class="field-note">Untersuche GitHub Copilot Session Streaming am 2026-07-02; nutze GitHub Changelog und Docs als Referenzen und prüfe Purview, SIEM, Datenresidenz, Tool-Call-Logging und DSGVO-Risiken.</p>
+              </div>
+            </details>
+          </article>
+          
+          <article class="story-card" data-id="github-copilot-ai-credit-pools-2026-07-02" data-category="enterprise_ai" data-trust-status="hoch">
+            <div class="story-header">
+              <div class="story-title-block">
+                <div class="story-kicker">FinOps</div>
+                <h3>Copilot-Kostensteuerung wird granularer</h3>
+              </div>
+              <div class="story-meta">
+                <span class="chip" data-ui-map="category" data-raw-value="enterprise_ai">enterprise_ai</span>
+                <span class="chip" data-ui-map="priority" data-raw-value="P2">P2</span>
+              </div>
+            </div>
+            <div class="story-text-stack">
+              <p>GitHub führt AI Credit Pools für Cost Centers ein. Unternehmen können begrenzen, wie viel des monatlich inkludierten AI-Credit-Pools einzelne Kostenstellen nutzen dürfen; UI-Unterstützung soll folgen.</p>
+              <p class="field-note"><strong>Warum relevant:</strong> KI-Nutzung wird in Entwicklerplattformen zunehmend verbrauchsabhängig. Ohne Kostenstellenlogik können Pilotgruppen gemeinsame Credits verbrauchen, bevor klare Chargeback-Regeln greifen.</p>
+              <p class="field-note"><strong>EU-/DE-Impact:</strong> Für deutsche IT- und Produktorganisationen ist das wichtig, weil Copilot-Rollouts oft über zentrale Lizenzen laufen, während Budgetverantwortung dezentral liegt.</p>
+              <p class="field-note"><strong>Einordnung:</strong> Neben Datenschutz und Security braucht Copilot-Governance jetzt FinOps-Regeln: Kostenstellen, Limits, Overage-Entscheidungen und Reporting gehören in den Rollout-Plan.</p>
+            </div>
+            <div class="score-strip">
+              <div class="score-item" style="--score: 3"><div class="score-topline"><span class="score-value">3</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">EU / DE-Relevanz</div></div>
+              <div class="score-item" style="--score: 4"><div class="score-topline"><span class="score-value">4</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Business Impact</div></div>
+              <div class="score-item" style="--score: 2"><div class="score-topline"><span class="score-value">2</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Regulatorik</div></div>
+              <div class="score-item" style="--score: 3"><div class="score-topline"><span class="score-value">3</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Technologie</div></div>
+              <div class="score-item" style="--score: 4"><div class="score-topline"><span class="score-value">4</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Lernwert</div></div>
+            </div>
+            <details class="evidence">
+              <summary>Quellen & Unsicherheit</summary>
+              <div class="sources">
+                <p class="field-note"><strong>Quellenlage:</strong> <span data-ui-map="trust" data-raw-value="hoch">hoch</span></p>
+                
+                <article class="source-link-card">
+                  
+                  <a href="https://github.blog/changelog/2026-07-02-cost-centers-now-support-included-usage-caps/" target="_blank" rel="noopener noreferrer">Cost centers now support AI credit pools</a>
+                  
+                  <div class="source-meta-row">
+                    <span class="source-pill" data-ui-map="role" data-raw-value="developer_dokumentation">developer_dokumentation</span>
+                    <span class="source-pill" data-ui-map="source-type" data-raw-value="documentation">documentation</span>
+                  </div>
+                  <div class="source-meta">
+                    <span><strong>Publisher:</strong> GitHub</span>
+                    <span><strong>Veröffentlicht:</strong> 2026-07-02</span>
+                    <span><strong>Abgerufen:</strong> 2026-07-03</span>
+                  </div>
+                </article>
+                
+                <p class="field-note"><strong>Unsicherheit:</strong> REST-API-Verfügbarkeit ist belegt; UI-Umsetzung und praktische Akzeptanz sind noch offen.</p>
+              </div>
+            </details>
+            <details class="evidence">
+              <summary>Weitere Recherche</summary>
+              <div class="sources">
+                <p class="field-note">Analysiere GitHub AI Credit Pools vom 2026-07-02; nutze den GitHub Changelog als Referenz und prüfe Auswirkungen auf Copilot Business/Enterprise Budgets in EU-Unternehmen.</p>
+              </div>
+            </details>
+          </article>
+          
+          <article class="story-card" data-id="anthropic-fable-5-redeployment-2026-07-02" data-category="global_eu" data-trust-status="hoch">
+            <div class="story-header">
+              <div class="story-title-block">
+                <div class="story-kicker">Modellzugang</div>
+                <h3>Anthropic bringt Fable 5 zurück, aber Modellzugang bleibt geopolitisch</h3>
+              </div>
+              <div class="story-meta">
+                <span class="chip" data-ui-map="category" data-raw-value="global_eu">global_eu</span>
+                <span class="chip" data-ui-map="priority" data-raw-value="P1">P1</span>
+              </div>
+            </div>
+            <div class="story-text-stack">
+              <p>Anthropic meldet nach aufgehobenen US-Exportkontrollen die Wiederbereitstellung von Claude Fable 5 für globale Nutzer. Mythos 5 bleibt enger an genehmigte Organisationen und Project Glasswing gebunden.</p>
+              <p class="field-note"><strong>Warum relevant:</strong> Der Fall zeigt, dass Frontier-Modelle für europäische Kunden nicht nur technische, sondern auch politische und kontrollrechtliche Abhängigkeiten haben.</p>
+              <p class="field-note"><strong>EU-/DE-Impact:</strong> EU-Unternehmen, Behörden und Security-Teams sollten Modellzugang, Fallback-Modelle, Cloud-Verfügbarkeit und Anbieterbedingungen als Resilienzthema behandeln.</p>
+              <p class="field-note"><strong>Einordnung:</strong> Fable 5 ist wieder nutzbar, aber die Episode ist ein Procurement-Warnsignal: kritische Workflows brauchen Ausweichmodelle, Vertragspflichten und klare Eskalationspfade.</p>
+            </div>
+            <div class="score-strip">
+              <div class="score-item" style="--score: 4"><div class="score-topline"><span class="score-value">4</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">EU / DE-Relevanz</div></div>
+              <div class="score-item" style="--score: 4"><div class="score-topline"><span class="score-value">4</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Business Impact</div></div>
+              <div class="score-item" style="--score: 4"><div class="score-topline"><span class="score-value">4</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Regulatorik</div></div>
+              <div class="score-item" style="--score: 5"><div class="score-topline"><span class="score-value">5</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Technologie</div></div>
+              <div class="score-item" style="--score: 5"><div class="score-topline"><span class="score-value">5</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Lernwert</div></div>
+            </div>
+            <details class="evidence">
+              <summary>Quellen & Unsicherheit</summary>
+              <div class="sources">
+                <p class="field-note"><strong>Quellenlage:</strong> <span data-ui-map="trust" data-raw-value="hoch">hoch</span></p>
+                
+                <article class="source-link-card">
+                  
+                  <a href="https://www.anthropic.com/news/redeploying-fable-5" target="_blank" rel="noopener noreferrer">Redeploying Fable 5</a>
+                  
+                  <div class="source-meta-row">
+                    <span class="source-pill" data-ui-map="role" data-raw-value="unternehmensquelle">unternehmensquelle</span>
+                    <span class="source-pill" data-ui-map="source-type" data-raw-value="vendor">vendor</span>
+                  </div>
+                  <div class="source-meta">
+                    <span><strong>Publisher:</strong> Anthropic</span>
+                    <span><strong>Veröffentlicht:</strong> 2026-06-30</span>
+                    <span><strong>Abgerufen:</strong> 2026-07-03</span>
+                  </div>
+                </article>
+                
+                <article class="source-link-card">
+                  
+                  <a href="https://cloud.google.com/blog/products/ai-machine-learning/what-google-cloud-announced-in-ai-this-month" target="_blank" rel="noopener noreferrer">What Google Cloud announced in AI this month</a>
+                  
+                  <div class="source-meta-row">
+                    <span class="source-pill" data-ui-map="role" data-raw-value="produktquelle">produktquelle</span>
+                    <span class="source-pill" data-ui-map="source-type" data-raw-value="vendor">vendor</span>
+                  </div>
+                  <div class="source-meta">
+                    <span><strong>Publisher:</strong> Google Cloud</span>
+                    <span><strong>Veröffentlicht:</strong> 2026-06-30</span>
+                    <span><strong>Abgerufen:</strong> 2026-07-03</span>
+                  </div>
+                </article>
+                
+                <p class="field-note"><strong>Unsicherheit:</strong> Globale Fable-5-Rückkehr ist belegt; EU-spezifische Vertrags- und Cloud-Regiondetails müssen pro Anbieter geprüft werden.</p>
+              </div>
+            </details>
+            <details class="evidence">
+              <summary>Weitere Recherche</summary>
+              <div class="sources">
+                <p class="field-note">Vertiefe Anthropic Fable 5 nach der Wiederbereitstellung ab 2026-07-01; nutze Anthropic Redeploying Fable 5 und Google Cloud AI Monatsupdate als Referenzen und prüfe EU-Zugang, Cloud-Regionen und Fallback-Strategien.</p>
+              </div>
+            </details>
+          </article>
+          
+          <article class="story-card" data-id="eu-apply-ai-startup-award-window-2026-07-02" data-category="governance" data-trust-status="hoch">
+            <div class="story-header">
+              <div class="story-title-block">
+                <div class="story-kicker">EU Apply AI</div>
+                <h3>EU öffnet Apply-AI-Award-Fenster für strategische Sektoren</h3>
+              </div>
+              <div class="story-meta">
+                <span class="chip" data-ui-map="category" data-raw-value="governance">governance</span>
+                <span class="chip" data-ui-map="priority" data-raw-value="P2">P2</span>
+              </div>
+            </div>
+            <div class="story-text-stack">
+              <p>Die Bewerbungsphase für nominierte Unternehmen beim Apply AI Startup Award läuft seit 1. Juli bis 22. Juli. Die Kommission und AI-BOOST suchen europäische Startups in strategischen Sektoren.</p>
+              <p class="field-note"><strong>Warum relevant:</strong> Der Award ist kein Regulierungsakt, aber ein Signal, wo die EU Anwendung, Sichtbarkeit und Skalierung europäischer KI-Anbieter politisch priorisiert.</p>
+              <p class="field-note"><strong>EU-/DE-Impact:</strong> Für deutsche KI-Startups, Verbände und Corporate-Partner ist relevant, welche Sektoren die Kommission als Apply-AI-Fokus nennt.</p>
+              <p class="field-note"><strong>Einordnung:</strong> Beobachten lohnt sich: Die Shortlist kann frühe Hinweise geben, welche europäischen AI-Anwendungsfelder politisch und kommunikativ Rückenwind bekommen.</p>
+            </div>
+            <div class="score-strip">
+              <div class="score-item" style="--score: 5"><div class="score-topline"><span class="score-value">5</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">EU / DE-Relevanz</div></div>
+              <div class="score-item" style="--score: 3"><div class="score-topline"><span class="score-value">3</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Business Impact</div></div>
+              <div class="score-item" style="--score: 2"><div class="score-topline"><span class="score-value">2</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Regulatorik</div></div>
+              <div class="score-item" style="--score: 3"><div class="score-topline"><span class="score-value">3</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Technologie</div></div>
+              <div class="score-item" style="--score: 4"><div class="score-topline"><span class="score-value">4</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Lernwert</div></div>
+            </div>
+            <details class="evidence">
+              <summary>Quellen & Unsicherheit</summary>
+              <div class="sources">
+                <p class="field-note"><strong>Quellenlage:</strong> <span data-ui-map="trust" data-raw-value="hoch">hoch</span></p>
+                
+                <article class="source-link-card">
+                  
+                  <a href="https://digital-strategy.ec.europa.eu/en/news/apply-ai-startup-award" target="_blank" rel="noopener noreferrer">Apply AI Startup Award</a>
+                  
+                  <div class="source-meta-row">
+                    <span class="source-pill" data-ui-map="role" data-raw-value="faktenanker">faktenanker</span>
+                    <span class="source-pill" data-ui-map="source-type" data-raw-value="official">official</span>
+                  </div>
+                  <div class="source-meta">
+                    <span><strong>Publisher:</strong> European Commission</span>
+                    <span><strong>Veröffentlicht:</strong> 2026-06-23</span>
+                    <span><strong>Abgerufen:</strong> 2026-07-03</span>
+                  </div>
+                </article>
+                
+                <p class="field-note"><strong>Unsicherheit:</strong> Programm und Zeitplan sind offiziell; konkrete Nominierungen und Gewinner stehen noch nicht fest.</p>
+              </div>
+            </details>
+            <details class="evidence">
+              <summary>Weitere Recherche</summary>
+              <div class="sources">
+                <p class="field-note">Prüfe den Apply AI Startup Award im Zeitraum 2026-07-01 bis 2026-07-22; nutze die Kommissionsseite als Referenz und identifiziere deutsche Nominierungen, Sektoren und spätere Top-10-Finalisten.</p>
+              </div>
+            </details>
+          </article>
+          
+          <article class="story-card" data-id="ai-for-good-global-commission-2026-07-02" data-category="global_eu" data-trust-status="hoch">
+            <div class="story-header">
+              <div class="story-title-block">
+                <div class="story-kicker">Global Governance</div>
+                <h3>ITU und Salesforce starten AI for Good Global Commission</h3>
+              </div>
+              <div class="story-meta">
+                <span class="chip" data-ui-map="category" data-raw-value="global_eu">global_eu</span>
+                <span class="chip" data-ui-map="priority" data-raw-value="P3">P3</span>
+              </div>
+            </div>
+            <div class="story-text-stack">
+              <p>ITU, Salesforce und politische Führungspersonen kündigen eine AI for Good Global Commission an. Sie soll beim Genfer AI-for-Good-Umfeld praktische Wege für Vertrauen, Zugang und gesellschaftlichen Nutzen von KI erarbeiten.</p>
+              <p class="field-note"><strong>Warum relevant:</strong> Die Initiative ist nicht EU-zentriert, aber europäische Akteure und die Genfer Governance-Woche machen sie zu einem relevanten Signal im globalen KI-Governance-Wettbewerb.</p>
+              <p class="field-note"><strong>EU-/DE-Impact:</strong> Für EU-Policy-Teams ist wichtig, ob solche Foren konkrete Standards, Beschaffungsprinzipien oder Entwicklungsland-Perspektiven in internationale KI-Debatten tragen.</p>
+              <p class="field-note"><strong>Einordnung:</strong> Als Hauptmeldung nur P3: Es ist ein Governance-Signal, noch kein belastbarer Standard. Beobachte Output der ersten Sitzung statt nur die prominente Mitgliederliste.</p>
+            </div>
+            <div class="score-strip">
+              <div class="score-item" style="--score: 3"><div class="score-topline"><span class="score-value">3</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">EU / DE-Relevanz</div></div>
+              <div class="score-item" style="--score: 3"><div class="score-topline"><span class="score-value">3</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Business Impact</div></div>
+              <div class="score-item" style="--score: 3"><div class="score-topline"><span class="score-value">3</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Regulatorik</div></div>
+              <div class="score-item" style="--score: 2"><div class="score-topline"><span class="score-value">2</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Technologie</div></div>
+              <div class="score-item" style="--score: 3"><div class="score-topline"><span class="score-value">3</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Lernwert</div></div>
+            </div>
+            <details class="evidence">
+              <summary>Quellen & Unsicherheit</summary>
+              <div class="sources">
+                <p class="field-note"><strong>Quellenlage:</strong> <span data-ui-map="trust" data-raw-value="hoch">hoch</span></p>
+                
+                <article class="source-link-card">
+                  
+                  <a href="https://www.itu.int/en/mediacentre/Pages/PR-2026-07-02-AI-for-Good-Global-Commission.aspx" target="_blank" rel="noopener noreferrer">Global leaders launch AI for Good Global Commission</a>
+                  
+                  <div class="source-meta-row">
+                    <span class="source-pill" data-ui-map="role" data-raw-value="faktenanker">faktenanker</span>
+                    <span class="source-pill" data-ui-map="source-type" data-raw-value="official">official</span>
+                  </div>
+                  <div class="source-meta">
+                    <span><strong>Publisher:</strong> ITU</span>
+                    <span><strong>Veröffentlicht:</strong> 2026-07-02</span>
+                    <span><strong>Abgerufen:</strong> 2026-07-03</span>
+                  </div>
+                </article>
+                
+                <article class="source-link-card">
+                  
+                  <a href="https://www.salesforce.com/news/press-releases/2026/07/02/ai-for-good-global-commission-announcement/" target="_blank" rel="noopener noreferrer">Global leaders launch AI for Good Global Commission</a>
+                  
+                  <div class="source-meta-row">
+                    <span class="source-pill" data-ui-map="role" data-raw-value="unternehmensquelle">unternehmensquelle</span>
+                    <span class="source-pill" data-ui-map="source-type" data-raw-value="vendor">vendor</span>
+                  </div>
+                  <div class="source-meta">
+                    <span><strong>Publisher:</strong> Salesforce</span>
+                    <span><strong>Veröffentlicht:</strong> 2026-07-02</span>
+                    <span><strong>Abgerufen:</strong> 2026-07-03</span>
+                  </div>
+                </article>
+                
+                <p class="field-note"><strong>Unsicherheit:</strong> Launch ist belegt; praktische Wirkung und konkrete Governance-Ergebnisse sind offen.</p>
+              </div>
+            </details>
+            <details class="evidence">
+              <summary>Weitere Recherche</summary>
+              <div class="sources">
+                <p class="field-note">Verfolge die AI for Good Global Commission nach dem Start am 2026-07-02; nutze ITU und Salesforce als Referenzen und prüfe Ergebnisse der Genfer Sitzungen vom 2026-07-06 bis 2026-07-10.</p>
+              </div>
+            </details>
+          </article>
+          
+          <div class="filter-empty-state" id="story-filter-empty-state">
+            Keine Stories für diesen Filter sichtbar. Wähle einen anderen Filter oder prüfe, ob in diesem Lauf nur andere Kategorien vorkommen.
+          </div>
+        </section>
+      </section>
+
+      <aside class="sidebar">
+        <section class="sidebar-block">
+          <h3>Tageslage</h3>
+          <p class="sidebar-meta">Der Tag zeigt KI-Umsetzung als Management- und Kontrollthema: Microsoft professionalisiert Enterprise-AI-Engineering, GitHub ergänzt Copilot-Auditierbarkeit, Anthropic bringt Fable 5 zurück und die EU schärft ihren Apply-AI-Fokus.</p>
+          <div class="sidebar-status-grid">
+            <div class="status-card">
+              <span class="status-card-label">Fenster</span>
+              <span class="status-card-value">2026-07-02 00:00-23:59 CEST</span>
+            </div>
+            <div class="status-card">
+              <span class="status-card-label">Quellenlage</span>
+              <span class="status-card-value" data-ui-map="trust" data-raw-value="hoch">hoch</span>
+            </div>
+          </div>
+        </section>
+
+        <section class="sidebar-block watchlist">
+          <h3>Watchlist</h3>
+          
+          <article class="watch-item" data-id="anthropic-glasswing-eu-access">
+            <div class="story-meta"><span class="badge" data-trust="watchlist" data-ui-map="trust" data-raw-value="watchlist">watchlist</span></div>
+            <h4>Project Glasswing und EU-Zugang</h4>
+            <p class="sidebar-meta">Anthropic will Glasswing-Zugang ausweiten; offen bleibt, ob und wie europäische Cybersecurity-Organisationen einbezogen werden.</p>
+            <p class="sidebar-meta"><strong>Warum beobachten:</strong> Relevant für europäische Sicherheitsanbieter und kritische Infrastruktur.</p>
+            <p class="sidebar-meta"><strong>Nächstes Signal:</strong> Anthropic-, Cloud- oder Behördenlisten zu zugelassenen Partnern.</p>
+          </article>
+          
+          <article class="watch-item" data-id="github-copilot-logs-dpa">
+            <div class="story-meta"><span class="badge" data-trust="watchlist" data-ui-map="trust" data-raw-value="watchlist">watchlist</span></div>
+            <h4>Copilot-Sessiondaten und Datenschutz</h4>
+            <p class="sidebar-meta">Neue Logdaten schaffen Auditierbarkeit, können aber auch personenbezogene oder sensible Entwicklungsdaten enthalten.</p>
+            <p class="sidebar-meta"><strong>Warum beobachten:</strong> DSGVO, Betriebsrat und Security müssen Logging-Zwecke und Aufbewahrung bewerten.</p>
+            <p class="sidebar-meta"><strong>Nächstes Signal:</strong> GitHub Docs zu Datenresidenz, Retention, Export und Purview-Integration.</p>
+          </article>
+          
+          <article class="watch-item" data-id="apply-ai-startup-shortlist">
+            <div class="story-meta"><span class="badge" data-trust="watchlist" data-ui-map="trust" data-raw-value="watchlist">watchlist</span></div>
+            <h4>Apply-AI-Shortlist</h4>
+            <p class="sidebar-meta">Die Top-10-Finalisten werden laut Kommission im September erwartet.</p>
+            <p class="sidebar-meta"><strong>Warum beobachten:</strong> Gibt Hinweise auf priorisierte europäische KI-Anwendungsfelder.</p>
+            <p class="sidebar-meta"><strong>Nächstes Signal:</strong> Veröffentlichung der Finalisten und deutsche Nominierungen.</p>
+          </article>
+          
+        </section>
+
+        <section class="sidebar-block archive-panel">
+          <h3>Archivbezug</h3>
+          
+          <article class="archive-item" data-id="archive-microsoft-work-iq-2026-06-16">
+            <span class="badge relation-type" data-ui-map="relation-type" data-raw-value="trendline">trendline</span>
+            <h4>Microsoft Work IQ wird produktive Agenten-Infrastruktur</h4>
+            <p class="sidebar-meta">Frontier Company setzt die Linie fort: Microsoft verkauft Agenten nicht nur als Produkt, sondern als Enterprise-Betriebsmodell.</p>
+          </article>
+          
+          <article class="archive-item" data-id="archive-anthropic-sovereignty-2026-06-16">
+            <span class="badge relation-type" data-ui-map="relation-type" data-raw-value="follow_up">follow_up</span>
+            <h4>Anthropic-Sperre bleibt Europas Souveränitätstest</h4>
+            <p class="sidebar-meta">Die Wiederbereitstellung von Fable 5 ist der direkte Folgepunkt zur Modellzugangs- und Souveränitätsfrage.</p>
+          </article>
+          
+          <article class="archive-item" data-id="archive-github-agentic-workflows">
+            <span class="badge relation-type" data-ui-map="relation-type" data-raw-value="recurring_theme">recurring_theme</span>
+            <h4>GitHub Agentic Workflows</h4>
+            <p class="sidebar-meta">Neue Copilot-Logs und Credit-Pools passen zur laufenden Watchlist zu Audit, Berechtigungen und Kostenkontrolle.</p>
+          </article>
+          
+        </section>
+      </aside>
+    </section>
+  </main>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const labelMaps = {
+        category: {
+          regulation: 'Regulierung',
+          product: 'Produkte & Plattformen',
+          global_eu: 'Global mit EU-Impact',
+          enterprise_ai: 'Enterprise AI',
+          governance: 'Governance',
+          watchlist: 'Watchlist'
+        },
+        priority: {
+          P1: 'Sehr wichtig',
+          P2: 'Relevant',
+          P3: 'Kurz notiert'
+        },
+        trust: {
+          hoch: 'Hohe Quellenlage',
+          mittel: 'Mittlere Quellenlage',
+          niedrig: 'Niedrige Quellenlage',
+          gemischt: 'Gemischte Quellenlage',
+          watchlist: 'Watchlist'
+        },
+        role: {
+          faktenanker: 'Faktenanker',
+          policy_interpretation: 'Policy-Interpretation',
+          marktverifikation: 'Marktverifikation',
+          produktquelle: 'Produktquelle',
+          enterprise_signal: 'Enterprise-Signal',
+          'frühindikator': 'Frühindikator',
+          unternehmensquelle: 'Unternehmensquelle',
+          developer_dokumentation: 'Entwicklerdokumentation'
+        },
+        'source-type': {
+          official: 'Offizielle Quelle',
+          vendor: 'Anbieterquelle',
+          media: 'Medienbericht',
+          research: 'Research',
+          community: 'Community',
+          documentation: 'Dokumentation',
+          legal: 'Rechtstext'
+        },
+        'relation-type': {
+          follow_up: 'Follow-up',
+          recurring_theme: 'Wiederkehrendes Thema',
+          precedent: 'Präzedenzfall',
+          trendline: 'Trendlinie'
+        }
+      };
+
+      const mapLabel = (group, rawValue) => {
+        if (!rawValue) return '';
+        return (labelMaps[group] && labelMaps[group][rawValue]) || rawValue;
+      };
+
+      document.querySelectorAll('[data-ui-map]').forEach((element) => {
+        const group = element.dataset.uiMap;
+        const rawValue = element.dataset.rawValue || element.textContent.trim();
+        const mappedValue = mapLabel(group === 'overall-trust' ? 'trust' : group, rawValue);
+
+        if (group === 'overall-trust') {
+          element.textContent = `Status: ${mappedValue}`;
+          return;
+        }
+
+        element.textContent = mappedValue;
+      });
+
+      document.querySelectorAll('[data-derived-from-story]').forEach((element) => {
+        const rawValue = element.dataset.derivedFromStory;
+        element.textContent = rawValue === 'true' ? 'Aus Story-Quellen abgeleitet' : 'Eigenständig zusammengeführt';
+      });
+
+      document.querySelectorAll('.source-item').forEach((item) => {
+        const roleSummary = item.querySelector('[data-role-summary]');
+        const roleNodes = Array.from(item.querySelectorAll('[data-source-role]'));
+        const sourceCountNode = item.querySelector('[data-source-count]');
+        const uniqueRoles = [...new Set(roleNodes.map((node) => node.dataset.rawValue).filter(Boolean))];
+
+        if (sourceCountNode) sourceCountNode.textContent = String(roleNodes.length);
+
+        if (roleSummary) {
+          roleSummary.innerHTML = '';
+          uniqueRoles.forEach((role) => {
+            const pill = document.createElement('span');
+            pill.className = 'source-pill';
+            pill.textContent = mapLabel('role', role);
+            roleSummary.appendChild(pill);
+          });
+        }
+      });
+
+      const cards = Array.from(document.querySelectorAll('.priority-stories .story-card'));
+      const filterRow = document.getElementById('story-filter-row');
+      const emptyState = document.getElementById('story-filter-empty-state');
+      const categoryCounts = cards.reduce((acc, card) => {
+        const category = card.dataset.category;
+        if (!category) return acc;
+        acc[category] = (acc[category] || 0) + 1;
+        return acc;
+      }, {});
+
+      const createButton = (filter, label) => {
+        const button = document.createElement('button');
+        button.type = 'button';
+        button.className = 'filter-button';
+        button.dataset.filter = filter;
+        button.setAttribute('aria-pressed', 'false');
+        button.textContent = label;
+        return button;
+      };
+
+      Object.keys(categoryCounts).forEach((category) => {
+        const button = createButton(category, `${mapLabel('category', category)} · ${categoryCounts[category]}`);
+        filterRow.appendChild(button);
+      });
+
+      const buttons = Array.from(document.querySelectorAll('.filter-button'));
+
+      const applyFilter = (filter) => {
+        buttons.forEach((button) => {
+          const isActive = button.dataset.filter === filter;
+          button.classList.toggle('active', isActive);
+          button.setAttribute('aria-pressed', isActive ? 'true' : 'false');
+        });
+
+        let visibleCount = 0;
+        cards.forEach((card) => {
+          const isVisible = filter === 'all' || card.dataset.category === filter;
+          card.classList.toggle('is-filtered-out', !isVisible);
+          if (isVisible) visibleCount += 1;
+        });
+
+        if (emptyState) {
+          emptyState.classList.toggle('is-visible', visibleCount === 0);
+        }
+      };
+
+      buttons.forEach((button) => {
+        button.addEventListener('click', () => applyFilter(button.dataset.filter || 'all'));
+      });
+
+      applyFilter('all');
+    });
+  </script>
+</body>
+</html>
