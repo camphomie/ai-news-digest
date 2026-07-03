@@ -1,6 +1,23 @@
 {
   "reports": [
     {
+      "id": "daily-2026-07-02",
+      "mode": "daily",
+      "title": "AI Intelligence Daily - Enterprise-Agenten, Modellzugang und Governance",
+      "date_label": "02.07.2026",
+      "public_url": "https://ai-news.camphausen.eu/daily/2026-07-02.html",
+      "published_at": "2026-07-03T02:16:00Z",
+      "summary": "Der Tag zeigt KI-Umsetzung als Management- und Kontrollthema: Microsoft professionalisiert Enterprise-AI-Engineering, GitHub ergänzt Copilot-Auditierbarkeit, Anthropic bringt Fable 5 zurück und die EU schärft ihren Apply-AI-Fokus.",
+      "trust_status": "hoch",
+      "tags": [
+        "Enterprise AI",
+        "GitHub Copilot",
+        "Anthropic",
+        "Apply AI",
+        "Governance"
+      ]
+    },
+    {
       "id": "daily-2026-06-29",
       "mode": "daily",
       "title": "AI Intelligence Daily - AI-Omnibus verschiebt High-Risk-Pflichten",
@@ -9,7 +26,13 @@
       "published_at": "2026-06-30T02:16:00Z",
       "summary": "Der 29. Juni bringt eine harte AI-Act-Weiche: Der Rat gibt dem Digital Omnibus auf AI final grünes Licht. High-Risk-Pflichten werden verschoben, Transparenzfristen bleiben nah, Skills-Programme werden ausgebaut.",
       "trust_status": "hoch",
-      "tags": ["AI Act", "Omnibus", "High-Risk AI", "Transparenz", "Skills"]
+      "tags": [
+        "AI Act",
+        "Omnibus",
+        "High-Risk AI",
+        "Transparenz",
+        "Skills"
+      ]
     },
     {
       "id": "daily-2026-06-25",
@@ -20,7 +43,13 @@
       "published_at": "2026-06-26T02:06:01Z",
       "summary": "Der 25. Juni setzt zwei operative Linien: Die EU zieht Cloud als KI-Infrastrukturschicht in die DMA-Logik, während agentische Computersteuerung produktnäher wird. Datenschutzrechte bleiben der Governance-Prüfstein.",
       "trust_status": "hoch",
-      "tags": ["DMA", "Cloud", "Agentic AI", "Datenschutz", "Enterprise AI"]
+      "tags": [
+        "DMA",
+        "Cloud",
+        "Agentic AI",
+        "Datenschutz",
+        "Enterprise AI"
+      ]
     },
     {
       "id": "daily-2026-06-24",
@@ -31,7 +60,13 @@
       "published_at": "2026-06-25T02:06:01Z",
       "summary": "Der 24. Juni schärft vor allem den Blick auf AI-Act-Transparenz: Article 50 bleibt für viele Teams ein naher Umsetzungspunkt. Dazu kommen produktnahe Signale zu ChatGPT, EU Apply AI, AI-Infrastruktur und Enterprise-Agenten.",
       "trust_status": "hoch",
-      "tags": ["AI Act", "Article 50", "Transparenz", "Enterprise AI", "Infrastruktur"]
+      "tags": [
+        "AI Act",
+        "Article 50",
+        "Transparenz",
+        "Enterprise AI",
+        "Infrastruktur"
+      ]
     },
     {
       "id": "daily-2026-06-16",
@@ -42,7 +77,13 @@
       "published_at": "2026-06-17T20:40:00Z",
       "summary": "Der Tag zeigt die Verschiebung von Agenten-Hype zu Betrieb: Microsoft macht Agenten nutzungsbasiert, GitHub monetarisiert AI-Codequalität, und die EU schärft AI-Act- sowie Online-Safety-Governance.",
       "trust_status": "hoch",
-      "tags": ["Microsoft", "Agentic AI", "AI Act", "GitHub", "Governance"]
+      "tags": [
+        "Microsoft",
+        "Agentic AI",
+        "AI Act",
+        "GitHub",
+        "Governance"
+      ]
     },
     {
       "id": "weekly-2026-W24",
@@ -53,7 +94,12 @@
       "published_at": "2026-06-16T13:20:00Z",
       "summary": "AI-Act-Umsetzung, deutsche Aufsicht und Sicherheitskapazität, Plattformzugang, Souveränitätsinfrastruktur und produktive Agenten-Workflows prägen die Woche.",
       "trust_status": "hoch",
-      "tags": ["AI Act", "Governance", "Enterprise AI", "Souveränität"]
+      "tags": [
+        "AI Act",
+        "Governance",
+        "Enterprise AI",
+        "Souveränität"
+      ]
     }
   ]
 }
