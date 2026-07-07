@@ -1,6 +1,21 @@
 {
   "reports": [
     {
+      "id": "daily-2026-07-06",
+      "mode": "daily",
+      "title": "Daily Briefing 06.07.2026",
+      "date_label": "06.07.2026",
+      "public_url": "https://ai-news.camphausen.eu/daily/2026-07-06.html",
+      "published_at": "2026-07-07T10:48:38Z",
+      "summary": "Verdeckter China-Erkennungscode in Claude Code erschüttert Vendor-Vertrauen, SAP schließt Dremio-Übernahme ab, UN eröffnet Global Dialogue on AI Governance in Genf.",
+      "trust_status": "gemischt",
+      "tags": [
+        "Vendor Trust",
+        "Enterprise AI",
+        "Global Governance"
+      ]
+    },
+    {
       "id": "daily-2026-07-02",
       "mode": "daily",
       "title": "AI Intelligence Daily - Enterprise-Agenten, Modellzugang und Governance",
