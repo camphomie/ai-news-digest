@@ -1,6 +1,21 @@
 {
   "reports": [
     {
+      "id": "daily-2026-07-08",
+      "mode": "daily",
+      "title": "Daily Briefing 08.07.2026",
+      "date_label": "08.07.2026",
+      "public_url": "https://ai-news.camphausen.eu/daily/2026-07-08.html",
+      "published_at": "2026-07-09T07:26:32Z",
+      "summary": "Metas „Super Sensing“-Brillenprototyp zeichnet dauerhaft auf, ohne Warnlicht – mit offenen DSGVO- und AI-Act-Fragen. GPT-5.6 startet am 9. Juli für alle, EU-Zugang bleibt laut ungesicherten Berichten weiter ausgeschlossen.",
+      "trust_status": "gemischt",
+      "tags": [
+        "AI Act",
+        "Governance",
+        "Enterprise AI"
+      ]
+    },
+    {
       "id": "daily-2026-07-07",
       "mode": "daily",
       "title": "Daily Briefing 07.07.2026",
