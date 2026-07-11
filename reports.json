@@ -1,6 +1,23 @@
 {
   "reports": [
     {
+      "id": "weekly-2026-W28",
+      "mode": "weekly",
+      "title": "AI Intelligence Weekly KW 28: KI-Durchführungsgesetz besiegelt, Modellzugang bleibt Flickenteppich",
+      "date_label": "KW 28 / 06.–10.07.2026",
+      "public_url": "https://ai-news.camphausen.eu/weekly/2026-W28.html",
+      "published_at": "2026-07-11T04:24:04Z",
+      "summary": "Der Bundesrat besiegelt die deutsche AI-Act-Aufsicht durch die Bundesnetzagentur. Zugleich zeigen GPT-5.6, Claude Fable 5 und Grok 4.5 binnen einer Woche drei verschiedene EU-Zugangsschicksale. Dazu: neue EDPB-Leitlinien zu Web-Scraping und ein niederländischer Digitalsouveränitäts-Bericht.",
+      "trust_status": "gemischt",
+      "tags": [
+        "AI Act",
+        "Governance",
+        "Datenschutz",
+        "Deutschland",
+        "Souveränität"
+      ]
+    },
+    {
       "id": "daily-2026-07-10",
       "mode": "daily",
       "title": "Daily Briefing 10.07.2026",
