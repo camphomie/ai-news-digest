@@ -1,6 +1,23 @@
 {
   "reports": [
     {
+      "id": "daily-2026-07-13",
+      "mode": "daily",
+      "title": "Daily Briefing 13.07.2026",
+      "date_label": "13.07.2026",
+      "public_url": "https://ai-news.camphausen.eu/daily/2026-07-13.html",
+      "published_at": "2026-07-13T23:24:09Z",
+      "summary": "EU-Kinderschutzpanel empfiehlt Altersgrenzen und einen verbindlichen Verhaltenskodex, Kommission und AI Board bestätigen die Angemessenheit des Transparenz-Codes, Meta zieht ein Instagram-KI-Feature zurück, GPT-5.6 klärt seinen EU-Zugang.",
+      "trust_status": "hoch",
+      "tags": [
+        "AI Act",
+        "Kinderschutz",
+        "DSA",
+        "Datenschutz",
+        "Enterprise AI"
+      ]
+    },
+    {
       "id": "weekly-2026-W28",
       "mode": "weekly",
       "title": "AI Intelligence Weekly KW 28: KI-Durchführungsgesetz besiegelt, Modellzugang bleibt Flickenteppich",
