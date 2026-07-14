@@ -1,6 +1,23 @@
 {
   "reports": [
     {
+      "id": "daily-2026-07-14",
+      "mode": "daily",
+      "title": "Daily Briefing 14.07.2026",
+      "date_label": "14.07.2026",
+      "public_url": "https://ai-news.camphausen.eu/daily/2026-07-14.html",
+      "published_at": "2026-07-14T23:38:06Z",
+      "summary": "Meta stellt nach EU-Zwangsmaßnahme vom 09.06. kostenfreien WhatsApp-Zugang für ChatGPT wieder her – greifende Kartellrechtsdurchsetzung. Dazu: OpenAI lockert GPT-5.6-Limits, neue Details zu nationalen Mindestaltersgrenzen und EUDI-Wallet.",
+      "trust_status": "gemischt",
+      "tags": [
+        "Wettbewerbsrecht",
+        "WhatsApp",
+        "OpenAI",
+        "Kinderschutz",
+        "DSA"
+      ]
+    },
+    {
       "id": "daily-2026-07-13",
       "mode": "daily",
       "title": "Daily Briefing 13.07.2026",
