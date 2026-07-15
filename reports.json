@@ -1,6 +1,22 @@
 {
   "reports": [
     {
+      "id": "daily-2026-07-15",
+      "mode": "daily",
+      "title": "Daily Briefing 15.07.2026",
+      "date_label": "15.07.2026",
+      "public_url": "https://ai-news.camphausen.eu/daily/2026-07-15.html",
+      "published_at": "2026-07-15T23:42:59Z",
+      "summary": "Ruhiger Tag: Fraunhofer verteidigt das deutsche Sprachmodell Soofi S gegen Überanpassungs-Kritik. Daneben zwei indirekt EU-relevante Signale: OpenAI verschlüsselt Codex-Agentenkommunikation; eine US-Klage gegen Meta wegen KI-gestützter Kündigungen illustriert das Risiko hinter den AI-Act-Beschäftigungsregeln.",
+      "trust_status": "gemischt",
+      "tags": [
+        "Sovereign AI",
+        "Agentic AI",
+        "Enterprise AI",
+        "Governance"
+      ]
+    },
+    {
       "id": "daily-2026-07-14",
       "mode": "daily",
       "title": "Daily Briefing 14.07.2026",
