@@ -1,6 +1,22 @@
 {
   "reports": [
     {
+      "id": "daily-2026-07-16",
+      "mode": "daily",
+      "title": "Daily Briefing 16.07.2026",
+      "date_label": "16.07.2026",
+      "public_url": "https://ai-news.camphausen.eu/daily/2026-07-16.html",
+      "published_at": "2026-07-17T07:41:59Z",
+      "summary": "Moonshot AI veröffentlicht mit Kimi K3 das größte offene KI-Modell der Welt (2,8 Billionen Parameter) – EU-Bezug indirekt über die Souveränitäts- und Exportkontroll-Debatte. Google benennt NotebookLM in Gemini Notebook um; Anthropic/OpenAI streiten über US-Bundesstaaten-KI-Gesetze.",
+      "trust_status": "gemischt",
+      "tags": [
+        "Open Source AI",
+        "Souveränität",
+        "Enterprise AI",
+        "Governance"
+      ]
+    },
+    {
       "id": "daily-2026-07-15",
       "mode": "daily",
       "title": "Daily Briefing 15.07.2026",
