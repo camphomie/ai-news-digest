@@ -1,6 +1,22 @@
 {
   "reports": [
     {
+      "id": "daily-2026-07-17",
+      "mode": "daily",
+      "title": "Daily Briefing 17.07.2026",
+      "date_label": "17.07.2026",
+      "public_url": "https://ai-news.camphausen.eu/daily/2026-07-17.html",
+      "published_at": "2026-07-17T23:18:08Z",
+      "summary": "China lanciert mit 29 Staaten die World AI Cooperation Organization als Gegenentwurf zur US-/EU-geprägten KI-Governance – kein EU-Land dabei. Daneben: Netflix' KI-Einsatz in 300 Produktionen vor der AI-Act-Kennzeichnungspflicht, sowie Thinking Machines' offenes Modell Inkling.",
+      "trust_status": "gemischt",
+      "tags": [
+        "Global Governance",
+        "Souveränität",
+        "Enterprise AI",
+        "Open Source AI"
+      ]
+    },
+    {
       "id": "daily-2026-07-16",
       "mode": "daily",
       "title": "Daily Briefing 16.07.2026",
