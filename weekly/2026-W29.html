@@ -1,0 +1,1548 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Intelligence Weekly – KW 29: Durchsetzung greift, Souveränität unter Druck</title>
+  <style>
+    :root {
+      --bg: #eef3f9;
+      --bg-radial: radial-gradient(circle at top left, rgba(49, 91, 217, 0.14), transparent 32rem), radial-gradient(circle at top right, rgba(31, 122, 77, 0.10), transparent 28rem), #eef3f9;
+      --surface: #ffffff;
+      --surface-soft: #f7f9fd;
+      --surface-blue: #f1f5ff;
+      --text: #111b2e;
+      --muted: #66748c;
+      --muted-2: #8190a8;
+      --border: #d9e2ef;
+      --border-strong: #bfcae0;
+      --accent: #244ed8;
+      --accent-strong: #1739a8;
+      --accent-soft: #e8efff;
+      --success: #1f7a4d;
+      --success-soft: #e7f5ee;
+      --warning: #b26a00;
+      --warning-soft: #fff3dc;
+      --risk: #a63f3f;
+      --risk-soft: #fdecec;
+      --watch: #2563eb;
+      --watch-soft: #eaf1ff;
+      --shadow: 0 18px 45px rgba(17, 30, 58, 0.10);
+      --shadow-soft: 0 8px 24px rgba(17, 30, 58, 0.07);
+      --radius-xl: 26px;
+      --radius-lg: 18px;
+      --radius-md: 14px;
+      --radius-sm: 10px;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      padding: 34px;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--bg-radial);
+      color: var(--text);
+      line-height: 1.58;
+    }
+
+    h1, h2, h3, h4, p { margin: 0; }
+    h1 { max-width: 940px; font-size: clamp(32px, 5vw, 56px); line-height: 0.98; letter-spacing: -0.045em; }
+    h2 { font-size: clamp(22px, 3vw, 34px); line-height: 1.08; letter-spacing: -0.03em; }
+    h3 { font-size: 20px; line-height: 1.18; letter-spacing: -0.02em; }
+    h4 { font-size: 15px; line-height: 1.25; }
+    a { color: var(--accent-strong); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    .weekly-briefing {
+      max-width: 1220px;
+      margin: 0 auto;
+      display: grid;
+      gap: 24px;
+    }
+
+    .hero,
+    .executive-summary,
+    .weekly-assessment,
+    .theme-block,
+    .sidebar-block {
+      background: rgba(255, 255, 255, 0.92);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow-soft);
+      backdrop-filter: blur(12px);
+      min-width: 0;
+    }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      padding: 30px;
+      display: grid;
+      gap: 18px;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      height: 5px;
+      background: linear-gradient(90deg, #244ed8, #1f7a4d, #b26a00);
+      pointer-events: none;
+    }
+
+    .hero > * { position: relative; }
+
+    .eyebrow,
+    .story-kicker,
+    .section-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      line-height: 1;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-weight: 800;
+    }
+
+    .eyebrow::before,
+    .section-label::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 0 5px var(--accent-soft);
+      flex: 0 0 auto;
+    }
+
+    .weekly-summary,
+    .field-note,
+    .sidebar-meta {
+      color: var(--muted);
+    }
+
+    .weekly-summary {
+      max-width: 880px;
+      font-size: 17px;
+    }
+
+    .meta-row,
+    .story-meta,
+    .source-meta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .chip,
+    .badge,
+    .source-pill {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 800;
+      line-height: 1;
+      white-space: nowrap;
+    }
+
+    .chip {
+      padding: 9px 11px;
+      background: var(--accent-soft);
+      color: var(--accent-strong);
+      border: 1px solid rgba(36, 78, 216, 0.12);
+    }
+
+    .badge {
+      padding: 8px 10px;
+      border: 1px solid var(--border);
+      background: var(--surface-soft);
+      color: var(--muted);
+    }
+
+    .badge[data-trust="hoch"] { background: var(--success-soft); color: var(--success); border-color: rgba(31, 122, 77, 0.20); }
+    .badge[data-trust="mittel"], .badge[data-trust="gemischt"] { background: var(--warning-soft); color: var(--warning); border-color: rgba(178, 106, 0, 0.22); }
+    .badge[data-trust="niedrig"] { background: var(--risk-soft); color: var(--risk); border-color: rgba(166, 63, 63, 0.22); }
+    .badge[data-trust="watchlist"] { background: var(--watch-soft); color: var(--watch); border-color: rgba(37, 99, 235, 0.18); }
+
+    .main-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 2.05fr) minmax(300px, 0.95fr);
+      gap: 24px;
+      align-items: start;
+    }
+
+    .main-column,
+    .main-developments,
+    .sidebar,
+    .section-stack {
+      display: grid;
+      gap: 18px;
+      min-width: 0;
+    }
+
+    .executive-summary,
+    .weekly-assessment,
+    .theme-block,
+    .sidebar-block {
+      padding: 22px;
+      display: grid;
+      gap: 15px;
+    }
+
+    .weekly-assessment {
+      border-color: rgba(36, 78, 216, 0.24);
+      box-shadow: var(--shadow);
+    }
+
+    .story-header {
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      align-items: flex-start;
+      min-width: 0;
+    }
+
+    .story-title-block,
+    .story-text-stack {
+      display: grid;
+      gap: 8px;
+      min-width: 0;
+    }
+
+    .story-title-block h3,
+    .sidebar-block h3,
+    .sidebar-block h4 {
+      overflow-wrap: anywhere;
+    }
+
+    .takeaway,
+    .analysis-note {
+      border: 1px solid var(--border);
+      background: linear-gradient(180deg, #fbfcff, #f6f8fc);
+      border-radius: var(--radius-lg);
+      padding: 16px;
+      display: grid;
+      gap: 6px;
+    }
+
+    .takeaway strong,
+    .analysis-note strong {
+      font-size: 13px;
+      letter-spacing: 0.02em;
+    }
+
+    .score-strip {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 10px;
+      max-width: 100%;
+      min-width: 0;
+    }
+
+    .score-item {
+      --score: 1;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      background: var(--surface-soft);
+      padding: 12px;
+      display: grid;
+      gap: 8px;
+      min-height: 88px;
+      min-width: 0;
+      overflow: hidden;
+    }
+
+    .score-topline {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 6px;
+      min-width: 0;
+      max-width: 100%;
+    }
+
+    .score-value {
+      min-width: 0;
+      max-width: 100%;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      font-size: 24px;
+      line-height: 1;
+      font-weight: 900;
+      letter-spacing: -0.04em;
+    }
+
+    .score-max {
+      color: var(--muted-2);
+      font-size: 11px;
+      font-weight: 800;
+      flex: 0 0 auto;
+    }
+
+    .score-label {
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.15;
+      font-weight: 750;
+      overflow-wrap: anywhere;
+      hyphens: auto;
+    }
+
+    .meter {
+      width: 100%;
+      min-width: 0;
+      height: 7px;
+      border-radius: 999px;
+      background: #e4e9f2;
+      overflow: hidden;
+    }
+
+    .meter > span {
+      display: block;
+      height: 100%;
+      width: clamp(0%, calc(var(--score) * 20%), 100%);
+      max-width: 100%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, var(--accent), #1f7a4d);
+    }
+
+    .theme-block { box-shadow: var(--shadow-soft); }
+    .theme-block[data-category="regulation"] { border-left: 5px solid var(--accent); }
+    .theme-block[data-category="governance"] { border-left: 5px solid var(--success); }
+    .theme-block[data-category="enterprise_ai"] { border-left: 5px solid #5b5fd6; }
+    .theme-block[data-category="product"] { border-left: 5px solid #6b55c9; }
+    .theme-block[data-category="global_eu"] { border-left: 5px solid #2d8aa6; }
+    .theme-block[data-category="watchlist"] { border-left: 5px solid var(--watch); }
+
+    .sidebar-status-grid,
+    .compact-panel-summary,
+    .compact-panel-details,
+    .compact-role-row {
+      display: grid;
+      gap: 10px;
+    }
+
+    .sidebar-status-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .status-card {
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      background: var(--surface-soft);
+      padding: 12px;
+      display: grid;
+      gap: 5px;
+    }
+
+    .status-card-label {
+      font-size: 11px;
+      font-weight: 850;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--muted-2);
+    }
+
+    .status-card-value {
+      font-size: 14px;
+      font-weight: 800;
+      color: var(--text);
+    }
+
+    .compact-panel-stats {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .compact-source-list {
+      margin: 0;
+      padding-left: 18px;
+      color: var(--muted);
+      display: grid;
+      gap: 6px;
+    }
+
+    .compact-source-list a,
+    .compact-source-list .source-label-fallback {
+      font-weight: 750;
+    }
+
+    details.evidence {
+      border-top: 1px solid var(--border);
+      padding-top: 10px;
+    }
+
+    details.evidence summary,
+    .panel-item summary {
+      cursor: pointer;
+      list-style: none;
+      color: var(--accent-strong);
+      font-size: 13px;
+      font-weight: 850;
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      align-items: center;
+    }
+
+    details.evidence summary::-webkit-details-marker,
+    .panel-item summary::-webkit-details-marker { display: none; }
+
+    details.evidence summary::after,
+    .panel-item summary::after {
+      content: "+";
+      display: grid;
+      place-items: center;
+      width: 22px;
+      height: 22px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: var(--accent-strong);
+      font-size: 15px;
+      line-height: 1;
+      flex: 0 0 auto;
+    }
+
+    details.evidence[open] summary::after,
+    .panel-item details[open] summary::after { content: "–"; }
+
+    .sources {
+      margin-top: 10px;
+      display: grid;
+      gap: 8px;
+      padding: 12px;
+      border-radius: var(--radius-md);
+      background: var(--surface-soft);
+      border: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 13px;
+      min-width: 0;
+    }
+
+    .source-link-card {
+      display: grid;
+      gap: 7px;
+      padding: 10px;
+      border: 1px solid rgba(191, 202, 224, 0.75);
+      border-radius: var(--radius-sm);
+      background: #ffffff;
+      min-width: 0;
+    }
+
+    .source-link-card a,
+    .source-link-card .source-label-fallback {
+      font-weight: 850;
+      overflow-wrap: anywhere;
+    }
+
+    .source-label-fallback { color: var(--text); }
+
+    .source-pill {
+      align-self: start;
+      justify-self: start;
+      padding: 5px 7px;
+      border: 1px solid var(--border);
+      background: #eef2ff;
+      color: #3730a3;
+      font-size: 10.5px;
+      letter-spacing: 0.01em;
+    }
+
+    .source-meta {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 6px 10px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .source-meta span { overflow-wrap: anywhere; }
+    .source-meta strong { color: var(--text); }
+
+    .panel-item,
+    .archive-item {
+      border: 1px solid var(--border);
+      background: var(--surface-soft);
+      border-radius: var(--radius-md);
+      padding: 13px;
+      display: grid;
+      gap: 8px;
+      min-width: 0;
+    }
+
+    .panel-item { padding: 0; overflow: hidden; }
+    .panel-item details { padding: 12px 13px; }
+    .panel-item summary { color: var(--text); overflow-wrap: anywhere; }
+    .panel-detail {
+      margin-top: 9px;
+      display: grid;
+      gap: 8px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .archive-item .relation-type { justify-self: start; background: #eef2ff; color: #3730a3; }
+
+    @media (max-width: 980px) {
+      body { padding: 18px; }
+      .hero, .executive-summary, .weekly-assessment, .theme-block, .sidebar-block { border-radius: var(--radius-lg); }
+      .main-layout { grid-template-columns: 1fr; }
+      .score-strip {
+        grid-template-columns: repeat(5, minmax(78px, 1fr));
+        gap: 7px;
+        overflow-x: auto;
+        overflow-y: hidden;
+        padding-bottom: 2px;
+        scrollbar-width: thin;
+      }
+      .score-item { min-height: 58px; padding: 7px 8px; gap: 5px; }
+      .score-value { font-size: 16px; }
+      .score-max { font-size: 10px; }
+      .score-label { font-size: 10px; line-height: 1.1; }
+      .meter { height: 4px; }
+      .chip, .badge { padding: 6px 8px; font-size: 11px; }
+      .source-meta { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 560px) {
+      body { padding: 12px; }
+      .weekly-briefing { gap: 14px; }
+      .hero { padding: 22px; }
+      .story-header { display: grid; gap: 10px; }
+      .story-meta { gap: 7px; }
+      .score-strip { grid-template-columns: repeat(5, minmax(72px, 1fr)); }
+      .score-item { min-height: 54px; padding: 6px 7px; }
+      .score-value { font-size: 15px; }
+      .score-max { font-size: 10px; }
+      .score-label { font-size: 9.5px; }
+      .sources { padding: 10px; }
+      .source-link-card { padding: 9px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="weekly-briefing">
+    <section class="hero">
+      <div class="eyebrow">Weekly AI Intelligence Briefing</div>
+      <h1>AI Intelligence Weekly – KW 29: Durchsetzung greift, Souveränität unter Druck</h1>
+      <p class="weekly-summary">Zwei EU-Durchsetzungserfolge (Kinderschutzpanel, WhatsApp-Rückkehr) treffen auf eine Woche voller Souveränitätsfragen: WAICO ohne EU, Mistral fällt im FLI-Sicherheitsindex durch, Soofi S unter Kritik.</p>
+      <div class="meta-row">
+        <span class="chip">Woche: 13. – 17. Juli 2026 (KW 29)</span>
+        <span class="chip">Fokus: Deutschland / EU</span>
+        <span class="badge" data-trust="gemischt" data-ui-map="weekly-trust" data-raw-value="gemischt">Vertrauensbild: gemischt</span>
+        <span class="chip">Leitmuster: Durchsetzung, Souveränität, Vertrauenslücken</span>
+      </div>
+    </section>
+
+    <section class="main-layout">
+      <section class="main-column">
+        <article class="executive-summary">
+          <div class="section-label">Executive Summary</div>
+          <h2>Wöchentliche Lage in Kürze</h2>
+          <p class="field-note">Die EU zeigte diese Woche zweimal wirksame Durchsetzung: das Kinderschutz-Sonderpanel schlägt ein verbindliches Vorab-Zertifizierungsregime vor, ChatGPT kehrte nach EU-Kartellauflage kostenfrei auf WhatsApp zurück. Zugleich verdichteten sich Souveränitätsfragen: China gründete mit WAICO eine EU-freie KI-Allianz, einen Tag nachdem die Kommission eigene Frontier-KI-Defizite eingeräumt hatte. Der FLI-Sicherheitsindex stufte Mistral als einzigen von neun Anbietern mit „F“ ein. Deutschlands Soofi S geriet unter Überanpassungskritik, während Kimi K3 zum größten offenen Modell der Welt wurde. AI-Act-Omnibus und KI-Durchführungsgesetz warten weiter auf Verkündung.</p>
+        </article>
+
+        <article class="weekly-assessment">
+          <div class="section-label">Wocheneinschätzung</div>
+          <h2>Durchsetzung, Souveränität, Vertrauenslücken</h2>
+          <p class="field-note">Die Woche zeigt eine EU, die im eigenen Rechtsraum durchsetzungsfähig ist, aber im globalen KI-Wettlauf und bei der eigenen Anbieter-Basis unter Druck gerät – Durchsetzung und Souveränitätsdefizite bestehen nebeneinander, ungelöst.</p>
+          <div class="score-strip">
+            <div class="score-item" style="--score: 5"><div class="score-topline"><span class="score-value">5</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">EU / DE-Relevanz</div></div>
+            <div class="score-item" style="--score: 4"><div class="score-topline"><span class="score-value">4</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Business Impact</div></div>
+            <div class="score-item" style="--score: 4"><div class="score-topline"><span class="score-value">4</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Regulatorik</div></div>
+            <div class="score-item" style="--score: 3"><div class="score-topline"><span class="score-value">3</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Technologie</div></div>
+            <div class="score-item" style="--score: 4"><div class="score-topline"><span class="score-value">4</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Lernwert</div></div>
+          </div>
+        </article>
+
+        <section class="main-developments">
+          <div class="section-label">Hauptentwicklungen der Woche</div>
+          <article class="theme-block" data-id="wk29-eu-child-safety-panel" data-category="regulation">
+            <div class="story-header">
+              <div class="story-title-block">
+                <div class="story-kicker">REGULIERUNG / DSA</div>
+                <h3>EU-Sonderpanel empfiehlt Altersgrenzen und verbindliches Vorab-Zertifizierungsregime</h3>
+              </div>
+              <div class="story-meta">
+                <span class="chip" data-ui-map="category" data-raw-value="regulation">regulation</span>
+                <span class="chip" data-ui-map="priority" data-raw-value="P1">P1</span>
+              </div>
+            </div>
+            <div class="story-text-stack">
+              <p class="field-note"><strong>Thema:</strong> Kinderschutz online als Zertifizierungsthema</p>
+              <p>Das Sonderpanel legte am 13.07. seinen Abschlussbericht vor: Zugangssperre für Unter-13-Jährige ohne „safe by design“-Nachweis, verbindlicher Verhaltenskodex statt DSA-Art.-28-Leitlinien, Vorab-Zertifizierung mit Beweislast bei Anbietern. 23 von 27 Staaten erwägen eigene Mindestaltersgrenzen; Altersnachweis via EUDI-Wallet.</p>
+              <p class="field-note"><strong>Strategische Relevanz:</strong> Verschiebt die Debatte von freiwilligen Leitlinien zu verbindlicher Vorab-Zertifizierung – ein Ansatzpunkt für den Assurance-Beratungsmarkt vor den Herbst-Gesetzesvorschlägen.</p>
+              <p class="field-note"><strong>EU-/DE-Impact:</strong> Direkt: legt die künftige Architektur für Plattform-Kinderschutz fest und zeigt bereits erhebliche nationale Fragmentierung vor dem EU-Vorschlag.</p>
+              <p class="field-note"><strong>Einordnung:</strong> Noch keine Entscheidung, aber die Richtung ist gesetzt; die nationale Fragmentierung vor dem Herbstvorschlag ist selbst ein Risikosignal für Compliance-Planung.</p>
+            </div>
+            <div class="score-strip">
+              <div class="score-item" style="--score: 5"><div class="score-topline"><span class="score-value">5</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">EU / DE-Relevanz</div></div>
+              <div class="score-item" style="--score: 4"><div class="score-topline"><span class="score-value">4</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Business Impact</div></div>
+              <div class="score-item" style="--score: 5"><div class="score-topline"><span class="score-value">5</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Regulatorik</div></div>
+              <div class="score-item" style="--score: 1"><div class="score-topline"><span class="score-value">1</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Technologie</div></div>
+              <div class="score-item" style="--score: 4"><div class="score-topline"><span class="score-value">4</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Lernwert</div></div>
+            </div>
+            <details class="evidence">
+              <summary>Quellen & Unsicherheit</summary>
+              <div class="sources">
+                <p class="field-note"><strong>Quellenlage:</strong> <span data-ui-map="trust" data-raw-value="hoch">hoch</span></p>
+                <article class="source-link-card">
+                  <a href="https://ec.europa.eu/commission/presscorner/detail/en/statement_26_1590" target="_blank" rel="noopener noreferrer">Statement by President von der Leyen with the Co-Chairs of the Special Panel on child safety online</a>
+                  <div class="source-meta-row">
+                    <span class="source-pill" data-ui-map="role" data-raw-value="faktenanker">faktenanker</span>
+                    <span class="source-pill" data-ui-map="source-type" data-raw-value="official">official</span>
+                  </div>
+                  <div class="source-meta">
+                    <span><strong>Publisher:</strong> European Commission</span>
+                    <span><strong>Veröffentlicht:</strong> 2026-07-13</span>
+                    <span><strong>Abgerufen:</strong> 2026-07-18</span>
+                  </div>
+                </article>
+                <article class="source-link-card">
+                  <a href="https://commission.europa.eu/news-and-media/news/europeans-concerned-about-child-safety-online-new-report-publishes-recommendations-2026-07-13_en" target="_blank" rel="noopener noreferrer">Europeans concerned about child safety online as new report publishes recommendations</a>
+                  <div class="source-meta-row">
+                    <span class="source-pill" data-ui-map="role" data-raw-value="faktenanker">faktenanker</span>
+                    <span class="source-pill" data-ui-map="source-type" data-raw-value="official">official</span>
+                  </div>
+                  <div class="source-meta">
+                    <span><strong>Publisher:</strong> European Commission</span>
+                    <span><strong>Veröffentlicht:</strong> 2026-07-13</span>
+                    <span><strong>Abgerufen:</strong> 2026-07-18</span>
+                  </div>
+                </article>
+                <article class="source-link-card">
+                  <a href="https://www.europarl.europa.eu/RegData/etudes/BRIE/2026/789316/EPRS_BRI(2026)789316_EN.pdf" target="_blank" rel="noopener noreferrer">Debate on setting a minimum age for social media</a>
+                  <div class="source-meta-row">
+                    <span class="source-pill" data-ui-map="role" data-raw-value="faktenanker">faktenanker</span>
+                    <span class="source-pill" data-ui-map="source-type" data-raw-value="official">official</span>
+                  </div>
+                  <div class="source-meta">
+                    <span><strong>Publisher:</strong> European Parliament (EPRS)</span>
+                    <span><strong>Veröffentlicht:</strong> 2026-07-13</span>
+                    <span><strong>Abgerufen:</strong> 2026-07-18</span>
+                  </div>
+                </article>
+                <article class="source-link-card">
+                  <a href="https://www.euronews.com/my-europe/2026/07/13/von-der-leyen-social-media-ban" target="_blank" rel="noopener noreferrer">Von der Leyen convinced by case for &#x27;age-appropriate&#x27; social media restrictions</a>
+                  <div class="source-meta-row">
+                    <span class="source-pill" data-ui-map="role" data-raw-value="policy_interpretation">policy_interpretation</span>
+                    <span class="source-pill" data-ui-map="source-type" data-raw-value="media">media</span>
+                  </div>
+                  <div class="source-meta">
+                    <span><strong>Publisher:</strong> Euronews</span>
+                    <span><strong>Veröffentlicht:</strong> 2026-07-13</span>
+                    <span><strong>Abgerufen:</strong> 2026-07-18</span>
+                  </div>
+                </article>
+                <p class="field-note"><strong>Unsicherheit:</strong> Panel-Empfehlungen und EPRS-Zahlen sind primärquellenbestätigt; das EUDI-Wallet-Datum ist eine Ankündigung, kein Fixtermin.</p>
+              </div>
+            </details>
+            <details class="evidence">
+              <summary>Weitere Recherche</summary>
+              <div class="sources">
+                <p class="field-note">Die angekündigten Kommissionsvorschläge nach der Sommerpause, den Fortgang der EUDI-Wallet-Altersverifizierung und weitere nationale Alleingänge verfolgen.</p>
+              </div>
+            </details>
+          </article>
+          <article class="theme-block" data-id="wk29-whatsapp-antitrust-precedent" data-category="regulation">
+            <div class="story-header">
+              <div class="story-title-block">
+                <div class="story-kicker">WETTBEWERBSRECHT / DURCHSETZUNG</div>
+                <h3>ChatGPT kehrt nach EU-Kartellrechtsauflage kostenfrei auf WhatsApp zurück</h3>
+              </div>
+              <div class="story-meta">
+                <span class="chip" data-ui-map="category" data-raw-value="regulation">regulation</span>
+                <span class="chip" data-ui-map="priority" data-raw-value="P1">P1</span>
+              </div>
+            </div>
+            <div class="story-text-stack">
+              <p class="field-note"><strong>Thema:</strong> Wirksame EU-Kartellrechtsdurchsetzung gegenüber Gatekeepern</p>
+              <p>Meta hatte ChatGPT, Copilot und Perplexity im Januar verbannt, im März nur gegen Gebühren zugelassen. Die Kommission ordnete am 09.06. einstweilige Maßnahmen an – erst das dritte Instrument in 25 Jahren –, sonst drohen Bußgelder bis 10%. OpenAI aktivierte ChatGPT am 13.07. in allen 27 EU-Staaten plus EWR (~500 Mio. Nutzer:innen).</p>
+              <p class="field-note"><strong>Strategische Relevanz:</strong> Ein seltenes, aber wirksames kartellrechtliches Druckmittel: Marktzugang wurde tatsächlich erzwungen, nicht nur angedroht – ein Präzedenzfall für DMA-Durchsetzung gegenüber KI-Gatekeepern.</p>
+              <p class="field-note"><strong>EU-/DE-Impact:</strong> Direkt; wirksames Präzedenzbeispiel für EU-Kartellrechtsdurchsetzung mit unmittelbarer Breitenwirkung für rund 500 Mio. Nutzer:innen.</p>
+              <p class="field-note"><strong>Einordnung:</strong> Rechtssicherheit besteht für ChatGPT; ob Copilot und Perplexity dasselbe Ergebnis erzielten, bleibt offen und sollte einzeln geprüft werden.</p>
+            </div>
+            <div class="score-strip">
+              <div class="score-item" style="--score: 5"><div class="score-topline"><span class="score-value">5</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">EU / DE-Relevanz</div></div>
+              <div class="score-item" style="--score: 4"><div class="score-topline"><span class="score-value">4</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Business Impact</div></div>
+              <div class="score-item" style="--score: 4"><div class="score-topline"><span class="score-value">4</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Regulatorik</div></div>
+              <div class="score-item" style="--score: 2"><div class="score-topline"><span class="score-value">2</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Technologie</div></div>
+              <div class="score-item" style="--score: 4"><div class="score-topline"><span class="score-value">4</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Lernwert</div></div>
+            </div>
+            <details class="evidence">
+              <summary>Quellen & Unsicherheit</summary>
+              <div class="sources">
+                <p class="field-note"><strong>Quellenlage:</strong> <span data-ui-map="trust" data-raw-value="hoch">hoch</span></p>
+                <article class="source-link-card">
+                  <a href="https://ec.europa.eu/commission/presscorner/detail/en/ip_26_1276" target="_blank" rel="noopener noreferrer">Commission imposes interim measures on Meta to preserve free access to WhatsApp for rival AI assistants</a>
+                  <div class="source-meta-row">
+                    <span class="source-pill" data-ui-map="role" data-raw-value="faktenanker">faktenanker</span>
+                    <span class="source-pill" data-ui-map="source-type" data-raw-value="official">official</span>
+                  </div>
+                  <div class="source-meta">
+                    <span><strong>Publisher:</strong> European Commission</span>
+                    <span><strong>Veröffentlicht:</strong> 2026-06-09</span>
+                    <span><strong>Abgerufen:</strong> 2026-07-18</span>
+                  </div>
+                </article>
+                <article class="source-link-card">
+                  <a href="https://the-decoder.com/chatgpt-returns-to-whatsapp-in-europe-after-eu-forces-meta-to-open-the-door-to-rival-ai-bots/" target="_blank" rel="noopener noreferrer">ChatGPT returns to WhatsApp in Europe after EU forces Meta to open the door to rival AI bots</a>
+                  <div class="source-meta-row">
+                    <span class="source-pill" data-ui-map="role" data-raw-value="enterprise_signal">enterprise_signal</span>
+                    <span class="source-pill" data-ui-map="source-type" data-raw-value="media">media</span>
+                  </div>
+                  <div class="source-meta">
+                    <span><strong>Publisher:</strong> The Decoder</span>
+                    <span><strong>Veröffentlicht:</strong> 2026-07-14</span>
+                    <span><strong>Abgerufen:</strong> 2026-07-18</span>
+                  </div>
+                </article>
+                <article class="source-link-card">
+                  <a href="https://www.notebookcheck.net/ChatGPT-is-back-on-WhatsApp-the-EU-forced-Meta-to-do-it.1342449.0.html" target="_blank" rel="noopener noreferrer">ChatGPT is back on WhatsApp, the EU forced Meta to do it</a>
+                  <div class="source-meta-row">
+                    <span class="source-pill" data-ui-map="role" data-raw-value="marktverifikation">marktverifikation</span>
+                    <span class="source-pill" data-ui-map="source-type" data-raw-value="media">media</span>
+                  </div>
+                  <div class="source-meta">
+                    <span><strong>Publisher:</strong> Notebookcheck</span>
+                    <span><strong>Veröffentlicht:</strong> 2026-07-14</span>
+                    <span><strong>Abgerufen:</strong> 2026-07-18</span>
+                  </div>
+                </article>
+                <p class="field-note"><strong>Unsicherheit:</strong> EU-Anordnung und Restauration sind primärquellen- bzw. mehrfach unabhängig bestätigt; Copilot-/Perplexity-Status ist nicht namentlich belegt.</p>
+              </div>
+            </details>
+            <details class="evidence">
+              <summary>Weitere Recherche</summary>
+              <div class="sources">
+                <p class="field-note">Ob Microsoft Copilot und Perplexity ebenfalls einzeln bestätigt zurückkehren, ob Meta Rechtsmittel einlegt, und den Fortgang der Kartelluntersuchung verfolgen.</p>
+              </div>
+            </details>
+          </article>
+          <article class="theme-block" data-id="wk29-waico-vs-eu-competitiveness" data-category="global_eu">
+            <div class="story-header">
+              <div class="story-title-block">
+                <div class="story-kicker">GLOBALE KI-GOVERNANCE</div>
+                <h3>China gründet EU-freie KI-Allianz WAICO – tags zuvor EU-Eingeständnis eigener Defizite</h3>
+              </div>
+              <div class="story-meta">
+                <span class="chip" data-ui-map="category" data-raw-value="global_eu">global_eu</span>
+                <span class="chip" data-ui-map="priority" data-raw-value="P1">P1</span>
+              </div>
+            </div>
+            <div class="story-text-stack">
+              <p class="field-note"><strong>Thema:</strong> Souveränitäts-Wettlauf um globale KI-Governance</p>
+              <p>Am 15.07. nannte die Kommission Rechenkapazität, Energie, Kapital und Talent als dringendste Frontier-KI-Prioritäten. Einen Tag später unterzeichneten 29 Staaten (u.a. Russland, Belarus, Serbien) in Shanghai die WAICO-Gründung – kein EU-Staat darunter. Xi warb am 17.07. für KI-Governance als „Sinfonie“ statt „Solo eines Landes“.</p>
+              <p class="field-note"><strong>Strategische Relevanz:</strong> Die zeitliche Nähe ist eine bemerkenswerte Koinzidenz, keine belegte Kausalverbindung – sie macht aber sichtbar, dass China institutionell vorprescht, während die EU eigene Lücken erst benennt.</p>
+              <p class="field-note"><strong>EU-/DE-Impact:</strong> Indirekt, substantiiert: kein EU-Staat ist WAICO-Mitglied; unabhängige Medien werten sie als Gegenentwurf zur US-/EU-Architektur; noch keine EU-Reaktion.</p>
+              <p class="field-note"><strong>Einordnung:</strong> Die EU benennt eigene Frontier-KI-Schwächen, während China institutionell Fakten schafft – ob aus dem Befund konkrete Maßnahmen folgen, ist die eigentliche Nagelprobe.</p>
+            </div>
+            <div class="score-strip">
+              <div class="score-item" style="--score: 4"><div class="score-topline"><span class="score-value">4</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">EU / DE-Relevanz</div></div>
+              <div class="score-item" style="--score: 4"><div class="score-topline"><span class="score-value">4</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Business Impact</div></div>
+              <div class="score-item" style="--score: 2"><div class="score-topline"><span class="score-value">2</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Regulatorik</div></div>
+              <div class="score-item" style="--score: 2"><div class="score-topline"><span class="score-value">2</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Technologie</div></div>
+              <div class="score-item" style="--score: 4"><div class="score-topline"><span class="score-value">4</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Lernwert</div></div>
+            </div>
+            <details class="evidence">
+              <summary>Quellen & Unsicherheit</summary>
+              <div class="sources">
+                <p class="field-note"><strong>Quellenlage:</strong> <span data-ui-map="trust" data-raw-value="mittel">mittel</span></p>
+                <article class="source-link-card">
+                  <a href="https://www.euronews.com/next/2026/07/17/xi-calls-for-global-ai-cooperation-as-us-restrictions-squeeze-chinas-tech-access" target="_blank" rel="noopener noreferrer">Xi calls for global AI cooperation as US restrictions squeeze China&#x27;s tech access</a>
+                  <div class="source-meta-row">
+                    <span class="source-pill" data-ui-map="role" data-raw-value="marktverifikation">marktverifikation</span>
+                    <span class="source-pill" data-ui-map="source-type" data-raw-value="media">media</span>
+                  </div>
+                  <div class="source-meta">
+                    <span><strong>Publisher:</strong> Euronews</span>
+                    <span><strong>Veröffentlicht:</strong> 2026-07-17</span>
+                    <span><strong>Abgerufen:</strong> 2026-07-18</span>
+                  </div>
+                </article>
+                <article class="source-link-card">
+                  <a href="https://www.aljazeera.com/news/2026/7/17/chinas-xi-jinping-launches-new-ai-alliance-what-is-it" target="_blank" rel="noopener noreferrer">China&#x27;s Xi Jinping launches new AI alliance: What is it?</a>
+                  <div class="source-meta-row">
+                    <span class="source-pill" data-ui-map="role" data-raw-value="marktverifikation">marktverifikation</span>
+                    <span class="source-pill" data-ui-map="source-type" data-raw-value="media">media</span>
+                  </div>
+                  <div class="source-meta">
+                    <span><strong>Publisher:</strong> Al Jazeera</span>
+                    <span><strong>Veröffentlicht:</strong> 2026-07-17</span>
+                    <span><strong>Abgerufen:</strong> 2026-07-18</span>
+                  </div>
+                </article>
+                <article class="source-link-card">
+                  <a href="https://english.www.gov.cn/news/202607/17/content_WS6a59a226c6d00ca5f9a0c432.html" target="_blank" rel="noopener noreferrer">29 countries sign agreement on establishing World AI Cooperation Organization</a>
+                  <div class="source-meta-row">
+                    <span class="source-pill" data-ui-map="role" data-raw-value="faktenanker">faktenanker</span>
+                    <span class="source-pill" data-ui-map="source-type" data-raw-value="official">official</span>
+                  </div>
+                  <div class="source-meta">
+                    <span><strong>Publisher:</strong> The State Council of the People&#x27;s Republic of China / Xinhua</span>
+                    <span><strong>Veröffentlicht:</strong> 2026-07-17</span>
+                    <span><strong>Abgerufen:</strong> 2026-07-18</span>
+                  </div>
+                </article>
+                <p class="field-note"><strong>Unsicherheit:</strong> Beide Einzelfakten sind primärquellenbestätigt; die Bookend-Einordnung als Wochenmuster ist eigene Analyse, keine belegte Verbindung.</p>
+              </div>
+            </details>
+            <details class="evidence">
+              <summary>Weitere Recherche</summary>
+              <div class="sources">
+                <p class="field-note">Ob und wie die Kommission auf WAICO reagiert, ob weitere Staaten beitreten, und ob aus dem Befund konkrete Förderprogramme folgen.</p>
+              </div>
+            </details>
+          </article>
+          <article class="theme-block" data-id="wk29-mistral-safety-index-last-place" data-category="governance">
+            <div class="story-header">
+              <div class="story-title-block">
+                <div class="story-kicker">AI GOVERNANCE / SOUVERÄNITÄT</div>
+                <h3>Europas Vorzeigeanbieter Mistral fällt im internationalen KI-Sicherheitsindex durch</h3>
+              </div>
+              <div class="story-meta">
+                <span class="chip" data-ui-map="category" data-raw-value="governance">governance</span>
+                <span class="chip" data-ui-map="priority" data-raw-value="P2">P2</span>
+              </div>
+            </div>
+            <div class="story-text-stack">
+              <p class="field-note"><strong>Thema:</strong> Sicherheitslücke beim europäischen Souveränitäts-Anbieter</p>
+              <p>Der FLI AI Safety Index (veröffentlicht 07.07., diese Woche erstmals aufgenommen) bewertete neun Anbieter. Anthropic führte mit „C+“ (2,66) – die beste Note überhaupt. Mistral, einziger EU-Anbieter, erhielt ein „F“ (0,33), letzter Platz. Mistral beantwortete die Umfrage nicht und wies die Kritik gegenüber AFP zurück.</p>
+              <p class="field-note"><strong>Strategische Relevanz:</strong> Ein unabhängiger, mehrfach bestätigter Befund, der die EU-Souveränitätserzählung konterkariert: regulatorisch führend, aber der prominenteste Anbieter schneidet bei Sicherheit am schlechtesten ab.</p>
+              <p class="field-note"><strong>EU-/DE-Impact:</strong> Direkt: Mistral ist zentral für EU-Souveränität und Enterprise-Beschaffung; der Letztplatz ist ein konkreter, unadressierter Datenpunkt für Vendor-Assurance.</p>
+              <p class="field-note"><strong>Einordnung:</strong> Mistrals Methodik-Kritik ist legitim, aber keine Widerlegung; Assurance-Verantwortliche sollten Mistral nicht allein aus Souveränitätsgründen von Sicherheitsprüfungen ausnehmen.</p>
+            </div>
+            <div class="score-strip">
+              <div class="score-item" style="--score: 5"><div class="score-topline"><span class="score-value">5</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">EU / DE-Relevanz</div></div>
+              <div class="score-item" style="--score: 3"><div class="score-topline"><span class="score-value">3</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Business Impact</div></div>
+              <div class="score-item" style="--score: 2"><div class="score-topline"><span class="score-value">2</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Regulatorik</div></div>
+              <div class="score-item" style="--score: 3"><div class="score-topline"><span class="score-value">3</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Technologie</div></div>
+              <div class="score-item" style="--score: 4"><div class="score-topline"><span class="score-value">4</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Lernwert</div></div>
+            </div>
+            <details class="evidence">
+              <summary>Quellen & Unsicherheit</summary>
+              <div class="sources">
+                <p class="field-note"><strong>Quellenlage:</strong> <span data-ui-map="trust" data-raw-value="mittel">mittel</span></p>
+                <article class="source-link-card">
+                  <a href="https://futureoflife.org/ai-safety-index-summer-2026/" target="_blank" rel="noopener noreferrer">AI Safety Index — Summer 2026</a>
+                  <div class="source-meta-row">
+                    <span class="source-pill" data-ui-map="role" data-raw-value="faktenanker">faktenanker</span>
+                    <span class="source-pill" data-ui-map="source-type" data-raw-value="research">research</span>
+                  </div>
+                  <div class="source-meta">
+                    <span><strong>Publisher:</strong> Future of Life Institute</span>
+                    <span><strong>Veröffentlicht:</strong> 2026-07-07</span>
+                    <span><strong>Abgerufen:</strong> 2026-07-18</span>
+                  </div>
+                </article>
+                <article class="source-link-card">
+                  <a href="https://time.com/article/2026/07/07/ai-safety-rankings-openai-anthropic-meta/" target="_blank" rel="noopener noreferrer">The Latest AI Safety Rankings Are In. Nobody Gets an A</a>
+                  <div class="source-meta-row">
+                    <span class="source-pill" data-ui-map="role" data-raw-value="policy_interpretation">policy_interpretation</span>
+                    <span class="source-pill" data-ui-map="source-type" data-raw-value="media">media</span>
+                  </div>
+                  <div class="source-meta">
+                    <span><strong>Publisher:</strong> TIME</span>
+                    <span><strong>Veröffentlicht:</strong> 2026-07-07</span>
+                    <span><strong>Abgerufen:</strong> 2026-07-18</span>
+                  </div>
+                </article>
+                <article class="source-link-card">
+                  <a href="https://www.mitsloanme.com/article/anthropic-tops-2026-ai-safety-index-but-no-ai-firm-earns-above-a-c/" target="_blank" rel="noopener noreferrer">Anthropic Tops 2026 AI Safety Index, But No AI Firm Earns Above a C+</a>
+                  <div class="source-meta-row">
+                    <span class="source-pill" data-ui-map="role" data-raw-value="policy_interpretation">policy_interpretation</span>
+                    <span class="source-pill" data-ui-map="source-type" data-raw-value="media">media</span>
+                  </div>
+                  <div class="source-meta">
+                    <span><strong>Publisher:</strong> MIT Sloan Management Review Middle East</span>
+                    <span><strong>Veröffentlicht:</strong> 2026-07-08</span>
+                    <span><strong>Abgerufen:</strong> 2026-07-18</span>
+                  </div>
+                </article>
+                <p class="field-note"><strong>Unsicherheit:</strong> Primärquellen- und mehrfach medienbestätigt; Mistral nahm nicht an der Umfrage teil und bestreitet die Methodik. Ursprung (07.07.) liegt vor dem Wochenfenster.</p>
+              </div>
+            </details>
+            <details class="evidence">
+              <summary>Weitere Recherche</summary>
+              <div class="sources">
+                <p class="field-note">Eine mögliche Methodik-Erwiderung oder eigene Sicherheitsdokumentation von Mistral, unabhängige Zweitbewertungen und eine EU-Politik-Reaktion verfolgen.</p>
+              </div>
+            </details>
+          </article>
+          <article class="theme-block" data-id="wk29-open-weight-race-soofi-s" data-category="enterprise_ai">
+            <div class="story-header">
+              <div class="story-title-block">
+                <div class="story-kicker">SOUVERÄNITÄT / OFFENE MODELLE</div>
+                <h3>Offene Modelle brechen weltweit Rekorde – Deutschlands Soofi S unter Überanpassungsverdacht</h3>
+              </div>
+              <div class="story-meta">
+                <span class="chip" data-ui-map="category" data-raw-value="enterprise_ai">enterprise_ai</span>
+                <span class="chip" data-ui-map="priority" data-raw-value="P2">P2</span>
+              </div>
+            </div>
+            <div class="story-text-stack">
+              <p class="field-note"><strong>Thema:</strong> Offene-Modelle-Wettlauf mit deutscher Nebenlinie</p>
+              <p>Ein BMWK-gefördertes Konsortium (Fraunhofer, DFKI) veröffentlichte am 13.07. das offene Modell Soofi S (31,6 Mrd. Parameter); eine Überanpassungskritik (15.07.) wies Fraunhofer zurück. Am 16.07. wurde Kimi K3 (2,8 Bio. Parameter) zum größten offenen Modell der Welt; Inkling (975 Mrd.) ergänzte einen US-Beitrag.</p>
+              <p class="field-note"><strong>Strategische Relevanz:</strong> Drei offene Modelle aus drei Weltregionen in einer Woche – während Deutschlands geförderter Beitrag zugleich technisch angezweifelt wird, was Sichtbarkeit und Angreifbarkeit zugleich erhöht.</p>
+              <p class="field-note"><strong>EU-/DE-Impact:</strong> Direkt für Soofi S als deutsches Vorzeigeprojekt; indirekt für Kimi K3/Inkling, die das Souveränitäts-Alternativen-Narrativ erweitern, ohne EU-Reaktion.</p>
+              <p class="field-note"><strong>Einordnung:</strong> Die Fakten sind solide belegt; ob Fraunhofers MoE-Argumentation stichhaltig ist, bleibt offene Fachdebatte, ebenso ob EU-Organisationen solche Modelle überhaupt erwägen würden.</p>
+            </div>
+            <div class="score-strip">
+              <div class="score-item" style="--score: 3"><div class="score-topline"><span class="score-value">3</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">EU / DE-Relevanz</div></div>
+              <div class="score-item" style="--score: 3"><div class="score-topline"><span class="score-value">3</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Business Impact</div></div>
+              <div class="score-item" style="--score: 1"><div class="score-topline"><span class="score-value">1</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Regulatorik</div></div>
+              <div class="score-item" style="--score: 5"><div class="score-topline"><span class="score-value">5</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Technologie</div></div>
+              <div class="score-item" style="--score: 4"><div class="score-topline"><span class="score-value">4</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Lernwert</div></div>
+            </div>
+            <details class="evidence">
+              <summary>Quellen & Unsicherheit</summary>
+              <div class="sources">
+                <p class="field-note"><strong>Quellenlage:</strong> <span data-ui-map="trust" data-raw-value="mittel">mittel</span></p>
+                <article class="source-link-card">
+                  <a href="https://the-decoder.com/german-ai-consortium-releases-soofi-s-an-open-30b-model-that-tops-benchmarks-in-both-english-and-german/" target="_blank" rel="noopener noreferrer">German AI consortium releases Soofi S, an open 30B model that tops benchmarks in both English and German</a>
+                  <div class="source-meta-row">
+                    <span class="source-pill" data-ui-map="role" data-raw-value="enterprise_signal">enterprise_signal</span>
+                    <span class="source-pill" data-ui-map="source-type" data-raw-value="media">media</span>
+                  </div>
+                  <div class="source-meta">
+                    <span><strong>Publisher:</strong> The Decoder</span>
+                    <span><strong>Veröffentlicht:</strong> 2026-07-15</span>
+                    <span><strong>Abgerufen:</strong> 2026-07-18</span>
+                  </div>
+                </article>
+                <article class="source-link-card">
+                  <a href="https://fortune.com/2026/07/16/moonshots-kimi-k3-pushes-chinese-ai-into-fable-level-territory/" target="_blank" rel="noopener noreferrer">Moonshot&#x27;s Kimi K3 pushes Chinese AI into Fable-level territory</a>
+                  <div class="source-meta-row">
+                    <span class="source-pill" data-ui-map="role" data-raw-value="marktverifikation">marktverifikation</span>
+                    <span class="source-pill" data-ui-map="source-type" data-raw-value="media">media</span>
+                  </div>
+                  <div class="source-meta">
+                    <span><strong>Publisher:</strong> Fortune</span>
+                    <span><strong>Veröffentlicht:</strong> 2026-07-16</span>
+                    <span><strong>Abgerufen:</strong> 2026-07-18</span>
+                  </div>
+                </article>
+                <article class="source-link-card">
+                  <a href="https://venturebeat.com/technology/chinas-moonshot-ai-releases-kimi-k3-the-largest-open-source-model-ever-rivaling-top-u-s-systems" target="_blank" rel="noopener noreferrer">China&#x27;s Moonshot AI releases Kimi K3, the largest open-source model ever, rivaling top U.S. systems</a>
+                  <div class="source-meta-row">
+                    <span class="source-pill" data-ui-map="role" data-raw-value="enterprise_signal">enterprise_signal</span>
+                    <span class="source-pill" data-ui-map="source-type" data-raw-value="media">media</span>
+                  </div>
+                  <div class="source-meta">
+                    <span><strong>Publisher:</strong> VentureBeat</span>
+                    <span><strong>Veröffentlicht:</strong> 2026-07-16</span>
+                    <span><strong>Abgerufen:</strong> 2026-07-18</span>
+                  </div>
+                </article>
+                <article class="source-link-card">
+                  <a href="https://thinkingmachines.ai/news/introducing-inkling/" target="_blank" rel="noopener noreferrer">Inkling: Our open-weights model</a>
+                  <div class="source-meta-row">
+                    <span class="source-pill" data-ui-map="role" data-raw-value="unternehmensquelle">unternehmensquelle</span>
+                    <span class="source-pill" data-ui-map="source-type" data-raw-value="vendor">vendor</span>
+                  </div>
+                  <div class="source-meta">
+                    <span><strong>Publisher:</strong> Thinking Machines Lab</span>
+                    <span><strong>Veröffentlicht:</strong> 2026-07-15</span>
+                    <span><strong>Abgerufen:</strong> 2026-07-18</span>
+                  </div>
+                </article>
+                <p class="field-note"><strong>Unsicherheit:</strong> Kernspezifikationen sind herstellerbestätigt und mehrfach bestätigt; die Überanpassungsfrage ist offene Fachdebatte, kein Tatsachenbefund.</p>
+              </div>
+            </details>
+            <details class="evidence">
+              <summary>Weitere Recherche</summary>
+              <div class="sources">
+                <p class="field-note">Ob unabhängige Forscher:innen die Fraunhofer-Argumentation bestätigen, ob Soofi S produktiv erprobt wird, und ob Kimi K3s volle Gewichte am 27.07. unabhängige Benchmarks bestätigen.</p>
+              </div>
+            </details>
+          </article>
+          <article class="theme-block" data-id="wk29-netflix-art50-boundary" data-category="enterprise_ai">
+            <div class="story-header">
+              <div class="story-title-block">
+                <div class="story-kicker">ENTERPRISE AI / ART. 50</div>
+                <h3>Netflix&#x27; generative-KI-Praxis illustriert die Grenzen der AI-Act-Kennzeichnungspflicht</h3>
+              </div>
+              <div class="story-meta">
+                <span class="chip" data-ui-map="category" data-raw-value="enterprise_ai">enterprise_ai</span>
+                <span class="chip" data-ui-map="priority" data-raw-value="P3">P3</span>
+              </div>
+            </div>
+            <div class="story-text-stack">
+              <p class="field-note"><strong>Thema:</strong> Art.-50-Kennzeichnungspflicht vor der Anwendbarkeit</p>
+              <p>Netflix-Co-CEO Sarandos bestätigte im Q2-Call (16.07.), dass generative KI 2026 in rund 300 Produktionen eingesetzt wurde, überwiegend in der Postproduktion; die Dokuserie „The American Experiment“ enthält 17 Minuten KI-bearbeitetes Material, laut Netflix doppelt so schnell und zum halben Preis produziert.</p>
+              <p class="field-note"><strong>Strategische Relevanz:</strong> Ab 02.08.2026 greift Art. 50 mit Kennzeichnungspflichten; Netflix&#x27; Offenlegung fällt in dieses Zeitfenster und zeigt die Praxis eines großen Anbieters kurz vor der Anwendbarkeit.</p>
+              <p class="field-note"><strong>EU-/DE-Impact:</strong> Indirekt: Für fiktionale Werke sieht Art. 50 nur einen leichten Hinweis vor. Keine Quelle stellt diese Verbindung her; eigene Einordnung des Briefings.</p>
+              <p class="field-note"><strong>Einordnung:</strong> Der Fall zeigt eher die Grenzen der Art.-50-Pflichten für Unterhaltungsinhalte als ein Compliance-Risiko – ein Praxisbeispiel, keine harte Regulierungsmeldung.</p>
+            </div>
+            <div class="score-strip">
+              <div class="score-item" style="--score: 2"><div class="score-topline"><span class="score-value">2</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">EU / DE-Relevanz</div></div>
+              <div class="score-item" style="--score: 3"><div class="score-topline"><span class="score-value">3</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Business Impact</div></div>
+              <div class="score-item" style="--score: 2"><div class="score-topline"><span class="score-value">2</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Regulatorik</div></div>
+              <div class="score-item" style="--score: 2"><div class="score-topline"><span class="score-value">2</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Technologie</div></div>
+              <div class="score-item" style="--score: 3"><div class="score-topline"><span class="score-value">3</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Lernwert</div></div>
+            </div>
+            <details class="evidence">
+              <summary>Quellen & Unsicherheit</summary>
+              <div class="sources">
+                <p class="field-note"><strong>Quellenlage:</strong> <span data-ui-map="trust" data-raw-value="mittel">mittel</span></p>
+                <article class="source-link-card">
+                  <a href="https://deadline.com/2026/07/netflix-2026-content-spend-accelerates-generative-ai-savings-1236984524/" target="_blank" rel="noopener noreferrer">Netflix Content Spend Accelerates, As Do Savings From AI, Ted Sarandos Says Streamer Has Used It In 300 Productions</a>
+                  <div class="source-meta-row">
+                    <span class="source-pill" data-ui-map="role" data-raw-value="enterprise_signal">enterprise_signal</span>
+                    <span class="source-pill" data-ui-map="source-type" data-raw-value="media">media</span>
+                  </div>
+                  <div class="source-meta">
+                    <span><strong>Publisher:</strong> Deadline</span>
+                    <span><strong>Veröffentlicht:</strong> 2026-07-16</span>
+                    <span><strong>Abgerufen:</strong> 2026-07-18</span>
+                  </div>
+                </article>
+                <article class="source-link-card">
+                  <a href="https://variety.com/2026/biz/news/about-300-netflix-programs-used-ai-this-year-q2-earnings-1236812914/" target="_blank" rel="noopener noreferrer">About 300 Netflix Titles Used Generative AI This Year, Company Reveals</a>
+                  <div class="source-meta-row">
+                    <span class="source-pill" data-ui-map="role" data-raw-value="enterprise_signal">enterprise_signal</span>
+                    <span class="source-pill" data-ui-map="source-type" data-raw-value="media">media</span>
+                  </div>
+                  <div class="source-meta">
+                    <span><strong>Publisher:</strong> Variety</span>
+                    <span><strong>Veröffentlicht:</strong> 2026-07-16</span>
+                    <span><strong>Abgerufen:</strong> 2026-07-18</span>
+                  </div>
+                </article>
+                <p class="field-note"><strong>Unsicherheit:</strong> Netflix-Fakten unternehmensbestätigt; EU-Bezug ist eigene Analyse, nicht quellenbelegt; Kosten-/Zeitangaben unverifiziert von Netflix.</p>
+              </div>
+            </details>
+            <details class="evidence">
+              <summary>Weitere Recherche</summary>
+              <div class="sources">
+                <p class="field-note">Ob Netflix oder die Kommission die Verbindung zu Art. 50 offiziell herstellen und wie eng die künstlerische Ausnahme nach dem 02.08. ausgelegt wird.</p>
+              </div>
+            </details>
+          </article>
+        </section>
+      </section>
+
+      <aside class="sidebar">
+        <section class="sidebar-block">
+          <h3>Wochenlage</h3>
+          <p class="sidebar-meta">Zwei EU-Durchsetzungserfolge (Kinderschutzpanel, WhatsApp-Rückkehr) treffen auf eine Woche voller Souveränitätsfragen: WAICO ohne EU, Mistral fällt im FLI-Sicherheitsindex durch, Soofi S unter Kritik.</p>
+          <div class="sidebar-status-grid">
+            <div class="status-card">
+              <span class="status-card-label">Woche</span>
+              <span class="status-card-value">13. – 17. Juli 2026 (KW 29)</span>
+            </div>
+            <div class="status-card">
+              <span class="status-card-label">Quellenlage</span>
+              <span class="status-card-value" data-ui-map="trust" data-raw-value="gemischt">gemischt</span>
+            </div>
+          </div>
+        </section>
+
+        <section class="sidebar-block regulation-panel">
+          <h3>Regulatorik</h3>
+          <article class="panel-item regulation-item" data-id="wk29-gpai-evaluator-workshop" data-category="regulation">
+            <details>
+              <summary>AI Office hält Workshop zu externen GPAI-Prüfern ab – Ergebnisse noch offen</summary>
+              <div class="panel-detail compact-panel-details">
+                <div class="compact-panel-summary">
+                  <div class="story-meta"><span class="badge" data-trust="mittel" data-ui-map="trust" data-raw-value="mittel">mittel</span></div>
+                  <div class="compact-panel-stats">
+                    <span class="chip">Quellen: <span data-source-count>0</span></span>
+                    <span class="chip">Rollen</span>
+                  </div>
+                  <div class="compact-role-row" data-role-summary></div>
+                </div>
+                <p>Das AI Office führte am 15.07. planmäßig einen Workshop zu Unabhängigkeits-/Qualifikationskriterien für externe GPAI-Prüfer durch; bis Ende der Woche keine Ergebnisse oder Auswahlkriterien veröffentlicht.</p>
+                <p><strong>EU-/DE-Impact:</strong> Relevant für die praktische Nachweisführung der GPAI-Code-Konformität; betrifft jeden Anbieter eines Modells mit systemischem Risiko.</p>
+                <div class="sources">
+                  <ol class="compact-source-list">
+                  <li>
+                    <a href="https://digital-strategy.ec.europa.eu/en/policies/gpai-code-of-practice" target="_blank" rel="noopener noreferrer">GPAI Code of Practice</a>
+                    <div class="source-meta-row"><span class="source-pill" data-ui-map="role" data-raw-value="faktenanker" data-source-role>faktenanker</span></div>
+                  </li>
+                  </ol>
+                </div>
+              </div>
+            </details>
+          </article>
+          <article class="panel-item regulation-item" data-id="wk29-bdsg-reform-bundesrat-backfill" data-category="regulation">
+            <details>
+              <summary>BDSG-Reform: Bundesrat billigt Vereinheitlichung der Datenschutzaufsicht (Nachtrag 12.07.)</summary>
+              <div class="panel-detail compact-panel-details">
+                <div class="compact-panel-summary">
+                  <div class="story-meta"><span class="badge" data-trust="mittel" data-ui-map="trust" data-raw-value="mittel">mittel</span></div>
+                  <div class="compact-panel-stats">
+                    <span class="chip">Quellen: <span data-source-count>0</span></span>
+                    <span class="chip">Rollen</span>
+                  </div>
+                  <div class="compact-role-row" data-role-summary></div>
+                </div>
+                <p>Der Bundesrat billigte bereits am 12.07. (Sonntag, vor dem Berichtsfenster) eine BDSG-Reform zur Vereinheitlichung der Länderaufsicht (One-Stop-Shop). In keinem bisherigen Daily erfasst; hier als Nachtrag zur Kontinuitätslücke aufgenommen.</p>
+                <p><strong>EU-/DE-Impact:</strong> Direkt für die deutsche Datenschutzaufsichtsstruktur und Organisationen mit mehreren Landesdatenschutzbehörden.</p>
+                <div class="sources">
+                  <ol class="compact-source-list">
+                  <li>
+                    <a href="https://www.bundesrat.de/DE/plenum/bundesrat-kompakt/26/1067/1067-node.html" target="_blank" rel="noopener noreferrer">1067. Sitzung des Bundesrates am 10./12. Juli 2026 – Tagesordnung und Beschlüsse</a>
+                    <div class="source-meta-row"><span class="source-pill" data-ui-map="role" data-raw-value="faktenanker" data-source-role>faktenanker</span></div>
+                  </li>
+                  </ol>
+                </div>
+              </div>
+            </details>
+          </article>
+        </section>
+
+        <section class="sidebar-block product-panel">
+          <h3>Produkte & Plattformen</h3>
+          <article class="panel-item product-item" data-id="wk29-gpt56-eu-enterprise-expansion" data-category="product">
+            <details>
+              <summary>GPT-5.6 klärt EU-Zugang, OpenAI baut Enterprise aus, stellt Atlas-Browser ein</summary>
+              <div class="panel-detail compact-panel-details">
+                <div class="compact-panel-summary">
+                  <div class="story-meta"><span class="chip">OpenAI</span><span class="badge" data-trust="mittel" data-ui-map="trust" data-raw-value="mittel">mittel</span></div>
+                  <div class="compact-panel-stats">
+                    <span class="chip">Quellen: <span data-source-count>0</span></span>
+                    <span class="chip">Rollen</span>
+                  </div>
+                  <div class="compact-role-row" data-role-summary></div>
+                </div>
+                <p>GPT-5.6 wurde am 09.07. öffentlich verfügbar, EWR/Schweiz/UK inklusive. Parallel rollt „ChatGPT Work“ aus, Atlas wird zum 09.08. eingestellt. Am 12.07. hob OpenAI zudem temporär Nutzungslimits für ChatGPT Work/Codex nach einer Lastspitze auf.</p>
+                <p><strong>Business-Relevanz:</strong> Direkt relevant für EU-Organisationen, die GPT-5.6 evaluieren oder einsetzen, sowie für Atlas-Nutzer:innen, die vor der Einstellung migrieren müssen.</p>
+                <div class="sources">
+                  <ol class="compact-source-list">
+                  <li>
+                    <a href="https://techcrunch.com/2026/07/09/openai-is-shutting-down-atlas-but-its-ai-browser-ambitions-are-still-growing/" target="_blank" rel="noopener noreferrer">OpenAI is shutting down Atlas, but its AI browser ambitions are still growing</a>
+                    <div class="source-meta-row"><span class="source-pill" data-ui-map="role" data-raw-value="marktverifikation" data-source-role>marktverifikation</span></div>
+                  </li>
+                  <li>
+                    <a href="https://www.bleepingcomputer.com/news/artificial-intelligence/openai-temporarily-relaxes-gpt-56-sol-usage-limits/" target="_blank" rel="noopener noreferrer">OpenAI temporarily relaxes GPT-5.6 Sol usage limits</a>
+                    <div class="source-meta-row"><span class="source-pill" data-ui-map="role" data-raw-value="marktverifikation" data-source-role>marktverifikation</span></div>
+                  </li>
+                  </ol>
+                </div>
+              </div>
+            </details>
+          </article>
+          <article class="panel-item product-item" data-id="wk29-gemini-notebook-rebrand" data-category="product">
+            <details>
+              <summary>Google benennt NotebookLM in „Gemini Notebook“ um, ergänzt Cloud-Code-Ausführung</summary>
+              <div class="panel-detail compact-panel-details">
+                <div class="compact-panel-summary">
+                  <div class="story-meta"><span class="chip">Google</span><span class="badge" data-trust="hoch" data-ui-map="trust" data-raw-value="hoch">hoch</span></div>
+                  <div class="compact-panel-stats">
+                    <span class="chip">Quellen: <span data-source-count>0</span></span>
+                    <span class="chip">Rollen</span>
+                  </div>
+                  <div class="compact-role-row" data-role-summary></div>
+                </div>
+                <p>Google benannte NotebookLM am 16.07. in Gemini Notebook um; jedes Notebook erhält Cloud-Rechenkapazität für native Python-Ausführung. Rollout zunächst für AI-Ultra-/Workspace-Kund:innen. Über 30 Mio. Nutzer:innen, 600.000+ Organisationen.</p>
+                <p><strong>Business-Relevanz:</strong> Direkt relevant für Workspace-Kund:innen; keine EU-spezifische Datenresidenz-/DSGVO-Dokumentation für die neue Cloud-Rechner-Funktion vorhanden.</p>
+                <div class="sources">
+                  <ol class="compact-source-list">
+                  <li>
+                    <a href="https://workspaceupdates.googleblog.com/2026/07/notebooklm-now-gemini-notebook.html" target="_blank" rel="noopener noreferrer">NotebookLM is now Gemini Notebook</a>
+                    <div class="source-meta-row"><span class="source-pill" data-ui-map="role" data-raw-value="produktquelle" data-source-role>produktquelle</span></div>
+                  </li>
+                  </ol>
+                </div>
+              </div>
+            </details>
+          </article>
+          <article class="panel-item product-item" data-id="wk29-codex-agent-encryption" data-category="governance">
+            <details>
+              <summary>OpenAI verschlüsselt Codex-Agentenkommunikation – Entwickler verlieren Auditierbarkeit</summary>
+              <div class="panel-detail compact-panel-details">
+                <div class="compact-panel-summary">
+                  <div class="story-meta"><span class="chip">OpenAI Codex</span><span class="badge" data-trust="mittel" data-ui-map="trust" data-raw-value="mittel">mittel</span></div>
+                  <div class="compact-panel-stats">
+                    <span class="chip">Quellen: <span data-source-count>0</span></span>
+                    <span class="chip">Rollen</span>
+                  </div>
+                  <div class="compact-role-row" data-role-summary></div>
+                </div>
+                <p>Seit einem Update verschlüsselt Codex Anweisungen zwischen Haupt- und Subagenten (surfaced 15.07.); die Historie zeigt nur Chiffretext, Entschlüsselung schlägt teils fehl. Entwickler:innen verlieren Delegations-Protokolle. OpenAI nennt keinen Grund.</p>
+                <p><strong>Business-Relevanz:</strong> Relevant für jede Organisation mit produktiven Codex-Multiagenten-Workflows – berührt Auditierbarkeitserwartungen, die EU-Unternehmen an agentische KI stellen.</p>
+                <div class="sources">
+                  <ol class="compact-source-list">
+                  <li>
+                    <a href="https://www.theregister.com/ai-and-ml/2026/07/15/openai-hides-codex-agent-instructions-behind-encryption-leaving-developers-in-the-dark/" target="_blank" rel="noopener noreferrer">OpenAI hides Codex agent instructions behind encryption, leaving developers in the dark</a>
+                    <div class="source-meta-row"><span class="source-pill" data-ui-map="role" data-raw-value="enterprise_signal" data-source-role>enterprise_signal</span></div>
+                  </li>
+                  </ol>
+                </div>
+              </div>
+            </details>
+          </article>
+        </section>
+
+        <section class="sidebar-block global-panel">
+          <h3>Global mit EU-Impact</h3>
+          <article class="panel-item global-item" data-id="wk29-meta-ai-layoffs-lawsuit" data-category="global_eu">
+            <details>
+              <summary>US-Klage: Meta soll KI für diskriminierende Kündigungen genutzt haben</summary>
+              <div class="panel-detail compact-panel-details">
+                <div class="compact-panel-summary">
+                  <div class="story-meta"><span class="chip">USA</span><span class="badge" data-trust="mittel" data-ui-map="trust" data-raw-value="mittel">mittel</span></div>
+                  <div class="compact-panel-stats">
+                    <span class="chip">Quellen: <span data-source-count>0</span></span>
+                    <span class="chip">Rollen</span>
+                  </div>
+                  <div class="compact-role-row" data-role-summary></div>
+                </div>
+                <p>26 Meta-Mitarbeitende klagten am 14.07. in Oakland: Meta habe interne KI-Systeme zur Auswahl von ~8.000 Kündigungen genutzt, mit überproportionaler Wirkung auf Behinderte. Die Klage strebt Sammelklagenstatus an.</p>
+                <p><strong>EU-/DE-Impact:</strong> Kein EU-Sachverhalt; die unbewiesenen Vorwürfe illustrieren aber das Risikoszenario, das Anhang III des AI Act für Beschäftigungs-KI adressieren soll.</p>
+                <div class="sources">
+                  <ol class="compact-source-list">
+                  <li>
+                    <a href="https://www.cnbc.com/2026/07/14/meta-lawsuit-layoffs-ai.html" target="_blank" rel="noopener noreferrer">Meta lawsuit: Employees allege discrimination in AI-assisted layoffs</a>
+                    <div class="source-meta-row"><span class="source-pill" data-ui-map="role" data-raw-value="marktverifikation" data-source-role>marktverifikation</span></div>
+                  </li>
+                  <li>
+                    <a href="https://www.cbsnews.com/news/26-meta-workers-sue-ai-aided-layoffs-medical-family-leave/" target="_blank" rel="noopener noreferrer">26 Meta workers sue over alleged AI-aided layoffs targeting employees on medical or family leave</a>
+                    <div class="source-meta-row"><span class="source-pill" data-ui-map="role" data-raw-value="marktverifikation" data-source-role>marktverifikation</span></div>
+                  </li>
+                  </ol>
+                </div>
+              </div>
+            </details>
+          </article>
+          <article class="panel-item global-item" data-id="wk29-illinois-anthropic-openai-divergence" data-category="global_eu">
+            <details>
+              <summary>Anthropic und OpenAI positionieren sich gegensätzlich zu US-Bundesstaaten-KI-Gesetzen</summary>
+              <div class="panel-detail compact-panel-details">
+                <div class="compact-panel-summary">
+                  <div class="story-meta"><span class="chip">USA</span><span class="badge" data-trust="watchlist" data-ui-map="trust" data-raw-value="watchlist">watchlist</span></div>
+                  <div class="compact-panel-stats">
+                    <span class="chip">Quellen: <span data-source-count>0</span></span>
+                    <span class="chip">Rollen</span>
+                  </div>
+                  <div class="compact-role-row" data-role-summary></div>
+                </div>
+                <p>Illinois-Gouverneur Pritzker unterzeichnete SB 315 (Pflicht-Sicherheitsaudits); bei zwei weiteren Entwürfen stehen Anthropic (SB 3261, Meldepflichten) und OpenAI (SB 3444, Haftungsschutz mit Bundes-Vorrang) gegeneinander.</p>
+                <p><strong>EU-/DE-Impact:</strong> Keiner gefunden; rein US-bundesstaatliche Dynamik, nur als Kontrast zum einheitlichen AI-Act-Rahmen aufgenommen.</p>
+                <div class="sources">
+                  <ol class="compact-source-list">
+                  <li>
+                    <a href="https://chicago.suntimes.com/politics/2026/07/06/ai-regulations-illinois-law-pritzker-signed" target="_blank" rel="noopener noreferrer">Gov. JB Pritzker signs Illinois AI regulations into law, aiming to rein in &#x27;the tech bros&#x27;</a>
+                    <div class="source-meta-row"><span class="source-pill" data-ui-map="role" data-raw-value="marktverifikation" data-source-role>marktverifikation</span></div>
+                  </li>
+                  </ol>
+                </div>
+              </div>
+            </details>
+          </article>
+        </section>
+
+        <section class="sidebar-block watchlist-archive-panel">
+          <h3>Watchlist & Archiv</h3>
+          <div class="section-stack watchlist">
+            <article class="panel-item watch-item" data-id="wk29-eu-ai-act-omnibus-oj">
+              <details>
+                <summary>EU-AI-Act-Omnibus wartet weiter auf Amtsblatt-Veröffentlichung</summary>
+                <div class="panel-detail compact-panel-details">
+                  <div class="compact-panel-summary">
+                    <div class="story-meta"><span class="badge" data-trust="mittel" data-ui-map="trust" data-raw-value="mittel">mittel</span></div>
+                    <div class="compact-panel-stats">
+                      <span class="chip">Quellen: <span data-source-count>0</span></span>
+                      <span class="chip">Rollen</span>
+                    </div>
+                    <div class="compact-role-row" data-role-summary></div>
+                  </div>
+                  <p>EP- und Ratspräsidien unterzeichneten die Novelle bereits am 08.07.; eine EUR-Lex-Prüfung am 18.07. zeigt weiterhin keine Amtsblattnummer.</p>
+                  <p><strong>Warum beobachten:</strong> Erst mit der Amtsblatt-Veröffentlichung werden die neuen Hochrisiko-Fristen vor dem 02.08.2026 rechtlich bindend.</p>
+                  <p><strong>Nächstes Signal:</strong> Tatsächliche Veröffentlichung im Amtsblatt der EU mit CELEX-Nummer.</p>
+                  <div class="sources">
+                    <ol class="compact-source-list">
+                    <li>
+                      <a href="https://eur-lex.europa.eu/procedure/EN/2025_359" target="_blank" rel="noopener noreferrer">Procedure file 2025/0359/COD</a>
+                      <div class="source-meta-row"><span class="source-pill" data-ui-map="role" data-raw-value="faktenanker" data-source-role>faktenanker</span></div>
+                    </li>
+                    </ol>
+                  </div>
+                </div>
+              </details>
+            </article>
+            <article class="panel-item watch-item" data-id="wk29-ki-mig-bgbl-promulgation">
+              <details>
+                <summary>KI-Durchführungsgesetz: Verkündung im Bundesgesetzblatt weiterhin offen</summary>
+                <div class="panel-detail compact-panel-details">
+                  <div class="compact-panel-summary">
+                    <div class="story-meta"><span class="badge" data-trust="mittel" data-ui-map="trust" data-raw-value="mittel">mittel</span></div>
+                    <div class="compact-panel-stats">
+                      <span class="chip">Quellen: <span data-source-count>0</span></span>
+                      <span class="chip">Rollen</span>
+                    </div>
+                    <div class="compact-role-row" data-role-summary></div>
+                  </div>
+                  <p>Der Bundesrat billigte das Gesetz bereits am 10.07.; auch zum Wochenende liegt kein Verkündungsdatum im Bundesgesetzblatt vor.</p>
+                  <p><strong>Warum beobachten:</strong> Erst mit der Verkündung wird die deutsche AI-Act-Aufsicht bei der Bundesnetzagentur formal wirksam.</p>
+                  <p><strong>Nächstes Signal:</strong> Veröffentlichung im Bundesgesetzblatt mit offiziellem Inkrafttretensdatum.</p>
+                  <div class="sources">
+                    <ol class="compact-source-list">
+                    <li>
+                      <a href="https://www.bundesrat.de/DE/plenum/bundesrat-kompakt/26/1067/1067-node.html" target="_blank" rel="noopener noreferrer">1067. Sitzung des Bundesrates am 10. Juli 2026</a>
+                      <div class="source-meta-row"><span class="source-pill" data-ui-map="role" data-raw-value="faktenanker" data-source-role>faktenanker</span></div>
+                    </li>
+                    </ol>
+                  </div>
+                </div>
+              </details>
+            </article>
+            <article class="panel-item watch-item" data-id="wk29-cada-false-claim-pattern">
+              <details>
+                <summary>CADA: Falschmeldungen zur Amtsblatt-Veröffentlichung zum zweiten Mal widerlegt</summary>
+                <div class="panel-detail compact-panel-details">
+                  <div class="compact-panel-summary">
+                    <div class="story-meta"><span class="badge" data-trust="mittel" data-ui-map="trust" data-raw-value="mittel">mittel</span></div>
+                    <div class="compact-panel-stats">
+                      <span class="chip">Quellen: <span data-source-count>0</span></span>
+                      <span class="chip">Rollen</span>
+                    </div>
+                    <div class="compact-role-row" data-role-summary></div>
+                  </div>
+                  <p>Sekundärquellen behaupteten erneut eine Amtsblatt-Veröffentlichung; direkt geprüft (EUR-Lex, EP-Legislative-Train) bleibt CADA reiner Kommissionsvorschlag ohne Ausschusszuweisung.</p>
+                  <p><strong>Warum beobachten:</strong> Zentraler Baustein der EU-Cloud-/KI-Souveränitätsagenda; das wiederholte Falschmeldungsmuster erfordert erhöhte Vorsicht.</p>
+                  <p><strong>Nächstes Signal:</strong> Zuweisung an Parlamentsausschüsse und Benennung von Berichterstatter:innen.</p>
+                  <div class="sources">
+                    <ol class="compact-source-list">
+                    <li>
+                      <a href="https://eur-lex.europa.eu/legal-content/EN/HIS/?uri&#x3D;CELEX:52026PC0502" target="_blank" rel="noopener noreferrer">Procedure file COM(2026)502</a>
+                      <div class="source-meta-row"><span class="source-pill" data-ui-map="role" data-raw-value="faktenanker" data-source-role>faktenanker</span></div>
+                    </li>
+                    </ol>
+                  </div>
+                </div>
+              </details>
+            </article>
+            <article class="panel-item watch-item" data-id="wk29-article-50-signatory-list">
+              <details>
+                <summary>Erste Unterzeichnerliste des Transparenz-Code weiterhin ausstehend</summary>
+                <div class="panel-detail compact-panel-details">
+                  <div class="compact-panel-summary">
+                    <div class="story-meta"><span class="badge" data-trust="mittel" data-ui-map="trust" data-raw-value="mittel">mittel</span></div>
+                    <div class="compact-panel-stats">
+                      <span class="chip">Quellen: <span data-source-count>0</span></span>
+                      <span class="chip">Rollen</span>
+                    </div>
+                    <div class="compact-role-row" data-role-summary></div>
+                  </div>
+                  <p>Frist für die erste Unterzeichnerliste ist der 22.07., 18:00 CEST; bis Ende dieser Woche noch keine Veröffentlichung.</p>
+                  <p><strong>Warum beobachten:</strong> Zeigt, welche GPAI-Anbieter den Code als Nachweisweg für Art.-50-Pflichten ab 02.08. nutzen.</p>
+                  <p><strong>Nächstes Signal:</strong> Veröffentlichung der ersten Unterzeichnerliste vor dem 22.07.</p>
+                  <div class="sources">
+                    <ol class="compact-source-list">
+                    <li>
+                      <a href="https://digital-strategy.ec.europa.eu/en/faqs/signing-code-practice-transparency-ai-generated-content" target="_blank" rel="noopener noreferrer">Signing the Code of Practice on transparency of AI-generated content</a>
+                      <div class="source-meta-row"><span class="source-pill" data-ui-map="role" data-raw-value="faktenanker" data-source-role>faktenanker</span></div>
+                    </li>
+                    </ol>
+                  </div>
+                </div>
+              </details>
+            </article>
+            <article class="panel-item watch-item" data-id="wk29-china-mofcom-export-controls">
+              <details>
+                <summary>China MOFCOM: KI-Modell-Exportbeschränkungen weiterhin unbestätigt</summary>
+                <div class="panel-detail compact-panel-details">
+                  <div class="compact-panel-summary">
+                    <div class="story-meta"><span class="badge" data-trust="watchlist" data-ui-map="trust" data-raw-value="watchlist">watchlist</span></div>
+                    <div class="compact-panel-stats">
+                      <span class="chip">Quellen: <span data-source-count>0</span></span>
+                      <span class="chip">Rollen</span>
+                    </div>
+                    <div class="compact-role-row" data-role-summary></div>
+                  </div>
+                  <p>Gespräche mit Alibaba, ByteDance und Z.ai über ein gestuftes Exportregime bleiben unbestätigt; Kimi K3s Leistungssprung dürfte die Debatte neu befeuern.</p>
+                  <p><strong>Warum beobachten:</strong> Offene chinesische Modelle gelten in der EU-Souveränitätsdebatte als Alternative zu US-Anbietern.</p>
+                  <p><strong>Nächstes Signal:</strong> Tatsächlich erlassene MOFCOM-Regeln oder Unternehmensbestätigungen.</p>
+                  <div class="sources">
+                    <ol class="compact-source-list">
+                    <li>
+                      <a href="https://time.com/article/2026/07/07/china-ai-models-alibaba-bytedance/" target="_blank" rel="noopener noreferrer">China May Restrict Access to Its Most Powerful AI Models</a>
+                      <div class="source-meta-row"><span class="source-pill" data-ui-map="role" data-raw-value="policy_interpretation" data-source-role>policy_interpretation</span></div>
+                    </li>
+                    </ol>
+                  </div>
+                </div>
+              </details>
+            </article>
+            <article class="panel-item watch-item" data-id="wk29-kimi-k3-full-release">
+              <details>
+                <summary>Kimi K3: volle offene Gewichte erst am 27.07. erwartet</summary>
+                <div class="panel-detail compact-panel-details">
+                  <div class="compact-panel-summary">
+                    <div class="story-meta"><span class="badge" data-trust="mittel" data-ui-map="trust" data-raw-value="mittel">mittel</span></div>
+                    <div class="compact-panel-stats">
+                      <span class="chip">Quellen: <span data-source-count>0</span></span>
+                      <span class="chip">Rollen</span>
+                    </div>
+                    <div class="compact-role-row" data-role-summary></div>
+                  </div>
+                  <p>Moonshot stellte Kimi K3 am 16.07. vor; volle offene Gewichte sollen erst am 27.07. folgen, bis dahin nur über Moonshots eigene API nutzbar.</p>
+                  <p><strong>Warum beobachten:</strong> Erst mit der vollen Gewichtsfreigabe werden unabhängige Benchmark-Replikationen und EU-Evaluierungen möglich.</p>
+                  <p><strong>Nächstes Signal:</strong> Veröffentlichung der vollen Gewichte am 27.07. und erste unabhängige Benchmarks.</p>
+                  <div class="sources">
+                    <ol class="compact-source-list">
+                    <li>
+                      <a href="https://fortune.com/2026/07/16/moonshots-kimi-k3-pushes-chinese-ai-into-fable-level-territory/" target="_blank" rel="noopener noreferrer">Moonshot&#x27;s Kimi K3 pushes Chinese AI into Fable-level territory</a>
+                      <div class="source-meta-row"><span class="source-pill" data-ui-map="role" data-raw-value="marktverifikation" data-source-role>marktverifikation</span></div>
+                    </li>
+                    </ol>
+                  </div>
+                </div>
+              </details>
+            </article>
+            <article class="panel-item watch-item" data-id="wk29-anthropic-fable5-free-access">
+              <details>
+                <summary>Anthropic verlängert freien Claude-Fable-5-Zugang bis 19.07.</summary>
+                <div class="panel-detail compact-panel-details">
+                  <div class="compact-panel-summary">
+                    <div class="story-meta"><span class="badge" data-trust="mittel" data-ui-map="trust" data-raw-value="mittel">mittel</span></div>
+                    <div class="compact-panel-stats">
+                      <span class="chip">Quellen: <span data-source-count>0</span></span>
+                      <span class="chip">Rollen</span>
+                    </div>
+                    <div class="compact-role-row" data-role-summary></div>
+                  </div>
+                  <p>Anthropic öffnete Fable 5 am 13.07. erneut kostenfrei bis 19.07. – offenbar Reaktion auf GPT-5.6-Sol-Start; EU-Zugang bleibt weiter ausgeschlossen.</p>
+                  <p><strong>Warum beobachten:</strong> Reiht sich in die laufende Modellzugangs-/Souveränitätsdebatte um Frontier-Modelle ein.</p>
+                  <p><strong>Nächstes Signal:</strong> Ob die kostenfreie Öffnung nach dem 19.07. dauerhaft wird und ob sich eine EU-Zugangsänderung zeigt.</p>
+                  <div class="sources">
+                    <ol class="compact-source-list">
+                    <li>
+                      <a href="https://www.anthropic.com/news/redeploying-fable-5" target="_blank" rel="noopener noreferrer">Redeploying Claude Fable 5</a>
+                      <div class="source-meta-row"><span class="source-pill" data-ui-map="role" data-raw-value="unternehmensquelle" data-source-role>unternehmensquelle</span></div>
+                    </li>
+                    </ol>
+                  </div>
+                </div>
+              </details>
+            </article>
+          </div>
+
+          <div class="section-stack archive-references">
+            <article class="archive-item" data-id="wk29-weekly-w28-sovereignty-continuation">
+              <span class="badge relation-type" data-ui-map="relation-type" data-raw-value="trendline">trendline</span>
+              <h4>Weekly KW 28: Modellzugangs-Souveränität als Wochenmuster</h4>
+              <p class="sidebar-meta">KW 28 dokumentierte GPT-5.6/Grok-4.5-Zugangsverzögerungen; diese Woche erweitert Kimi K3/Inkling denselben Trend, Mistrals Index-Letztplatz fügt eine Facette hinzu.</p>
+            </article>
+            <article class="archive-item" data-id="wk29-weekly-w24-article-50-followup">
+              <span class="badge relation-type" data-ui-map="relation-type" data-raw-value="follow_up">follow_up</span>
+              <h4>Weekly KW 24: Artikel-50-Transparenz-Code als offener Faden</h4>
+              <p class="sidebar-meta">KW 24 markierte die Angemessenheitsbewertung als offen; sie ist inzwischen bestätigt (08./09.07.), die erste Unterzeichnerliste bleibt aber offen.</p>
+            </article>
+            <article class="archive-item" data-id="wk29-weekly-w24-meta-whatsapp-precedent">
+              <span class="badge relation-type" data-ui-map="relation-type" data-raw-value="precedent">precedent</span>
+              <h4>Weekly KW 24: EU-Interimsmaßnahmen gegen Meta (09.06.2026)</h4>
+              <p class="sidebar-meta">Die in KW 24 berichteten Interimsmaßnahmen führten diese Woche zur tatsächlichen Wiederherstellung des ChatGPT-Zugangs – ein abgeschlossener Durchsetzungs-Kreislauf.</p>
+            </article>
+            <article class="archive-item" data-id="wk29-mistral-sovereignty-precedent">
+              <span class="badge relation-type" data-ui-map="relation-type" data-raw-value="precedent">precedent</span>
+              <h4>Mistrals Souveränitäts-Woche (Weekly KW 28)</h4>
+              <p class="sidebar-meta">KW 28 dokumentierte Mistrals drei Souveränitätssignale in Folge; der FLI-Index-Letztplatz dieser Woche zeigt die Kehrseite dieser Positionierung.</p>
+            </article>
+          </div>
+        </section>
+      </aside>
+    </section>
+  </main>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const labelMaps = {
+        category: {
+          regulation: 'Regulierung',
+          product: 'Produkte & Plattformen',
+          global_eu: 'Global mit EU-Impact',
+          enterprise_ai: 'Enterprise AI',
+          governance: 'Governance',
+          watchlist: 'Watchlist'
+        },
+        priority: {
+          P1: 'Sehr wichtig',
+          P2: 'Relevant',
+          P3: 'Kurz notiert'
+        },
+        trust: {
+          hoch: 'Hohe Quellenlage',
+          mittel: 'Mittlere Quellenlage',
+          niedrig: 'Niedrige Quellenlage',
+          gemischt: 'Gemischte Quellenlage',
+          watchlist: 'Watchlist'
+        },
+        role: {
+          faktenanker: 'Faktenanker',
+          policy_interpretation: 'Policy-Interpretation',
+          marktverifikation: 'Marktverifikation',
+          produktquelle: 'Produktquelle',
+          enterprise_signal: 'Enterprise-Signal',
+          'frühindikator': 'Frühindikator',
+          unternehmensquelle: 'Unternehmensquelle',
+          developer_dokumentation: 'Entwicklerdokumentation'
+        },
+        'source-type': {
+          official: 'Offizielle Quelle',
+          vendor: 'Anbieterquelle',
+          media: 'Medienbericht',
+          research: 'Research',
+          community: 'Community',
+          documentation: 'Dokumentation',
+          legal: 'Rechtstext'
+        },
+        'relation-type': {
+          follow_up: 'Follow-up',
+          recurring_theme: 'Wiederkehrendes Thema',
+          precedent: 'Präzedenzfall',
+          trendline: 'Trendlinie'
+        }
+      };
+
+      const mapLabel = (group, rawValue) => {
+        if (!rawValue) return '';
+        return (labelMaps[group] && labelMaps[group][rawValue]) || rawValue;
+      };
+
+      document.querySelectorAll('[data-ui-map]').forEach((element) => {
+        const group = element.dataset.uiMap;
+        const rawValue = element.dataset.rawValue || element.textContent.trim();
+        const mappedValue = mapLabel(group === 'weekly-trust' ? 'trust' : group, rawValue);
+
+        if (group === 'weekly-trust') {
+          element.textContent = `Vertrauensbild: ${mappedValue}`;
+          return;
+        }
+
+        element.textContent = mappedValue;
+      });
+
+      document.querySelectorAll('.panel-item').forEach((item) => {
+        const roleSummary = item.querySelector('[data-role-summary]');
+        const roleNodes = Array.from(item.querySelectorAll('[data-source-role]'));
+        const sourceCountNode = item.querySelector('[data-source-count]');
+        const uniqueRoles = [...new Set(roleNodes.map((node) => node.dataset.rawValue).filter(Boolean))];
+
+        if (sourceCountNode) sourceCountNode.textContent = String(roleNodes.length);
+
+        if (roleSummary) {
+          roleSummary.innerHTML = '';
+          uniqueRoles.forEach((role) => {
+            const pill = document.createElement('span');
+            pill.className = 'source-pill';
+            pill.textContent = mapLabel('role', role);
+            roleSummary.appendChild(pill);
+          });
+        }
+      });
+    });
+  </script>
+</body>
+</html>

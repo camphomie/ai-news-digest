@@ -1,6 +1,24 @@
 {
   "reports": [
     {
+      "id": "weekly-2026-W29",
+      "mode": "weekly",
+      "title": "AI Intelligence Weekly – KW 29: Durchsetzung greift, Souveränität unter Druck",
+      "date_label": "KW 29 / 13.–17.07.2026",
+      "public_url": "https://ai-news.camphausen.eu/weekly/2026-W29.html",
+      "published_at": "2026-07-18T04:05:42Z",
+      "summary": "Zwei EU-Durchsetzungserfolge (Kinderschutzpanel, WhatsApp-Rückkehr) treffen auf eine Woche voller Souveränitätsfragen: WAICO ohne EU, Mistral fällt im FLI-Sicherheitsindex durch, Soofi S unter Kritik.",
+      "trust_status": "gemischt",
+      "tags": [
+        "AI Act",
+        "Governance",
+        "Souveränität",
+        "Wettbewerbsrecht",
+        "Kinderschutz",
+        "Open Source AI"
+      ]
+    },
+    {
       "id": "daily-2026-07-17",
       "mode": "daily",
       "title": "Daily Briefing 17.07.2026",
