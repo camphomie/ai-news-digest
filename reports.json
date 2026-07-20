@@ -1,6 +1,21 @@
 {
   "reports": [
     {
+      "id": "daily-2026-07-20",
+      "mode": "daily",
+      "title": "Daily Briefing 20.07.2026",
+      "date_label": "20.07.2026",
+      "public_url": "https://ai-news.camphausen.eu/daily/2026-07-20.html",
+      "published_at": "2026-07-20T23:21:50Z",
+      "summary": "Wochenend-Nachholfenster (Sa–So): EU-Kommission verlängert Unterzeichnerfrist des Transparenz-Code-of-Practice von 22. auf 27. Juli 2026. Ansonsten ruhiges Wochenende: Omnibus, KI-MIG, CADA, CEN-CENELEC und noyb/DPF unverändert offen.",
+      "trust_status": "gemischt",
+      "tags": [
+        "AI Act",
+        "Governance",
+        "Transparenz"
+      ]
+    },
+    {
       "id": "weekly-2026-W29",
       "mode": "weekly",
       "title": "AI Intelligence Weekly – KW 29: Durchsetzung greift, Souveränität unter Druck",
