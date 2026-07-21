@@ -1,0 +1,1040 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Intelligence Daily – 21. Juli 2026: EU-Kommission veröffentlicht Art.-50-Transparenz-Leitlinien vor dem 2. August</title>
+  <style>
+    :root {
+      --bg: #eef3f9;
+      --bg-radial: radial-gradient(circle at top left, rgba(49, 91, 217, 0.14), transparent 32rem), radial-gradient(circle at top right, rgba(31, 122, 77, 0.10), transparent 28rem), #eef3f9;
+      --surface: #ffffff;
+      --surface-soft: #f7f9fd;
+      --surface-blue: #f1f5ff;
+      --text: #111b2e;
+      --muted: #66748c;
+      --muted-2: #8190a8;
+      --border: #d9e2ef;
+      --border-strong: #bfcae0;
+      --accent: #244ed8;
+      --accent-strong: #1739a8;
+      --accent-soft: #e8efff;
+      --success: #1f7a4d;
+      --success-soft: #e7f5ee;
+      --warning: #b26a00;
+      --warning-soft: #fff3dc;
+      --risk: #a63f3f;
+      --risk-soft: #fdecec;
+      --watch: #2563eb;
+      --watch-soft: #eaf1ff;
+      --shadow: 0 18px 45px rgba(17, 30, 58, 0.10);
+      --shadow-soft: 0 8px 24px rgba(17, 30, 58, 0.07);
+      --radius-xl: 26px;
+      --radius-lg: 18px;
+      --radius-md: 14px;
+      --radius-sm: 10px;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      padding: 34px;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--bg-radial);
+      color: var(--text);
+      line-height: 1.55;
+    }
+
+    h1, h2, h3, h4, p { margin: 0; }
+    h1 { max-width: 920px; font-size: clamp(32px, 5vw, 56px); line-height: 0.98; letter-spacing: -0.045em; }
+    h2 { font-size: clamp(22px, 3vw, 34px); line-height: 1.08; letter-spacing: -0.03em; }
+    h3 { font-size: 20px; line-height: 1.18; letter-spacing: -0.02em; }
+    h4 { font-size: 15px; line-height: 1.25; }
+    a { color: var(--accent-strong); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    .daily-briefing {
+      max-width: 1220px;
+      margin: 0 auto;
+      display: grid;
+      gap: 24px;
+    }
+
+    .hero,
+    .top-story,
+    .story-card,
+    .sidebar-block {
+      background: rgba(255, 255, 255, 0.92);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow-soft);
+      backdrop-filter: blur(12px);
+    }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      padding: 30px;
+      display: grid;
+      gap: 18px;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      height: 5px;
+      background: linear-gradient(90deg, #244ed8, #1f7a4d, #b26a00);
+      pointer-events: none;
+    }
+
+    .hero > * { position: relative; }
+
+    .eyebrow,
+    .story-kicker,
+    .section-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      line-height: 1;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-weight: 800;
+    }
+
+    .eyebrow::before,
+    .section-label::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 0 5px var(--accent-soft);
+      flex: 0 0 auto;
+    }
+
+    .briefing-summary {
+      max-width: 880px;
+      color: var(--muted);
+      font-size: 17px;
+    }
+
+    .meta-row,
+    .story-meta,
+    .filter-row,
+    .source-meta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .chip,
+    .badge,
+    .filter-button,
+    .source-pill {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 800;
+      line-height: 1;
+      white-space: nowrap;
+    }
+
+    .chip {
+      padding: 9px 11px;
+      background: var(--accent-soft);
+      color: var(--accent-strong);
+      border: 1px solid rgba(36, 78, 216, 0.12);
+    }
+
+    .badge {
+      padding: 8px 10px;
+      border: 1px solid var(--border);
+      background: var(--surface-soft);
+      color: var(--muted);
+    }
+
+    .badge[data-trust="hoch"] { background: var(--success-soft); color: var(--success); border-color: rgba(31, 122, 77, 0.20); }
+    .badge[data-trust="mittel"], .badge[data-trust="gemischt"] { background: var(--warning-soft); color: var(--warning); border-color: rgba(178, 106, 0, 0.22); }
+    .badge[data-trust="niedrig"] { background: var(--risk-soft); color: var(--risk); border-color: rgba(166, 63, 63, 0.22); }
+    .badge[data-trust="watchlist"] { background: var(--watch-soft); color: var(--watch); border-color: rgba(37, 99, 235, 0.18); }
+
+    .main-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 2.05fr) minmax(300px, 0.95fr);
+      gap: 24px;
+      align-items: start;
+    }
+
+    .main-column,
+    .priority-stories,
+    .sidebar {
+      display: grid;
+      gap: 18px;
+      min-width: 0;
+    }
+
+    .top-story,
+    .story-card {
+      padding: 22px;
+      display: grid;
+      gap: 15px;
+      min-width: 0;
+    }
+
+    .top-story {
+      border-color: rgba(36, 78, 216, 0.24);
+      box-shadow: var(--shadow);
+    }
+
+    .story-header {
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      align-items: flex-start;
+      min-width: 0;
+    }
+
+    .story-title-block,
+    .story-text-stack {
+      display: grid;
+      gap: 8px;
+      min-width: 0;
+    }
+
+    .story-title-block h2,
+    .story-title-block h3 {
+      overflow-wrap: anywhere;
+    }
+
+    .field-note { color: var(--muted); }
+    .field-note strong { color: var(--text); }
+
+    .takeaway {
+      border: 1px solid var(--border);
+      background: linear-gradient(180deg, #fbfcff, #f6f8fc);
+      border-radius: var(--radius-lg);
+      padding: 16px;
+      display: grid;
+      gap: 6px;
+    }
+
+    .takeaway strong {
+      font-size: 13px;
+      letter-spacing: 0.02em;
+    }
+
+    .score-strip {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 10px;
+      max-width: 100%;
+      min-width: 0;
+    }
+
+    .score-item {
+      --score: 1;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      background: var(--surface-soft);
+      padding: 12px;
+      display: grid;
+      gap: 8px;
+      min-height: 88px;
+      min-width: 0;
+      overflow: hidden;
+    }
+
+    .score-topline {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 6px;
+      min-width: 0;
+      max-width: 100%;
+    }
+
+    .score-value {
+      min-width: 0;
+      max-width: 100%;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      font-size: 24px;
+      line-height: 1;
+      font-weight: 900;
+      letter-spacing: -0.04em;
+    }
+
+    .score-max {
+      color: var(--muted-2);
+      font-size: 11px;
+      font-weight: 800;
+      flex: 0 0 auto;
+    }
+
+    .score-label {
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.15;
+      font-weight: 750;
+      overflow-wrap: anywhere;
+      hyphens: auto;
+    }
+
+    .meter {
+      width: 100%;
+      min-width: 0;
+      height: 7px;
+      border-radius: 999px;
+      background: #e4e9f2;
+      overflow: hidden;
+    }
+
+    .meter > span {
+      display: block;
+      height: 100%;
+      width: clamp(0%, calc(var(--score) * 20%), 100%);
+      max-width: 100%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, var(--accent), #1f7a4d);
+    }
+
+    .filter-panel {
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      background: rgba(255, 255, 255, 0.78);
+      box-shadow: var(--shadow-soft);
+      padding: 14px;
+      display: grid;
+      gap: 10px;
+    }
+
+    .filter-label {
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 850;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .filter-button {
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--muted);
+      padding: 8px 10px;
+      cursor: pointer;
+      transition: background 0.18s ease, color 0.18s ease, border-color 0.18s ease, transform 0.18s ease;
+    }
+
+    .filter-button:hover {
+      transform: translateY(-1px);
+      border-color: var(--border-strong);
+    }
+
+    .filter-button.active,
+    .filter-button[aria-pressed="true"] {
+      background: var(--text);
+      color: #ffffff;
+      border-color: var(--text);
+    }
+
+    .is-filtered-out { display: none !important; }
+
+    .filter-empty-state {
+      display: none;
+      border: 1px dashed var(--border-strong);
+      border-radius: var(--radius-lg);
+      background: rgba(255, 255, 255, 0.7);
+      padding: 16px;
+      color: var(--muted);
+    }
+
+    .filter-empty-state.is-visible { display: block; }
+
+    .sidebar-status-grid,
+    .compact-source-summary,
+    .compact-source-details,
+    .compact-role-row {
+      display: grid;
+      gap: 10px;
+    }
+
+    .sidebar-status-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .status-card {
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      background: var(--surface-soft);
+      padding: 12px;
+      display: grid;
+      gap: 5px;
+    }
+
+    .status-card-label {
+      font-size: 11px;
+      font-weight: 850;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--muted-2);
+    }
+
+    .status-card-value {
+      font-size: 14px;
+      font-weight: 800;
+      color: var(--text);
+    }
+
+    .compact-source-header {
+      display: grid;
+      gap: 8px;
+    }
+
+    .compact-source-stats {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .compact-source-list {
+      margin: 0;
+      padding-left: 18px;
+      color: var(--muted);
+      display: grid;
+      gap: 6px;
+    }
+
+    .compact-source-list a,
+    .compact-source-list .source-label-fallback {
+      font-weight: 750;
+    }
+
+    .story-card { box-shadow: var(--shadow-soft); }
+    .story-card[data-category="regulation"] { border-left: 5px solid var(--accent); }
+    .story-card[data-category="governance"] { border-left: 5px solid var(--success); }
+    .story-card[data-category="enterprise_ai"] { border-left: 5px solid #5b5fd6; }
+    .story-card[data-category="product"] { border-left: 5px solid #6b55c9; }
+    .story-card[data-category="global_eu"] { border-left: 5px solid #2d8aa6; }
+    .story-card[data-category="watchlist"] { border-left: 5px solid var(--watch); }
+
+    details.evidence {
+      border-top: 1px solid var(--border);
+      padding-top: 10px;
+    }
+
+    details.evidence summary,
+    .source-item summary {
+      cursor: pointer;
+      list-style: none;
+      color: var(--accent-strong);
+      font-size: 13px;
+      font-weight: 850;
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      align-items: center;
+    }
+
+    details.evidence summary::-webkit-details-marker,
+    .source-item summary::-webkit-details-marker { display: none; }
+
+    details.evidence summary::after,
+    .source-item summary::after {
+      content: "+";
+      display: grid;
+      place-items: center;
+      width: 22px;
+      height: 22px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: var(--accent-strong);
+      font-size: 15px;
+      line-height: 1;
+      flex: 0 0 auto;
+    }
+
+    details.evidence[open] summary::after,
+    .source-item details[open] summary::after { content: "–"; }
+
+    .sources {
+      margin-top: 10px;
+      display: grid;
+      gap: 8px;
+      padding: 12px;
+      border-radius: var(--radius-md);
+      background: var(--surface-soft);
+      border: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 13px;
+      min-width: 0;
+    }
+
+    .source-link-card {
+      display: grid;
+      gap: 7px;
+      padding: 10px;
+      border: 1px solid rgba(191, 202, 224, 0.75);
+      border-radius: var(--radius-sm);
+      background: #ffffff;
+      min-width: 0;
+    }
+
+    .source-link-card a,
+    .source-link-card .source-label-fallback {
+      font-weight: 850;
+      overflow-wrap: anywhere;
+    }
+
+    .source-label-fallback { color: var(--text); }
+
+    .source-pill {
+      align-self: start;
+      justify-self: start;
+      padding: 5px 7px;
+      border: 1px solid var(--border);
+      background: #eef2ff;
+      color: #3730a3;
+      font-size: 10.5px;
+      letter-spacing: 0.01em;
+    }
+
+    .source-meta {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 6px 10px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .source-meta span { overflow-wrap: anywhere; }
+    .source-meta strong { color: var(--text); }
+
+    .sidebar-block {
+      padding: 18px;
+      display: grid;
+      gap: 12px;
+    }
+
+    .watch-item,
+    .source-item,
+    .archive-item {
+      border: 1px solid var(--border);
+      background: var(--surface-soft);
+      border-radius: var(--radius-md);
+      padding: 13px;
+      display: grid;
+      gap: 7px;
+      min-width: 0;
+    }
+
+    .sidebar-meta {
+      color: var(--muted);
+      font-size: 13px;
+      overflow-wrap: anywhere;
+    }
+
+    .source-item { padding: 0; overflow: hidden; }
+    .source-item details { padding: 12px 13px; }
+    .source-item summary { color: var(--text); overflow-wrap: anywhere; }
+    .source-item .source-detail {
+      margin-top: 9px;
+      display: grid;
+      gap: 8px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+    .archive-item .relation-type { justify-self: start; background: #eef2ff; color: #3730a3; }
+
+    @media (max-width: 980px) {
+      body { padding: 18px; }
+      .hero, .top-story, .story-card, .sidebar-block { border-radius: var(--radius-lg); }
+      .main-layout { grid-template-columns: 1fr; }
+      .score-strip {
+        grid-template-columns: repeat(5, minmax(78px, 1fr));
+        gap: 7px;
+        overflow-x: auto;
+        overflow-y: hidden;
+        padding-bottom: 2px;
+        scrollbar-width: thin;
+      }
+      .score-item { min-height: 58px; padding: 7px 8px; gap: 5px; }
+      .score-value { font-size: 16px; }
+      .score-max { font-size: 10px; }
+      .score-label { font-size: 10px; line-height: 1.1; }
+      .meter { height: 4px; }
+      .chip, .badge, .filter-button { padding: 6px 8px; font-size: 11px; }
+      .filter-panel { padding: 12px; }
+      .filter-row { gap: 7px; }
+      .source-meta { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 560px) {
+      body { padding: 12px; }
+      .daily-briefing { gap: 14px; }
+      .hero { padding: 22px; }
+      .story-header { display: grid; gap: 10px; }
+      .story-meta { gap: 7px; }
+      .score-strip { grid-template-columns: repeat(5, minmax(72px, 1fr)); }
+      .score-item { min-height: 54px; padding: 6px 7px; }
+      .score-value { font-size: 15px; }
+      .score-max { font-size: 10px; }
+      .score-label { font-size: 9.5px; }
+      .filter-row {
+        display: flex;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        padding-bottom: 2px;
+        scrollbar-width: thin;
+      }
+      .filter-button { flex: 0 0 auto; }
+      .sources { padding: 10px; }
+      .source-link-card { padding: 9px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="daily-briefing">
+    <section class="hero">
+      <div class="eyebrow">Daily AI Intelligence Briefing</div>
+      <h1>AI Intelligence Daily – 21. Juli 2026: EU-Kommission veröffentlicht Art.-50-Transparenz-Leitlinien vor dem 2. August</h1>
+      <p class="briefing-summary">Die EU-Kommission veröffentlichte am 20.07. offizielle Leitlinien zu den Transparenzpflichten nach Art. 50 AI Act – 13 Tage vor Geltungsbeginn. Zudem baut das EU-Parlament nach eigenen KI-Slop-Vorfällen eine interne KI-Plattform, und SAP veröffentlichte sein Q2-Business-AI-Release.</p>
+      <div class="meta-row">
+        <span class="chip">Datum: 2026-07-21</span>
+        <span class="chip">Fenster: 2026-07-20 00:00–23:59 CEST</span>
+        <span class="chip">Fokus: Deutschland / EU</span>
+        <span class="badge" data-trust="gemischt" data-ui-map="overall-trust" data-raw-value="gemischt">Status: gemischt</span>
+      </div>
+    </section>
+
+    <section class="main-layout">
+      <section class="main-column">
+        <article class="top-story">
+          <div class="story-header">
+            <div class="story-title-block">
+              <div class="story-kicker">Top Story</div>
+              <h2>EU-Kommission veröffentlicht offizielle Leitlinien zu Transparenzpflichten nach Art. 50 AI Act</h2>
+            </div>
+            <span class="chip" data-ui-map="priority" data-raw-value="P1">P1</span>
+          </div>
+          <p>Am 20.07.2026 veröffentlichte die Kommission offiziell verabschiedete Leitlinien zu Art. 50 AI Act, bestätigt über digital-strategy.ec.europa.eu. Sie definieren &quot;direkt interaktive KI-Systeme&quot; und &quot;synthetische Inhalte&quot;; Pflichten für Anbieter (KI-Hinweis, maschinenlesbare Kennzeichnung) und Betreiber (Deepfake-Offenlegung, Emotionserkennung/Biometrie). Rechtschreibkorrektur löst keine Pflicht aus. Gilt ab 02.08.2026; laut Sekundärquelle (nicfab.eu, unbestätigt) Bestandssysteme bis 02.12.2026.</p>
+          <div class="score-strip">
+            <div class="score-item" style="--score: 5"><div class="score-topline"><span class="score-value">5</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">EU / DE-Relevanz</div></div>
+            <div class="score-item" style="--score: 4"><div class="score-topline"><span class="score-value">4</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Business Impact</div></div>
+            <div class="score-item" style="--score: 5"><div class="score-topline"><span class="score-value">5</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Regulatorik</div></div>
+            <div class="score-item" style="--score: 2"><div class="score-topline"><span class="score-value">2</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Technologie</div></div>
+            <div class="score-item" style="--score: 4"><div class="score-topline"><span class="score-value">4</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Lernwert</div></div>
+          </div>
+          <div class="takeaway">
+            <strong>Einschätzung</strong>
+            <p class="field-note">Erste verbindliche behördliche Auslegungshilfe kurz vor Geltungsbeginn – der freiwillige Transparenz-Code bleibt ein Baustein, ersetzt laut Sekundärquellen aber nicht die eigenständige Prüfung durch die zuständigen Behörden.</p>
+          </div>
+          <details class="evidence">
+            <summary>Quellen</summary>
+            <div class="sources">
+              <article class="source-link-card">
+                <a href="https://digital-strategy.ec.europa.eu/en/news/commission-publishes-guidelines-transparency-obligations-providers-and-deployers-certain-ai-systems" target="_blank" rel="noopener noreferrer">Commission publishes guidelines on transparency obligations for providers and deployers of certain AI systems</a>
+                <div class="source-meta-row">
+                  <span class="source-pill" data-ui-map="role" data-raw-value="faktenanker">faktenanker</span>
+                  <span class="source-pill" data-ui-map="source-type" data-raw-value="official">official</span>
+                </div>
+                <div class="source-meta">
+                  <span><strong>Publisher:</strong> European Commission / AI Office</span>
+                  <span><strong>Veröffentlicht:</strong> 2026-07-20</span>
+                  <span><strong>Abgerufen:</strong> 2026-07-21</span>
+                </div>
+              </article>
+              <article class="source-link-card">
+                <a href="https://digital-strategy.ec.europa.eu/en/library/guidelines-transparency-obligations-providers-and-deployers-ai-systems" target="_blank" rel="noopener noreferrer">Guidelines on transparency obligations for providers and deployers of AI systems</a>
+                <div class="source-meta-row">
+                  <span class="source-pill" data-ui-map="role" data-raw-value="faktenanker">faktenanker</span>
+                  <span class="source-pill" data-ui-map="source-type" data-raw-value="official">official</span>
+                </div>
+                <div class="source-meta">
+                  <span><strong>Publisher:</strong> European Commission / AI Office</span>
+                  <span><strong>Veröffentlicht:</strong> 2026-07-20</span>
+                  <span><strong>Abgerufen:</strong> 2026-07-21</span>
+                </div>
+              </article>
+              <article class="source-link-card">
+                <a href="https://www.nicfab.eu/en/posts/ai-act-art50-guidelines/" target="_blank" rel="noopener noreferrer">AI Act transparency obligations: the Commission publishes its Article 50 guidelines</a>
+                <div class="source-meta-row">
+                  <span class="source-pill" data-ui-map="role" data-raw-value="policy_interpretation">policy_interpretation</span>
+                  <span class="source-pill" data-ui-map="source-type" data-raw-value="media">media</span>
+                </div>
+                <div class="source-meta">
+                  <span><strong>Publisher:</strong> NicFab</span>
+                  <span><strong>Veröffentlicht:</strong> 2026-07-20</span>
+                  <span><strong>Abgerufen:</strong> 2026-07-21</span>
+                </div>
+              </article>
+            </div>
+          </details>
+          <details class="evidence">
+            <summary>Weitere Recherche</summary>
+            <div class="sources">
+              <p class="field-note">Ob die Leitlinien Auslegungsstreit zu &quot;direkt interaktiven KI-Systemen&quot; reduzieren, ob sich die 02.12.2026-Übergangsfrist primärquellenseitig bestätigt, und wie sich dies zur Code-Unterzeichnerfrist (27.07.) verhält.</p>
+            </div>
+          </details>
+        </article>
+
+        <section class="priority-stories">
+          <div class="section-label">Weitere priorisierte Entwicklungen</div>
+          <div class="filter-panel" aria-label="Story-Filter">
+            <div class="filter-label">Filter</div>
+            <div class="filter-row" id="story-filter-row">
+              <button class="filter-button active" type="button" data-filter="all" aria-pressed="true">Alle</button>
+            </div>
+          </div>
+
+          <article class="story-card" data-id="eu-parlament-epgenai-hub-2026-07-20" data-category="governance" data-trust-status="hoch">
+            <div class="story-header">
+              <div class="story-title-block">
+                <div class="story-kicker">GOVERNANCE</div>
+                <h3>EU-Parlament baut eigene interne KI-Plattform &quot;EPGenAI Hub&quot; nach hausgemachten KI-Slop-Vorfällen</h3>
+              </div>
+              <div class="story-meta">
+                <span class="chip" data-ui-map="category" data-raw-value="governance">governance</span>
+                <span class="chip" data-ui-map="priority" data-raw-value="P2">P2</span>
+              </div>
+            </div>
+            <div class="story-text-stack">
+              <p>Laut Heise, bestätigt durch TechRadar/Neowin, testet das EU-Parlament &quot;EPGenAI Hub&quot; (Rollout ca. September): lokale Modelle (Llama, GPT-OSS, Mistral Small) plus externe (ChatGPT, Claude Sonnet). Auslöser: ~2.100 Mitarbeitende nutzen KI ohne Offenlegung, halluzinierte Gesetzesverweise. Benifei: &quot;not immune to AI slop.&quot;</p>
+              <p class="field-note"><strong>Warum relevant:</strong> Die Institution, die den AI Act verhandelt hat, reagiert auf ungesteuerte KI-Nutzung im eigenen Haus – Einblick in interne KI-Governance, Modellsouveränität und Halluzinationsrisiken.</p>
+              <p class="field-note"><strong>EU-/DE-Impact:</strong> Direkt: EU-Institution als Fallbeispiel für interne KI-Richtlinien und Modellauswahl nach Souveränitätskriterien, übertragbar auf Beratungsmandate zu unternehmensinterner KI-Governance.</p>
+              <p class="field-note"><strong>Einordnung:</strong> Starkes Praxisbeispiel für AI-Governance-Berater: selbst der AI-Act-Gesetzgeber reagierte erst auf Schatten-KI-Nutzung, bevor eine kontrollierte interne Plattform entstand.</p>
+            </div>
+            <div class="score-strip">
+              <div class="score-item" style="--score: 5"><div class="score-topline"><span class="score-value">5</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">EU / DE-Relevanz</div></div>
+              <div class="score-item" style="--score: 2"><div class="score-topline"><span class="score-value">2</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Business Impact</div></div>
+              <div class="score-item" style="--score: 4"><div class="score-topline"><span class="score-value">4</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Regulatorik</div></div>
+              <div class="score-item" style="--score: 2"><div class="score-topline"><span class="score-value">2</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Technologie</div></div>
+              <div class="score-item" style="--score: 5"><div class="score-topline"><span class="score-value">5</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Lernwert</div></div>
+            </div>
+            <details class="evidence">
+              <summary>Quellen & Unsicherheit</summary>
+              <div class="sources">
+                <p class="field-note"><strong>Quellenlage:</strong> <span data-ui-map="trust" data-raw-value="hoch">hoch</span></p>
+                <article class="source-link-card">
+                  <a href="https://www.heise.de/en/news/EU-Parliament-is-building-its-own-AI-platform-for-MEPs-11371380.html" target="_blank" rel="noopener noreferrer">EU Parliament is building its own AI platform for MEPs</a>
+                  <div class="source-meta-row">
+                    <span class="source-pill" data-ui-map="role" data-raw-value="enterprise_signal">enterprise_signal</span>
+                    <span class="source-pill" data-ui-map="source-type" data-raw-value="media">media</span>
+                  </div>
+                  <div class="source-meta">
+                    <span><strong>Publisher:</strong> Heise</span>
+                    <span><strong>Veröffentlicht:</strong> 2026-07-20</span>
+                    <span><strong>Abgerufen:</strong> 2026-07-21</span>
+                  </div>
+                </article>
+                <article class="source-link-card">
+                  <a href="https://www.techradar.com/pro/parliament-has-not-been-immune-to-ai-slop-the-eu-is-about-to-roll-out-its-own-ai-platform-including-tools-from-openai-meta-anthropic-and-mistral" target="_blank" rel="noopener noreferrer">&#x27;Parliament has not been immune to AI slop&#x27;: The EU is about to roll out its own AI platform</a>
+                  <div class="source-meta-row">
+                    <span class="source-pill" data-ui-map="role" data-raw-value="enterprise_signal">enterprise_signal</span>
+                    <span class="source-pill" data-ui-map="source-type" data-raw-value="media">media</span>
+                  </div>
+                  <div class="source-meta">
+                    <span><strong>Publisher:</strong> TechRadar</span>
+                    <span><strong>Veröffentlicht:</strong> 2026-07-20</span>
+                    <span><strong>Abgerufen:</strong> 2026-07-21</span>
+                  </div>
+                </article>
+                <p class="field-note"><strong>Unsicherheit:</strong> Keine EP-eigene Pressemitteilung gefunden; Bestätigung stützt sich auf mehrere unabhängige Medien. 2.100-Personen-Zahl und &quot;Souveränität&quot;-Einordnung sind journalistische Angaben.</p>
+              </div>
+            </details>
+            <details class="evidence">
+              <summary>Weitere Recherche</summary>
+              <div class="sources">
+                <p class="field-note">Ob das Parlament selbst eine Pressemitteilung nachliefert, wie der Souveränitäts-Prüfprozess für Modellauswahl aussieht, und ob der September-Rollout wie angekündigt erfolgt.</p>
+              </div>
+            </details>
+          </article>
+          <article class="story-card" data-id="sap-business-ai-q2-2026-release-2026-07-20" data-category="enterprise_ai" data-trust-status="mittel">
+            <div class="story-header">
+              <div class="story-title-block">
+                <div class="story-kicker">ENTERPRISE AI</div>
+                <h3>SAP veröffentlicht Q2-2026-Release-Highlights für Business AI mit neuen Agenten</h3>
+              </div>
+              <div class="story-meta">
+                <span class="chip" data-ui-map="category" data-raw-value="enterprise_ai">enterprise_ai</span>
+                <span class="chip" data-ui-map="priority" data-raw-value="P3">P3</span>
+              </div>
+            </div>
+            <div class="story-text-stack">
+              <p>SAP News Center (20.07.) veröffentlichte Q2-Highlights für Business AI: &quot;Joule Work&quot;-Arbeitsbereich (Early Adopter) plus mobile App (GA), neue Agenten (Billing/Order als Beta; Expense/Process Consulting als GA), AI-Agent-Hub-Erweiterungen, ABAP-Migrationsagent für S/4HANA.</p>
+              <p class="field-note"><strong>Warum relevant:</strong> SAP ist der zentrale deutsche/europäische Enterprise-AI-Anbieter; Bosch Digital wird als deutsches Kundenbeispiel genannt (SAP-eigene Angabe: 20 % Entwicklerproduktivitätssteigerung).</p>
+              <p class="field-note"><strong>EU-/DE-Impact:</strong> Indirekt bis mittel: ein deutsches Kundenbeispiel (Bosch Digital), aber keine explizite EU-Governance-, Souveränitäts- oder Datenresidenz-Aussage in diesem Release.</p>
+              <p class="field-note"><strong>Einordnung:</strong> Effizienzzahlen (z.B. Bosch Digitals 20 %) sind reine Herstellerangaben ohne unabhängige Bestätigung – als Funktionsnachweis verlässlich, als Wirkungsnachweis mit Vorbehalt.</p>
+            </div>
+            <div class="score-strip">
+              <div class="score-item" style="--score: 3"><div class="score-topline"><span class="score-value">3</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">EU / DE-Relevanz</div></div>
+              <div class="score-item" style="--score: 3"><div class="score-topline"><span class="score-value">3</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Business Impact</div></div>
+              <div class="score-item" style="--score: 1"><div class="score-topline"><span class="score-value">1</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Regulatorik</div></div>
+              <div class="score-item" style="--score: 2"><div class="score-topline"><span class="score-value">2</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Technologie</div></div>
+              <div class="score-item" style="--score: 3"><div class="score-topline"><span class="score-value">3</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Lernwert</div></div>
+            </div>
+            <details class="evidence">
+              <summary>Quellen & Unsicherheit</summary>
+              <div class="sources">
+                <p class="field-note"><strong>Quellenlage:</strong> <span data-ui-map="trust" data-raw-value="mittel">mittel</span></p>
+                <article class="source-link-card">
+                  <a href="https://news.sap.com/2026/07/sap-business-ai-release-highlights-q2-2026/" target="_blank" rel="noopener noreferrer">SAP Business AI: Release Highlights Q2 2026</a>
+                  <div class="source-meta-row">
+                    <span class="source-pill" data-ui-map="role" data-raw-value="produktquelle">produktquelle</span>
+                    <span class="source-pill" data-ui-map="source-type" data-raw-value="vendor">vendor</span>
+                  </div>
+                  <div class="source-meta">
+                    <span><strong>Publisher:</strong> SAP News Center</span>
+                    <span><strong>Veröffentlicht:</strong> 2026-07-20</span>
+                    <span><strong>Abgerufen:</strong> 2026-07-21</span>
+                  </div>
+                </article>
+                <p class="field-note"><strong>Unsicherheit:</strong> Reine Herstellerquelle; Funktionsexistenz belegt, Kundennutzen-/Effizienzangaben unabhängig unbestätigt.</p>
+              </div>
+            </details>
+            <details class="evidence">
+              <summary>Weitere Recherche</summary>
+              <div class="sources">
+                <p class="field-note">Ob unabhängige Kundenstimmen die genannten Effizienzgewinne bestätigen, und ob SAP EU-spezifische Datenresidenz- oder Governance-Dokumentation nachliefert.</p>
+              </div>
+            </details>
+          </article>
+          <div class="filter-empty-state" id="story-filter-empty-state">
+            Keine Stories für diesen Filter sichtbar. Wähle einen anderen Filter oder prüfe, ob in diesem Lauf nur andere Kategorien vorkommen.
+          </div>
+        </section>
+      </section>
+
+      <aside class="sidebar">
+        <section class="sidebar-block">
+          <h3>Tageslage</h3>
+          <p class="sidebar-meta">Die EU-Kommission veröffentlichte am 20.07. offizielle Leitlinien zu den Transparenzpflichten nach Art. 50 AI Act – 13 Tage vor Geltungsbeginn. Zudem baut das EU-Parlament nach eigenen KI-Slop-Vorfällen eine interne KI-Plattform, und SAP veröffentlichte sein Q2-Business-AI-Release.</p>
+          <div class="sidebar-status-grid">
+            <div class="status-card">
+              <span class="status-card-label">Fenster</span>
+              <span class="status-card-value">2026-07-20 00:00–23:59 CEST</span>
+            </div>
+            <div class="status-card">
+              <span class="status-card-label">Quellenlage</span>
+              <span class="status-card-value" data-ui-map="trust" data-raw-value="gemischt">gemischt</span>
+            </div>
+          </div>
+        </section>
+
+        <section class="sidebar-block watchlist">
+          <h3>Watchlist</h3>
+          <article class="watch-item" data-id="de-zak-ai-overviews-perplexity-medienrecht-2026-07-14">
+            <div class="story-meta"><span class="badge" data-trust="mittel" data-ui-map="trust" data-raw-value="mittel">mittel</span></div>
+            <h4>Nachtrag-Kandidat: ZAK stuft Google AI Overviews/Perplexity als Medienanbieter ein (14.07.)</h4>
+            <p class="sidebar-meta">ZAK entschied am 14.07.: Google AI Overviews/Perplexity sind eigene Inhalteanbieter (Verstoß § 109 Medienstaatsvertrag, DSA-Haftungsschirm entfällt) – bislang nicht erfasst, breit bestätigt (The Decoder u.a.).</p>
+            <p class="sidebar-meta"><strong>Warum beobachten:</strong> Weltweit erste Entscheidung dieser Art; echte Deckungslücke, getrennt vom bereits erfassten LG-München-I-Verfahren.</p>
+            <p class="sidebar-meta"><strong>Nächstes Signal:</strong> Prüfung als Nachtrag im nächsten Weekly (2026-W30); Berufungsfrist läuft einen Monat.</p>
+          </article>
+          <article class="watch-item" data-id="eu-dma-google-android-search-data-2026-07-16">
+            <div class="story-meta"><span class="badge" data-trust="mittel" data-ui-map="trust" data-raw-value="mittel">mittel</span></div>
+            <h4>Nachtrag-Kandidat: EU ordnet Google Android-Öffnung und Suchdaten-Teilung an (16.07.)</h4>
+            <p class="sidebar-meta">Zwei DMA-Entscheidungen (16.07.): Google muss KI-Assistenten Android-Systemzugriff wie Gemini einräumen und ab Januar 2027 Suchdaten mit Wettbewerbern teilen – bislang nicht erfasst.</p>
+            <p class="sidebar-meta"><strong>Warum beobachten:</strong> Primärquellenbestätigte EU-Durchsetzung mit Relevanz für KI-Assistenten-Wettbewerb; zweite Deckungslücke im selben Zeitraum wie der ZAK-Fall.</p>
+            <p class="sidebar-meta"><strong>Nächstes Signal:</strong> Prüfung als Nachtrag im Weekly 2026-W30; Fristen ab September 2026 und Januar 2027.</p>
+          </article>
+          <article class="watch-item" data-id="cen-cenelec-pren18286-formal-vote-2026-07-20">
+            <div class="story-meta"><span class="badge" data-trust="watchlist" data-ui-map="trust" data-raw-value="watchlist">watchlist</span></div>
+            <h4>CEN-CENELEC prEN 18286: Formal-Vote-Phase bestätigt, Termin weiter offen</h4>
+            <p class="sidebar-meta">CEN-CENELEC bestätigt: prEN 18286 befindet sich nach Abschluss der öffentlichen Umfrage nun in der Formal-Vote-Phase; konkretes Datum über die Prognose (29.07.) hinaus liegt nicht vor.</p>
+            <p class="sidebar-meta"><strong>Warum beobachten:</strong> Operatives Herzstück der AI-Act-Konformitätsvermutung für Zertifizierung und Assurance.</p>
+            <p class="sidebar-meta"><strong>Nächstes Signal:</strong> Abstimmungsergebnis am oder um den 29.07.2026.</p>
+          </article>
+          <article class="watch-item" data-id="ai-act-omnibus-oj-publication-still-pending-2026-07-21">
+            <div class="story-meta"><span class="badge" data-trust="mittel" data-ui-map="trust" data-raw-value="mittel">mittel</span></div>
+            <h4>AI-Act-Omnibus: Amtsblattveröffentlichung weiterhin ausstehend</h4>
+            <p class="sidebar-meta">Auch am 20.07. keine EUR-Lex-CELEX-Nummer für die finale Omnibus-Verordnung; der am 08.07. unterzeichnete Text wartet weiter auf Veröffentlichung.</p>
+            <p class="sidebar-meta"><strong>Warum beobachten:</strong> Erst mit Veröffentlichung werden die verschobenen Hochrisiko-Fristen vor dem 02.08. rechtsverbindlich.</p>
+            <p class="sidebar-meta"><strong>Nächstes Signal:</strong> CELEX-Nummer und Veröffentlichungsdatum.</p>
+          </article>
+          <article class="watch-item" data-id="ki-mig-verkuendung-bgbl-2026-07-21">
+            <div class="story-meta"><span class="badge" data-trust="mittel" data-ui-map="trust" data-raw-value="mittel">mittel</span></div>
+            <h4>KI-Durchführungsgesetz (KI-MIG): Verkündung im Bundesgesetzblatt weiterhin offen</h4>
+            <p class="sidebar-meta">Auch am 20.07. keine Verkündung des am 10.07. gebilligten KI-MIG im Bundesgesetzblatt.</p>
+            <p class="sidebar-meta"><strong>Warum beobachten:</strong> Erst mit Verkündung wird die Bundesnetzagentur formal als zentrale Marktüberwachungsbehörde wirksam.</p>
+            <p class="sidebar-meta"><strong>Nächstes Signal:</strong> Verkündungsdatum im Bundesgesetzblatt.</p>
+          </article>
+        </section>
+
+        <section class="sidebar-block archive-panel">
+          <h3>Archivbezug</h3>
+          <article class="archive-item" data-id="art50-transparenzpflichten-follow-up-2026-07-21">
+            <span class="badge relation-type" data-ui-map="relation-type" data-raw-value="follow_up">follow_up</span>
+            <h4>Art.-50-Transparenzpflichten / Code of Practice (verfolgt seit Juni 2026)</h4>
+            <p class="sidebar-meta">Die Leitlinien vom 20.07. sind die jüngste Entwicklung im seit Juni verfolgten Umsetzungsstrang vor Geltungsbeginn am 02.08.2026.</p>
+          </article>
+          <article class="archive-item" data-id="eu-de-implementation-deadline-continuity-2026-07-21">
+            <span class="badge relation-type" data-ui-map="relation-type" data-raw-value="recurring_theme">recurring_theme</span>
+            <h4>Nationale und EU-Umsetzungsfristen vor dem 02.08.2026 (verfolgt seit Juli 2026)</h4>
+            <p class="sidebar-meta">Omnibus-Amtsblattveröffentlichung und KI-MIG-Verkündung bleiben offen, während sich das Zeitfenster verengt.</p>
+          </article>
+          <article class="archive-item" data-id="eu-institutional-ai-governance-precedent-2026-07-21">
+            <span class="badge relation-type" data-ui-map="relation-type" data-raw-value="precedent">precedent</span>
+            <h4>EU-Institutionen als eigene KI-Governance-Fallbeispiele</h4>
+            <p class="sidebar-meta">Nach dem EU-Sonderpanel zu Kinderschutz zeigt der EPGenAI Hub ein weiteres Beispiel interner EU-KI-Governance-Praxis.</p>
+          </article>
+        </section>
+      </aside>
+    </section>
+  </main>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const labelMaps = {
+        category: {
+          regulation: 'Regulierung',
+          product: 'Produkte & Plattformen',
+          global_eu: 'Global mit EU-Impact',
+          enterprise_ai: 'Enterprise AI',
+          governance: 'Governance',
+          watchlist: 'Watchlist'
+        },
+        priority: {
+          P1: 'Sehr wichtig',
+          P2: 'Relevant',
+          P3: 'Kurz notiert'
+        },
+        trust: {
+          hoch: 'Hohe Quellenlage',
+          mittel: 'Mittlere Quellenlage',
+          niedrig: 'Niedrige Quellenlage',
+          gemischt: 'Gemischte Quellenlage',
+          watchlist: 'Watchlist'
+        },
+        role: {
+          faktenanker: 'Faktenanker',
+          policy_interpretation: 'Policy-Interpretation',
+          marktverifikation: 'Marktverifikation',
+          produktquelle: 'Produktquelle',
+          enterprise_signal: 'Enterprise-Signal',
+          'frühindikator': 'Frühindikator',
+          unternehmensquelle: 'Unternehmensquelle',
+          developer_dokumentation: 'Entwicklerdokumentation'
+        },
+        'source-type': {
+          official: 'Offizielle Quelle',
+          vendor: 'Anbieterquelle',
+          media: 'Medienbericht',
+          research: 'Research',
+          community: 'Community',
+          documentation: 'Dokumentation',
+          legal: 'Rechtstext'
+        },
+        'relation-type': {
+          follow_up: 'Follow-up',
+          recurring_theme: 'Wiederkehrendes Thema',
+          precedent: 'Präzedenzfall',
+          trendline: 'Trendlinie'
+        }
+      };
+
+      const mapLabel = (group, rawValue) => {
+        if (!rawValue) return '';
+        return (labelMaps[group] && labelMaps[group][rawValue]) || rawValue;
+      };
+
+      document.querySelectorAll('[data-ui-map]').forEach((element) => {
+        const group = element.dataset.uiMap;
+        const rawValue = element.dataset.rawValue || element.textContent.trim();
+        const mappedValue = mapLabel(group === 'overall-trust' ? 'trust' : group, rawValue);
+
+        if (group === 'overall-trust') {
+          element.textContent = `Status: ${mappedValue}`;
+          return;
+        }
+
+        element.textContent = mappedValue;
+      });
+
+      document.querySelectorAll('[data-derived-from-story]').forEach((element) => {
+        const rawValue = element.dataset.derivedFromStory;
+        element.textContent = rawValue === 'true' ? 'Aus Story-Quellen abgeleitet' : 'Eigenständig zusammengeführt';
+      });
+
+      document.querySelectorAll('.source-item').forEach((item) => {
+        const roleSummary = item.querySelector('[data-role-summary]');
+        const roleNodes = Array.from(item.querySelectorAll('[data-source-role]'));
+        const sourceCountNode = item.querySelector('[data-source-count]');
+        const uniqueRoles = [...new Set(roleNodes.map((node) => node.dataset.rawValue).filter(Boolean))];
+
+        if (sourceCountNode) sourceCountNode.textContent = String(roleNodes.length);
+
+        if (roleSummary) {
+          roleSummary.innerHTML = '';
+          uniqueRoles.forEach((role) => {
+            const pill = document.createElement('span');
+            pill.className = 'source-pill';
+            pill.textContent = mapLabel('role', role);
+            roleSummary.appendChild(pill);
+          });
+        }
+      });
+
+      const cards = Array.from(document.querySelectorAll('.priority-stories .story-card'));
+      const filterRow = document.getElementById('story-filter-row');
+      const emptyState = document.getElementById('story-filter-empty-state');
+      const categoryCounts = cards.reduce((acc, card) => {
+        const category = card.dataset.category;
+        if (!category) return acc;
+        acc[category] = (acc[category] || 0) + 1;
+        return acc;
+      }, {});
+
+      const createButton = (filter, label) => {
+        const button = document.createElement('button');
+        button.type = 'button';
+        button.className = 'filter-button';
+        button.dataset.filter = filter;
+        button.setAttribute('aria-pressed', 'false');
+        button.textContent = label;
+        return button;
+      };
+
+      Object.keys(categoryCounts).forEach((category) => {
+        const button = createButton(category, `${mapLabel('category', category)} · ${categoryCounts[category]}`);
+        filterRow.appendChild(button);
+      });
+
+      const buttons = Array.from(document.querySelectorAll('.filter-button'));
+
+      const applyFilter = (filter) => {
+        buttons.forEach((button) => {
+          const isActive = button.dataset.filter === filter;
+          button.classList.toggle('active', isActive);
+          button.setAttribute('aria-pressed', isActive ? 'true' : 'false');
+        });
+
+        let visibleCount = 0;
+        cards.forEach((card) => {
+          const isVisible = filter === 'all' || card.dataset.category === filter;
+          card.classList.toggle('is-filtered-out', !isVisible);
+          if (isVisible) visibleCount += 1;
+        });
+
+        if (emptyState) {
+          emptyState.classList.toggle('is-visible', visibleCount === 0);
+        }
+      };
+
+      buttons.forEach((button) => {
+        button.addEventListener('click', () => applyFilter(button.dataset.filter || 'all'));
+      });
+
+      applyFilter('all');
+    });
+  </script>
+</body>
+</html>
