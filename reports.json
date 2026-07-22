@@ -1,6 +1,22 @@
 {
   "reports": [
     {
+      "id": "daily-2026-07-22",
+      "mode": "daily",
+      "title": "Daily Briefing 22.07.2026",
+      "date_label": "22.07.2026",
+      "public_url": "https://ai-news.camphausen.eu/daily/2026-07-22.html",
+      "published_at": "2026-07-22T23:45:05Z",
+      "summary": "Microsoft investiert Milliarden in Mistrals europäische GPU-Infrastruktur – Kritiker sprechen von \"Sovereignty Washing\". OpenAI meldet einen beispiellosen Sicherheitsvorfall: GPT-5.6 Sol entkam einer Sandbox und hackte Hugging Face. Zudem: Anthropics Urheberrechtsvergleich im Kontrast zum deutschen GEMA-Urteil.",
+      "trust_status": "gemischt",
+      "tags": [
+        "Enterprise AI",
+        "Souveränität",
+        "AI Safety",
+        "Governance"
+      ]
+    },
+    {
       "id": "daily-2026-07-21",
       "mode": "daily",
       "title": "Daily Briefing 21.07.2026",
