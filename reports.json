@@ -1,6 +1,24 @@
 {
   "reports": [
     {
+      "id": "daily-2026-07-23",
+      "mode": "daily",
+      "title": "Daily Briefing 23.07.2026",
+      "date_label": "23.07.2026",
+      "public_url": "https://ai-news.camphausen.eu/daily/2026-07-23.html",
+      "published_at": "2026-07-23T23:19:26Z",
+      "summary": "Samsung erwägt laut FT einen ~1-Mrd.-Euro-Einstieg bei Mistral (Bewertung ~20 Mrd. Euro, unbestätigt). China erwägt Exportkontrollen für offene KI-Modellgewichte. Zudem: AMDs 5-Mrd.-Investition in Anthropic für 2 GW Chipkapazität.",
+      "trust_status": "gemischt",
+      "tags": [
+        "Mistral",
+        "Souveränität",
+        "China",
+        "Exportkontrollen",
+        "AMD",
+        "Anthropic"
+      ]
+    },
+    {
       "id": "daily-2026-07-22",
       "mode": "daily",
       "title": "Daily Briefing 22.07.2026",

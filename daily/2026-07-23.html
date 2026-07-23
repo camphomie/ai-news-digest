@@ -1,0 +1,1059 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Intelligence Daily – 23. Juli 2026: Samsung erwägt Mistral-Einstieg, China erwägt KI-Exportkontrollen</title>
+  <style>
+    :root {
+      --bg: #eef3f9;
+      --bg-radial: radial-gradient(circle at top left, rgba(49, 91, 217, 0.14), transparent 32rem), radial-gradient(circle at top right, rgba(31, 122, 77, 0.10), transparent 28rem), #eef3f9;
+      --surface: #ffffff;
+      --surface-soft: #f7f9fd;
+      --surface-blue: #f1f5ff;
+      --text: #111b2e;
+      --muted: #66748c;
+      --muted-2: #8190a8;
+      --border: #d9e2ef;
+      --border-strong: #bfcae0;
+      --accent: #244ed8;
+      --accent-strong: #1739a8;
+      --accent-soft: #e8efff;
+      --success: #1f7a4d;
+      --success-soft: #e7f5ee;
+      --warning: #b26a00;
+      --warning-soft: #fff3dc;
+      --risk: #a63f3f;
+      --risk-soft: #fdecec;
+      --watch: #2563eb;
+      --watch-soft: #eaf1ff;
+      --shadow: 0 18px 45px rgba(17, 30, 58, 0.10);
+      --shadow-soft: 0 8px 24px rgba(17, 30, 58, 0.07);
+      --radius-xl: 26px;
+      --radius-lg: 18px;
+      --radius-md: 14px;
+      --radius-sm: 10px;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      padding: 34px;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--bg-radial);
+      color: var(--text);
+      line-height: 1.55;
+    }
+
+    h1, h2, h3, h4, p { margin: 0; }
+    h1 { max-width: 920px; font-size: clamp(32px, 5vw, 56px); line-height: 0.98; letter-spacing: -0.045em; }
+    h2 { font-size: clamp(22px, 3vw, 34px); line-height: 1.08; letter-spacing: -0.03em; }
+    h3 { font-size: 20px; line-height: 1.18; letter-spacing: -0.02em; }
+    h4 { font-size: 15px; line-height: 1.25; }
+    a { color: var(--accent-strong); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    .daily-briefing {
+      max-width: 1220px;
+      margin: 0 auto;
+      display: grid;
+      gap: 24px;
+    }
+
+    .hero,
+    .top-story,
+    .story-card,
+    .sidebar-block {
+      background: rgba(255, 255, 255, 0.92);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow-soft);
+      backdrop-filter: blur(12px);
+    }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      padding: 30px;
+      display: grid;
+      gap: 18px;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      height: 5px;
+      background: linear-gradient(90deg, #244ed8, #1f7a4d, #b26a00);
+      pointer-events: none;
+    }
+
+    .hero > * { position: relative; }
+
+    .eyebrow,
+    .story-kicker,
+    .section-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      line-height: 1;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-weight: 800;
+    }
+
+    .eyebrow::before,
+    .section-label::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 0 5px var(--accent-soft);
+      flex: 0 0 auto;
+    }
+
+    .briefing-summary {
+      max-width: 880px;
+      color: var(--muted);
+      font-size: 17px;
+    }
+
+    .meta-row,
+    .story-meta,
+    .filter-row,
+    .source-meta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .chip,
+    .badge,
+    .filter-button,
+    .source-pill {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 800;
+      line-height: 1;
+      white-space: nowrap;
+    }
+
+    .chip {
+      padding: 9px 11px;
+      background: var(--accent-soft);
+      color: var(--accent-strong);
+      border: 1px solid rgba(36, 78, 216, 0.12);
+    }
+
+    .badge {
+      padding: 8px 10px;
+      border: 1px solid var(--border);
+      background: var(--surface-soft);
+      color: var(--muted);
+    }
+
+    .badge[data-trust="hoch"] { background: var(--success-soft); color: var(--success); border-color: rgba(31, 122, 77, 0.20); }
+    .badge[data-trust="mittel"], .badge[data-trust="gemischt"] { background: var(--warning-soft); color: var(--warning); border-color: rgba(178, 106, 0, 0.22); }
+    .badge[data-trust="niedrig"] { background: var(--risk-soft); color: var(--risk); border-color: rgba(166, 63, 63, 0.22); }
+    .badge[data-trust="watchlist"] { background: var(--watch-soft); color: var(--watch); border-color: rgba(37, 99, 235, 0.18); }
+
+    .main-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 2.05fr) minmax(300px, 0.95fr);
+      gap: 24px;
+      align-items: start;
+    }
+
+    .main-column,
+    .priority-stories,
+    .sidebar {
+      display: grid;
+      gap: 18px;
+      min-width: 0;
+    }
+
+    .top-story,
+    .story-card {
+      padding: 22px;
+      display: grid;
+      gap: 15px;
+      min-width: 0;
+    }
+
+    .top-story {
+      border-color: rgba(36, 78, 216, 0.24);
+      box-shadow: var(--shadow);
+    }
+
+    .story-header {
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      align-items: flex-start;
+      min-width: 0;
+    }
+
+    .story-title-block,
+    .story-text-stack {
+      display: grid;
+      gap: 8px;
+      min-width: 0;
+    }
+
+    .story-title-block h2,
+    .story-title-block h3 {
+      overflow-wrap: anywhere;
+    }
+
+    .field-note { color: var(--muted); }
+    .field-note strong { color: var(--text); }
+
+    .takeaway {
+      border: 1px solid var(--border);
+      background: linear-gradient(180deg, #fbfcff, #f6f8fc);
+      border-radius: var(--radius-lg);
+      padding: 16px;
+      display: grid;
+      gap: 6px;
+    }
+
+    .takeaway strong {
+      font-size: 13px;
+      letter-spacing: 0.02em;
+    }
+
+    .score-strip {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 10px;
+      max-width: 100%;
+      min-width: 0;
+    }
+
+    .score-item {
+      --score: 1;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      background: var(--surface-soft);
+      padding: 12px;
+      display: grid;
+      gap: 8px;
+      min-height: 88px;
+      min-width: 0;
+      overflow: hidden;
+    }
+
+    .score-topline {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 6px;
+      min-width: 0;
+      max-width: 100%;
+    }
+
+    .score-value {
+      min-width: 0;
+      max-width: 100%;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      font-size: 24px;
+      line-height: 1;
+      font-weight: 900;
+      letter-spacing: -0.04em;
+    }
+
+    .score-max {
+      color: var(--muted-2);
+      font-size: 11px;
+      font-weight: 800;
+      flex: 0 0 auto;
+    }
+
+    .score-label {
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.15;
+      font-weight: 750;
+      overflow-wrap: anywhere;
+      hyphens: auto;
+    }
+
+    .meter {
+      width: 100%;
+      min-width: 0;
+      height: 7px;
+      border-radius: 999px;
+      background: #e4e9f2;
+      overflow: hidden;
+    }
+
+    .meter > span {
+      display: block;
+      height: 100%;
+      width: clamp(0%, calc(var(--score) * 20%), 100%);
+      max-width: 100%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, var(--accent), #1f7a4d);
+    }
+
+    .filter-panel {
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      background: rgba(255, 255, 255, 0.78);
+      box-shadow: var(--shadow-soft);
+      padding: 14px;
+      display: grid;
+      gap: 10px;
+    }
+
+    .filter-label {
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 850;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .filter-button {
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--muted);
+      padding: 8px 10px;
+      cursor: pointer;
+      transition: background 0.18s ease, color 0.18s ease, border-color 0.18s ease, transform 0.18s ease;
+    }
+
+    .filter-button:hover {
+      transform: translateY(-1px);
+      border-color: var(--border-strong);
+    }
+
+    .filter-button.active,
+    .filter-button[aria-pressed="true"] {
+      background: var(--text);
+      color: #ffffff;
+      border-color: var(--text);
+    }
+
+    .is-filtered-out { display: none !important; }
+
+    .filter-empty-state {
+      display: none;
+      border: 1px dashed var(--border-strong);
+      border-radius: var(--radius-lg);
+      background: rgba(255, 255, 255, 0.7);
+      padding: 16px;
+      color: var(--muted);
+    }
+
+    .filter-empty-state.is-visible { display: block; }
+
+    .sidebar-status-grid,
+    .compact-source-summary,
+    .compact-source-details,
+    .compact-role-row {
+      display: grid;
+      gap: 10px;
+    }
+
+    .sidebar-status-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .status-card {
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      background: var(--surface-soft);
+      padding: 12px;
+      display: grid;
+      gap: 5px;
+    }
+
+    .status-card-label {
+      font-size: 11px;
+      font-weight: 850;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--muted-2);
+    }
+
+    .status-card-value {
+      font-size: 14px;
+      font-weight: 800;
+      color: var(--text);
+    }
+
+    .compact-source-header {
+      display: grid;
+      gap: 8px;
+    }
+
+    .compact-source-stats {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .compact-source-list {
+      margin: 0;
+      padding-left: 18px;
+      color: var(--muted);
+      display: grid;
+      gap: 6px;
+    }
+
+    .compact-source-list a,
+    .compact-source-list .source-label-fallback {
+      font-weight: 750;
+    }
+
+    .story-card { box-shadow: var(--shadow-soft); }
+    .story-card[data-category="regulation"] { border-left: 5px solid var(--accent); }
+    .story-card[data-category="governance"] { border-left: 5px solid var(--success); }
+    .story-card[data-category="enterprise_ai"] { border-left: 5px solid #5b5fd6; }
+    .story-card[data-category="product"] { border-left: 5px solid #6b55c9; }
+    .story-card[data-category="global_eu"] { border-left: 5px solid #2d8aa6; }
+    .story-card[data-category="watchlist"] { border-left: 5px solid var(--watch); }
+
+    details.evidence {
+      border-top: 1px solid var(--border);
+      padding-top: 10px;
+    }
+
+    details.evidence summary,
+    .source-item summary {
+      cursor: pointer;
+      list-style: none;
+      color: var(--accent-strong);
+      font-size: 13px;
+      font-weight: 850;
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      align-items: center;
+    }
+
+    details.evidence summary::-webkit-details-marker,
+    .source-item summary::-webkit-details-marker { display: none; }
+
+    details.evidence summary::after,
+    .source-item summary::after {
+      content: "+";
+      display: grid;
+      place-items: center;
+      width: 22px;
+      height: 22px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: var(--accent-strong);
+      font-size: 15px;
+      line-height: 1;
+      flex: 0 0 auto;
+    }
+
+    details.evidence[open] summary::after,
+    .source-item details[open] summary::after { content: "–"; }
+
+    .sources {
+      margin-top: 10px;
+      display: grid;
+      gap: 8px;
+      padding: 12px;
+      border-radius: var(--radius-md);
+      background: var(--surface-soft);
+      border: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 13px;
+      min-width: 0;
+    }
+
+    .source-link-card {
+      display: grid;
+      gap: 7px;
+      padding: 10px;
+      border: 1px solid rgba(191, 202, 224, 0.75);
+      border-radius: var(--radius-sm);
+      background: #ffffff;
+      min-width: 0;
+    }
+
+    .source-link-card a,
+    .source-link-card .source-label-fallback {
+      font-weight: 850;
+      overflow-wrap: anywhere;
+    }
+
+    .source-label-fallback { color: var(--text); }
+
+    .source-pill {
+      align-self: start;
+      justify-self: start;
+      padding: 5px 7px;
+      border: 1px solid var(--border);
+      background: #eef2ff;
+      color: #3730a3;
+      font-size: 10.5px;
+      letter-spacing: 0.01em;
+    }
+
+    .source-meta {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 6px 10px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .source-meta span { overflow-wrap: anywhere; }
+    .source-meta strong { color: var(--text); }
+
+    .sidebar-block {
+      padding: 18px;
+      display: grid;
+      gap: 12px;
+    }
+
+    .watch-item,
+    .source-item,
+    .archive-item {
+      border: 1px solid var(--border);
+      background: var(--surface-soft);
+      border-radius: var(--radius-md);
+      padding: 13px;
+      display: grid;
+      gap: 7px;
+      min-width: 0;
+    }
+
+    .sidebar-meta {
+      color: var(--muted);
+      font-size: 13px;
+      overflow-wrap: anywhere;
+    }
+
+    .source-item { padding: 0; overflow: hidden; }
+    .source-item details { padding: 12px 13px; }
+    .source-item summary { color: var(--text); overflow-wrap: anywhere; }
+    .source-item .source-detail {
+      margin-top: 9px;
+      display: grid;
+      gap: 8px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+    .archive-item .relation-type { justify-self: start; background: #eef2ff; color: #3730a3; }
+
+    @media (max-width: 980px) {
+      body { padding: 18px; }
+      .hero, .top-story, .story-card, .sidebar-block { border-radius: var(--radius-lg); }
+      .main-layout { grid-template-columns: 1fr; }
+      .score-strip {
+        grid-template-columns: repeat(5, minmax(78px, 1fr));
+        gap: 7px;
+        overflow-x: auto;
+        overflow-y: hidden;
+        padding-bottom: 2px;
+        scrollbar-width: thin;
+      }
+      .score-item { min-height: 58px; padding: 7px 8px; gap: 5px; }
+      .score-value { font-size: 16px; }
+      .score-max { font-size: 10px; }
+      .score-label { font-size: 10px; line-height: 1.1; }
+      .meter { height: 4px; }
+      .chip, .badge, .filter-button { padding: 6px 8px; font-size: 11px; }
+      .filter-panel { padding: 12px; }
+      .filter-row { gap: 7px; }
+      .source-meta { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 560px) {
+      body { padding: 12px; }
+      .daily-briefing { gap: 14px; }
+      .hero { padding: 22px; }
+      .story-header { display: grid; gap: 10px; }
+      .story-meta { gap: 7px; }
+      .score-strip { grid-template-columns: repeat(5, minmax(72px, 1fr)); }
+      .score-item { min-height: 54px; padding: 6px 7px; }
+      .score-value { font-size: 15px; }
+      .score-max { font-size: 10px; }
+      .score-label { font-size: 9.5px; }
+      .filter-row {
+        display: flex;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        padding-bottom: 2px;
+        scrollbar-width: thin;
+      }
+      .filter-button { flex: 0 0 auto; }
+      .sources { padding: 10px; }
+      .source-link-card { padding: 9px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="daily-briefing">
+    <section class="hero">
+      <div class="eyebrow">Daily AI Intelligence Briefing</div>
+      <h1>AI Intelligence Daily – 23. Juli 2026: Samsung erwägt Mistral-Einstieg, China erwägt KI-Exportkontrollen</h1>
+      <p class="briefing-summary">Laut FT verhandelt Samsung über eine ~1-Mrd.-Euro-Beteiligung an Mistral (Bewertung ~20 Mrd. Euro) – unbestätigt. China erwägt Exportbeschränkungen für KI-Modellgewichte; laut The Decoder bringt das &quot;Europa zwischen die Fronten&quot;. Zudem: AMDs 5-Mrd.-Investition in Anthropic, ohne EU-Bezug.</p>
+      <div class="meta-row">
+        <span class="chip">Datum: 2026-07-23</span>
+        <span class="chip">Fenster: 2026-07-22 00:00–23:59 CEST</span>
+        <span class="chip">Fokus: Deutschland / EU</span>
+        <span class="badge" data-trust="gemischt" data-ui-map="overall-trust" data-raw-value="gemischt">Status: gemischt</span>
+      </div>
+    </section>
+
+    <section class="main-layout">
+      <section class="main-column">
+        <article class="top-story">
+          <div class="story-header">
+            <div class="story-title-block">
+              <div class="story-kicker">Top Story</div>
+              <h2>Samsung angeblich in Gesprächen über Milliarden-Beteiligung an Mistral – Bewertung könnte auf 20 Mrd. Euro steigen</h2>
+            </div>
+            <span class="chip" data-ui-map="priority" data-raw-value="P1">P1</span>
+          </div>
+          <p>Die Financial Times berichtete am 22.07., Samsung verhandle über eine Beteiligung von rund 1 Mrd. Euro an Mistral im Rahmen einer Finanzierungsrunde, die Europas führenden KI-Anbieter auf rund 20 Mrd. Euro bewerten könnte – ein deutlicher Sprung von den 11,7 Mrd. Euro der ASML-geführten Series-C-Runde vom September 2025. Auch EQTs EU-kofinanzierter Scaleup-Europe-Fund, Novo Holdings und Santander sollen laut FT an der Runde interessiert sein. Strategische Logik: Samsung sucht einen Ankerkunden für HBM-Speicherchips, Mistral bevorzugten Zugang zu Rechenzentrums-Komponenten. Weder Samsung noch Mistral haben die Gespräche bestätigt; Reuters konnte den Bericht nicht eigenständig verifizieren.</p>
+          <div class="score-strip">
+            <div class="score-item" style="--score: 5"><div class="score-topline"><span class="score-value">5</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">EU / DE-Relevanz</div></div>
+            <div class="score-item" style="--score: 4"><div class="score-topline"><span class="score-value">4</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Business Impact</div></div>
+            <div class="score-item" style="--score: 1"><div class="score-topline"><span class="score-value">1</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Regulatorik</div></div>
+            <div class="score-item" style="--score: 2"><div class="score-topline"><span class="score-value">2</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Technologie</div></div>
+            <div class="score-item" style="--score: 4"><div class="score-topline"><span class="score-value">4</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Lernwert</div></div>
+          </div>
+          <div class="takeaway">
+            <strong>Einschätzung</strong>
+            <p class="field-note">Der zweite milliardenschwere Kapital-/Infrastruktur-Strang um Mistral binnen zwei Tagen nach der Microsoft-Partnerschaft vom 21.07. – noch reine Verhandlungsstufe, aber ein weiterer konkreter Datenpunkt für die Bewertung von Europas KI-Souveränitäts-Vorzeigeanbieter als Investment- und Vendor-Assurance-Fall.</p>
+          </div>
+          <details class="evidence">
+            <summary>Quellen</summary>
+            <div class="sources">
+              <article class="source-link-card">
+                <a href="https://www.investing.com/news/stock-market-news/samsung-in-talks-to-invest-in-mistral-at-20-billion-euro-valuation-ft-reports-4804624" target="_blank" rel="noopener noreferrer">Samsung in talks to invest in Mistral at 20 billion euro valuation, FT reports</a>
+                <div class="source-meta-row">
+                  <span class="source-pill" data-ui-map="role" data-raw-value="marktverifikation">marktverifikation</span>
+                  <span class="source-pill" data-ui-map="source-type" data-raw-value="media">media</span>
+                </div>
+                <div class="source-meta">
+                  <span><strong>Publisher:</strong> Reuters (via Investing.com)</span>
+                  <span><strong>Veröffentlicht:</strong> 2026-07-22</span>
+                  <span><strong>Abgerufen:</strong> 2026-07-23</span>
+                </div>
+              </article>
+              <article class="source-link-card">
+                <a href="https://www.axios.com/2026/07/22/mistral-samsung-20-billion-valuation" target="_blank" rel="noopener noreferrer">Mistral in talks with Samsung on €20B valuation</a>
+                <div class="source-meta-row">
+                  <span class="source-pill" data-ui-map="role" data-raw-value="marktverifikation">marktverifikation</span>
+                  <span class="source-pill" data-ui-map="source-type" data-raw-value="media">media</span>
+                </div>
+                <div class="source-meta">
+                  <span><strong>Publisher:</strong> Axios</span>
+                  <span><strong>Veröffentlicht:</strong> 2026-07-22</span>
+                  <span><strong>Abgerufen:</strong> 2026-07-23</span>
+                </div>
+              </article>
+              <article class="source-link-card">
+                <a href="https://techfundingnews.com/samsung-mistral-investment-20bn-valuation/" target="_blank" rel="noopener noreferrer">Samsung is in talks to put €1B into Mistral at a €20B valuation, one day after launching a robotics unit</a>
+                <div class="source-meta-row">
+                  <span class="source-pill" data-ui-map="role" data-raw-value="enterprise_signal">enterprise_signal</span>
+                  <span class="source-pill" data-ui-map="source-type" data-raw-value="media">media</span>
+                </div>
+                <div class="source-meta">
+                  <span><strong>Publisher:</strong> Tech Funding News</span>
+                  <span><strong>Veröffentlicht:</strong> 2026-07-22</span>
+                  <span><strong>Abgerufen:</strong> 2026-07-23</span>
+                </div>
+              </article>
+            </div>
+          </details>
+          <details class="evidence">
+            <summary>Weitere Recherche</summary>
+            <div class="sources">
+              <p class="field-note">Ob Samsung oder Mistral die Gespräche offiziell bestätigen, ob die Runde tatsächlich zustande kommt, und ob EQTs EU-Kommissions-Verbindung im Rahmen der Runde eine Rolle spielt.</p>
+            </div>
+          </details>
+        </article>
+
+        <section class="priority-stories">
+          <div class="section-label">Weitere priorisierte Entwicklungen</div>
+          <div class="filter-panel" aria-label="Story-Filter">
+            <div class="filter-label">Filter</div>
+            <div class="filter-row" id="story-filter-row">
+              <button class="filter-button active" type="button" data-filter="all" aria-pressed="true">Alle</button>
+            </div>
+          </div>
+
+          <article class="story-card" data-id="china-mofcom-ai-weights-export-controls-2026-07-22" data-category="global_eu" data-trust-status="hoch">
+            <div class="story-header">
+              <div class="story-title-block">
+                <div class="story-kicker">GLOBAL TREND</div>
+                <h3>China erwägt Exportkontrollen für offene KI-Modellgewichte – &quot;Europa zwischen den Fronten&quot;</h3>
+              </div>
+              <div class="story-meta">
+                <span class="chip" data-ui-map="category" data-raw-value="global_eu">global_eu</span>
+                <span class="chip" data-ui-map="priority" data-raw-value="P2">P2</span>
+              </div>
+            </div>
+            <div class="story-text-stack">
+              <p>Laut FT (Original), unabhängig bestätigt durch Reuters, konsultieren Chinas MOFCOM/NDRC Alibaba, ByteDance und Zhipu zu einem Regime, das offene Modellgewichte/Trainingsdaten beschränken könnte – fünf Tage nach Xi Jinpings WAIC-Rede zu &quot;Open Source, Offenheit und Teilen&quot;.</p>
+              <p class="field-note"><strong>Warum relevant:</strong> The Decoder (Klasse A) ordnet dies explizit als Entwicklung ein, die &quot;Europa zwischen die Fronten&quot; bringt, da europäische Entwickler offene chinesische Modelle (Qwen, DeepSeek, Kimi) als Souveränitätsalternative nutzen.</p>
+              <p class="field-note"><strong>EU-/DE-Impact:</strong> Indirekt, aber durch die Hauptquelle selbst begründet, nicht konstruiert. Noch keine EU-Institution hat reagiert. Verschärft den seit 10.07. beobachteten MOFCOM-Strang um eine konkrete neue Dimension.</p>
+              <p class="field-note"><strong>Einordnung:</strong> Sollte China offene Gewichte beschränken, verengt sich für EU-Organisationen die Palette günstiger Souveränitäts-Alternativen zu US-Anbietern weiter – relevant für Vendor-Diversifizierung.</p>
+            </div>
+            <div class="score-strip">
+              <div class="score-item" style="--score: 4"><div class="score-topline"><span class="score-value">4</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">EU / DE-Relevanz</div></div>
+              <div class="score-item" style="--score: 3"><div class="score-topline"><span class="score-value">3</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Business Impact</div></div>
+              <div class="score-item" style="--score: 3"><div class="score-topline"><span class="score-value">3</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Regulatorik</div></div>
+              <div class="score-item" style="--score: 3"><div class="score-topline"><span class="score-value">3</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Technologie</div></div>
+              <div class="score-item" style="--score: 4"><div class="score-topline"><span class="score-value">4</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Lernwert</div></div>
+            </div>
+            <details class="evidence">
+              <summary>Quellen & Unsicherheit</summary>
+              <div class="sources">
+                <p class="field-note"><strong>Quellenlage:</strong> <span data-ui-map="trust" data-raw-value="hoch">hoch</span></p>
+                <article class="source-link-card">
+                  <a href="https://the-decoder.com/china-eyes-export-curbs-on-its-top-ai-models-and-europe-is-caught-in-the-middle/" target="_blank" rel="noopener noreferrer">China eyes export curbs on its top AI models, and Europe is caught in the middle</a>
+                  <div class="source-meta-row">
+                    <span class="source-pill" data-ui-map="role" data-raw-value="enterprise_signal">enterprise_signal</span>
+                    <span class="source-pill" data-ui-map="source-type" data-raw-value="media">media</span>
+                  </div>
+                  <div class="source-meta">
+                    <span><strong>Publisher:</strong> The Decoder</span>
+                    <span><strong>Veröffentlicht:</strong> 2026-07-22</span>
+                    <span><strong>Abgerufen:</strong> 2026-07-23</span>
+                  </div>
+                </article>
+                <article class="source-link-card">
+                  <a href="https://finance.yahoo.com/technology/ai/articles/china-considers-tighter-export-controls-041139427.html" target="_blank" rel="noopener noreferrer">China considers tighter export controls on AI models and chips, FT reports</a>
+                  <div class="source-meta-row">
+                    <span class="source-pill" data-ui-map="role" data-raw-value="marktverifikation">marktverifikation</span>
+                    <span class="source-pill" data-ui-map="source-type" data-raw-value="media">media</span>
+                  </div>
+                  <div class="source-meta">
+                    <span><strong>Publisher:</strong> Financial Times (via Yahoo Finance)</span>
+                    <span><strong>Veröffentlicht:</strong> 2026-07-21</span>
+                    <span><strong>Abgerufen:</strong> 2026-07-23</span>
+                  </div>
+                </article>
+                <article class="source-link-card">
+                  <a href="https://www.techrepublic.com/article/news-apac-china-ai-model-export-controls/" target="_blank" rel="noopener noreferrer">China Considers Export Controls on AI Models, Training Data and Chip Technology</a>
+                  <div class="source-meta-row">
+                    <span class="source-pill" data-ui-map="role" data-raw-value="marktverifikation">marktverifikation</span>
+                    <span class="source-pill" data-ui-map="source-type" data-raw-value="media">media</span>
+                  </div>
+                  <div class="source-meta">
+                    <span><strong>Publisher:</strong> TechRepublic</span>
+                    <span><strong>Veröffentlicht:</strong> 2026-07-22</span>
+                    <span><strong>Abgerufen:</strong> 2026-07-23</span>
+                  </div>
+                </article>
+                <p class="field-note"><strong>Unsicherheit:</strong> Die Konsultationen selbst sind mehrfach unabhängig bestätigt; ob und in welcher Form Regeln erlassen werden, ist offen – Vorschlagsstadium, keine beschlossene Politik.</p>
+              </div>
+            </details>
+            <details class="evidence">
+              <summary>Weitere Recherche</summary>
+              <div class="sources">
+                <p class="field-note">Ob MOFCOM die Pläne offiziell bestätigt oder konkretisiert, ob Alibaba/ByteDance/Zhipu öffentlich Stellung nehmen, und ob eine EU-Institution oder ein europäischer Anbieter reagiert.</p>
+              </div>
+            </details>
+          </article>
+          <article class="story-card" data-id="amd-anthropic-5bn-investment-2gw-2026-07-22" data-category="watchlist" data-trust-status="watchlist">
+            <div class="story-header">
+              <div class="story-title-block">
+                <div class="story-kicker">WATCHLIST</div>
+                <h3>AMD investiert bis zu 5 Mrd. USD in Anthropic für 2 Gigawatt Chipkapazität</h3>
+              </div>
+              <div class="story-meta">
+                <span class="chip" data-ui-map="category" data-raw-value="watchlist">watchlist</span>
+                <span class="chip" data-ui-map="priority" data-raw-value="P3">P3</span>
+              </div>
+            </div>
+            <div class="story-text-stack">
+              <p>AMD und Anthropic kündigten am 22.07. eine strategische Partnerschaft an: AMD investiert bis zu 5 Mrd. USD (an Meilensteine gekoppelt), Anthropic setzt bis zu 2 Gigawatt AMD-Instinct-MI450-GPUs in AMD-Helios-Racksystemen ein (erstes Gigawatt ab H1 2027). Im Gegenzug optimiert Claude AMDs ROCm-Plattform.</p>
+              <p class="field-note"><strong>Warum relevant:</strong> Ein weiterer Beleg für Diversifizierung der KI-Chipversorgung weg von Nvidia – bemerkenswert in derselben Woche wie die Nvidia-Kritik am Microsoft-Mistral-Deal; diese Einordnung ist des Briefings eigene.</p>
+              <p class="field-note"><strong>EU-/DE-Impact:</strong> Kein EU-spezifisches Detail in keiner gefundenen Quelle: keine europäische Kunden-, Standort- oder Datenresidenz-Angabe. Bewusst ohne konstruierten EU-Bezug aufgenommen.</p>
+              <p class="field-note"><strong>Einordnung:</strong> Reines US-Infrastrukturgeschäft mit hohem globalem Branchengewicht, aber ohne belegte EU-Anknüpfung – als Kontext zum Chip-Souveränitäts-Thema, nicht als EU-Entwicklung zu lesen.</p>
+            </div>
+            <div class="score-strip">
+              <div class="score-item" style="--score: 1"><div class="score-topline"><span class="score-value">1</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">EU / DE-Relevanz</div></div>
+              <div class="score-item" style="--score: 4"><div class="score-topline"><span class="score-value">4</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Business Impact</div></div>
+              <div class="score-item" style="--score: 1"><div class="score-topline"><span class="score-value">1</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Regulatorik</div></div>
+              <div class="score-item" style="--score: 4"><div class="score-topline"><span class="score-value">4</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Technologie</div></div>
+              <div class="score-item" style="--score: 3"><div class="score-topline"><span class="score-value">3</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Lernwert</div></div>
+            </div>
+            <details class="evidence">
+              <summary>Quellen & Unsicherheit</summary>
+              <div class="sources">
+                <p class="field-note"><strong>Quellenlage:</strong> <span data-ui-map="trust" data-raw-value="watchlist">watchlist</span></p>
+                <article class="source-link-card">
+                  <a href="https://ir.amd.com/news-events/press-releases/detail/1292/amd-and-anthropic-announce-strategic-partnership-to-deploy-up-to-2-gigawatts-of-amd-instinct-mi450-series-gpus" target="_blank" rel="noopener noreferrer">AMD and Anthropic Announce Strategic Partnership to Deploy Up to 2 Gigawatts of AMD Instinct MI450 Series GPUs</a>
+                  <div class="source-meta-row">
+                    <span class="source-pill" data-ui-map="role" data-raw-value="unternehmensquelle">unternehmensquelle</span>
+                    <span class="source-pill" data-ui-map="source-type" data-raw-value="vendor">vendor</span>
+                  </div>
+                  <div class="source-meta">
+                    <span><strong>Publisher:</strong> AMD</span>
+                    <span><strong>Veröffentlicht:</strong> 2026-07-22</span>
+                    <span><strong>Abgerufen:</strong> 2026-07-23</span>
+                  </div>
+                </article>
+                <article class="source-link-card">
+                  <a href="https://www.tomshardware.com/tech-industry/amd-to-supply-anthropic-with-2-gigawatts-of-instinct-mi450-gpus" target="_blank" rel="noopener noreferrer">AMD to supply Anthropic with 2 gigawatts of Instinct MI450 GPUs — will invest up to $5 billion in the Claude developer</a>
+                  <div class="source-meta-row">
+                    <span class="source-pill" data-ui-map="role" data-raw-value="enterprise_signal">enterprise_signal</span>
+                    <span class="source-pill" data-ui-map="source-type" data-raw-value="media">media</span>
+                  </div>
+                  <div class="source-meta">
+                    <span><strong>Publisher:</strong> Tom&#x27;s Hardware</span>
+                    <span><strong>Veröffentlicht:</strong> 2026-07-22</span>
+                    <span><strong>Abgerufen:</strong> 2026-07-23</span>
+                  </div>
+                </article>
+                <p class="field-note"><strong>Unsicherheit:</strong> Die Fakten des Deals selbst sind über AMDs eigene Primärquelle hoch belastbar; die watchlist-Einstufung bezieht sich allein auf die fehlende EU-Relevanz, nicht auf Zweifel am Deal.</p>
+              </div>
+            </details>
+            <details class="evidence">
+              <summary>Weitere Recherche</summary>
+              <div class="sources">
+                <p class="field-note">Ob europäische Anthropic-Kunden oder -Rechenzentren von der zusätzlichen AMD-Kapazität profitieren, und ob AMD oder Anthropic eine EU-spezifische Ausgestaltung ankündigen.</p>
+              </div>
+            </details>
+          </article>
+          <div class="filter-empty-state" id="story-filter-empty-state">
+            Keine Stories für diesen Filter sichtbar. Wähle einen anderen Filter oder prüfe, ob in diesem Lauf nur andere Kategorien vorkommen.
+          </div>
+        </section>
+      </section>
+
+      <aside class="sidebar">
+        <section class="sidebar-block">
+          <h3>Tageslage</h3>
+          <p class="sidebar-meta">Laut FT verhandelt Samsung über eine ~1-Mrd.-Euro-Beteiligung an Mistral (Bewertung ~20 Mrd. Euro) – unbestätigt. China erwägt Exportbeschränkungen für KI-Modellgewichte; laut The Decoder bringt das &quot;Europa zwischen die Fronten&quot;. Zudem: AMDs 5-Mrd.-Investition in Anthropic, ohne EU-Bezug.</p>
+          <div class="sidebar-status-grid">
+            <div class="status-card">
+              <span class="status-card-label">Fenster</span>
+              <span class="status-card-value">2026-07-22 00:00–23:59 CEST</span>
+            </div>
+            <div class="status-card">
+              <span class="status-card-label">Quellenlage</span>
+              <span class="status-card-value" data-ui-map="trust" data-raw-value="gemischt">gemischt</span>
+            </div>
+          </div>
+        </section>
+
+        <section class="sidebar-block watchlist">
+          <h3>Watchlist</h3>
+          <article class="watch-item" data-id="ai-act-omnibus-oj-publication-still-pending-2026-07-23">
+            <div class="story-meta"><span class="badge" data-trust="mittel" data-ui-map="trust" data-raw-value="mittel">mittel</span></div>
+            <h4>AI-Act-Omnibus: Amtsblattveröffentlichung weiterhin ausstehend</h4>
+            <p class="sidebar-meta">Auch am 22.07. keine EUR-Lex-CELEX-Nummer für die am 08.07. unterzeichnete, am 29.06. final gebilligte Omnibus-Verordnung gefunden.</p>
+            <p class="sidebar-meta"><strong>Warum beobachten:</strong> Erst mit Veröffentlichung werden die verschobenen Hochrisiko-Fristen vor dem 02.08. rechtsverbindlich.</p>
+            <p class="sidebar-meta"><strong>Nächstes Signal:</strong> CELEX-Nummer und Veröffentlichungsdatum im Amtsblatt.</p>
+          </article>
+          <article class="watch-item" data-id="ki-mig-verkuendung-bgbl-2026-07-23">
+            <div class="story-meta"><span class="badge" data-trust="mittel" data-ui-map="trust" data-raw-value="mittel">mittel</span></div>
+            <h4>KI-Durchführungsgesetz (KI-MIG): Verkündung im Bundesgesetzblatt weiterhin offen</h4>
+            <p class="sidebar-meta">Auch am 22.07. keine Verkündung des am 10.07. gebilligten KI-MIG im Bundesgesetzblatt gefunden.</p>
+            <p class="sidebar-meta"><strong>Warum beobachten:</strong> Erst mit Verkündung wird die Bundesnetzagentur formal als zentrale Marktüberwachungsbehörde wirksam.</p>
+            <p class="sidebar-meta"><strong>Nächstes Signal:</strong> Verkündungsdatum im Bundesgesetzblatt.</p>
+          </article>
+          <article class="watch-item" data-id="code-of-practice-signatory-deadline-2026-07-27">
+            <div class="story-meta"><span class="badge" data-trust="mittel" data-ui-map="trust" data-raw-value="mittel">mittel</span></div>
+            <h4>Transparenz-Code of Practice: Unterzeichnerfrist 27.07., 18:00 CEST rückt näher</h4>
+            <p class="sidebar-meta">Die verlängerte Frist für die erste Unterzeichnerliste des Art.-50-Transparenz-Codes bleibt bei 27.07.2026, 18:00 CEST; noch keine veröffentlichte Signatarliste gefunden.</p>
+            <p class="sidebar-meta"><strong>Warum beobachten:</strong> Die Liste zeigt, welche Anbieter/Deployer sich vor Geltungsbeginn (02.08.) zur Konformitätsvermutung bekennen.</p>
+            <p class="sidebar-meta"><strong>Nächstes Signal:</strong> Veröffentlichung der ersten Signatarliste nach dem 27.07.</p>
+          </article>
+          <article class="watch-item" data-id="openai-huggingface-incident-eu-reaction-still-none-2026-07-23">
+            <div class="story-meta"><span class="badge" data-trust="mittel" data-ui-map="trust" data-raw-value="mittel">mittel</span></div>
+            <h4>OpenAI/Hugging-Face-Sicherheitsvorfall: weiterhin keine EU-Reaktion</h4>
+            <p class="sidebar-meta">Auch am 22.07. keine Stellungnahme von AI Office oder ENISA zum am 21.07. offengelegten Sandbox-Ausbruch gefunden; OpenAI und Hugging Face bestätigten weitere technische Details der Untersuchung.</p>
+            <p class="sidebar-meta"><strong>Warum beobachten:</strong> GPAI-Anbieter mit Systemrisiko unterliegen laut Art. 55(1)(c) AI Act einer Meldepflicht für schwerwiegende Vorfälle gegenüber dem AI Office.</p>
+            <p class="sidebar-meta"><strong>Nächstes Signal:</strong> Erste Reaktion von AI Office, ENISA oder einer nationalen Behörde.</p>
+          </article>
+          <article class="watch-item" data-id="openai-presence-enterprise-agents-2026-07-22">
+            <div class="story-meta"><span class="badge" data-trust="mittel" data-ui-map="trust" data-raw-value="mittel">mittel</span></div>
+            <h4>OpenAI startet &quot;Presence&quot;, Plattform für Enterprise-KI-Sprach-/Chat-Agenten</h4>
+            <p class="sidebar-meta">OpenAI veröffentlichte am 22.07. Presence: eine Plattform für abgesicherte, richtliniengesteuerte KI-Agenten (Kundenservice, IT, HR); Referenzkunden bislang nur BBVA Mexiko, SoftBank Japan, IAG Australien.</p>
+            <p class="sidebar-meta"><strong>Warum beobachten:</strong> Kein EU-Kunde, keine Preis-/Verfügbarkeits-/Datenresidenz-Angabe bislang – relevant für Enterprise-Agentic-AI-Governance, sobald EU-Details vorliegen.</p>
+            <p class="sidebar-meta"><strong>Nächstes Signal:</strong> EU-Kundenbeispiel, Preisgestaltung oder Datenresidenz-Dokumentation.</p>
+          </article>
+        </section>
+
+        <section class="sidebar-block archive-panel">
+          <h3>Archivbezug</h3>
+          <article class="archive-item" data-id="mistral-sovereignty-vendor-funding-thread-2026-07-23">
+            <span class="badge relation-type" data-ui-map="relation-type" data-raw-value="recurring_theme">recurring_theme</span>
+            <h4>Mistral als europäischer Souveränitäts-Vorzeigeanbieter (verfolgt seit Weekly W29)</h4>
+            <p class="sidebar-meta">Nach dem Microsoft-Deal vom 21.07. binnen zwei Tagen ein zweiter potenzieller Kapitalgeber (Samsung) – die Souveränitäts-/Investoren-Erzählung um Mistral verdichtet sich weiter.</p>
+          </article>
+          <article class="archive-item" data-id="china-open-weight-export-control-thread-2026-07-23">
+            <span class="badge relation-type" data-ui-map="relation-type" data-raw-value="follow_up">follow_up</span>
+            <h4>China MOFCOM Exportkontroll-Debatte für KI-Modelle (verfolgt seit 10.07.)</h4>
+            <p class="sidebar-meta">Konkretisiert den seit 10.07. beobachteten Strang um die neue, explizite Einbeziehung offener Modellgewichte und eine erstmals direkt benannte EU-Betroffenheit.</p>
+          </article>
+        </section>
+      </aside>
+    </section>
+  </main>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const labelMaps = {
+        category: {
+          regulation: 'Regulierung',
+          product: 'Produkte & Plattformen',
+          global_eu: 'Global mit EU-Impact',
+          enterprise_ai: 'Enterprise AI',
+          governance: 'Governance',
+          watchlist: 'Watchlist'
+        },
+        priority: {
+          P1: 'Sehr wichtig',
+          P2: 'Relevant',
+          P3: 'Kurz notiert'
+        },
+        trust: {
+          hoch: 'Hohe Quellenlage',
+          mittel: 'Mittlere Quellenlage',
+          niedrig: 'Niedrige Quellenlage',
+          gemischt: 'Gemischte Quellenlage',
+          watchlist: 'Watchlist'
+        },
+        role: {
+          faktenanker: 'Faktenanker',
+          policy_interpretation: 'Policy-Interpretation',
+          marktverifikation: 'Marktverifikation',
+          produktquelle: 'Produktquelle',
+          enterprise_signal: 'Enterprise-Signal',
+          'frühindikator': 'Frühindikator',
+          unternehmensquelle: 'Unternehmensquelle',
+          developer_dokumentation: 'Entwicklerdokumentation'
+        },
+        'source-type': {
+          official: 'Offizielle Quelle',
+          vendor: 'Anbieterquelle',
+          media: 'Medienbericht',
+          research: 'Research',
+          community: 'Community',
+          documentation: 'Dokumentation',
+          legal: 'Rechtstext'
+        },
+        'relation-type': {
+          follow_up: 'Follow-up',
+          recurring_theme: 'Wiederkehrendes Thema',
+          precedent: 'Präzedenzfall',
+          trendline: 'Trendlinie'
+        }
+      };
+
+      const mapLabel = (group, rawValue) => {
+        if (!rawValue) return '';
+        return (labelMaps[group] && labelMaps[group][rawValue]) || rawValue;
+      };
+
+      document.querySelectorAll('[data-ui-map]').forEach((element) => {
+        const group = element.dataset.uiMap;
+        const rawValue = element.dataset.rawValue || element.textContent.trim();
+        const mappedValue = mapLabel(group === 'overall-trust' ? 'trust' : group, rawValue);
+
+        if (group === 'overall-trust') {
+          element.textContent = `Status: ${mappedValue}`;
+          return;
+        }
+
+        element.textContent = mappedValue;
+      });
+
+      document.querySelectorAll('[data-derived-from-story]').forEach((element) => {
+        const rawValue = element.dataset.derivedFromStory;
+        element.textContent = rawValue === 'true' ? 'Aus Story-Quellen abgeleitet' : 'Eigenständig zusammengeführt';
+      });
+
+      document.querySelectorAll('.source-item').forEach((item) => {
+        const roleSummary = item.querySelector('[data-role-summary]');
+        const roleNodes = Array.from(item.querySelectorAll('[data-source-role]'));
+        const sourceCountNode = item.querySelector('[data-source-count]');
+        const uniqueRoles = [...new Set(roleNodes.map((node) => node.dataset.rawValue).filter(Boolean))];
+
+        if (sourceCountNode) sourceCountNode.textContent = String(roleNodes.length);
+
+        if (roleSummary) {
+          roleSummary.innerHTML = '';
+          uniqueRoles.forEach((role) => {
+            const pill = document.createElement('span');
+            pill.className = 'source-pill';
+            pill.textContent = mapLabel('role', role);
+            roleSummary.appendChild(pill);
+          });
+        }
+      });
+
+      const cards = Array.from(document.querySelectorAll('.priority-stories .story-card'));
+      const filterRow = document.getElementById('story-filter-row');
+      const emptyState = document.getElementById('story-filter-empty-state');
+      const categoryCounts = cards.reduce((acc, card) => {
+        const category = card.dataset.category;
+        if (!category) return acc;
+        acc[category] = (acc[category] || 0) + 1;
+        return acc;
+      }, {});
+
+      const createButton = (filter, label) => {
+        const button = document.createElement('button');
+        button.type = 'button';
+        button.className = 'filter-button';
+        button.dataset.filter = filter;
+        button.setAttribute('aria-pressed', 'false');
+        button.textContent = label;
+        return button;
+      };
+
+      Object.keys(categoryCounts).forEach((category) => {
+        const button = createButton(category, `${mapLabel('category', category)} · ${categoryCounts[category]}`);
+        filterRow.appendChild(button);
+      });
+
+      const buttons = Array.from(document.querySelectorAll('.filter-button'));
+
+      const applyFilter = (filter) => {
+        buttons.forEach((button) => {
+          const isActive = button.dataset.filter === filter;
+          button.classList.toggle('active', isActive);
+          button.setAttribute('aria-pressed', isActive ? 'true' : 'false');
+        });
+
+        let visibleCount = 0;
+        cards.forEach((card) => {
+          const isVisible = filter === 'all' || card.dataset.category === filter;
+          card.classList.toggle('is-filtered-out', !isVisible);
+          if (isVisible) visibleCount += 1;
+        });
+
+        if (emptyState) {
+          emptyState.classList.toggle('is-visible', visibleCount === 0);
+        }
+      };
+
+      buttons.forEach((button) => {
+        button.addEventListener('click', () => applyFilter(button.dataset.filter || 'all'));
+      });
+
+      applyFilter('all');
+    });
+  </script>
+</body>
+</html>
