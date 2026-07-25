@@ -1,6 +1,22 @@
 {
   "reports": [
     {
+      "id": "weekly-2026-W30",
+      "mode": "weekly",
+      "title": "Weekly Briefing KW 30 (20.-24.07.2026)",
+      "date_label": "20.-24.07.2026",
+      "public_url": "https://ai-news.camphausen.eu/weekly/2026-W30.html",
+      "published_at": "2026-07-25T04:21:07Z",
+      "summary": "AI-Act-Omnibus verkündet, Google zwischen ZAK-Ruling und DMA-Anordnung, Mistrals Kapital- und Strategiewoche, OpenAI-Sicherheitsvorfall ohne EU-Reaktion.",
+      "trust_status": "gemischt",
+      "tags": [
+        "AI Act",
+        "Regulierung",
+        "Souveränität",
+        "DSA/DMA"
+      ]
+    },
+    {
       "id": "daily-2026-07-23",
       "mode": "daily",
       "title": "Daily Briefing 23.07.2026",
