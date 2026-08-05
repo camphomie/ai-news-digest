@@ -1,0 +1,1033 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Office setzt auf „Technical Compliance Dialogues&quot; – Mistral bringt Sicherheitsklassifikator</title>
+  <style>
+    :root {
+      --bg: #eef3f9;
+      --bg-radial: radial-gradient(circle at top left, rgba(49, 91, 217, 0.14), transparent 32rem), radial-gradient(circle at top right, rgba(31, 122, 77, 0.10), transparent 28rem), #eef3f9;
+      --surface: #ffffff;
+      --surface-soft: #f7f9fd;
+      --surface-blue: #f1f5ff;
+      --text: #111b2e;
+      --muted: #66748c;
+      --muted-2: #8190a8;
+      --border: #d9e2ef;
+      --border-strong: #bfcae0;
+      --accent: #244ed8;
+      --accent-strong: #1739a8;
+      --accent-soft: #e8efff;
+      --success: #1f7a4d;
+      --success-soft: #e7f5ee;
+      --warning: #b26a00;
+      --warning-soft: #fff3dc;
+      --risk: #a63f3f;
+      --risk-soft: #fdecec;
+      --watch: #2563eb;
+      --watch-soft: #eaf1ff;
+      --shadow: 0 18px 45px rgba(17, 30, 58, 0.10);
+      --shadow-soft: 0 8px 24px rgba(17, 30, 58, 0.07);
+      --radius-xl: 26px;
+      --radius-lg: 18px;
+      --radius-md: 14px;
+      --radius-sm: 10px;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      padding: 34px;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--bg-radial);
+      color: var(--text);
+      line-height: 1.55;
+    }
+
+    h1, h2, h3, h4, p { margin: 0; }
+    h1 { max-width: 920px; font-size: clamp(32px, 5vw, 56px); line-height: 0.98; letter-spacing: -0.045em; }
+    h2 { font-size: clamp(22px, 3vw, 34px); line-height: 1.08; letter-spacing: -0.03em; }
+    h3 { font-size: 20px; line-height: 1.18; letter-spacing: -0.02em; }
+    h4 { font-size: 15px; line-height: 1.25; }
+    a { color: var(--accent-strong); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    .daily-briefing {
+      max-width: 1220px;
+      margin: 0 auto;
+      display: grid;
+      gap: 24px;
+    }
+
+    .hero,
+    .top-story,
+    .story-card,
+    .sidebar-block {
+      background: rgba(255, 255, 255, 0.92);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow-soft);
+      backdrop-filter: blur(12px);
+    }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      padding: 30px;
+      display: grid;
+      gap: 18px;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      height: 5px;
+      background: linear-gradient(90deg, #244ed8, #1f7a4d, #b26a00);
+      pointer-events: none;
+    }
+
+    .hero > * { position: relative; }
+
+    .eyebrow,
+    .story-kicker,
+    .section-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      line-height: 1;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-weight: 800;
+    }
+
+    .eyebrow::before,
+    .section-label::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 0 5px var(--accent-soft);
+      flex: 0 0 auto;
+    }
+
+    .briefing-summary {
+      max-width: 880px;
+      color: var(--muted);
+      font-size: 17px;
+    }
+
+    .meta-row,
+    .story-meta,
+    .filter-row,
+    .source-meta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .chip,
+    .badge,
+    .filter-button,
+    .source-pill {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 800;
+      line-height: 1;
+      white-space: nowrap;
+    }
+
+    .chip {
+      padding: 9px 11px;
+      background: var(--accent-soft);
+      color: var(--accent-strong);
+      border: 1px solid rgba(36, 78, 216, 0.12);
+    }
+
+    .badge {
+      padding: 8px 10px;
+      border: 1px solid var(--border);
+      background: var(--surface-soft);
+      color: var(--muted);
+    }
+
+    .badge[data-trust="hoch"] { background: var(--success-soft); color: var(--success); border-color: rgba(31, 122, 77, 0.20); }
+    .badge[data-trust="mittel"], .badge[data-trust="gemischt"] { background: var(--warning-soft); color: var(--warning); border-color: rgba(178, 106, 0, 0.22); }
+    .badge[data-trust="niedrig"] { background: var(--risk-soft); color: var(--risk); border-color: rgba(166, 63, 63, 0.22); }
+    .badge[data-trust="watchlist"] { background: var(--watch-soft); color: var(--watch); border-color: rgba(37, 99, 235, 0.18); }
+
+    .main-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 2.05fr) minmax(300px, 0.95fr);
+      gap: 24px;
+      align-items: start;
+    }
+
+    .main-column,
+    .priority-stories,
+    .sidebar {
+      display: grid;
+      gap: 18px;
+      min-width: 0;
+    }
+
+    .top-story,
+    .story-card {
+      padding: 22px;
+      display: grid;
+      gap: 15px;
+      min-width: 0;
+    }
+
+    .top-story {
+      border-color: rgba(36, 78, 216, 0.24);
+      box-shadow: var(--shadow);
+    }
+
+    .story-header {
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      align-items: flex-start;
+      min-width: 0;
+    }
+
+    .story-title-block,
+    .story-text-stack {
+      display: grid;
+      gap: 8px;
+      min-width: 0;
+    }
+
+    .story-title-block h2,
+    .story-title-block h3 {
+      overflow-wrap: anywhere;
+    }
+
+    .field-note { color: var(--muted); }
+    .field-note strong { color: var(--text); }
+
+    .takeaway {
+      border: 1px solid var(--border);
+      background: linear-gradient(180deg, #fbfcff, #f6f8fc);
+      border-radius: var(--radius-lg);
+      padding: 16px;
+      display: grid;
+      gap: 6px;
+    }
+
+    .takeaway strong {
+      font-size: 13px;
+      letter-spacing: 0.02em;
+    }
+
+    .score-strip {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 10px;
+      max-width: 100%;
+      min-width: 0;
+    }
+
+    .score-item {
+      --score: 1;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      background: var(--surface-soft);
+      padding: 12px;
+      display: grid;
+      gap: 8px;
+      min-height: 88px;
+      min-width: 0;
+      overflow: hidden;
+    }
+
+    .score-topline {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 6px;
+      min-width: 0;
+      max-width: 100%;
+    }
+
+    .score-value {
+      min-width: 0;
+      max-width: 100%;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      font-size: 24px;
+      line-height: 1;
+      font-weight: 900;
+      letter-spacing: -0.04em;
+    }
+
+    .score-max {
+      color: var(--muted-2);
+      font-size: 11px;
+      font-weight: 800;
+      flex: 0 0 auto;
+    }
+
+    .score-label {
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.15;
+      font-weight: 750;
+      overflow-wrap: anywhere;
+      hyphens: auto;
+    }
+
+    .meter {
+      width: 100%;
+      min-width: 0;
+      height: 7px;
+      border-radius: 999px;
+      background: #e4e9f2;
+      overflow: hidden;
+    }
+
+    .meter > span {
+      display: block;
+      height: 100%;
+      width: clamp(0%, calc(var(--score) * 20%), 100%);
+      max-width: 100%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, var(--accent), #1f7a4d);
+    }
+
+    .filter-panel {
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      background: rgba(255, 255, 255, 0.78);
+      box-shadow: var(--shadow-soft);
+      padding: 14px;
+      display: grid;
+      gap: 10px;
+    }
+
+    .filter-label {
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 850;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .filter-button {
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--muted);
+      padding: 8px 10px;
+      cursor: pointer;
+      transition: background 0.18s ease, color 0.18s ease, border-color 0.18s ease, transform 0.18s ease;
+    }
+
+    .filter-button:hover {
+      transform: translateY(-1px);
+      border-color: var(--border-strong);
+    }
+
+    .filter-button.active,
+    .filter-button[aria-pressed="true"] {
+      background: var(--text);
+      color: #ffffff;
+      border-color: var(--text);
+    }
+
+    .is-filtered-out { display: none !important; }
+
+    .filter-empty-state {
+      display: none;
+      border: 1px dashed var(--border-strong);
+      border-radius: var(--radius-lg);
+      background: rgba(255, 255, 255, 0.7);
+      padding: 16px;
+      color: var(--muted);
+    }
+
+    .filter-empty-state.is-visible { display: block; }
+
+    .sidebar-status-grid,
+    .compact-source-summary,
+    .compact-source-details,
+    .compact-role-row {
+      display: grid;
+      gap: 10px;
+    }
+
+    .sidebar-status-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .status-card {
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      background: var(--surface-soft);
+      padding: 12px;
+      display: grid;
+      gap: 5px;
+    }
+
+    .status-card-label {
+      font-size: 11px;
+      font-weight: 850;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--muted-2);
+    }
+
+    .status-card-value {
+      font-size: 14px;
+      font-weight: 800;
+      color: var(--text);
+    }
+
+    .compact-source-header {
+      display: grid;
+      gap: 8px;
+    }
+
+    .compact-source-stats {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .compact-source-list {
+      margin: 0;
+      padding-left: 18px;
+      color: var(--muted);
+      display: grid;
+      gap: 6px;
+    }
+
+    .compact-source-list a,
+    .compact-source-list .source-label-fallback {
+      font-weight: 750;
+    }
+
+    .story-card { box-shadow: var(--shadow-soft); }
+    .story-card[data-category="regulation"] { border-left: 5px solid var(--accent); }
+    .story-card[data-category="governance"] { border-left: 5px solid var(--success); }
+    .story-card[data-category="enterprise_ai"] { border-left: 5px solid #5b5fd6; }
+    .story-card[data-category="product"] { border-left: 5px solid #6b55c9; }
+    .story-card[data-category="global_eu"] { border-left: 5px solid #2d8aa6; }
+    .story-card[data-category="watchlist"] { border-left: 5px solid var(--watch); }
+
+    details.evidence {
+      border-top: 1px solid var(--border);
+      padding-top: 10px;
+    }
+
+    details.evidence summary,
+    .source-item summary {
+      cursor: pointer;
+      list-style: none;
+      color: var(--accent-strong);
+      font-size: 13px;
+      font-weight: 850;
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      align-items: center;
+    }
+
+    details.evidence summary::-webkit-details-marker,
+    .source-item summary::-webkit-details-marker { display: none; }
+
+    details.evidence summary::after,
+    .source-item summary::after {
+      content: "+";
+      display: grid;
+      place-items: center;
+      width: 22px;
+      height: 22px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: var(--accent-strong);
+      font-size: 15px;
+      line-height: 1;
+      flex: 0 0 auto;
+    }
+
+    details.evidence[open] summary::after,
+    .source-item details[open] summary::after { content: "–"; }
+
+    .sources {
+      margin-top: 10px;
+      display: grid;
+      gap: 8px;
+      padding: 12px;
+      border-radius: var(--radius-md);
+      background: var(--surface-soft);
+      border: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 13px;
+      min-width: 0;
+    }
+
+    .source-link-card {
+      display: grid;
+      gap: 7px;
+      padding: 10px;
+      border: 1px solid rgba(191, 202, 224, 0.75);
+      border-radius: var(--radius-sm);
+      background: #ffffff;
+      min-width: 0;
+    }
+
+    .source-link-card a,
+    .source-link-card .source-label-fallback {
+      font-weight: 850;
+      overflow-wrap: anywhere;
+    }
+
+    .source-label-fallback { color: var(--text); }
+
+    .source-pill {
+      align-self: start;
+      justify-self: start;
+      padding: 5px 7px;
+      border: 1px solid var(--border);
+      background: #eef2ff;
+      color: #3730a3;
+      font-size: 10.5px;
+      letter-spacing: 0.01em;
+    }
+
+    .source-meta {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 6px 10px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .source-meta span { overflow-wrap: anywhere; }
+    .source-meta strong { color: var(--text); }
+
+    .sidebar-block {
+      padding: 18px;
+      display: grid;
+      gap: 12px;
+    }
+
+    .watch-item,
+    .source-item,
+    .archive-item {
+      border: 1px solid var(--border);
+      background: var(--surface-soft);
+      border-radius: var(--radius-md);
+      padding: 13px;
+      display: grid;
+      gap: 7px;
+      min-width: 0;
+    }
+
+    .sidebar-meta {
+      color: var(--muted);
+      font-size: 13px;
+      overflow-wrap: anywhere;
+    }
+
+    .source-item { padding: 0; overflow: hidden; }
+    .source-item details { padding: 12px 13px; }
+    .source-item summary { color: var(--text); overflow-wrap: anywhere; }
+    .source-item .source-detail {
+      margin-top: 9px;
+      display: grid;
+      gap: 8px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+    .archive-item .relation-type { justify-self: start; background: #eef2ff; color: #3730a3; }
+
+    @media (max-width: 980px) {
+      body { padding: 18px; }
+      .hero, .top-story, .story-card, .sidebar-block { border-radius: var(--radius-lg); }
+      .main-layout { grid-template-columns: 1fr; }
+      .score-strip {
+        grid-template-columns: repeat(5, minmax(78px, 1fr));
+        gap: 7px;
+        overflow-x: auto;
+        overflow-y: hidden;
+        padding-bottom: 2px;
+        scrollbar-width: thin;
+      }
+      .score-item { min-height: 58px; padding: 7px 8px; gap: 5px; }
+      .score-value { font-size: 16px; }
+      .score-max { font-size: 10px; }
+      .score-label { font-size: 10px; line-height: 1.1; }
+      .meter { height: 4px; }
+      .chip, .badge, .filter-button { padding: 6px 8px; font-size: 11px; }
+      .filter-panel { padding: 12px; }
+      .filter-row { gap: 7px; }
+      .source-meta { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 560px) {
+      body { padding: 12px; }
+      .daily-briefing { gap: 14px; }
+      .hero { padding: 22px; }
+      .story-header { display: grid; gap: 10px; }
+      .story-meta { gap: 7px; }
+      .score-strip { grid-template-columns: repeat(5, minmax(72px, 1fr)); }
+      .score-item { min-height: 54px; padding: 6px 7px; }
+      .score-value { font-size: 15px; }
+      .score-max { font-size: 10px; }
+      .score-label { font-size: 9.5px; }
+      .filter-row {
+        display: flex;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        padding-bottom: 2px;
+        scrollbar-width: thin;
+      }
+      .filter-button { flex: 0 0 auto; }
+      .sources { padding: 10px; }
+      .source-link-card { padding: 9px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="daily-briefing">
+    <section class="hero">
+      <div class="eyebrow">Daily AI Intelligence Briefing</div>
+      <h1>AI Office setzt auf „Technical Compliance Dialogues&quot; – Mistral bringt Sicherheitsklassifikator</h1>
+      <p class="briefing-summary">Die Kommission bestätigt: Das AI Office setzt zunächst auf technische Dialoge statt sofortiger Verfahren. Mistral veröffentlicht mit Shieldstral einen offenen Sicherheits-Klassifikator. Anthropic sichert sich Rechenkapazität in Norwegen – ohne erkennbaren EU-Politikbezug.</p>
+      <div class="meta-row">
+        <span class="chip">Datum: 2026-08-05</span>
+        <span class="chip">Fenster: Di. 04.08.2026 CEST</span>
+        <span class="chip">Fokus: Deutschland / EU</span>
+        <span class="badge" data-trust="gemischt" data-ui-map="overall-trust" data-raw-value="gemischt">Status: gemischt</span>
+      </div>
+    </section>
+
+    <section class="main-layout">
+      <section class="main-column">
+        <article class="top-story">
+          <div class="story-header">
+            <div class="story-title-block">
+              <div class="story-kicker">Top Story</div>
+              <h2>AI Office bestätigt Vollzugslogik: „Technical Compliance Dialogues&quot; als erstes Mittel, nicht sofortige Verfahren</h2>
+            </div>
+            <span class="chip" data-ui-map="priority" data-raw-value="P1">P1</span>
+          </div>
+          <p>Zwei Tage nach Beginn der AI-Act-Vollzugsphase (02.08.) hat die Kommission über den AI Act Service Desk klargestellt, wie das AI Office seine neuen Befugnisse einsetzt: „Technical compliance dialogues&quot; mit Anbietern seien das „erste Mittel der Wahl&quot; zur Konformitätsprüfung – sie laufen laut Kommission bereits seit dem Vorjahr und werden nun fortgeführt und intensiviert. Erst wenn Dialoge nicht ausreichen, greift das AI Office auf formelle Befugnisse zurück: Auskunftsersuchen, Modellzugriff, Bußgelder bis 35 Mio. Euro/7 % Jahresumsatz (verbotene Praktiken) bzw. 15 Mio. Euro/3 % (andere Verstöße, inkl. GPAI). Ein namentlich benannter Fall ist bislang nicht bekannt.</p>
+          <div class="score-strip">
+            <div class="score-item" style="--score: 4"><div class="score-topline"><span class="score-value">4</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">EU / DE-Relevanz</div></div>
+            <div class="score-item" style="--score: 4"><div class="score-topline"><span class="score-value">4</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Business Impact</div></div>
+            <div class="score-item" style="--score: 5"><div class="score-topline"><span class="score-value">5</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Regulatorik</div></div>
+            <div class="score-item" style="--score: 2"><div class="score-topline"><span class="score-value">2</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Technologie</div></div>
+            <div class="score-item" style="--score: 4"><div class="score-topline"><span class="score-value">4</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Lernwert</div></div>
+          </div>
+          <div class="takeaway">
+            <strong>Einschätzung</strong>
+            <p class="field-note">Für Unternehmen und Berater heißt das: Die ersten Wochen nach dem 02.08. verlaufen aller Voraussicht nach als informeller Dialogprozess, nicht als Verfahrenswelle – das senkt kurzfristig das Eskalationsrisiko, ändert aber nichts an der grundsätzlichen Dokumentations- und Nachweispflicht.</p>
+          </div>
+          <details class="evidence">
+            <summary>Quellen</summary>
+            <div class="sources">
+              <article class="source-link-card">
+                <a href="https://ai-act-service-desk.ec.europa.eu/en/faq" target="_blank" rel="noopener noreferrer">Frequently Asked Questions – General-Purpose AI Models</a>
+                <div class="source-meta-row">
+                  <span class="source-pill" data-ui-map="role" data-raw-value="faktenanker">faktenanker</span>
+                  <span class="source-pill" data-ui-map="source-type" data-raw-value="official">official</span>
+                </div>
+                <div class="source-meta">
+                  <span><strong>Publisher:</strong> European Commission (AI Act Service Desk)</span>
+                  <span><strong>Veröffentlicht:</strong> </span>
+                  <span><strong>Abgerufen:</strong> 2026-08-05</span>
+                </div>
+              </article>
+              <article class="source-link-card">
+                <a href="https://ec.europa.eu/commission/presscorner/detail/en/ip_26_1714" target="_blank" rel="noopener noreferrer">Commission starts enforcing AI Act rules and new transparency requirements on 2 August</a>
+                <div class="source-meta-row">
+                  <span class="source-pill" data-ui-map="role" data-raw-value="faktenanker">faktenanker</span>
+                  <span class="source-pill" data-ui-map="source-type" data-raw-value="official">official</span>
+                </div>
+                <div class="source-meta">
+                  <span><strong>Publisher:</strong> European Commission</span>
+                  <span><strong>Veröffentlicht:</strong> 2026-07-31</span>
+                  <span><strong>Abgerufen:</strong> 2026-08-05</span>
+                </div>
+              </article>
+              <article class="source-link-card">
+                <a href="https://www.helpnetsecurity.com/2026/08/04/eu-ai-act-enforcement-ai-models/" target="_blank" rel="noopener noreferrer">EU begins enforcing AI Act, putting AI models under the microscope</a>
+                <div class="source-meta-row">
+                  <span class="source-pill" data-ui-map="role" data-raw-value="enterprise_signal">enterprise_signal</span>
+                  <span class="source-pill" data-ui-map="source-type" data-raw-value="media">media</span>
+                </div>
+                <div class="source-meta">
+                  <span><strong>Publisher:</strong> Help Net Security</span>
+                  <span><strong>Veröffentlicht:</strong> 2026-08-04</span>
+                  <span><strong>Abgerufen:</strong> 2026-08-05</span>
+                </div>
+              </article>
+            </div>
+          </details>
+          <details class="evidence">
+            <summary>Weitere Recherche</summary>
+            <div class="sources">
+              <p class="field-note">Wird die Kommission benennen, mit welchen GPAI-Anbietern bereits „technical compliance dialogues&quot; laufen, oder bleibt der Prozess vertraulich, bis ein erster förmlicher Fall öffentlich wird?</p>
+            </div>
+          </details>
+        </article>
+
+        <section class="priority-stories">
+          <div class="section-label">Weitere priorisierte Entwicklungen</div>
+          <div class="filter-panel" aria-label="Story-Filter">
+            <div class="filter-label">Filter</div>
+            <div class="filter-row" id="story-filter-row">
+              <button class="filter-button active" type="button" data-filter="all" aria-pressed="true">Alle</button>
+            </div>
+          </div>
+
+          <article class="story-card" data-id="mistral-shieldstral-2026-08-04" data-category="product" data-trust-status="hoch">
+            <div class="story-header">
+              <div class="story-title-block">
+                <div class="story-kicker">PRODUKT / EU-ANBIETER</div>
+                <h3>Mistral veröffentlicht Shieldstral: offener Sicherheits-Klassifikator zeitgleich mit AI-Act-Kennzeichnungspflicht</h3>
+              </div>
+              <div class="story-meta">
+                <span class="chip" data-ui-map="category" data-raw-value="product">product</span>
+                <span class="chip" data-ui-map="priority" data-raw-value="P2">P2</span>
+              </div>
+            </div>
+            <div class="story-text-stack">
+              <p>Mistral hat am 04.08. mit Shieldstral einen 3-Mrd.-Parameter-Sicherheitsklassifikator unter Apache-2.0-Lizenz veröffentlicht: Er bewertet Text und Bilder gegen frei formulierbare Richtlinien, ohne Neutraining, auf einer einzelnen 16-GB-GPU. Mistral ist Gründungsmitglied der neuen „Open Secure AI Alliance&quot; mit Nvidia.</p>
+              <p class="field-note"><strong>Warum relevant:</strong> Ein europäischer Kernanbieter bringt ein Content-Moderations-Werkzeug exakt in der Woche, in der die AI-Act-Kennzeichnungspflichten (Art. 50) EU-weit bindend wurden – zeitliche Nähe ist belegt, nicht konstruiert.</p>
+              <p class="field-note"><strong>EU-/DE-Impact:</strong> Direkt für Unternehmen, die Kennzeichnungs- und Moderationspflichten operativ umsetzen müssen; als Open-Weight-Modell auch für Selbsthosting in deutschen/europäischen Compliance-Umgebungen nutzbar.</p>
+              <p class="field-note"><strong>Einordnung:</strong> Die Existenz und Lizenz des Modells sind herstellerseitig belegt; Leistungsversprechen („schlägt 7-fach größere Modelle&quot;) bleiben bis zu unabhängiger Benchmark-Bestätigung Herstellerangabe.</p>
+            </div>
+            <div class="score-strip">
+              <div class="score-item" style="--score: 5"><div class="score-topline"><span class="score-value">5</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">EU / DE-Relevanz</div></div>
+              <div class="score-item" style="--score: 3"><div class="score-topline"><span class="score-value">3</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Business Impact</div></div>
+              <div class="score-item" style="--score: 3"><div class="score-topline"><span class="score-value">3</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Regulatorik</div></div>
+              <div class="score-item" style="--score: 4"><div class="score-topline"><span class="score-value">4</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Technologie</div></div>
+              <div class="score-item" style="--score: 4"><div class="score-topline"><span class="score-value">4</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Lernwert</div></div>
+            </div>
+            <details class="evidence">
+              <summary>Quellen & Unsicherheit</summary>
+              <div class="sources">
+                <p class="field-note"><strong>Quellenlage:</strong> <span data-ui-map="trust" data-raw-value="hoch">hoch</span></p>
+                <article class="source-link-card">
+                  <a href="https://mistral.ai/news/shieldstral/" target="_blank" rel="noopener noreferrer">Introducing Shieldstral</a>
+                  <div class="source-meta-row">
+                    <span class="source-pill" data-ui-map="role" data-raw-value="produktquelle">produktquelle</span>
+                    <span class="source-pill" data-ui-map="source-type" data-raw-value="vendor">vendor</span>
+                  </div>
+                  <div class="source-meta">
+                    <span><strong>Publisher:</strong> Mistral AI</span>
+                    <span><strong>Veröffentlicht:</strong> 2026-08-04</span>
+                    <span><strong>Abgerufen:</strong> 2026-08-05</span>
+                  </div>
+                </article>
+                <p class="field-note"><strong>Unsicherheit:</strong> Existenz, Lizenz und technische Eckdaten sind herstellerseitig primärquellenbelegt; Leistungsvergleiche zu anderen Modellen sind unabhängig nicht bestätigt.</p>
+              </div>
+            </details>
+            <details class="evidence">
+              <summary>Weitere Recherche</summary>
+              <div class="sources">
+                <p class="field-note">Wird eine unabhängige Stelle (Fachmedium, Forschungsgruppe) Shieldstrals Leistungsversprechen nachvollziehen, und nutzen deutsche Unternehmen es für ihre Art.-50-Kennzeichnungspflicht?</p>
+              </div>
+            </details>
+          </article>
+          <article class="story-card" data-id="anthropic-volta-norwegen-compute-2026-08-04" data-category="global_eu" data-trust-status="mittel">
+            <div class="story-header">
+              <div class="story-title-block">
+                <div class="story-kicker">INFRASTRUKTUR / GLOBAL</div>
+                <h3>Anthropic sichert sich 10-Mrd.-Dollar-Rechenkapazität in Norwegen – ohne erkennbaren EU-Politikbezug</h3>
+              </div>
+              <div class="story-meta">
+                <span class="chip" data-ui-map="category" data-raw-value="global_eu">global_eu</span>
+                <span class="chip" data-ui-map="priority" data-raw-value="P3">P3</span>
+              </div>
+            </div>
+            <div class="story-text-stack">
+              <p>Anthropic hat einen Sechsjahresvertrag über 10 Mrd. US-Dollar mit dem Rechenzentrums-Start-up Volta Infra geschlossen: 133 MW Kapazität in Bitdeers Rechenzentrum in Tydal, Norwegen, mit Nvidia-Vera-Rubin-Chips, abgesichert durch eine 1,3-Mrd.-Dollar-Kreditlinie von JPMorgan-Töchtern.</p>
+              <p class="field-note"><strong>Warum relevant:</strong> Physische KI-Infrastruktur eines führenden US-Anbieters entsteht im EWR (Norwegen) – als reines Standortfaktum relevant für die europäische Rechenkapazitäts-Debatte, nicht als Politiksignal.</p>
+              <p class="field-note"><strong>EU-/DE-Impact:</strong> Ausschließlich geografisch: In keiner geprüften Quelle (TechCrunch, Bloomberg, The Decoder) findet sich eine EU-, EWR- oder norwegische Regierungs-/Regulierungsreaktion oder Souveränitäts-Einordnung zu diesem Deal.</p>
+              <p class="field-note"><strong>Einordnung:</strong> Der Deal selbst ist über mehrere unabhängige Quellen bestätigt; eine europapolitische Lesart (Souveränität, Standortpolitik) wäre an dieser Stelle konstruiert und wird bewusst nicht behauptet.</p>
+            </div>
+            <div class="score-strip">
+              <div class="score-item" style="--score: 2"><div class="score-topline"><span class="score-value">2</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">EU / DE-Relevanz</div></div>
+              <div class="score-item" style="--score: 3"><div class="score-topline"><span class="score-value">3</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Business Impact</div></div>
+              <div class="score-item" style="--score: 1"><div class="score-topline"><span class="score-value">1</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Regulatorik</div></div>
+              <div class="score-item" style="--score: 3"><div class="score-topline"><span class="score-value">3</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Technologie</div></div>
+              <div class="score-item" style="--score: 3"><div class="score-topline"><span class="score-value">3</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Lernwert</div></div>
+            </div>
+            <details class="evidence">
+              <summary>Quellen & Unsicherheit</summary>
+              <div class="sources">
+                <p class="field-note"><strong>Quellenlage:</strong> <span data-ui-map="trust" data-raw-value="mittel">mittel</span></p>
+                <article class="source-link-card">
+                  <a href="https://techcrunch.com/2026/08/04/anthropic-signs-10-billion-deal-with-ai-cloud-startup-volta/" target="_blank" rel="noopener noreferrer">Anthropic signs $10B deal with AI cloud startup Volta</a>
+                  <div class="source-meta-row">
+                    <span class="source-pill" data-ui-map="role" data-raw-value="marktverifikation">marktverifikation</span>
+                    <span class="source-pill" data-ui-map="source-type" data-raw-value="media">media</span>
+                  </div>
+                  <div class="source-meta">
+                    <span><strong>Publisher:</strong> TechCrunch</span>
+                    <span><strong>Veröffentlicht:</strong> 2026-08-04</span>
+                    <span><strong>Abgerufen:</strong> 2026-08-05</span>
+                  </div>
+                </article>
+                <article class="source-link-card">
+                  <a href="https://the-decoder.com/anthropic-locks-in-10-billion-of-compute-from-volta-a-cloud-startup-that-didnt-exist-six-months-ago/" target="_blank" rel="noopener noreferrer">Anthropic locks in $10 billion of compute from Volta, a cloud startup that didn&#x27;t exist six months ago</a>
+                  <div class="source-meta-row">
+                    <span class="source-pill" data-ui-map="role" data-raw-value="enterprise_signal">enterprise_signal</span>
+                    <span class="source-pill" data-ui-map="source-type" data-raw-value="media">media</span>
+                  </div>
+                  <div class="source-meta">
+                    <span><strong>Publisher:</strong> The Decoder</span>
+                    <span><strong>Veröffentlicht:</strong> 2026-08-04</span>
+                    <span><strong>Abgerufen:</strong> 2026-08-05</span>
+                  </div>
+                </article>
+                <p class="field-note"><strong>Unsicherheit:</strong> Deal-Eckdaten sind über drei unabhängige Medien konsistent bestätigt; jede EU-/EWR-Politikrelevanz über den Standort hinaus ist bislang unbelegt.</p>
+              </div>
+            </details>
+            <details class="evidence">
+              <summary>Weitere Recherche</summary>
+              <div class="sources">
+                <p class="field-note">Kommentiert die norwegische Regierung oder eine EU-Institution den Deal, sobald der Bau 2026/27 fortschreitet, oder bleibt er ein rein kommerzielles Infrastruktur-Faktum?</p>
+              </div>
+            </details>
+          </article>
+          <div class="filter-empty-state" id="story-filter-empty-state">
+            Keine Stories für diesen Filter sichtbar. Wähle einen anderen Filter oder prüfe, ob in diesem Lauf nur andere Kategorien vorkommen.
+          </div>
+        </section>
+      </section>
+
+      <aside class="sidebar">
+        <section class="sidebar-block">
+          <h3>Tageslage</h3>
+          <p class="sidebar-meta">Die Kommission bestätigt: Das AI Office setzt zunächst auf technische Dialoge statt sofortiger Verfahren. Mistral veröffentlicht mit Shieldstral einen offenen Sicherheits-Klassifikator. Anthropic sichert sich Rechenkapazität in Norwegen – ohne erkennbaren EU-Politikbezug.</p>
+          <div class="sidebar-status-grid">
+            <div class="status-card">
+              <span class="status-card-label">Fenster</span>
+              <span class="status-card-value">Di. 04.08.2026 CEST</span>
+            </div>
+            <div class="status-card">
+              <span class="status-card-label">Quellenlage</span>
+              <span class="status-card-value" data-ui-map="trust" data-raw-value="gemischt">gemischt</span>
+            </div>
+          </div>
+        </section>
+
+        <section class="sidebar-block watchlist">
+          <h3>Watchlist</h3>
+          <article class="watch-item" data-id="anthropic-transkript-ausstehend-2026-08-05">
+            <div class="story-meta"><span class="badge" data-trust="mittel" data-ui-map="trust" data-raw-value="mittel">mittel</span></div>
+            <h4>Anthropics redigiertes Vorfalls-Transkript weiterhin nicht veröffentlicht</h4>
+            <p class="sidebar-meta">Die für „innerhalb einer Woche&quot; nach dem 30.07. angekündigte Transkript-Veröffentlichung zum PyPI-Vorfall ist auch Stand 05.08. nicht erfolgt; die Anthropic-Seite zeigt nur eine kleinere Korrektur vom 03.08.</p>
+            <p class="sidebar-meta"><strong>Warum beobachten:</strong> Zentral für die Bewertung, wie transparent Anthropic mit dem Sicherheitsvorfall umgeht, der die EU-Kommissions-Reaktion ausgelöst hat.</p>
+            <p class="sidebar-meta"><strong>Nächstes Signal:</strong> Veröffentlichung des Transkripts, laut ursprünglicher Ankündigung um den 06.08. erwartet.</p>
+          </article>
+          <article class="watch-item" data-id="mistral-open-weights-statement-ausstehend-2026-08-05">
+            <div class="story-meta"><span class="badge" data-trust="watchlist" data-ui-map="trust" data-raw-value="watchlist">watchlist</span></div>
+            <h4>Mistral äußert sich weiter nicht zum Open-Weights-Brief</h4>
+            <p class="sidebar-meta">Auch nach Shieldstral-Launch keine eigene Erklärung Mistrals zur fortgesetzten Unterzeichnung des „Open Weights and American AI Leadership&quot;-Briefs gefunden.</p>
+            <p class="sidebar-meta"><strong>Warum beobachten:</strong> Europas Souveränitäts-Vorzeigeanbieter positioniert sich weiter nicht zu seiner US-politischen Positionierung.</p>
+            <p class="sidebar-meta"><strong>Nächstes Signal:</strong> Eine Mistral-eigene Stellungnahme oder unabhängige Berichterstattung dazu.</p>
+          </article>
+          <article class="watch-item" data-id="en18286-widerspruch-recheck-2026-08-05">
+            <div class="story-meta"><span class="badge" data-trust="mittel" data-ui-map="trust" data-raw-value="mittel">mittel</span></div>
+            <h4>EN 18286: Kommissionsseite weiterhin unverändert trotz neuem Zeitstempel</h4>
+            <p class="sidebar-meta">Die AI-Act-Normungsseite der Kommission zeigt nun „Last update: 3 August 2026&quot;, der Inhalt (prEN 18286 weiter im Entwurfsstatus, keine Amtsblatt-Zitierung) ist gegenüber dem 03.08.-Stand unverändert.</p>
+            <p class="sidebar-meta"><strong>Warum beobachten:</strong> Der Widerspruch zwischen CEN-CENELECs eigener Freigabe-Bestätigung und der Kommissionsseite läuft nun seit rund fünf Wochen ungelöst weiter.</p>
+            <p class="sidebar-meta"><strong>Nächstes Signal:</strong> Eine inhaltliche Aktualisierung der Kommissionsseite oder eine tatsächliche Amtsblatt-Zitierung.</p>
+          </article>
+          <article class="watch-item" data-id="claude-foundry-eu-datenresidenz-luecke-2026-08-05">
+            <div class="story-meta"><span class="badge" data-trust="mittel" data-ui-map="trust" data-raw-value="mittel">mittel</span></div>
+            <h4>Claude auf Microsoft Foundry: Keine eigene EU-Datenzone, europäische Kunden pausieren Einsatz</h4>
+            <p class="sidebar-meta">Seit der GA von Claude auf Microsoft Foundry (29.06.) existiert keine EU-Datenzone für Claude-Modelle; ein niederländisches Finanzinstitut untersagt laut Berichten deshalb den Einsatz über Foundry.</p>
+            <p class="sidebar-meta"><strong>Warum beobachten:</strong> Direkter Datenresidenz-/Compliance-Konflikt für europäische Enterprise-Kunden, der bislang nicht im Briefing erfasst wurde – guter Kandidat für eine Weekly-Vertiefung.</p>
+            <p class="sidebar-meta"><strong>Nächstes Signal:</strong> Eine konkrete Terminangabe Microsofts für eine EU-Datenzone, oder eine offizielle Anthropic-/Microsoft-Stellungnahme.</p>
+          </article>
+        </section>
+
+        <section class="sidebar-block archive-panel">
+          <h3>Archivbezug</h3>
+          <article class="archive-item" data-id="ref-ai-act-vollzug-daily-2026-08-03">
+            <span class="badge relation-type" data-ui-map="relation-type" data-raw-value="follow_up">follow_up</span>
+            <h4>AI-Act-Vollzugsstart (Daily 03.08.)</h4>
+            <p class="sidebar-meta">Konkretisiert direkt die dort offene Frage, ob AI Office/nationale Behörden ihre neuen Befugnisse sofort nutzen oder zunächst dialogorientiert vorgehen.</p>
+          </article>
+          <article class="archive-item" data-id="ref-en18286-recurring">
+            <span class="badge relation-type" data-ui-map="relation-type" data-raw-value="recurring_theme">recurring_theme</span>
+            <h4>EN-18286-Widerspruch (Daily 27./28./31.07., 03.08.)</h4>
+            <p class="sidebar-meta">Fünfte Woche in Folge ohne Auflösung des Widerspruchs zwischen CEN-CENELEC- und Kommissionsangaben.</p>
+          </article>
+          <article class="archive-item" data-id="ref-mistral-produktlinie">
+            <span class="badge relation-type" data-ui-map="relation-type" data-raw-value="trendline">trendline</span>
+            <h4>Mistral-Produktlinie (u. a. Robostral, Industrial-AI-Stack)</h4>
+            <p class="sidebar-meta">Shieldstral reiht sich in Mistrals fortgesetzte Strategie ein, europäische Souveränität über konkrete Open-Weight-Produkte statt nur Ankündigungen zu belegen.</p>
+          </article>
+        </section>
+      </aside>
+    </section>
+  </main>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const labelMaps = {
+        category: {
+          regulation: 'Regulierung',
+          product: 'Produkte & Plattformen',
+          global_eu: 'Global mit EU-Impact',
+          enterprise_ai: 'Enterprise AI',
+          governance: 'Governance',
+          watchlist: 'Watchlist'
+        },
+        priority: {
+          P1: 'Sehr wichtig',
+          P2: 'Relevant',
+          P3: 'Kurz notiert'
+        },
+        trust: {
+          hoch: 'Hohe Quellenlage',
+          mittel: 'Mittlere Quellenlage',
+          niedrig: 'Niedrige Quellenlage',
+          gemischt: 'Gemischte Quellenlage',
+          watchlist: 'Watchlist'
+        },
+        role: {
+          faktenanker: 'Faktenanker',
+          policy_interpretation: 'Policy-Interpretation',
+          marktverifikation: 'Marktverifikation',
+          produktquelle: 'Produktquelle',
+          enterprise_signal: 'Enterprise-Signal',
+          'frühindikator': 'Frühindikator',
+          unternehmensquelle: 'Unternehmensquelle',
+          developer_dokumentation: 'Entwicklerdokumentation'
+        },
+        'source-type': {
+          official: 'Offizielle Quelle',
+          vendor: 'Anbieterquelle',
+          media: 'Medienbericht',
+          research: 'Research',
+          community: 'Community',
+          documentation: 'Dokumentation',
+          legal: 'Rechtstext'
+        },
+        'relation-type': {
+          follow_up: 'Follow-up',
+          recurring_theme: 'Wiederkehrendes Thema',
+          precedent: 'Präzedenzfall',
+          trendline: 'Trendlinie'
+        }
+      };
+
+      const mapLabel = (group, rawValue) => {
+        if (!rawValue) return '';
+        return (labelMaps[group] && labelMaps[group][rawValue]) || rawValue;
+      };
+
+      document.querySelectorAll('[data-ui-map]').forEach((element) => {
+        const group = element.dataset.uiMap;
+        const rawValue = element.dataset.rawValue || element.textContent.trim();
+        const mappedValue = mapLabel(group === 'overall-trust' ? 'trust' : group, rawValue);
+
+        if (group === 'overall-trust') {
+          element.textContent = `Status: ${mappedValue}`;
+          return;
+        }
+
+        element.textContent = mappedValue;
+      });
+
+      document.querySelectorAll('[data-derived-from-story]').forEach((element) => {
+        const rawValue = element.dataset.derivedFromStory;
+        element.textContent = rawValue === 'true' ? 'Aus Story-Quellen abgeleitet' : 'Eigenständig zusammengeführt';
+      });
+
+      document.querySelectorAll('.source-item').forEach((item) => {
+        const roleSummary = item.querySelector('[data-role-summary]');
+        const roleNodes = Array.from(item.querySelectorAll('[data-source-role]'));
+        const sourceCountNode = item.querySelector('[data-source-count]');
+        const uniqueRoles = [...new Set(roleNodes.map((node) => node.dataset.rawValue).filter(Boolean))];
+
+        if (sourceCountNode) sourceCountNode.textContent = String(roleNodes.length);
+
+        if (roleSummary) {
+          roleSummary.innerHTML = '';
+          uniqueRoles.forEach((role) => {
+            const pill = document.createElement('span');
+            pill.className = 'source-pill';
+            pill.textContent = mapLabel('role', role);
+            roleSummary.appendChild(pill);
+          });
+        }
+      });
+
+      const cards = Array.from(document.querySelectorAll('.priority-stories .story-card'));
+      const filterRow = document.getElementById('story-filter-row');
+      const emptyState = document.getElementById('story-filter-empty-state');
+      const categoryCounts = cards.reduce((acc, card) => {
+        const category = card.dataset.category;
+        if (!category) return acc;
+        acc[category] = (acc[category] || 0) + 1;
+        return acc;
+      }, {});
+
+      const createButton = (filter, label) => {
+        const button = document.createElement('button');
+        button.type = 'button';
+        button.className = 'filter-button';
+        button.dataset.filter = filter;
+        button.setAttribute('aria-pressed', 'false');
+        button.textContent = label;
+        return button;
+      };
+
+      Object.keys(categoryCounts).forEach((category) => {
+        const button = createButton(category, `${mapLabel('category', category)} · ${categoryCounts[category]}`);
+        filterRow.appendChild(button);
+      });
+
+      const buttons = Array.from(document.querySelectorAll('.filter-button'));
+
+      const applyFilter = (filter) => {
+        buttons.forEach((button) => {
+          const isActive = button.dataset.filter === filter;
+          button.classList.toggle('active', isActive);
+          button.setAttribute('aria-pressed', isActive ? 'true' : 'false');
+        });
+
+        let visibleCount = 0;
+        cards.forEach((card) => {
+          const isVisible = filter === 'all' || card.dataset.category === filter;
+          card.classList.toggle('is-filtered-out', !isVisible);
+          if (isVisible) visibleCount += 1;
+        });
+
+        if (emptyState) {
+          emptyState.classList.toggle('is-visible', visibleCount === 0);
+        }
+      };
+
+      buttons.forEach((button) => {
+        button.addEventListener('click', () => applyFilter(button.dataset.filter || 'all'));
+      });
+
+      applyFilter('all');
+    });
+  </script>
+</body>
+</html>
