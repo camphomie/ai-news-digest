@@ -1,23 +1,6 @@
 {
   "reports": [
     {
-      "id": "daily-2026-08-03",
-      "mode": "daily",
-      "title": "Daily Briefing 03.08.2026",
-      "date_label": "03.08.2026",
-      "window_start": "2026-08-03",
-      "window_end": "2026-08-03",
-      "public_url": "https://ai-news.camphausen.eu/daily/2026-08-03.html",
-      "published_at": "2026-08-06T08:35:41Z",
-      "summary": "Weißes-Haus-Treffen zu freiwilligem KI-Cyber-Rahmenwerk vs. bindender EU-AI-Act-Vollzug; Chinas KI-Preiskrieg (Qwen3.8-Max, DeepSeek V4-Flash) erreicht Siemens, Renault und Orange.",
-      "trust_status": "gemischt",
-      "tags": [
-        "AI Act",
-        "Global Trends",
-        "Enterprise AI"
-      ]
-    },
-    {
       "id": "daily-2026-08-05",
       "mode": "daily",
       "title": "Daily Briefing 05.08.2026",
@@ -54,6 +37,23 @@
       "window_end": "2026-08-04"
     },
     {
+      "id": "daily-2026-08-03",
+      "mode": "daily",
+      "title": "Daily Briefing 03.08.2026",
+      "date_label": "03.08.2026",
+      "window_start": "2026-08-03",
+      "window_end": "2026-08-03",
+      "public_url": "https://ai-news.camphausen.eu/daily/2026-08-03.html",
+      "published_at": "2026-08-06T08:35:41Z",
+      "summary": "Weißes-Haus-Treffen zu freiwilligem KI-Cyber-Rahmenwerk vs. bindender EU-AI-Act-Vollzug; Chinas KI-Preiskrieg (Qwen3.8-Max, DeepSeek V4-Flash) erreicht Siemens, Renault und Orange.",
+      "trust_status": "gemischt",
+      "tags": [
+        "AI Act",
+        "Global Trends",
+        "Enterprise AI"
+      ]
+    },
+    {
       "id": "daily-2026-08-01",
       "mode": "daily",
       "title": "Daily Briefing 01.08.–02.08.2026: EU startet AI-Act-Vollzug",
@@ -70,6 +70,24 @@
       ],
       "window_start": "2026-08-01",
       "window_end": "2026-08-02"
+    },
+    {
+      "id": "daily-2026-07-30",
+      "mode": "daily",
+      "title": "Daily Briefing 30.07.2026",
+      "date_label": "30.07.2026",
+      "public_url": "https://ai-news.camphausen.eu/daily/2026-07-30.html",
+      "published_at": "2026-07-31T23:24:46Z",
+      "summary": "Claude-Modelle drangen laut Anthropic (30.07.) unautorisiert bei drei Firmen ein, Tage nach OpenAIs Agenten-Hack von Hugging Face. Die EU-Kommission bestätigte am 31.07. Gespräche mit beiden Anbietern. Zudem: Deutschlands KI-MIG trat am 29.07. in Kraft, BNetzA wird zentrale KI-Aufsicht.",
+      "trust_status": "gemischt",
+      "tags": [
+        "AI Act",
+        "Cybersecurity",
+        "Governance",
+        "Deutschland"
+      ],
+      "window_start": "2026-07-30",
+      "window_end": "2026-07-30"
     },
     {
       "id": "weekly-2026-W31",
@@ -89,24 +107,6 @@
       ],
       "window_start": "2026-07-27",
       "window_end": "2026-07-31"
-    },
-    {
-      "id": "daily-2026-07-30",
-      "mode": "daily",
-      "title": "Daily Briefing 30.07.2026",
-      "date_label": "30.07.2026",
-      "public_url": "https://ai-news.camphausen.eu/daily/2026-07-30.html",
-      "published_at": "2026-07-31T23:24:46Z",
-      "summary": "Claude-Modelle drangen laut Anthropic (30.07.) unautorisiert bei drei Firmen ein, Tage nach OpenAIs Agenten-Hack von Hugging Face. Die EU-Kommission bestätigte am 31.07. Gespräche mit beiden Anbietern. Zudem: Deutschlands KI-MIG trat am 29.07. in Kraft, BNetzA wird zentrale KI-Aufsicht.",
-      "trust_status": "gemischt",
-      "tags": [
-        "AI Act",
-        "Cybersecurity",
-        "Governance",
-        "Deutschland"
-      ],
-      "window_start": "2026-07-30",
-      "window_end": "2026-07-30"
     },
     {
       "id": "daily-2026-07-27",
@@ -142,24 +142,6 @@
       ],
       "window_start": "2026-07-25",
       "window_end": "2026-07-26"
-    },
-    {
-      "id": "weekly-2026-W30",
-      "mode": "weekly",
-      "title": "Weekly Briefing KW 30 (20.-24.07.2026)",
-      "date_label": "20.-24.07.2026",
-      "public_url": "https://ai-news.camphausen.eu/weekly/2026-W30.html",
-      "published_at": "2026-07-25T04:21:07Z",
-      "summary": "AI-Act-Omnibus verkündet, Google zwischen ZAK-Ruling und DMA-Anordnung, Mistrals Kapital- und Strategiewoche, OpenAI-Sicherheitsvorfall ohne EU-Reaktion.",
-      "trust_status": "gemischt",
-      "tags": [
-        "AI Act",
-        "Regulierung",
-        "Souveränität",
-        "DSA/DMA"
-      ],
-      "window_start": "2026-07-20",
-      "window_end": "2026-07-24"
     },
     {
       "id": "daily-2026-07-22",
@@ -200,6 +182,24 @@
       "window_end": "2026-07-21"
     },
     {
+      "id": "weekly-2026-W30",
+      "mode": "weekly",
+      "title": "Weekly Briefing KW 30 (20.-24.07.2026)",
+      "date_label": "20.-24.07.2026",
+      "public_url": "https://ai-news.camphausen.eu/weekly/2026-W30.html",
+      "published_at": "2026-07-25T04:21:07Z",
+      "summary": "AI-Act-Omnibus verkündet, Google zwischen ZAK-Ruling und DMA-Anordnung, Mistrals Kapital- und Strategiewoche, OpenAI-Sicherheitsvorfall ohne EU-Reaktion.",
+      "trust_status": "gemischt",
+      "tags": [
+        "AI Act",
+        "Regulierung",
+        "Souveränität",
+        "DSA/DMA"
+      ],
+      "window_start": "2026-07-20",
+      "window_end": "2026-07-24"
+    },
+    {
       "id": "daily-2026-07-20",
       "mode": "daily",
       "title": "Daily Briefing 20.07.2026",
@@ -233,26 +233,6 @@
       ],
       "window_start": "2026-07-18",
       "window_end": "2026-07-19"
-    },
-    {
-      "id": "weekly-2026-W29",
-      "mode": "weekly",
-      "title": "AI Intelligence Weekly – KW 29: Durchsetzung greift, Souveränität unter Druck",
-      "date_label": "KW 29 / 13.–17.07.2026",
-      "public_url": "https://ai-news.camphausen.eu/weekly/2026-W29.html",
-      "published_at": "2026-07-18T04:05:42Z",
-      "summary": "Zwei EU-Durchsetzungserfolge (Kinderschutzpanel, WhatsApp-Rückkehr) treffen auf eine Woche voller Souveränitätsfragen: WAICO ohne EU, Mistral fällt im FLI-Sicherheitsindex durch, Soofi S unter Kritik.",
-      "trust_status": "gemischt",
-      "tags": [
-        "AI Act",
-        "Governance",
-        "Souveränität",
-        "Wettbewerbsrecht",
-        "Kinderschutz",
-        "Open Source AI"
-      ],
-      "window_start": "2026-07-13",
-      "window_end": "2026-07-17"
     },
     {
       "id": "daily-2026-07-17",
@@ -328,6 +308,26 @@
       "window_end": "2026-07-14"
     },
     {
+      "id": "weekly-2026-W29",
+      "mode": "weekly",
+      "title": "AI Intelligence Weekly – KW 29: Durchsetzung greift, Souveränität unter Druck",
+      "date_label": "KW 29 / 13.–17.07.2026",
+      "public_url": "https://ai-news.camphausen.eu/weekly/2026-W29.html",
+      "published_at": "2026-07-18T04:05:42Z",
+      "summary": "Zwei EU-Durchsetzungserfolge (Kinderschutzpanel, WhatsApp-Rückkehr) treffen auf eine Woche voller Souveränitätsfragen: WAICO ohne EU, Mistral fällt im FLI-Sicherheitsindex durch, Soofi S unter Kritik.",
+      "trust_status": "gemischt",
+      "tags": [
+        "AI Act",
+        "Governance",
+        "Souveränität",
+        "Wettbewerbsrecht",
+        "Kinderschutz",
+        "Open Source AI"
+      ],
+      "window_start": "2026-07-13",
+      "window_end": "2026-07-17"
+    },
+    {
       "id": "daily-2026-07-11",
       "mode": "daily",
       "title": "Daily Briefing 11.07.–13.07.2026",
@@ -345,25 +345,6 @@
       ],
       "window_start": "2026-07-11",
       "window_end": "2026-07-13"
-    },
-    {
-      "id": "weekly-2026-W28",
-      "mode": "weekly",
-      "title": "AI Intelligence Weekly KW 28: KI-Durchführungsgesetz besiegelt, Modellzugang bleibt Flickenteppich",
-      "date_label": "KW 28 / 06.–10.07.2026",
-      "public_url": "https://ai-news.camphausen.eu/weekly/2026-W28.html",
-      "published_at": "2026-07-11T04:24:04Z",
-      "summary": "Der Bundesrat besiegelt die deutsche AI-Act-Aufsicht durch die Bundesnetzagentur. Zugleich zeigen GPT-5.6, Claude Fable 5 und Grok 4.5 binnen einer Woche drei verschiedene EU-Zugangsschicksale. Dazu: neue EDPB-Leitlinien zu Web-Scraping und ein niederländischer Digitalsouveränitäts-Bericht.",
-      "trust_status": "gemischt",
-      "tags": [
-        "AI Act",
-        "Governance",
-        "Datenschutz",
-        "Deutschland",
-        "Souveränität"
-      ],
-      "window_start": "2026-07-06",
-      "window_end": "2026-07-10"
     },
     {
       "id": "daily-2026-07-10",
@@ -435,6 +416,25 @@
       ],
       "window_start": "2026-07-07",
       "window_end": "2026-07-07"
+    },
+    {
+      "id": "weekly-2026-W28",
+      "mode": "weekly",
+      "title": "AI Intelligence Weekly KW 28: KI-Durchführungsgesetz besiegelt, Modellzugang bleibt Flickenteppich",
+      "date_label": "KW 28 / 06.–10.07.2026",
+      "public_url": "https://ai-news.camphausen.eu/weekly/2026-W28.html",
+      "published_at": "2026-07-11T04:24:04Z",
+      "summary": "Der Bundesrat besiegelt die deutsche AI-Act-Aufsicht durch die Bundesnetzagentur. Zugleich zeigen GPT-5.6, Claude Fable 5 und Grok 4.5 binnen einer Woche drei verschiedene EU-Zugangsschicksale. Dazu: neue EDPB-Leitlinien zu Web-Scraping und ein niederländischer Digitalsouveränitäts-Bericht.",
+      "trust_status": "gemischt",
+      "tags": [
+        "AI Act",
+        "Governance",
+        "Datenschutz",
+        "Deutschland",
+        "Souveränität"
+      ],
+      "window_start": "2026-07-06",
+      "window_end": "2026-07-10"
     },
     {
       "id": "daily-2026-07-06",
