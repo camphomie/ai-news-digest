@@ -1,6 +1,24 @@
 {
   "reports": [
     {
+      "id": "daily-2026-08-07",
+      "mode": "daily",
+      "title": "Daily Briefing 07.08.2026",
+      "date_label": "07.08.2026",
+      "window_start": "2026-08-07",
+      "window_end": "2026-08-07",
+      "public_url": "https://ai-news.camphausen.eu/daily/2026-08-07.html",
+      "published_at": "2026-08-08T02:25:31Z",
+      "summary": "Anthropic macht Claude Code „Auto Mode\" zum Standard und lockert Fable 5s Biologie-Sicherheitsfilter um rund 85%. EN 18286 bleibt laut Kommission im Entwurfsstatus.",
+      "trust_status": "gemischt",
+      "tags": [
+        "Agentic AI",
+        "AI Safety",
+        "Standards",
+        "Anthropic"
+      ]
+    },
+    {
       "id": "daily-2026-08-06",
       "mode": "daily",
       "title": "Daily Briefing 06.08.2026",
