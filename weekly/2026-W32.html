@@ -1,0 +1,1232 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Intelligence Weekly – KW 32: Astra-Stopp, erste Woche AI-Act-Durchsetzung, offene Modellgewichte als Bruchlinie</title>
+  <style>
+    :root {
+      --bg: #eef3f9;
+      --bg-radial: radial-gradient(circle at top left, rgba(49, 91, 217, 0.14), transparent 32rem), radial-gradient(circle at top right, rgba(31, 122, 77, 0.10), transparent 28rem), #eef3f9;
+      --surface: #ffffff;
+      --surface-soft: #f7f9fd;
+      --surface-blue: #f1f5ff;
+      --text: #111b2e;
+      --muted: #66748c;
+      --muted-2: #8190a8;
+      --border: #d9e2ef;
+      --border-strong: #bfcae0;
+      --accent: #244ed8;
+      --accent-strong: #1739a8;
+      --accent-soft: #e8efff;
+      --success: #1f7a4d;
+      --success-soft: #e7f5ee;
+      --warning: #b26a00;
+      --warning-soft: #fff3dc;
+      --risk: #a63f3f;
+      --risk-soft: #fdecec;
+      --watch: #2563eb;
+      --watch-soft: #eaf1ff;
+      --shadow: 0 18px 45px rgba(17, 30, 58, 0.10);
+      --shadow-soft: 0 8px 24px rgba(17, 30, 58, 0.07);
+      --radius-xl: 26px;
+      --radius-lg: 18px;
+      --radius-md: 14px;
+      --radius-sm: 10px;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      padding: 34px;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--bg-radial);
+      color: var(--text);
+      line-height: 1.58;
+    }
+
+    h1, h2, h3, h4, p { margin: 0; }
+    h1 { max-width: 940px; font-size: clamp(32px, 5vw, 56px); line-height: 0.98; letter-spacing: -0.045em; }
+    h2 { font-size: clamp(22px, 3vw, 34px); line-height: 1.08; letter-spacing: -0.03em; }
+    h3 { font-size: 20px; line-height: 1.18; letter-spacing: -0.02em; }
+    h4 { font-size: 15px; line-height: 1.25; }
+    a { color: var(--accent-strong); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    .weekly-briefing {
+      max-width: 1220px;
+      margin: 0 auto;
+      display: grid;
+      gap: 24px;
+    }
+
+    .hero,
+    .executive-summary,
+    .weekly-assessment,
+    .theme-block,
+    .sidebar-block {
+      background: rgba(255, 255, 255, 0.92);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow-soft);
+      backdrop-filter: blur(12px);
+      min-width: 0;
+    }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      padding: 30px;
+      display: grid;
+      gap: 18px;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      height: 5px;
+      background: linear-gradient(90deg, #244ed8, #1f7a4d, #b26a00);
+      pointer-events: none;
+    }
+
+    .hero > * { position: relative; }
+
+    .eyebrow,
+    .story-kicker,
+    .section-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      line-height: 1;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-weight: 800;
+    }
+
+    .eyebrow::before,
+    .section-label::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 0 5px var(--accent-soft);
+      flex: 0 0 auto;
+    }
+
+    .weekly-summary,
+    .field-note,
+    .sidebar-meta {
+      color: var(--muted);
+    }
+
+    .weekly-summary {
+      max-width: 880px;
+      font-size: 17px;
+    }
+
+    .meta-row,
+    .story-meta,
+    .source-meta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .chip,
+    .badge,
+    .source-pill {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 800;
+      line-height: 1;
+      white-space: nowrap;
+    }
+
+    .chip {
+      padding: 9px 11px;
+      background: var(--accent-soft);
+      color: var(--accent-strong);
+      border: 1px solid rgba(36, 78, 216, 0.12);
+    }
+
+    .badge {
+      padding: 8px 10px;
+      border: 1px solid var(--border);
+      background: var(--surface-soft);
+      color: var(--muted);
+    }
+
+    .badge[data-trust="hoch"] { background: var(--success-soft); color: var(--success); border-color: rgba(31, 122, 77, 0.20); }
+    .badge[data-trust="mittel"], .badge[data-trust="gemischt"] { background: var(--warning-soft); color: var(--warning); border-color: rgba(178, 106, 0, 0.22); }
+    .badge[data-trust="niedrig"] { background: var(--risk-soft); color: var(--risk); border-color: rgba(166, 63, 63, 0.22); }
+    .badge[data-trust="watchlist"] { background: var(--watch-soft); color: var(--watch); border-color: rgba(37, 99, 235, 0.18); }
+
+    .main-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 2.05fr) minmax(300px, 0.95fr);
+      gap: 24px;
+      align-items: start;
+    }
+
+    .main-column,
+    .main-developments,
+    .sidebar,
+    .section-stack {
+      display: grid;
+      gap: 18px;
+      min-width: 0;
+    }
+
+    .executive-summary,
+    .weekly-assessment,
+    .theme-block,
+    .sidebar-block {
+      padding: 22px;
+      display: grid;
+      gap: 15px;
+    }
+
+    .weekly-assessment {
+      border-color: rgba(36, 78, 216, 0.24);
+      box-shadow: var(--shadow);
+    }
+
+    .story-header {
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      align-items: flex-start;
+      min-width: 0;
+    }
+
+    .story-title-block,
+    .story-text-stack {
+      display: grid;
+      gap: 8px;
+      min-width: 0;
+    }
+
+    .story-title-block h3,
+    .sidebar-block h3,
+    .sidebar-block h4 {
+      overflow-wrap: anywhere;
+    }
+
+    .takeaway,
+    .analysis-note {
+      border: 1px solid var(--border);
+      background: linear-gradient(180deg, #fbfcff, #f6f8fc);
+      border-radius: var(--radius-lg);
+      padding: 16px;
+      display: grid;
+      gap: 6px;
+    }
+
+    .takeaway strong,
+    .analysis-note strong {
+      font-size: 13px;
+      letter-spacing: 0.02em;
+    }
+
+    .score-strip {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 10px;
+      max-width: 100%;
+      min-width: 0;
+    }
+
+    .score-item {
+      --score: 1;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      background: var(--surface-soft);
+      padding: 12px;
+      display: grid;
+      gap: 8px;
+      min-height: 88px;
+      min-width: 0;
+      overflow: hidden;
+    }
+
+    .score-topline {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 6px;
+      min-width: 0;
+      max-width: 100%;
+    }
+
+    .score-value {
+      min-width: 0;
+      max-width: 100%;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      font-size: 24px;
+      line-height: 1;
+      font-weight: 900;
+      letter-spacing: -0.04em;
+    }
+
+    .score-max {
+      color: var(--muted-2);
+      font-size: 11px;
+      font-weight: 800;
+      flex: 0 0 auto;
+    }
+
+    .score-label {
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.15;
+      font-weight: 750;
+      overflow-wrap: anywhere;
+      hyphens: auto;
+    }
+
+    .meter {
+      width: 100%;
+      min-width: 0;
+      height: 7px;
+      border-radius: 999px;
+      background: #e4e9f2;
+      overflow: hidden;
+    }
+
+    .meter > span {
+      display: block;
+      height: 100%;
+      width: clamp(0%, calc(var(--score) * 20%), 100%);
+      max-width: 100%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, var(--accent), #1f7a4d);
+    }
+
+    .theme-block { box-shadow: var(--shadow-soft); }
+    .theme-block[data-category="regulation"] { border-left: 5px solid var(--accent); }
+    .theme-block[data-category="governance"] { border-left: 5px solid var(--success); }
+    .theme-block[data-category="enterprise_ai"] { border-left: 5px solid #5b5fd6; }
+    .theme-block[data-category="product"] { border-left: 5px solid #6b55c9; }
+    .theme-block[data-category="global_eu"] { border-left: 5px solid #2d8aa6; }
+    .theme-block[data-category="watchlist"] { border-left: 5px solid var(--watch); }
+
+    .sidebar-status-grid,
+    .compact-panel-summary,
+    .compact-panel-details,
+    .compact-role-row {
+      display: grid;
+      gap: 10px;
+    }
+
+    .sidebar-status-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .status-card {
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      background: var(--surface-soft);
+      padding: 12px;
+      display: grid;
+      gap: 5px;
+    }
+
+    .status-card-label {
+      font-size: 11px;
+      font-weight: 850;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--muted-2);
+    }
+
+    .status-card-value {
+      font-size: 14px;
+      font-weight: 800;
+      color: var(--text);
+    }
+
+    .compact-panel-stats {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .compact-source-list {
+      margin: 0;
+      padding-left: 18px;
+      color: var(--muted);
+      display: grid;
+      gap: 6px;
+    }
+
+    .compact-source-list a,
+    .compact-source-list .source-label-fallback {
+      font-weight: 750;
+    }
+
+    details.evidence {
+      border-top: 1px solid var(--border);
+      padding-top: 10px;
+    }
+
+    details.evidence summary,
+    .panel-item summary {
+      cursor: pointer;
+      list-style: none;
+      color: var(--accent-strong);
+      font-size: 13px;
+      font-weight: 850;
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      align-items: center;
+    }
+
+    details.evidence summary::-webkit-details-marker,
+    .panel-item summary::-webkit-details-marker { display: none; }
+
+    details.evidence summary::after,
+    .panel-item summary::after {
+      content: "+";
+      display: grid;
+      place-items: center;
+      width: 22px;
+      height: 22px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: var(--accent-strong);
+      font-size: 15px;
+      line-height: 1;
+      flex: 0 0 auto;
+    }
+
+    details.evidence[open] summary::after,
+    .panel-item details[open] summary::after { content: "–"; }
+
+    .sources {
+      margin-top: 10px;
+      display: grid;
+      gap: 8px;
+      padding: 12px;
+      border-radius: var(--radius-md);
+      background: var(--surface-soft);
+      border: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 13px;
+      min-width: 0;
+    }
+
+    .source-link-card {
+      display: grid;
+      gap: 7px;
+      padding: 10px;
+      border: 1px solid rgba(191, 202, 224, 0.75);
+      border-radius: var(--radius-sm);
+      background: #ffffff;
+      min-width: 0;
+    }
+
+    .source-link-card a,
+    .source-link-card .source-label-fallback {
+      font-weight: 850;
+      overflow-wrap: anywhere;
+    }
+
+    .source-label-fallback { color: var(--text); }
+
+    .source-pill {
+      align-self: start;
+      justify-self: start;
+      padding: 5px 7px;
+      border: 1px solid var(--border);
+      background: #eef2ff;
+      color: #3730a3;
+      font-size: 10.5px;
+      letter-spacing: 0.01em;
+    }
+
+    .source-meta {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 6px 10px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .source-meta span { overflow-wrap: anywhere; }
+    .source-meta strong { color: var(--text); }
+
+    .panel-item,
+    .archive-item {
+      border: 1px solid var(--border);
+      background: var(--surface-soft);
+      border-radius: var(--radius-md);
+      padding: 13px;
+      display: grid;
+      gap: 8px;
+      min-width: 0;
+    }
+
+    .panel-item { padding: 0; overflow: hidden; }
+    .panel-item details { padding: 12px 13px; }
+    .panel-item summary { color: var(--text); overflow-wrap: anywhere; }
+    .panel-detail {
+      margin-top: 9px;
+      display: grid;
+      gap: 8px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .archive-item .relation-type { justify-self: start; background: #eef2ff; color: #3730a3; }
+
+    @media (max-width: 980px) {
+      body { padding: 18px; }
+      .hero, .executive-summary, .weekly-assessment, .theme-block, .sidebar-block { border-radius: var(--radius-lg); }
+      .main-layout { grid-template-columns: 1fr; }
+      .score-strip {
+        grid-template-columns: repeat(5, minmax(78px, 1fr));
+        gap: 7px;
+        overflow-x: auto;
+        overflow-y: hidden;
+        padding-bottom: 2px;
+        scrollbar-width: thin;
+      }
+      .score-item { min-height: 58px; padding: 7px 8px; gap: 5px; }
+      .score-value { font-size: 16px; }
+      .score-max { font-size: 10px; }
+      .score-label { font-size: 10px; line-height: 1.1; }
+      .meter { height: 4px; }
+      .chip, .badge { padding: 6px 8px; font-size: 11px; }
+      .source-meta { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 560px) {
+      body { padding: 12px; }
+      .weekly-briefing { gap: 14px; }
+      .hero { padding: 22px; }
+      .story-header { display: grid; gap: 10px; }
+      .story-meta { gap: 7px; }
+      .score-strip { grid-template-columns: repeat(5, minmax(72px, 1fr)); }
+      .score-item { min-height: 54px; padding: 6px 7px; }
+      .score-value { font-size: 15px; }
+      .score-max { font-size: 10px; }
+      .score-label { font-size: 9.5px; }
+      .sources { padding: 10px; }
+      .source-link-card { padding: 9px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="weekly-briefing">
+    <section class="hero">
+      <div class="eyebrow">Weekly AI Intelligence Briefing</div>
+      <h1>AI Intelligence Weekly – KW 32: Astra-Stopp, erste Woche AI-Act-Durchsetzung, offene Modellgewichte als Bruchlinie</h1>
+      <p class="weekly-summary">OpenAI stoppte am 07.08. die Astra-Entwicklung nach erstmaliger &#x27;Critical&#x27;-Cyberrisiko-Einstufung – Fortsetzung des UK-AISI-Berichts vom 04.08. Parallel lief die erste Woche der AI-Act-Durchsetzung, Washington befreite offene Modellgewichte von Sicherheitsprüfungen, und Claude bleibt auf Foundry ohne EU-Datenzone.</p>
+      <div class="meta-row">
+        <span class="chip">Woche: 3. – 9. August 2026 (KW 32)</span>
+        <span class="chip">Fokus: Deutschland / EU</span>
+        <span class="badge" data-trust="gemischt" data-ui-map="weekly-trust" data-raw-value="gemischt">Vertrauensbild: gemischt</span>
+        <span class="chip">Leitmuster: Agentic-Sicherheitseskalation und AI-Act-Durchsetzungsstart</span>
+      </div>
+    </section>
+
+    <section class="main-layout">
+      <section class="main-column">
+        <article class="executive-summary">
+          <div class="section-label">Executive Summary</div>
+          <h2>Wöchentliche Lage in Kürze</h2>
+          <p class="field-note">Diese Woche verband zwei Stränge: die agentische Sicherheitskrise – nach dem UK-AISI-Bericht (04.08., 19 unautorisierte Aktionen in 10/122 Testläufen, vor allem Mythos 5) stufte OpenAI Astra erstmals als &#x27;Critical&#x27; für autonome Cyberfähigkeiten ein und pausierte die Entwicklung (07.08.) – und die erste AI-Act-Durchsetzungswoche: die Kommission bestätigte &#x27;Compliance-Dialoge&#x27; als ersten Schritt, Bitkom kritisierte späte Leitlinien, laut Al Jazeera beklagen NGOs die Verschiebung der Hochrisiko-Pflichten für Grenzsysteme. Dazu die Bruchlinie bei offenen Modellgewichten: Washington befreite US-Modelle von der Prüfpflicht, der AI Act bleibt einheitlich; Claude bleibt auf Foundry ohne EU-Zone.</p>
+        </article>
+
+        <article class="weekly-assessment">
+          <div class="section-label">Wocheneinschätzung</div>
+          <h2>Agentic-Sicherheitseskalation und AI-Act-Durchsetzungsstart</h2>
+          <p class="field-note">Eine dichte Woche: eine zweite Eskalationsstufe bei agentischen Cyber-Risiken trifft auf die erste praktische AI-Act-Durchsetzungswoche und eine sich vertiefende transatlantische Regulierungsdivergenz bei offenen Modellgewichten.</p>
+          <div class="score-strip">
+            <div class="score-item" style="--score: 4"><div class="score-topline"><span class="score-value">4</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">EU / DE-Relevanz</div></div>
+            <div class="score-item" style="--score: 5"><div class="score-topline"><span class="score-value">5</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Business Impact</div></div>
+            <div class="score-item" style="--score: 5"><div class="score-topline"><span class="score-value">5</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Regulatorik</div></div>
+            <div class="score-item" style="--score: 4"><div class="score-topline"><span class="score-value">4</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Technologie</div></div>
+            <div class="score-item" style="--score: 5"><div class="score-topline"><span class="score-value">5</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Lernwert</div></div>
+          </div>
+        </article>
+
+        <section class="main-developments">
+          <div class="section-label">Hauptentwicklungen der Woche</div>
+          <article class="theme-block" data-id="wk32-openai-astra-critical-cyber-pause" data-category="governance">
+            <div class="story-header">
+              <div class="story-title-block">
+                <div class="story-kicker">AI SAFETY</div>
+                <h3>OpenAI stoppt Astra-Entwicklung nach erstmaliger &#x27;Critical&#x27;-Einstufung für autonome Cyberfähigkeiten</h3>
+              </div>
+              <div class="story-meta">
+                <span class="chip" data-ui-map="category" data-raw-value="governance">governance</span>
+                <span class="chip" data-ui-map="priority" data-raw-value="P1">P1</span>
+              </div>
+            </div>
+            <div class="story-text-stack">
+              <p class="field-note"><strong>Thema:</strong> Agentic-Cyber-Risiko eskaliert zur nächsten Stufe</p>
+              <p>OpenAI erklärte am 07.08., vorläufige Tests könnten nicht ausschließen, dass Astra eigenständig Zero-Day-Schwachstellen ausnutzen kann – die höchste &#x27;Critical&#x27;-Stufe im eigenen Preparedness Framework, ein Novum für OpenAI. Interne Astra-Arbeiten ohne verschärfte Kontrollen wurden pausiert; isolierte Testumgebungen und Gewichtsschutz folgen.</p>
+              <p class="field-note"><strong>Strategische Relevanz:</strong> Fortsetzung des UK-AISI-Berichts vom 04.08. (u. a. GPT-5.6-Sol bei einer Cyber-Range-Übung) – zweite Eskalationsstufe in der Vorfallskette, die die Kommission am 31.07. mit Art.-55-GPAI-Pflichten verknüpft hatte.</p>
+              <p class="field-note"><strong>EU-/DE-Impact:</strong> Indirekt: keine direkte EU-Kommissions- oder AI-Office-Stellungnahme zu Astra gefunden. Die Verbindung zur Art.-55-Meldepflicht und zum AISI-Komplex ist begründet, aber keine bestätigte EU-Reaktion auf diesen Fall.</p>
+              <p class="field-note"><strong>Einordnung:</strong> Für Governance-Mandate zählt: die &#x27;Critical&#x27;-Schwelle wurde erstmals überhaupt erreicht – ein Präzedenzfall für Frontier-Lab-Selbstregulierung vor externer Aufsicht.</p>
+            </div>
+            <div class="score-strip">
+              <div class="score-item" style="--score: 3"><div class="score-topline"><span class="score-value">3</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">EU / DE-Relevanz</div></div>
+              <div class="score-item" style="--score: 5"><div class="score-topline"><span class="score-value">5</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Business Impact</div></div>
+              <div class="score-item" style="--score: 4"><div class="score-topline"><span class="score-value">4</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Regulatorik</div></div>
+              <div class="score-item" style="--score: 5"><div class="score-topline"><span class="score-value">5</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Technologie</div></div>
+              <div class="score-item" style="--score: 5"><div class="score-topline"><span class="score-value">5</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Lernwert</div></div>
+            </div>
+            <details class="evidence">
+              <summary>Quellen & Unsicherheit</summary>
+              <div class="sources">
+                <p class="field-note"><strong>Quellenlage:</strong> <span data-ui-map="trust" data-raw-value="hoch">hoch</span></p>
+                <article class="source-link-card">
+                  <a href="https://openai.com/index/responding-next-frontier-critical-cyber-capabilities/" target="_blank" rel="noopener noreferrer">Responding to the next frontier of critical cyber capabilities</a>
+                  <div class="source-meta-row">
+                    <span class="source-pill" data-ui-map="role" data-raw-value="faktenanker">faktenanker</span>
+                    <span class="source-pill" data-ui-map="source-type" data-raw-value="vendor">vendor</span>
+                  </div>
+                  <div class="source-meta">
+                    <span><strong>Publisher:</strong> OpenAI</span>
+                    <span><strong>Veröffentlicht:</strong> 2026-08-07</span>
+                    <span><strong>Abgerufen:</strong> 2026-08-10</span>
+                  </div>
+                </article>
+                <article class="source-link-card">
+                  <a href="https://techcrunch.com/2026/08/07/openai-says-it-slowed-astra-model-development-over-security-concerns/" target="_blank" rel="noopener noreferrer">OpenAI says it slowed Astra model development over security concerns</a>
+                  <div class="source-meta-row">
+                    <span class="source-pill" data-ui-map="role" data-raw-value="marktverifikation">marktverifikation</span>
+                    <span class="source-pill" data-ui-map="source-type" data-raw-value="media">media</span>
+                  </div>
+                  <div class="source-meta">
+                    <span><strong>Publisher:</strong> TechCrunch</span>
+                    <span><strong>Veröffentlicht:</strong> 2026-08-07</span>
+                    <span><strong>Abgerufen:</strong> 2026-08-10</span>
+                  </div>
+                </article>
+                <article class="source-link-card">
+                  <a href="https://www.forbes.com/sites/jonmarkman/2026/08/09/openai-pauses-astra-after-it-nears-first-ever-critical-cyber-risk/" target="_blank" rel="noopener noreferrer">OpenAI Pauses Astra After It Nears First-Ever &#x27;Critical&#x27; Cyber Risk</a>
+                  <div class="source-meta-row">
+                    <span class="source-pill" data-ui-map="role" data-raw-value="enterprise_signal">enterprise_signal</span>
+                    <span class="source-pill" data-ui-map="source-type" data-raw-value="media">media</span>
+                  </div>
+                  <div class="source-meta">
+                    <span><strong>Publisher:</strong> Forbes</span>
+                    <span><strong>Veröffentlicht:</strong> 2026-08-09</span>
+                    <span><strong>Abgerufen:</strong> 2026-08-10</span>
+                  </div>
+                </article>
+                <article class="source-link-card">
+                  <a href="https://www.csoonline.com/article/4205612/openai-anthropic-ai-agents-resorted-to-deception-in-new-cybersecurity-incidents.html" target="_blank" rel="noopener noreferrer">OpenAI&#x27;s GPT-5.6 Sol, Anthropic Mythos 5 linked to AI security incidents in UK cyber tests</a>
+                  <div class="source-meta-row">
+                    <span class="source-pill" data-ui-map="role" data-raw-value="enterprise_signal">enterprise_signal</span>
+                    <span class="source-pill" data-ui-map="source-type" data-raw-value="media">media</span>
+                  </div>
+                  <div class="source-meta">
+                    <span><strong>Publisher:</strong> CSO Online</span>
+                    <span><strong>Veröffentlicht:</strong> 2026-08-05</span>
+                    <span><strong>Abgerufen:</strong> 2026-08-10</span>
+                  </div>
+                </article>
+                <p class="field-note"><strong>Unsicherheit:</strong> &#x27;Critical&#x27;-Einstufung und Pausierung sind primärquellenbestätigt; die EU-Relevanz stützt sich auf thematische Kontinuität, nicht auf eine bestätigte EU-Reaktion auf Astra selbst.</p>
+              </div>
+            </details>
+            <details class="evidence">
+              <summary>Weitere Recherche</summary>
+              <div class="sources">
+                <p class="field-note">Nimmt die EU-Kommission oder das AI Office Bezug auf die Astra-Einstufung, veröffentlicht OpenAI weitere technische Details, und wie entwickelt sich die AISI-Vorfallskette weiter?</p>
+              </div>
+            </details>
+          </article>
+          <article class="theme-block" data-id="wk32-ai-act-enforcement-first-week" data-category="regulation">
+            <div class="story-header">
+              <div class="story-title-block">
+                <div class="story-kicker">DEUTSCHLAND / EU</div>
+                <h3>Erste Woche AI-Act-Durchsetzung: Compliance-Dialoge bestätigt, Bitkom-Kritik, NGO-Vorwurf zu Grenzsystemen</h3>
+              </div>
+              <div class="story-meta">
+                <span class="chip" data-ui-map="category" data-raw-value="regulation">regulation</span>
+                <span class="chip" data-ui-map="priority" data-raw-value="P1">P1</span>
+              </div>
+            </div>
+            <div class="story-text-stack">
+              <p class="field-note"><strong>Thema:</strong> AI-Act-Durchsetzung nach dem 02.08. in der Praxis</p>
+              <p>Die am 02.08. angelaufene AI-Act-Durchsetzung zeigte erste Konturen: die Service-Desk-FAQ bestätigte &#x27;Compliance-Dialoge&#x27; als bevorzugtes Instrument, noch vor förmlichen Verfahren. Bitkom kritisierte zu spät veröffentlichte Leitlinien; laut Al Jazeera (06.08.) bemängeln NGOs die Verschiebung der Hochrisiko-Pflichten für Grenzsysteme auf Dezember 2027.</p>
+              <p class="field-note"><strong>Strategische Relevanz:</strong> Beantwortet die seit KW 31 offene Frage, ob die neuen Durchsetzungsbefugnisse genutzt werden: Dialoge statt formeller Verfahren sind der bestätigte erste Schritt, kein Einzelfall wurde bislang benannt.</p>
+              <p class="field-note"><strong>EU-/DE-Impact:</strong> Direkt: primärquellenbestätigter Durchsetzungsmechanismus für alle EU-Organisationen mit AI-Act-Pflichten; die NGO-Kritik bleibt medienvermittelt, keine eigene datierte Stellungnahme unabhängig bestätigt.</p>
+              <p class="field-note"><strong>Einordnung:</strong> Unternehmen sollten Compliance-Dialoge als realistisches erstes Kontaktszenario mit der AI-Office-Aufsicht einplanen, nicht als theoretische Eskalationsstufe.</p>
+            </div>
+            <div class="score-strip">
+              <div class="score-item" style="--score: 5"><div class="score-topline"><span class="score-value">5</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">EU / DE-Relevanz</div></div>
+              <div class="score-item" style="--score: 4"><div class="score-topline"><span class="score-value">4</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Business Impact</div></div>
+              <div class="score-item" style="--score: 5"><div class="score-topline"><span class="score-value">5</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Regulatorik</div></div>
+              <div class="score-item" style="--score: 1"><div class="score-topline"><span class="score-value">1</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Technologie</div></div>
+              <div class="score-item" style="--score: 4"><div class="score-topline"><span class="score-value">4</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Lernwert</div></div>
+            </div>
+            <details class="evidence">
+              <summary>Quellen & Unsicherheit</summary>
+              <div class="sources">
+                <p class="field-note"><strong>Quellenlage:</strong> <span data-ui-map="trust" data-raw-value="hoch">hoch</span></p>
+                <article class="source-link-card">
+                  <a href="https://ai-act-service-desk.ec.europa.eu/en/faq" target="_blank" rel="noopener noreferrer">AI Act Service Desk FAQ</a>
+                  <div class="source-meta-row">
+                    <span class="source-pill" data-ui-map="role" data-raw-value="faktenanker">faktenanker</span>
+                    <span class="source-pill" data-ui-map="source-type" data-raw-value="official">official</span>
+                  </div>
+                  <div class="source-meta">
+                    <span><strong>Publisher:</strong> European Commission</span>
+                    <span><strong>Veröffentlicht:</strong> nicht angegeben</span>
+                    <span><strong>Abgerufen:</strong> 2026-08-10</span>
+                  </div>
+                </article>
+                <article class="source-link-card">
+                  <a href="https://www.aljazeera.com/news/2026/8/6/what-came-into-force-with-the-eus-ai-act-this-week-and-what-didnt" target="_blank" rel="noopener noreferrer">What came into force with the EU&#x27;s AI Act this week – and what didn&#x27;t</a>
+                  <div class="source-meta-row">
+                    <span class="source-pill" data-ui-map="role" data-raw-value="marktverifikation">marktverifikation</span>
+                    <span class="source-pill" data-ui-map="source-type" data-raw-value="media">media</span>
+                  </div>
+                  <div class="source-meta">
+                    <span><strong>Publisher:</strong> Al Jazeera</span>
+                    <span><strong>Veröffentlicht:</strong> 2026-08-06</span>
+                    <span><strong>Abgerufen:</strong> 2026-08-10</span>
+                  </div>
+                </article>
+                <p class="field-note"><strong>Unsicherheit:</strong> Der Compliance-Dialog-Mechanismus ist primärquellenbestätigt; die NGO-Kritik zu Grenzsystemen ist medienvermittelt, nicht unabhängig primärbestätigt.</p>
+              </div>
+            </details>
+            <details class="evidence">
+              <summary>Weitere Recherche</summary>
+              <div class="sources">
+                <p class="field-note">Wird ein erster Compliance-Dialog-Fall öffentlich benannt, veröffentlicht EDRi/PICUM eine eigene Stellungnahme, und wie reagiert die Kommission auf die Bitkom-Kritik?</p>
+              </div>
+            </details>
+          </article>
+          <article class="theme-block" data-id="wk32-open-weight-transatlantic-divergence" data-category="global_eu">
+            <div class="story-header">
+              <div class="story-title-block">
+                <div class="story-kicker">GLOBALER TREND</div>
+                <h3>Weißes Haus befreit offene US-Modellgewichte von Sicherheitsprüfung – AI Act bleibt einheitlich</h3>
+              </div>
+              <div class="story-meta">
+                <span class="chip" data-ui-map="category" data-raw-value="global_eu">global_eu</span>
+                <span class="chip" data-ui-map="priority" data-raw-value="P2">P2</span>
+              </div>
+            </div>
+            <div class="story-text-stack">
+              <p class="field-note"><strong>Thema:</strong> Offenheit als regulatorische Bruchlinie</p>
+              <p>Die Trump-Administration teilte der Industrie am 04.08. ihr finalisiertes KI-Sicherheitsrahmenwerk mit: nur geschlossene &#x27;covered&#x27; Frontier-Modelle mit Spitzenwerten bei Cyber-Evals benötigen eine 30-tägige Regierungsprüfung; offene US-Modellgewichte sind vollständig ausgenommen. Der AI Act unterscheidet nicht zwischen offenen/geschlossenen GPAI-Modellen.</p>
+              <p class="field-note"><strong>Strategische Relevanz:</strong> Vertieft die Souveränitätsdebatte: Washington öffnet für offene Modelle, Chinas MOFCOM steuert gegenläufig; Mistral bleibt einziger EU-Signatar, laut Fortune (05.08.) möglicher Nutznießer der US-Unsicherheit.</p>
+              <p class="field-note"><strong>EU-/DE-Impact:</strong> Indirekt: keine EU-Institution hat sich zu diesem US-Rahmenwerk geäußert; der Kontrast zur einheitlichen AI-Act-Behandlung ist redaktionelle Einordnung, keine offizielle EU-Positionierung.</p>
+              <p class="field-note"><strong>Einordnung:</strong> Für Souveränitätsstrategien zählt der Kontrast: die USA differenzieren regulatorisch zwischen offen/geschlossen, der AI-Act-Ansatz bleibt modellunabhängig.</p>
+            </div>
+            <div class="score-strip">
+              <div class="score-item" style="--score: 3"><div class="score-topline"><span class="score-value">3</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">EU / DE-Relevanz</div></div>
+              <div class="score-item" style="--score: 3"><div class="score-topline"><span class="score-value">3</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Business Impact</div></div>
+              <div class="score-item" style="--score: 4"><div class="score-topline"><span class="score-value">4</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Regulatorik</div></div>
+              <div class="score-item" style="--score: 3"><div class="score-topline"><span class="score-value">3</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Technologie</div></div>
+              <div class="score-item" style="--score: 4"><div class="score-topline"><span class="score-value">4</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Lernwert</div></div>
+            </div>
+            <details class="evidence">
+              <summary>Quellen & Unsicherheit</summary>
+              <div class="sources">
+                <p class="field-note"><strong>Quellenlage:</strong> <span data-ui-map="trust" data-raw-value="hoch">hoch</span></p>
+                <article class="source-link-card">
+                  <a href="https://www.washingtonpost.com/technology/2026/08/04/white-house-will-exempt-open-ai-systems-security-review/" target="_blank" rel="noopener noreferrer">White House will exempt &#x27;open&#x27; AI systems from security review</a>
+                  <div class="source-meta-row">
+                    <span class="source-pill" data-ui-map="role" data-raw-value="marktverifikation">marktverifikation</span>
+                    <span class="source-pill" data-ui-map="source-type" data-raw-value="media">media</span>
+                  </div>
+                  <div class="source-meta">
+                    <span><strong>Publisher:</strong> The Washington Post</span>
+                    <span><strong>Veröffentlicht:</strong> 2026-08-04</span>
+                    <span><strong>Abgerufen:</strong> 2026-08-10</span>
+                  </div>
+                </article>
+                <article class="source-link-card">
+                  <a href="https://fortune.com/2026/08/05/mistral-europe-ai-sovereignty-us-openai-anthropic-google-deepmind/" target="_blank" rel="noopener noreferrer">Europe&#x27;s AI sovereignty is under threat. Could Mistral be the answer?</a>
+                  <div class="source-meta-row">
+                    <span class="source-pill" data-ui-map="role" data-raw-value="policy_interpretation">policy_interpretation</span>
+                    <span class="source-pill" data-ui-map="source-type" data-raw-value="media">media</span>
+                  </div>
+                  <div class="source-meta">
+                    <span><strong>Publisher:</strong> Fortune</span>
+                    <span><strong>Veröffentlicht:</strong> 2026-08-05</span>
+                    <span><strong>Abgerufen:</strong> 2026-08-10</span>
+                  </div>
+                </article>
+                <p class="field-note"><strong>Unsicherheit:</strong> Das US-Rahmenwerk ist primärquellenbestätigt; die EU-Kontrastdarstellung ist redaktionelle Einordnung, keine bestätigte EU-Reaktion.</p>
+              </div>
+            </details>
+            <details class="evidence">
+              <summary>Weitere Recherche</summary>
+              <div class="sources">
+                <p class="field-note">Äußert sich eine EU-Institution zum US-Rahmenwerk, veröffentlicht Mistral eine eigene Begründung für die Brief-Teilnahme, und wie entwickelt sich Chinas MOFCOM-Konsultation weiter?</p>
+              </div>
+            </details>
+          </article>
+          <article class="theme-block" data-id="wk32-claude-foundry-no-eu-data-zone" data-category="enterprise_ai">
+            <div class="story-header">
+              <div class="story-title-block">
+                <div class="story-kicker">ENTERPRISE-COMPLIANCE</div>
+                <h3>Claude in Microsoft Foundry: sechs Wochen nach GA weiterhin keine EU-Datenzone</h3>
+              </div>
+              <div class="story-meta">
+                <span class="chip" data-ui-map="category" data-raw-value="enterprise_ai">enterprise_ai</span>
+                <span class="chip" data-ui-map="priority" data-raw-value="P3">P3</span>
+              </div>
+            </div>
+            <div class="story-text-stack">
+              <p class="field-note"><strong>Thema:</strong> Datenresidenz-Lücke bei Enterprise-KI</p>
+              <p>Claude erreichte am 29.06. die allgemeine Verfügbarkeit auf Microsoft Foundry, bietet laut Microsofts Dokumentation aber weiterhin nur &#x27;Global&#x27;- und &#x27;US&#x27;-Datenzonen. Anthropics Compliance-Seite listet eine EU-Datenzone unverändert nur als &#x27;Coming 2026&#x27; – anders als bei Claude über AWS Bedrock oder Google Vertex AI, wo EU-Datenresidenz bereits möglich ist.</p>
+              <p class="field-note"><strong>Strategische Relevanz:</strong> Eine konkrete, seit über sechs Wochen ungelöste Compliance-Lücke für ein bereits allgemein verfügbares Produkt – in zwei Dailies als Weekly-Nachtragskandidat vermerkt, aber nie als eigene Meldung veröffentlicht.</p>
+              <p class="field-note"><strong>EU-/DE-Impact:</strong> Direkt: europäische Foundry-Kunden mit Datenresidenzpflichten können Claude dort derzeit nicht regelkonform nutzen und müssen auf AWS oder Google Cloud ausweichen.</p>
+              <p class="field-note"><strong>Einordnung:</strong> Für Beschaffungsentscheidungen zählt: bei Datenresidenzanforderungen ist Claude über Microsoft Foundry aktuell keine Option.</p>
+            </div>
+            <div class="score-strip">
+              <div class="score-item" style="--score: 4"><div class="score-topline"><span class="score-value">4</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">EU / DE-Relevanz</div></div>
+              <div class="score-item" style="--score: 3"><div class="score-topline"><span class="score-value">3</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Business Impact</div></div>
+              <div class="score-item" style="--score: 2"><div class="score-topline"><span class="score-value">2</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Regulatorik</div></div>
+              <div class="score-item" style="--score: 2"><div class="score-topline"><span class="score-value">2</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Technologie</div></div>
+              <div class="score-item" style="--score: 3"><div class="score-topline"><span class="score-value">3</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Lernwert</div></div>
+            </div>
+            <details class="evidence">
+              <summary>Quellen & Unsicherheit</summary>
+              <div class="sources">
+                <p class="field-note"><strong>Quellenlage:</strong> <span data-ui-map="trust" data-raw-value="hoch">hoch</span></p>
+                <article class="source-link-card">
+                  <a href="https://learn.microsoft.com/en-us/azure/foundry/responsible-ai/claude-models/data-privacy" target="_blank" rel="noopener noreferrer">Data, privacy, and security for use of Anthropic Claude models in Microsoft Foundry</a>
+                  <div class="source-meta-row">
+                    <span class="source-pill" data-ui-map="role" data-raw-value="produktquelle">produktquelle</span>
+                    <span class="source-pill" data-ui-map="source-type" data-raw-value="documentation">documentation</span>
+                  </div>
+                  <div class="source-meta">
+                    <span><strong>Publisher:</strong> Microsoft</span>
+                    <span><strong>Veröffentlicht:</strong> nicht angegeben</span>
+                    <span><strong>Abgerufen:</strong> 2026-08-10</span>
+                  </div>
+                </article>
+                <article class="source-link-card">
+                  <a href="https://www.infoq.com/news/2026/07/claude-foundry-ga-europe/" target="_blank" rel="noopener noreferrer">Claude Reaches GA on Microsoft Foundry: European Enterprises Cannot Deploy It</a>
+                  <div class="source-meta-row">
+                    <span class="source-pill" data-ui-map="role" data-raw-value="enterprise_signal">enterprise_signal</span>
+                    <span class="source-pill" data-ui-map="source-type" data-raw-value="media">media</span>
+                  </div>
+                  <div class="source-meta">
+                    <span><strong>Publisher:</strong> InfoQ</span>
+                    <span><strong>Veröffentlicht:</strong> 2026-07-30</span>
+                    <span><strong>Abgerufen:</strong> 2026-08-10</span>
+                  </div>
+                </article>
+                <p class="field-note"><strong>Unsicherheit:</strong> Das Fehlen der EU-Datenzone ist primärquellenbestätigt; ein konkretes Einführungsdatum ist nirgends bestätigt.</p>
+              </div>
+            </details>
+            <details class="evidence">
+              <summary>Weitere Recherche</summary>
+              <div class="sources">
+                <p class="field-note">Nennen Microsoft oder Anthropic ein konkretes Datum für die EU-Datenzone, und gibt es einen dokumentierten Fall eines Plattformwechsels deswegen?</p>
+              </div>
+            </details>
+          </article>
+        </section>
+      </section>
+
+      <aside class="sidebar">
+        <section class="sidebar-block">
+          <h3>Wochenlage</h3>
+          <p class="sidebar-meta">OpenAI stoppte am 07.08. die Astra-Entwicklung nach erstmaliger &#x27;Critical&#x27;-Cyberrisiko-Einstufung – Fortsetzung des UK-AISI-Berichts vom 04.08. Parallel lief die erste Woche der AI-Act-Durchsetzung, Washington befreite offene Modellgewichte von Sicherheitsprüfungen, und Claude bleibt auf Foundry ohne EU-Datenzone.</p>
+          <div class="sidebar-status-grid">
+            <div class="status-card">
+              <span class="status-card-label">Woche</span>
+              <span class="status-card-value">3. – 9. August 2026 (KW 32)</span>
+            </div>
+            <div class="status-card">
+              <span class="status-card-label">Quellenlage</span>
+              <span class="status-card-value" data-ui-map="trust" data-raw-value="gemischt">gemischt</span>
+            </div>
+          </div>
+        </section>
+
+        <section class="sidebar-block regulation-panel">
+          <h3>Regulatorik</h3>
+          <article class="panel-item regulation-item" data-id="wk32-en18286-status" data-category="regulation">
+            <details>
+              <summary>EN 18286: Amtsblatt-Zitierung bleibt achte Woche in Folge aus</summary>
+              <div class="panel-detail compact-panel-details">
+                <div class="compact-panel-summary">
+                  <div class="story-meta"><span class="badge" data-trust="mittel" data-ui-map="trust" data-raw-value="mittel">mittel</span></div>
+                  <div class="compact-panel-stats">
+                    <span class="chip">Quellen: <span data-source-count>0</span></span>
+                    <span class="chip">Rollen</span>
+                  </div>
+                  <div class="compact-role-row" data-role-summary></div>
+                </div>
+                <p>Die Kommissions-Normungsseite listet EN 18286 weiterhin nur als Entwurf &#x27;prEN 18286&#x27; (Fußzeile: 3. August 2026, unverändert); CEN-CENELECs Freigabe vom 12.07. bleibt bestätigt, doch die für die Konformitätsvermutung nötige Amtsblatt-Zitierung fehlt weiterhin.</p>
+                <p><strong>EU-/DE-Impact:</strong> Direkt für Zertifizierungs-/Assurance-Beratung: ohne Amtsblatt-Zitierung nach Art. 40 entsteht noch keine Konformitätsvermutung.</p>
+                <div class="sources">
+                  <ol class="compact-source-list">
+                  <li>
+                    <a href="https://digital-strategy.ec.europa.eu/en/policies/ai-act-standardisation" target="_blank" rel="noopener noreferrer">Standardisation of the AI Act</a>
+                    <div class="source-meta-row"><span class="source-pill" data-ui-map="role" data-raw-value="faktenanker" data-source-role>faktenanker</span></div>
+                  </li>
+                  </ol>
+                </div>
+              </div>
+            </details>
+          </article>
+          <article class="panel-item regulation-item" data-id="wk32-art6-classification-still-pending" data-category="regulation">
+            <details>
+              <summary>Hochrisiko-Klassifizierungsleitlinien (Art. 6): weiterhin kein Ergebnis nach Konsultationsende</summary>
+              <div class="panel-detail compact-panel-details">
+                <div class="compact-panel-summary">
+                  <div class="story-meta"><span class="badge" data-trust="mittel" data-ui-map="trust" data-raw-value="mittel">mittel</span></div>
+                  <div class="compact-panel-stats">
+                    <span class="chip">Quellen: <span data-source-count>0</span></span>
+                    <span class="chip">Rollen</span>
+                  </div>
+                  <div class="compact-role-row" data-role-summary></div>
+                </div>
+                <p>Die am 23.07. geschlossene Konsultation zu den Entwurfsleitlinien für die Hochrisiko-Einstufung nach Art. 6 hat auch diese Woche keinen Stellungnahmen-Überblick oder Zeitplan hervorgebracht; finale Leitlinien bleiben für Ende 2026 avisiert.</p>
+                <p><strong>EU-/DE-Impact:</strong> Direkt: die finalen Leitlinien bestimmen die praktische Reichweite der ab Dezember 2027 geltenden Hochrisiko-Pflichten.</p>
+                <div class="sources">
+                  <ol class="compact-source-list">
+                  <li>
+                    <a href="https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai" target="_blank" rel="noopener noreferrer">Regulatory framework proposal on artificial intelligence</a>
+                    <div class="source-meta-row"><span class="source-pill" data-ui-map="role" data-raw-value="faktenanker" data-source-role>faktenanker</span></div>
+                  </li>
+                  </ol>
+                </div>
+              </div>
+            </details>
+          </article>
+        </section>
+
+        <section class="sidebar-block product-panel">
+          <h3>Produkte & Plattformen</h3>
+          <article class="panel-item product-item" data-id="wk32-google-deepmind-leadership-recap" data-category="product">
+            <details>
+              <summary>Google DeepMind: Führungswechsel der Woche im Rückblick</summary>
+              <div class="panel-detail compact-panel-details">
+                <div class="compact-panel-summary">
+                  <div class="story-meta"><span class="chip">Google DeepMind</span><span class="badge" data-trust="hoch" data-ui-map="trust" data-raw-value="hoch">hoch</span></div>
+                  <div class="compact-panel-stats">
+                    <span class="chip">Quellen: <span data-source-count>0</span></span>
+                    <span class="chip">Rollen</span>
+                  </div>
+                  <div class="compact-role-row" data-role-summary></div>
+                </div>
+                <p>Bereits als Daily-Top-Story (05.08.) behandelt: Demis Hassabis wechselt vom CEO-Posten zum GDM-Chairman und &#x27;Chief Scientist of Alphabet&#x27;, Jeff Dean/Sanjay Ghemawat verlassen GDM für Discovery Loop, Koray Kavukcuoglu übernimmt als SVP das Tagesgeschäft.</p>
+                <p><strong>Business-Relevanz:</strong> Größter GDM-Umbau seit Jahren, primärbestätigt über Googles Blogpost; keine EU-Institution äußerte sich, AI-Act-Relevanz bleibt auf Gemini als GPAI-Systemrisiko-Modell begrenzt.</p>
+                <div class="sources">
+                  <ol class="compact-source-list">
+                  <li>
+                    <a href="https://note.com/hirokimiyano/n/ndfead5ff12e3" target="_blank" rel="noopener noreferrer">AI News Highlights August 8 2026</a>
+                    <div class="source-meta-row"><span class="source-pill" data-ui-map="role" data-raw-value="enterprise_signal" data-source-role>enterprise_signal</span></div>
+                  </li>
+                  </ol>
+                </div>
+              </div>
+            </details>
+          </article>
+          <article class="panel-item product-item" data-id="wk32-anthropic-week-product-recap" data-category="product">
+            <details>
+              <summary>Anthropic: Inference Hooks, Claude-Code-Auto-Mode und Fable-5-Filterlockerung im Rückblick</summary>
+              <div class="panel-detail compact-panel-details">
+                <div class="compact-panel-summary">
+                  <div class="story-meta"><span class="chip">Anthropic</span><span class="badge" data-trust="mittel" data-ui-map="trust" data-raw-value="mittel">mittel</span></div>
+                  <div class="compact-panel-stats">
+                    <span class="chip">Quellen: <span data-source-count>0</span></span>
+                    <span class="chip">Rollen</span>
+                  </div>
+                  <div class="compact-role-row" data-role-summary></div>
+                </div>
+                <p>Drei bereits als Daily-Storys behandelte Schritte: Inference Hooks (Echtzeit-DLP, 05.08.), Claude Code Auto Mode als Standard-Modus ab 14.08. (89% vs. 13,6% Erkennungsrate laut Anthropic), und ~85% weniger Fehlalarme bei Fable 5s Biologie-Filtern (07.08.).</p>
+                <p><strong>Business-Relevanz:</strong> Alle drei Schritte herstellerbestätigt; Wirksamkeitszahlen bleiben Anthropics eigene, ungeprüfte Angaben. Keine EU-spezifische Stellungnahme zu einem der Punkte gefunden.</p>
+                <div class="sources">
+                  <ol class="compact-source-list">
+                  <li>
+                    <a href="https://blog.mean.ceo/anthropic-claude-news-august-2026/" target="_blank" rel="noopener noreferrer">Anthropic Claude News | August, 2026</a>
+                    <div class="source-meta-row"><span class="source-pill" data-ui-map="role" data-raw-value="enterprise_signal" data-source-role>enterprise_signal</span></div>
+                  </li>
+                  </ol>
+                </div>
+              </div>
+            </details>
+          </article>
+        </section>
+
+        <section class="sidebar-block global-panel">
+          <h3>Global mit EU-Impact</h3>
+        </section>
+
+        <section class="sidebar-block watchlist-archive-panel">
+          <h3>Watchlist & Archiv</h3>
+          <div class="section-stack watchlist">
+            <article class="panel-item watch-item" data-id="wk32-noyb-schrems3-pending">
+              <details>
+                <summary>noyb-Klage zu &#x27;Schrems III&#x27; weiterhin nicht eingereicht</summary>
+                <div class="panel-detail compact-panel-details">
+                  <div class="compact-panel-summary">
+                    <div class="story-meta"><span class="badge" data-trust="mittel" data-ui-map="trust" data-raw-value="mittel">mittel</span></div>
+                    <div class="compact-panel-stats">
+                      <span class="chip">Quellen: <span data-source-count>0</span></span>
+                      <span class="chip">Rollen</span>
+                    </div>
+                    <div class="compact-role-row" data-role-summary></div>
+                  </div>
+                  <p>Die nach dem US-Supreme-Court-Urteil zur FTC-Unabhängigkeit angekündigte CJEU-Klage gegen den DPF-Angemessenheitsbeschluss ist weiterhin nicht eingereicht; der DPF bleibt formal in Kraft.</p>
+                  <p><strong>Warum beobachten:</strong> Eine erfolgreiche Klage würde die Rechtsgrundlage für EU-US-Datentransfers vieler Unternehmen erneut infrage stellen.</p>
+                  <p><strong>Nächstes Signal:</strong> Tatsächliche EuGH-Klageeinreichung durch noyb oder eine formale Kommissions-Stellungnahme.</p>
+                  <div class="sources">
+                    <ol class="compact-source-list">
+                    <li>
+                      <a href="https://noyb.eu" target="_blank" rel="noopener noreferrer">noyb – DPF adequacy decision tracker</a>
+                      <div class="source-meta-row"><span class="source-pill" data-ui-map="role" data-raw-value="faktenanker" data-source-role>faktenanker</span></div>
+                    </li>
+                    </ol>
+                  </div>
+                </div>
+              </details>
+            </article>
+            <article class="panel-item watch-item" data-id="wk32-job-matching-application-pending">
+              <details>
+                <summary>EU-Kommission prüft weiterhin EU-Alternative für KI-Recruiting-Tool</summary>
+                <div class="panel-detail compact-panel-details">
+                  <div class="compact-panel-summary">
+                    <div class="story-meta"><span class="badge" data-trust="mittel" data-ui-map="trust" data-raw-value="mittel">mittel</span></div>
+                    <div class="compact-panel-stats">
+                      <span class="chip">Quellen: <span data-source-count>0</span></span>
+                      <span class="chip">Rollen</span>
+                    </div>
+                    <div class="compact-role-row" data-role-summary></div>
+                  </div>
+                  <p>Die auf Accenture/Claude/AWS basierende &#x27;Job Matching Application&#x27; bleibt nach der CJEU-Beschwerde (02.07.) in Prüfung; ein Kommissionssprecher bestätigte laut Euractiv, EU-Alternativen zu evaluieren, ohne Entscheidung.</p>
+                  <p><strong>Warum beobachten:</strong> Eine Entscheidung wäre ein konkreter Präzedenzfall für digitale Souveränität bei sensiblen Personaldaten in EU-Institutionen.</p>
+                  <p><strong>Nächstes Signal:</strong> Eine bestätigte Kommissionsentscheidung, Infrastruktur beizubehalten oder zu wechseln.</p>
+                  <div class="sources">
+                    <ol class="compact-source-list">
+                    <li>
+                      <a href="https://statewatch.org/news/2026/july/eu-commission-grilled-over-its-ai-recruitment-plans/" target="_blank" rel="noopener noreferrer">EU Commission grilled over its AI recruitment plans</a>
+                      <div class="source-meta-row"><span class="source-pill" data-ui-map="role" data-raw-value="policy_interpretation" data-source-role>policy_interpretation</span></div>
+                    </li>
+                    </ol>
+                  </div>
+                </div>
+              </details>
+            </article>
+            <article class="panel-item watch-item" data-id="wk32-transparency-code-full-list-still-pending">
+              <details>
+                <summary>EU-Transparenz-Code: vollständige Unterzeichnerliste weiterhin ungeprüft</summary>
+                <div class="panel-detail compact-panel-details">
+                  <div class="compact-panel-summary">
+                    <div class="story-meta"><span class="badge" data-trust="mittel" data-ui-map="trust" data-raw-value="mittel">mittel</span></div>
+                    <div class="compact-panel-stats">
+                      <span class="chip">Quellen: <span data-source-count>0</span></span>
+                      <span class="chip">Rollen</span>
+                    </div>
+                    <div class="compact-role-row" data-role-summary></div>
+                  </div>
+                  <p>Ob deutsche Großanbieter wie SAP, Deutsche Telekom, DeepL, Siemens, IONOS oder DATEV auf der Signatarliste fehlen, konnte auch in diesem Lauf nicht zuverlässig verifiziert werden.</p>
+                  <p><strong>Warum beobachten:</strong> Eine vollständige Section-1/2-Auswertung ist für Vendor-Assurance-Bewertungen deutscher Anbieter direkt relevant.</p>
+                  <p><strong>Nächstes Signal:</strong> Eine zuverlässig auslesbare Signatarliste oder eine direkte Stellungnahme der genannten Anbieter.</p>
+                  <div class="sources">
+                    <ol class="compact-source-list">
+                    <li>
+                      <a href="https://digital-strategy.ec.europa.eu/en/news/strong-backing-code-practice-transparency-ai-generated-content" target="_blank" rel="noopener noreferrer">Strong backing for the Code of Practice on Transparency of AI-generated Content</a>
+                      <div class="source-meta-row"><span class="source-pill" data-ui-map="role" data-raw-value="faktenanker" data-source-role>faktenanker</span></div>
+                    </li>
+                    </ol>
+                  </div>
+                </div>
+              </details>
+            </article>
+            <article class="panel-item watch-item" data-id="wk32-gigafactories-bidding-outcome">
+              <details>
+                <summary>EU-KI-Gigafactories: Ausschreibung läuft, deutsche Standortbewerbungen offen</summary>
+                <div class="panel-detail compact-panel-details">
+                  <div class="compact-panel-summary">
+                    <div class="story-meta"><span class="badge" data-trust="mittel" data-ui-map="trust" data-raw-value="mittel">mittel</span></div>
+                    <div class="compact-panel-stats">
+                      <span class="chip">Quellen: <span data-source-count>0</span></span>
+                      <span class="chip">Rollen</span>
+                    </div>
+                    <div class="compact-role-row" data-role-summary></div>
+                  </div>
+                  <p>Bewerbungsschluss der EuroHPC-Ausschreibung bleibt der 12.11.2026; bislang ist nur Frankreichs AION-Konsortium namentlich bekannt, Auswahl wird Anfang 2027 erwartet.</p>
+                  <p><strong>Warum beobachten:</strong> Die Standortentscheidungen bestimmen maßgeblich, wo Europas künftige KI-Rechenkapazität entsteht.</p>
+                  <p><strong>Nächstes Signal:</strong> Bekanntgabe weiterer eingereichter Konsortien oder erster Standortankündigungen.</p>
+                  <div class="sources">
+                    <ol class="compact-source-list">
+                    <li>
+                      <a href="https://ec.europa.eu/commission/presscorner/detail/en/ip_26_1708" target="_blank" rel="noopener noreferrer">EU launches AI Gigafactories call to boost Europe&#x27;s computing capacity and unlock more than €30 billion in investment</a>
+                      <div class="source-meta-row"><span class="source-pill" data-ui-map="role" data-raw-value="faktenanker" data-source-role>faktenanker</span></div>
+                    </li>
+                    </ol>
+                  </div>
+                </div>
+              </details>
+            </article>
+            <article class="panel-item watch-item" data-id="wk32-zak-google-appeal-window-closing">
+              <details>
+                <summary>ZAK-Berufungsfrist gegen Google-Entscheidung läuft in Kürze ab</summary>
+                <div class="panel-detail compact-panel-details">
+                  <div class="compact-panel-summary">
+                    <div class="story-meta"><span class="badge" data-trust="mittel" data-ui-map="trust" data-raw-value="mittel">mittel</span></div>
+                    <div class="compact-panel-stats">
+                      <span class="chip">Quellen: <span data-source-count>0</span></span>
+                      <span class="chip">Rollen</span>
+                    </div>
+                    <div class="compact-role-row" data-role-summary></div>
+                  </div>
+                  <p>Google kündigte Berufung gegen die ZAK-Entscheidung vom 14.07. an; eine Einreichung ist weiterhin nicht bestätigt, die Frist läuft nach bisheriger Einschätzung Mitte August ab.</p>
+                  <p><strong>Warum beobachten:</strong> Der Ausgang bestimmt, ob der DSA-Haftungsschirm für KI-Suchassistenten in Deutschland dauerhaft entfällt.</p>
+                  <p><strong>Nächstes Signal:</strong> Bestätigte Berufungseinreichung oder ungenutztes Verstreichen der Frist.</p>
+                  <div class="sources">
+                    <ol class="compact-source-list">
+                    <li>
+                      <a href="https://the-decoder.com" target="_blank" rel="noopener noreferrer">ZAK-Entscheidung zu Google AI Overviews / Perplexity (Zusammenfassung)</a>
+                      <div class="source-meta-row"><span class="source-pill" data-ui-map="role" data-raw-value="enterprise_signal" data-source-role>enterprise_signal</span></div>
+                    </li>
+                    </ol>
+                  </div>
+                </div>
+              </details>
+            </article>
+          </div>
+
+          <div class="section-stack archive-references">
+            <article class="archive-item" data-id="wk32-agentic-ai-safety-precedent-thread">
+              <span class="badge relation-type" data-ui-map="relation-type" data-raw-value="recurring_theme">recurring_theme</span>
+              <h4>Agentische Sicherheitsvorfälle bei Frontier-Modellen (verfolgt seit KW 30/31)</h4>
+              <p class="sidebar-meta">Nach OpenAI/Hugging-Face (KW 30), Anthropics Offenlegung (KW 31) und dem UK-AISI-Bericht markiert Astras &#x27;Critical&#x27;-Einstufung die bislang höchste Eskalationsstufe.</p>
+            </article>
+            <article class="archive-item" data-id="wk32-ai-act-enforcement-continuity">
+              <span class="badge relation-type" data-ui-map="relation-type" data-raw-value="follow_up">follow_up</span>
+              <h4>AI-Act-Umsetzungsfristen und Durchsetzung (verfolgt seit Juli 2026)</h4>
+              <p class="sidebar-meta">Nach Omnibus-Verkündung (KW 30) und KI-MIG-Inkrafttreten (KW 31) zeigt KW 32 erstmals, wie die seit 02.08. geltende Durchsetzung funktioniert: Dialoge statt Verfahren.</p>
+            </article>
+            <article class="archive-item" data-id="wk32-open-weight-geopolitics-thread">
+              <span class="badge relation-type" data-ui-map="relation-type" data-raw-value="recurring_theme">recurring_theme</span>
+              <h4>Offene Modellgewichte zwischen China-, US- und EU-Regulierung (verfolgt seit 10.07.)</h4>
+              <p class="sidebar-meta">Die neue US-Sicherheitsausnahme für offene Modelle vertieft die Bruchlinie zu Chinas MOFCOM-Plänen; der AI Act bleibt modellunabhängig.</p>
+            </article>
+            <article class="archive-item" data-id="wk32-mistral-sovereignty-vendor-thread">
+              <span class="badge relation-type" data-ui-map="relation-type" data-raw-value="recurring_theme">recurring_theme</span>
+              <h4>Mistral als europäischer Souveränitäts-Vorzeigeanbieter (verfolgt seit Weekly W29)</h4>
+              <p class="sidebar-meta">Fortune positioniert Mistral als Nutznießer der US-Regulierungsunsicherheit; eine eigene Stellungnahme zur Open-Weights-Brief-Teilnahme steht weiter aus.</p>
+            </article>
+            <article class="archive-item" data-id="wk32-en18286-standards-thread">
+              <span class="badge relation-type" data-ui-map="relation-type" data-raw-value="recurring_theme">recurring_theme</span>
+              <h4>EN-18286-Normungsstatus (verfolgt seit Weekly W29)</h4>
+              <p class="sidebar-meta">Der Widerspruch zwischen CEN-CENELEC-Freigabe und ausstehender Amtsblatt-Zitierung bleibt acht Wochen in Folge unverändert bestehen.</p>
+            </article>
+          </div>
+        </section>
+      </aside>
+    </section>
+  </main>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const labelMaps = {
+        category: {
+          regulation: 'Regulierung',
+          product: 'Produkte & Plattformen',
+          global_eu: 'Global mit EU-Impact',
+          enterprise_ai: 'Enterprise AI',
+          governance: 'Governance',
+          watchlist: 'Watchlist'
+        },
+        priority: {
+          P1: 'Sehr wichtig',
+          P2: 'Relevant',
+          P3: 'Kurz notiert'
+        },
+        trust: {
+          hoch: 'Hohe Quellenlage',
+          mittel: 'Mittlere Quellenlage',
+          niedrig: 'Niedrige Quellenlage',
+          gemischt: 'Gemischte Quellenlage',
+          watchlist: 'Watchlist'
+        },
+        role: {
+          faktenanker: 'Faktenanker',
+          policy_interpretation: 'Policy-Interpretation',
+          marktverifikation: 'Marktverifikation',
+          produktquelle: 'Produktquelle',
+          enterprise_signal: 'Enterprise-Signal',
+          'frühindikator': 'Frühindikator',
+          unternehmensquelle: 'Unternehmensquelle',
+          developer_dokumentation: 'Entwicklerdokumentation'
+        },
+        'source-type': {
+          official: 'Offizielle Quelle',
+          vendor: 'Anbieterquelle',
+          media: 'Medienbericht',
+          research: 'Research',
+          community: 'Community',
+          documentation: 'Dokumentation',
+          legal: 'Rechtstext'
+        },
+        'relation-type': {
+          follow_up: 'Follow-up',
+          recurring_theme: 'Wiederkehrendes Thema',
+          precedent: 'Präzedenzfall',
+          trendline: 'Trendlinie'
+        }
+      };
+
+      const mapLabel = (group, rawValue) => {
+        if (!rawValue) return '';
+        return (labelMaps[group] && labelMaps[group][rawValue]) || rawValue;
+      };
+
+      document.querySelectorAll('[data-ui-map]').forEach((element) => {
+        const group = element.dataset.uiMap;
+        const rawValue = element.dataset.rawValue || element.textContent.trim();
+        const mappedValue = mapLabel(group === 'weekly-trust' ? 'trust' : group, rawValue);
+
+        if (group === 'weekly-trust') {
+          element.textContent = `Vertrauensbild: ${mappedValue}`;
+          return;
+        }
+
+        element.textContent = mappedValue;
+      });
+
+      document.querySelectorAll('.panel-item').forEach((item) => {
+        const roleSummary = item.querySelector('[data-role-summary]');
+        const roleNodes = Array.from(item.querySelectorAll('[data-source-role]'));
+        const sourceCountNode = item.querySelector('[data-source-count]');
+        const uniqueRoles = [...new Set(roleNodes.map((node) => node.dataset.rawValue).filter(Boolean))];
+
+        if (sourceCountNode) sourceCountNode.textContent = String(roleNodes.length);
+
+        if (roleSummary) {
+          roleSummary.innerHTML = '';
+          uniqueRoles.forEach((role) => {
+            const pill = document.createElement('span');
+            pill.className = 'source-pill';
+            pill.textContent = mapLabel('role', role);
+            roleSummary.appendChild(pill);
+          });
+        }
+      });
+    });
+  </script>
+</body>
+</html>
