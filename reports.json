@@ -1,6 +1,24 @@
 {
   "reports": [
     {
+      "id": "daily-2026-08-10",
+      "mode": "daily",
+      "title": "Daily Briefing 10.08.2026",
+      "date_label": "10.08.2026",
+      "window_start": "2026-08-10",
+      "window_end": "2026-08-10",
+      "public_url": "https://ai-news.camphausen.eu/daily/2026-08-10.html",
+      "published_at": "2026-08-11T02:33:48Z",
+      "summary": "OpenAI veröffentlicht GPT-5.6-Cyber als Reaktion auf den Astra-Stopp, ohne bestätigten EU-Zugang wie im Mai. Der Bund pilotiert KI-Agenten in Genehmigungsverfahren (SPARK) und Kommunen (Agentic AI Hub).",
+      "trust_status": "gemischt",
+      "tags": [
+        "Agentic AI",
+        "Enterprise AI",
+        "Governance",
+        "Cybersecurity"
+      ]
+    },
+    {
       "id": "daily-2026-08-07",
       "mode": "daily",
       "title": "Daily Briefing 07.08.2026",
