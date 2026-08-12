@@ -1,6 +1,23 @@
 {
   "reports": [
     {
+      "id": "daily-2026-08-11",
+      "mode": "daily",
+      "title": "Daily Briefing 11.08.2026: Anthropic markiert KI-Texte, Mistral macht Souveränität zum Produkt",
+      "date_label": "11.08.2026",
+      "window_start": "2026-08-11",
+      "window_end": "2026-08-11",
+      "public_url": "https://ai-news.camphausen.eu/daily/2026-08-11.html",
+      "published_at": "2026-08-12T02:46:14Z",
+      "summary": "Anthropic markiert Claude-Texte/-Dateien ab sofort unsichtbar - laut eigener Angabe Umsetzung des EU-AI-Act-Transparenz-Codes (Art. 50(2)). Mistral macht EU-Souveränität zum Produkt: Regional Endpoints sind GA, dazu eine Compute-Koalition mit ASML, CMA CGM, Amadeus, Caisse des Dépôts - Eigenziel, keine geprüfte Zusage.",
+      "trust_status": "gemischt",
+      "tags": [
+        "AI Act",
+        "Governance",
+        "Enterprise AI"
+      ]
+    },
+    {
       "id": "daily-2026-08-10",
       "mode": "daily",
       "title": "Daily Briefing 10.08.2026",
