@@ -1,6 +1,25 @@
 {
   "reports": [
     {
+      "id": "daily-2026-08-13",
+      "mode": "daily",
+      "title": "Daily Briefing 13.08.2026",
+      "date_label": "13.08.2026",
+      "window_start": "2026-08-13",
+      "window_end": "2026-08-13",
+      "public_url": "https://ai-news.camphausen.eu/daily/2026-08-13.html",
+      "published_at": "2026-08-14T03:06:48Z",
+      "summary": "Hudson Rock veröffentlicht ein 153-GB-Archiv aus dem LiteLLM-Leck; Kevin Beaumont beweist, dass angeblich rotierte Zugangsdaten noch funktionierten – Fortsetzung von CloudSEKs gestrigem Top Story. Dünnes Fenster: dazu nur ein kompaktes Microsoft-Copilot-Update und ein Standards-Recheck ohne Fortschritt.",
+      "trust_status": "gemischt",
+      "tags": [
+        "Cybersecurity",
+        "LiteLLM",
+        "Supply Chain",
+        "Microsoft Copilot",
+        "Standards"
+      ]
+    },
+    {
       "id": "daily-2026-08-12",
       "mode": "daily",
       "title": "Daily Briefing 12.08.2026",
