@@ -1,0 +1,1185 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Intelligence Weekly – KW 33: Anthropic-Wasserzeichen im Detail, LiteLLM-Leck fünf Tage Top-Thema</title>
+  <style>
+    :root {
+      --bg: #eef3f9;
+      --bg-radial: radial-gradient(circle at top left, rgba(49, 91, 217, 0.14), transparent 32rem), radial-gradient(circle at top right, rgba(31, 122, 77, 0.10), transparent 28rem), #eef3f9;
+      --surface: #ffffff;
+      --surface-soft: #f7f9fd;
+      --surface-blue: #f1f5ff;
+      --text: #111b2e;
+      --muted: #66748c;
+      --muted-2: #8190a8;
+      --border: #d9e2ef;
+      --border-strong: #bfcae0;
+      --accent: #244ed8;
+      --accent-strong: #1739a8;
+      --accent-soft: #e8efff;
+      --success: #1f7a4d;
+      --success-soft: #e7f5ee;
+      --warning: #b26a00;
+      --warning-soft: #fff3dc;
+      --risk: #a63f3f;
+      --risk-soft: #fdecec;
+      --watch: #2563eb;
+      --watch-soft: #eaf1ff;
+      --shadow: 0 18px 45px rgba(17, 30, 58, 0.10);
+      --shadow-soft: 0 8px 24px rgba(17, 30, 58, 0.07);
+      --radius-xl: 26px;
+      --radius-lg: 18px;
+      --radius-md: 14px;
+      --radius-sm: 10px;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      padding: 34px;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--bg-radial);
+      color: var(--text);
+      line-height: 1.58;
+    }
+
+    h1, h2, h3, h4, p { margin: 0; }
+    h1 { max-width: 940px; font-size: clamp(32px, 5vw, 56px); line-height: 0.98; letter-spacing: -0.045em; }
+    h2 { font-size: clamp(22px, 3vw, 34px); line-height: 1.08; letter-spacing: -0.03em; }
+    h3 { font-size: 20px; line-height: 1.18; letter-spacing: -0.02em; }
+    h4 { font-size: 15px; line-height: 1.25; }
+    a { color: var(--accent-strong); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    .weekly-briefing {
+      max-width: 1220px;
+      margin: 0 auto;
+      display: grid;
+      gap: 24px;
+    }
+
+    .hero,
+    .executive-summary,
+    .weekly-assessment,
+    .theme-block,
+    .sidebar-block {
+      background: rgba(255, 255, 255, 0.92);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow-soft);
+      backdrop-filter: blur(12px);
+      min-width: 0;
+    }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      padding: 30px;
+      display: grid;
+      gap: 18px;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      height: 5px;
+      background: linear-gradient(90deg, #244ed8, #1f7a4d, #b26a00);
+      pointer-events: none;
+    }
+
+    .hero > * { position: relative; }
+
+    .eyebrow,
+    .story-kicker,
+    .section-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      line-height: 1;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-weight: 800;
+    }
+
+    .eyebrow::before,
+    .section-label::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 0 5px var(--accent-soft);
+      flex: 0 0 auto;
+    }
+
+    .weekly-summary,
+    .field-note,
+    .sidebar-meta {
+      color: var(--muted);
+    }
+
+    .weekly-summary {
+      max-width: 880px;
+      font-size: 17px;
+    }
+
+    .meta-row,
+    .story-meta,
+    .source-meta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .chip,
+    .badge,
+    .source-pill {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 800;
+      line-height: 1;
+      white-space: nowrap;
+    }
+
+    .chip {
+      padding: 9px 11px;
+      background: var(--accent-soft);
+      color: var(--accent-strong);
+      border: 1px solid rgba(36, 78, 216, 0.12);
+    }
+
+    .badge {
+      padding: 8px 10px;
+      border: 1px solid var(--border);
+      background: var(--surface-soft);
+      color: var(--muted);
+    }
+
+    .badge[data-trust="hoch"] { background: var(--success-soft); color: var(--success); border-color: rgba(31, 122, 77, 0.20); }
+    .badge[data-trust="mittel"], .badge[data-trust="gemischt"] { background: var(--warning-soft); color: var(--warning); border-color: rgba(178, 106, 0, 0.22); }
+    .badge[data-trust="niedrig"] { background: var(--risk-soft); color: var(--risk); border-color: rgba(166, 63, 63, 0.22); }
+    .badge[data-trust="watchlist"] { background: var(--watch-soft); color: var(--watch); border-color: rgba(37, 99, 235, 0.18); }
+
+    .main-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 2.05fr) minmax(300px, 0.95fr);
+      gap: 24px;
+      align-items: start;
+    }
+
+    .main-column,
+    .main-developments,
+    .sidebar,
+    .section-stack {
+      display: grid;
+      gap: 18px;
+      min-width: 0;
+    }
+
+    .executive-summary,
+    .weekly-assessment,
+    .theme-block,
+    .sidebar-block {
+      padding: 22px;
+      display: grid;
+      gap: 15px;
+    }
+
+    .weekly-assessment {
+      border-color: rgba(36, 78, 216, 0.24);
+      box-shadow: var(--shadow);
+    }
+
+    .story-header {
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      align-items: flex-start;
+      min-width: 0;
+    }
+
+    .story-title-block,
+    .story-text-stack {
+      display: grid;
+      gap: 8px;
+      min-width: 0;
+    }
+
+    .story-title-block h3,
+    .sidebar-block h3,
+    .sidebar-block h4 {
+      overflow-wrap: anywhere;
+    }
+
+    .takeaway,
+    .analysis-note {
+      border: 1px solid var(--border);
+      background: linear-gradient(180deg, #fbfcff, #f6f8fc);
+      border-radius: var(--radius-lg);
+      padding: 16px;
+      display: grid;
+      gap: 6px;
+    }
+
+    .takeaway strong,
+    .analysis-note strong {
+      font-size: 13px;
+      letter-spacing: 0.02em;
+    }
+
+    .score-strip {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 10px;
+      max-width: 100%;
+      min-width: 0;
+    }
+
+    .score-item {
+      --score: 1;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      background: var(--surface-soft);
+      padding: 12px;
+      display: grid;
+      gap: 8px;
+      min-height: 88px;
+      min-width: 0;
+      overflow: hidden;
+    }
+
+    .score-topline {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 6px;
+      min-width: 0;
+      max-width: 100%;
+    }
+
+    .score-value {
+      min-width: 0;
+      max-width: 100%;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      font-size: 24px;
+      line-height: 1;
+      font-weight: 900;
+      letter-spacing: -0.04em;
+    }
+
+    .score-max {
+      color: var(--muted-2);
+      font-size: 11px;
+      font-weight: 800;
+      flex: 0 0 auto;
+    }
+
+    .score-label {
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.15;
+      font-weight: 750;
+      overflow-wrap: anywhere;
+      hyphens: auto;
+    }
+
+    .meter {
+      width: 100%;
+      min-width: 0;
+      height: 7px;
+      border-radius: 999px;
+      background: #e4e9f2;
+      overflow: hidden;
+    }
+
+    .meter > span {
+      display: block;
+      height: 100%;
+      width: clamp(0%, calc(var(--score) * 20%), 100%);
+      max-width: 100%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, var(--accent), #1f7a4d);
+    }
+
+    .theme-block { box-shadow: var(--shadow-soft); }
+    .theme-block[data-category="regulation"] { border-left: 5px solid var(--accent); }
+    .theme-block[data-category="governance"] { border-left: 5px solid var(--success); }
+    .theme-block[data-category="enterprise_ai"] { border-left: 5px solid #5b5fd6; }
+    .theme-block[data-category="product"] { border-left: 5px solid #6b55c9; }
+    .theme-block[data-category="global_eu"] { border-left: 5px solid #2d8aa6; }
+    .theme-block[data-category="watchlist"] { border-left: 5px solid var(--watch); }
+
+    .sidebar-status-grid,
+    .compact-panel-summary,
+    .compact-panel-details,
+    .compact-role-row {
+      display: grid;
+      gap: 10px;
+    }
+
+    .sidebar-status-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .status-card {
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      background: var(--surface-soft);
+      padding: 12px;
+      display: grid;
+      gap: 5px;
+    }
+
+    .status-card-label {
+      font-size: 11px;
+      font-weight: 850;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--muted-2);
+    }
+
+    .status-card-value {
+      font-size: 14px;
+      font-weight: 800;
+      color: var(--text);
+    }
+
+    .compact-panel-stats {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .compact-source-list {
+      margin: 0;
+      padding-left: 18px;
+      color: var(--muted);
+      display: grid;
+      gap: 6px;
+    }
+
+    .compact-source-list a,
+    .compact-source-list .source-label-fallback {
+      font-weight: 750;
+    }
+
+    details.evidence {
+      border-top: 1px solid var(--border);
+      padding-top: 10px;
+    }
+
+    details.evidence summary,
+    .panel-item summary {
+      cursor: pointer;
+      list-style: none;
+      color: var(--accent-strong);
+      font-size: 13px;
+      font-weight: 850;
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      align-items: center;
+    }
+
+    details.evidence summary::-webkit-details-marker,
+    .panel-item summary::-webkit-details-marker { display: none; }
+
+    details.evidence summary::after,
+    .panel-item summary::after {
+      content: "+";
+      display: grid;
+      place-items: center;
+      width: 22px;
+      height: 22px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: var(--accent-strong);
+      font-size: 15px;
+      line-height: 1;
+      flex: 0 0 auto;
+    }
+
+    details.evidence[open] summary::after,
+    .panel-item details[open] summary::after { content: "–"; }
+
+    .sources {
+      margin-top: 10px;
+      display: grid;
+      gap: 8px;
+      padding: 12px;
+      border-radius: var(--radius-md);
+      background: var(--surface-soft);
+      border: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 13px;
+      min-width: 0;
+    }
+
+    .source-link-card {
+      display: grid;
+      gap: 7px;
+      padding: 10px;
+      border: 1px solid rgba(191, 202, 224, 0.75);
+      border-radius: var(--radius-sm);
+      background: #ffffff;
+      min-width: 0;
+    }
+
+    .source-link-card a,
+    .source-link-card .source-label-fallback {
+      font-weight: 850;
+      overflow-wrap: anywhere;
+    }
+
+    .source-label-fallback { color: var(--text); }
+
+    .source-pill {
+      align-self: start;
+      justify-self: start;
+      padding: 5px 7px;
+      border: 1px solid var(--border);
+      background: #eef2ff;
+      color: #3730a3;
+      font-size: 10.5px;
+      letter-spacing: 0.01em;
+    }
+
+    .source-meta {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 6px 10px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .source-meta span { overflow-wrap: anywhere; }
+    .source-meta strong { color: var(--text); }
+
+    .panel-item,
+    .archive-item {
+      border: 1px solid var(--border);
+      background: var(--surface-soft);
+      border-radius: var(--radius-md);
+      padding: 13px;
+      display: grid;
+      gap: 8px;
+      min-width: 0;
+    }
+
+    .panel-item { padding: 0; overflow: hidden; }
+    .panel-item details { padding: 12px 13px; }
+    .panel-item summary { color: var(--text); overflow-wrap: anywhere; }
+    .panel-detail {
+      margin-top: 9px;
+      display: grid;
+      gap: 8px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .archive-item .relation-type { justify-self: start; background: #eef2ff; color: #3730a3; }
+
+    @media (max-width: 980px) {
+      body { padding: 18px; }
+      .hero, .executive-summary, .weekly-assessment, .theme-block, .sidebar-block { border-radius: var(--radius-lg); }
+      .main-layout { grid-template-columns: 1fr; }
+      .score-strip {
+        grid-template-columns: repeat(5, minmax(78px, 1fr));
+        gap: 7px;
+        overflow-x: auto;
+        overflow-y: hidden;
+        padding-bottom: 2px;
+        scrollbar-width: thin;
+      }
+      .score-item { min-height: 58px; padding: 7px 8px; gap: 5px; }
+      .score-value { font-size: 16px; }
+      .score-max { font-size: 10px; }
+      .score-label { font-size: 10px; line-height: 1.1; }
+      .meter { height: 4px; }
+      .chip, .badge { padding: 6px 8px; font-size: 11px; }
+      .source-meta { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 560px) {
+      body { padding: 12px; }
+      .weekly-briefing { gap: 14px; }
+      .hero { padding: 22px; }
+      .story-header { display: grid; gap: 10px; }
+      .story-meta { gap: 7px; }
+      .score-strip { grid-template-columns: repeat(5, minmax(72px, 1fr)); }
+      .score-item { min-height: 54px; padding: 6px 7px; }
+      .score-value { font-size: 15px; }
+      .score-max { font-size: 10px; }
+      .score-label { font-size: 9.5px; }
+      .sources { padding: 10px; }
+      .source-link-card { padding: 9px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="weekly-briefing">
+    <section class="hero">
+      <div class="eyebrow">Weekly AI Intelligence Briefing</div>
+      <h1>AI Intelligence Weekly – KW 33: Anthropic-Wasserzeichen im Detail, LiteLLM-Leck fünf Tage Top-Thema</h1>
+      <p class="weekly-summary">Anthropic erklärte technische Details seines Claude-Wasserzeichens (SynthID-Text, Detection-API) – Art.-50(2)-Umsetzung. Im Rückblick: LiteLLM/TeamPCP blieb fünf Tage Top-Thema, Firmen schweigen. ZAKs Berufungsfrist gegen Google lief ohne bestätigte Einreichung ab.</p>
+      <div class="meta-row">
+        <span class="chip">Woche: 10. – 16. August 2026 (KW 33)</span>
+        <span class="chip">Fokus: Deutschland / EU</span>
+        <span class="badge" data-trust="gemischt" data-ui-map="weekly-trust" data-raw-value="gemischt">Vertrauensbild: gemischt</span>
+        <span class="chip">Leitmuster: Wasserzeichen-Technik und ungelöstes Lieferkettenrisiko</span>
+      </div>
+    </section>
+
+    <section class="main-layout">
+      <section class="main-column">
+        <article class="executive-summary">
+          <div class="section-label">Executive Summary</div>
+          <h2>Wöchentliche Lage in Kürze</h2>
+          <p class="field-note">Ein dünnes Wochenende traf auf eine substanzielle Rückblickswoche. Anthropic lieferte am 15.08. erstmals technische Details zu seinem Claude-Wasserzeichen (SynthID-Text, geplante Detection-API) – Umsetzung des am 11.08. angekündigten Art.-50(2)-Transparenz-Codes. Die Woche war geprägt vom LiteLLM/TeamPCP-Angriff: CloudSEKs Kartierung (Siemens, VW, Deutsche Bahn, Orange) eskalierte über Hudson Rocks 153-GB-Archiv und Beaumonts Rotationsnachweis bis zur Fünf-Monats-Bestandsaufnahme – keine Firma äußerte sich. Am 14.08. lief die ZAK-Berufungsfrist gegen Google ohne bestätigte Einreichung ab. Bei EN 18286, Foundry-EU-Zone und &#x27;Schrems III&#x27; keine Bewegung.</p>
+        </article>
+
+        <article class="weekly-assessment">
+          <div class="section-label">Wocheneinschätzung</div>
+          <h2>Wasserzeichen-Technik und ungelöstes Lieferkettenrisiko</h2>
+          <p class="field-note">Eine Woche ohne regulatorischen Paukenschlag, aber mit einem sich vertiefenden Cybersicherheits-Dauerthema und einem konkreten technischen Compliance-Präzedenzfall bei Anthropic – beides mit direkter Relevanz für EU-Enterprise-Governance.</p>
+          <div class="score-strip">
+            <div class="score-item" style="--score: 4"><div class="score-topline"><span class="score-value">4</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">EU / DE-Relevanz</div></div>
+            <div class="score-item" style="--score: 4"><div class="score-topline"><span class="score-value">4</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Business Impact</div></div>
+            <div class="score-item" style="--score: 3"><div class="score-topline"><span class="score-value">3</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Regulatorik</div></div>
+            <div class="score-item" style="--score: 3"><div class="score-topline"><span class="score-value">3</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Technologie</div></div>
+            <div class="score-item" style="--score: 4"><div class="score-topline"><span class="score-value">4</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Lernwert</div></div>
+          </div>
+        </article>
+
+        <section class="main-developments">
+          <div class="section-label">Hauptentwicklungen der Woche</div>
+          <article class="theme-block" data-id="wk33-anthropic-watermark-technical-details" data-category="regulation">
+            <div class="story-header">
+              <div class="story-title-block">
+                <div class="story-kicker">REGULIERUNG / COMPLIANCE</div>
+                <h3>Anthropic erklärt Funktionsweise seines Claude-Wasserzeichens: SynthID-Text, geplante Detection-API</h3>
+              </div>
+              <div class="story-meta">
+                <span class="chip" data-ui-map="category" data-raw-value="regulation">regulation</span>
+                <span class="chip" data-ui-map="priority" data-raw-value="P1">P1</span>
+              </div>
+            </div>
+            <div class="story-text-stack">
+              <p class="field-note"><strong>Thema:</strong> EU-Transparenz-Code wird technisch konkret</p>
+              <p>Anthropic beantwortete am 15.08. offene Fragen zu seinem am 11.08. angekündigten Claude-Wasserzeichen: SynthID-Text-Verfahren (Google DeepMind, 2024), übersteht leichte Bearbeitung, nicht vollständiges Umschreiben, kaum Effekt auf Code, öffentliche Detection-API geplant. Gilt für Claude-Modelle ab 02.08., ältere werden nachgerüstet.</p>
+              <p class="field-note"><strong>Strategische Relevanz:</strong> Technische Vertiefung der Daily-Top-Story vom 11.08. – zeigt, wie ein Unternehmen den Art.-50(2)-Transparenz-Code (rund 190 Unterzeichner) tatsächlich umsetzt, nicht nur ankündigt.</p>
+              <p class="field-note"><strong>EU-/DE-Impact:</strong> Direkt: Anthropic nennt den EU-AI-Act-Transparenz-Code explizit als Treiber; Rollout erfolgt weltweit, obwohl nur die EU dies verlangt – relevant für Compliance-Teams, die Claude-Ausgaben auf KI-Kennzeichnung prüfen.</p>
+              <p class="field-note"><strong>Einordnung:</strong> Für EU-Unternehmenskunden zählt: das Wasserzeichen ist kein Beweis, sondern ein Indiz – ein fehlendes Zeichen widerlegt KI-Generierung nicht, ein erkanntes ist laut Anthropic selbst &#x27;nicht vollständig beweiskräftig&#x27;.</p>
+            </div>
+            <div class="score-strip">
+              <div class="score-item" style="--score: 5"><div class="score-topline"><span class="score-value">5</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">EU / DE-Relevanz</div></div>
+              <div class="score-item" style="--score: 3"><div class="score-topline"><span class="score-value">3</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Business Impact</div></div>
+              <div class="score-item" style="--score: 4"><div class="score-topline"><span class="score-value">4</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Regulatorik</div></div>
+              <div class="score-item" style="--score: 3"><div class="score-topline"><span class="score-value">3</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Technologie</div></div>
+              <div class="score-item" style="--score: 4"><div class="score-topline"><span class="score-value">4</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Lernwert</div></div>
+            </div>
+            <details class="evidence">
+              <summary>Quellen & Unsicherheit</summary>
+              <div class="sources">
+                <p class="field-note"><strong>Quellenlage:</strong> <span data-ui-map="trust" data-raw-value="hoch">hoch</span></p>
+                <article class="source-link-card">
+                  <a href="https://techcrunch.com/2026/08/15/anthropic-shares-more-details-about-how-claudes-new-watermarks-will-work/" target="_blank" rel="noopener noreferrer">Anthropic shares more details about how Claude&#x27;s new watermarks will work</a>
+                  <div class="source-meta-row">
+                    <span class="source-pill" data-ui-map="role" data-raw-value="marktverifikation">marktverifikation</span>
+                    <span class="source-pill" data-ui-map="source-type" data-raw-value="media">media</span>
+                  </div>
+                  <div class="source-meta">
+                    <span><strong>Publisher:</strong> TechCrunch</span>
+                    <span><strong>Veröffentlicht:</strong> 2026-08-15</span>
+                    <span><strong>Abgerufen:</strong> 2026-08-17</span>
+                  </div>
+                </article>
+                <article class="source-link-card">
+                  <a href="https://the-decoder.com/anthropic-announces-watermark-detection-api-that-will-let-third-parties-detect-claudes-ai-texts/" target="_blank" rel="noopener noreferrer">Anthropic announces watermark detection API that will let third parties detect Claude&#x27;s AI texts</a>
+                  <div class="source-meta-row">
+                    <span class="source-pill" data-ui-map="role" data-raw-value="enterprise_signal">enterprise_signal</span>
+                    <span class="source-pill" data-ui-map="source-type" data-raw-value="media">media</span>
+                  </div>
+                  <div class="source-meta">
+                    <span><strong>Publisher:</strong> The Decoder</span>
+                    <span><strong>Veröffentlicht:</strong> 2026-08-15</span>
+                    <span><strong>Abgerufen:</strong> 2026-08-17</span>
+                  </div>
+                </article>
+                <article class="source-link-card">
+                  <a href="https://support.claude.com/en/articles/16266773-how-claude-marks-ai-generated-content" target="_blank" rel="noopener noreferrer">How Claude marks AI-generated content</a>
+                  <div class="source-meta-row">
+                    <span class="source-pill" data-ui-map="role" data-raw-value="produktquelle">produktquelle</span>
+                    <span class="source-pill" data-ui-map="source-type" data-raw-value="vendor">vendor</span>
+                  </div>
+                  <div class="source-meta">
+                    <span><strong>Publisher:</strong> Anthropic (Support)</span>
+                    <span><strong>Veröffentlicht:</strong> nicht angegeben</span>
+                    <span><strong>Abgerufen:</strong> 2026-08-17</span>
+                  </div>
+                </article>
+                <p class="field-note"><strong>Unsicherheit:</strong> Technische Fakten primärquellennah (Anthropic-Q&amp;A via TechCrunch) und unabhängig durch the-decoder.com bestätigt; kein konkretes Datum für die Detection-API genannt.</p>
+              </div>
+            </details>
+            <details class="evidence">
+              <summary>Weitere Recherche</summary>
+              <div class="sources">
+                <p class="field-note">Wann veröffentlicht Anthropic die angekündigte Detection-API, und legen andere Code-Unterzeichner (Google, Meta, Microsoft, OpenAI) vergleichbare technische Details offen?</p>
+              </div>
+            </details>
+          </article>
+          <article class="theme-block" data-id="wk33-litellm-week-in-review" data-category="enterprise_ai">
+            <div class="story-header">
+              <div class="story-title-block">
+                <div class="story-kicker">CYBERSECURITY / ENTERPRISE</div>
+                <h3>Wochenrückblick: LiteLLM/TeamPCP-Lieferkettenleck bleibt fünf Tage lang ungelöstes Top-Thema</h3>
+              </div>
+              <div class="story-meta">
+                <span class="chip" data-ui-map="category" data-raw-value="enterprise_ai">enterprise_ai</span>
+                <span class="chip" data-ui-map="priority" data-raw-value="P1">P1</span>
+              </div>
+            </div>
+            <div class="story-text-stack">
+              <p class="field-note"><strong>Thema:</strong> Eine Woche Bestandsaufnahme ohne Firmenreaktion</p>
+              <p>Der LiteLLM/TeamPCP-Angriff dominierte die Woche: CloudSEK kartierte ~2.500 betroffene Organisationen (Siemens, VW, Deutsche Bahn, Orange). Hudson Rock veröffentlichte ein 153-GB-Archiv (u.a. TomTom, BT Group); Beaumont bewies, angeblich rotierte Zugangsdaten funktionierten noch. Fünf Monate später fehlt bei vielen der 2.488 Domains die Rotation.</p>
+              <p class="field-note"><strong>Strategische Relevanz:</strong> Vierter/fünfter Tag derselben Geschichte – bewusst als Bestandsaufnahme gerahmt, nicht als neue Eskalation: die Unsicherheit (Datenabgleich vs. Kompromittierungsbeweis) besteht unverändert fort.</p>
+              <p class="field-note"><strong>EU-/DE-Impact:</strong> Direkt: mehrere deutsche/europäische Großkonzerne mehrfach genannt (CloudSEK/Hudson Rock nennen eigene, nicht identische Listen); keine Firma hat sich die ganze Woche geäußert.</p>
+              <p class="field-note"><strong>Einordnung:</strong> &#x27;Als rotiert gemeldet&#x27; ist laut Beaumonts Test nicht gleich tatsächlich rotiert – eigene Verifikation bleibt für Sicherheitsverantwortliche nötig, unabhängig von Unternehmensaussagen.</p>
+            </div>
+            <div class="score-strip">
+              <div class="score-item" style="--score: 4"><div class="score-topline"><span class="score-value">4</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">EU / DE-Relevanz</div></div>
+              <div class="score-item" style="--score: 5"><div class="score-topline"><span class="score-value">5</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Business Impact</div></div>
+              <div class="score-item" style="--score: 2"><div class="score-topline"><span class="score-value">2</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Regulatorik</div></div>
+              <div class="score-item" style="--score: 4"><div class="score-topline"><span class="score-value">4</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Technologie</div></div>
+              <div class="score-item" style="--score: 4"><div class="score-topline"><span class="score-value">4</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Lernwert</div></div>
+            </div>
+            <details class="evidence">
+              <summary>Quellen & Unsicherheit</summary>
+              <div class="sources">
+                <p class="field-note"><strong>Quellenlage:</strong> <span data-ui-map="trust" data-raw-value="mittel">mittel</span></p>
+                <article class="source-link-card">
+                  <a href="https://www.cloudsek.com/blog/ai-supply-chain-breach-2500-companies-434000-cicd-pipelines" target="_blank" rel="noopener noreferrer">2,500+ Companies and 434,000 CI/CD Pipelines Exposed in the Largest AI Supply Chain Breach of 2026</a>
+                  <div class="source-meta-row">
+                    <span class="source-pill" data-ui-map="role" data-raw-value="enterprise_signal">enterprise_signal</span>
+                    <span class="source-pill" data-ui-map="source-type" data-raw-value="research">research</span>
+                  </div>
+                  <div class="source-meta">
+                    <span><strong>Publisher:</strong> CloudSEK</span>
+                    <span><strong>Veröffentlicht:</strong> 2026-08-11</span>
+                    <span><strong>Abgerufen:</strong> 2026-08-17</span>
+                  </div>
+                </article>
+                <article class="source-link-card">
+                  <a href="https://www.infostealers.com/article/largest-ai-supply-chain-breach-of-2026-litellm-hack-impacts-thousands-of-global-enterprises-claim-your-ethical-disclosure/" target="_blank" rel="noopener noreferrer">Largest AI Supply Chain Breach of 2026: LiteLLM Hack Impacts Thousands of Global Enterprises</a>
+                  <div class="source-meta-row">
+                    <span class="source-pill" data-ui-map="role" data-raw-value="enterprise_signal">enterprise_signal</span>
+                    <span class="source-pill" data-ui-map="source-type" data-raw-value="research">research</span>
+                  </div>
+                  <div class="source-meta">
+                    <span><strong>Publisher:</strong> Hudson Rock / InfoStealers</span>
+                    <span><strong>Veröffentlicht:</strong> 2026-08-12</span>
+                    <span><strong>Abgerufen:</strong> 2026-08-17</span>
+                  </div>
+                </article>
+                <article class="source-link-card">
+                  <a href="https://www.techtimes.com/articles/324451/20260814/litellm-supply-chain-hack-hit-2488-firms-stolen-keys-still-work-five-months.htm" target="_blank" rel="noopener noreferrer">LiteLLM Supply Chain Hack Hit 2,488 Firms; Stolen Keys Still Work Five Months On</a>
+                  <div class="source-meta-row">
+                    <span class="source-pill" data-ui-map="role" data-raw-value="enterprise_signal">enterprise_signal</span>
+                    <span class="source-pill" data-ui-map="source-type" data-raw-value="media">media</span>
+                  </div>
+                  <div class="source-meta">
+                    <span><strong>Publisher:</strong> Tech Times</span>
+                    <span><strong>Veröffentlicht:</strong> 2026-08-14</span>
+                    <span><strong>Abgerufen:</strong> 2026-08-17</span>
+                  </div>
+                </article>
+                <p class="field-note"><strong>Unsicherheit:</strong> Kampagnenmechanik und Archivfakten mehrfach unabhängig bestätigt (hoch); die konkrete Firmenzuordnung bleibt Datenabgleich, kein Kompromittierungsbeweis, laut den Quellen selbst.</p>
+              </div>
+            </details>
+            <details class="evidence">
+              <summary>Weitere Recherche</summary>
+              <div class="sources">
+                <p class="field-note">Bestätigt eine der genannten Firmen (Siemens, VW, Deutsche Bahn, Orange, TomTom, BT Group) offiziell ihre Betroffenheit oder dementiert sie, und finden weitere unabhängige Forscher wie Beaumont ähnliche Rotationslücken?</p>
+              </div>
+            </details>
+          </article>
+          <article class="theme-block" data-id="wk33-zak-appeal-deadline-lapses" data-category="regulation">
+            <div class="story-header">
+              <div class="story-title-block">
+                <div class="story-kicker">DEUTSCHLAND / DSA</div>
+                <h3>ZAK-Berufungsfrist gegen Google-KI-Einstufung abgelaufen – keine Einreichung bestätigt</h3>
+              </div>
+              <div class="story-meta">
+                <span class="chip" data-ui-map="category" data-raw-value="regulation">regulation</span>
+                <span class="chip" data-ui-map="priority" data-raw-value="P3">P3</span>
+              </div>
+            </div>
+            <div class="story-text-stack">
+              <p class="field-note"><strong>Thema:</strong> Ungeklärter Ausgang einer Medienrechts-Weichenstellung</p>
+              <p>Die rund einmonatige Berufungsfrist gegen ZAKs Juli-Entscheidung (Google AI Overviews/Perplexity als Inhalteanbieter, Verlust des DSA-Haftungsschirms) lief am 14.08. ab. Google hatte unmittelbar nach der Entscheidung Berufung angekündigt; eine tatsächliche Einreichung ließ sich auch nach Fristablauf nicht bestätigen.</p>
+              <p class="field-note"><strong>Strategische Relevanz:</strong> Erste deutsche Anwendung von Medienrecht auf KI-Suchfunktionen (Juli 2026) erreicht mit Fristablauf einen faktischen Entscheidungspunkt, ohne dass der Ausgang bekannt ist.</p>
+              <p class="field-note"><strong>EU-/DE-Impact:</strong> Direkt, national: testet, ob ZAKs Einstufung von KI-Suchfunktionen als eigene redaktionelle Inhalte vor Gericht Bestand hat – mit Präzedenzwirkung für andere KI-Suchanbieter.</p>
+              <p class="field-note"><strong>Einordnung:</strong> Ohne bestätigte Einreichung bleibt offen, ob die Frist ungenutzt verstrich oder eine Berufung schlicht noch nicht öffentlich bekannt wurde – beide Fälle sind mit den vorliegenden Quellen nicht zu unterscheiden.</p>
+            </div>
+            <div class="score-strip">
+              <div class="score-item" style="--score: 5"><div class="score-topline"><span class="score-value">5</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">EU / DE-Relevanz</div></div>
+              <div class="score-item" style="--score: 3"><div class="score-topline"><span class="score-value">3</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Business Impact</div></div>
+              <div class="score-item" style="--score: 4"><div class="score-topline"><span class="score-value">4</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Regulatorik</div></div>
+              <div class="score-item" style="--score: 1"><div class="score-topline"><span class="score-value">1</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Technologie</div></div>
+              <div class="score-item" style="--score: 3"><div class="score-topline"><span class="score-value">3</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Lernwert</div></div>
+            </div>
+            <details class="evidence">
+              <summary>Quellen & Unsicherheit</summary>
+              <div class="sources">
+                <p class="field-note"><strong>Quellenlage:</strong> <span data-ui-map="trust" data-raw-value="mittel">mittel</span></p>
+                <article class="source-link-card">
+                  <a href="https://www.ad-hoc-news.de/wirtschaft/ki-suchmaschinen-zak-stuft-google-und-perplexity-als-inhalteanbieter-ein/69768077" target="_blank" rel="noopener noreferrer">KI-Suchmaschinen: ZAK stuft Google und Perplexity als Inhalteanbieter ein</a>
+                  <div class="source-meta-row">
+                    <span class="source-pill" data-ui-map="role" data-raw-value="policy_interpretation">policy_interpretation</span>
+                    <span class="source-pill" data-ui-map="source-type" data-raw-value="media">media</span>
+                  </div>
+                  <div class="source-meta">
+                    <span><strong>Publisher:</strong> ad-hoc-news.de</span>
+                    <span><strong>Veröffentlicht:</strong> 2026-07-14</span>
+                    <span><strong>Abgerufen:</strong> 2026-08-17</span>
+                  </div>
+                </article>
+                <p class="field-note"><strong>Unsicherheit:</strong> Die Monatsfrist stammt aus Sekundärquellen, nicht aus einem datierten ZAK-Primärtext; eine tatsächliche Einreichung ist weder bestätigt noch widerlegt.</p>
+              </div>
+            </details>
+            <details class="evidence">
+              <summary>Weitere Recherche</summary>
+              <div class="sources">
+                <p class="field-note">Bestätigt Google (oder Perplexity) eine formelle Berufung, und was bedeutet ein etwaiges Verstreichen der Frist für die Rechtskraft der ZAK-Einstufung?</p>
+              </div>
+            </details>
+          </article>
+        </section>
+      </section>
+
+      <aside class="sidebar">
+        <section class="sidebar-block">
+          <h3>Wochenlage</h3>
+          <p class="sidebar-meta">Anthropic erklärte technische Details seines Claude-Wasserzeichens (SynthID-Text, Detection-API) – Art.-50(2)-Umsetzung. Im Rückblick: LiteLLM/TeamPCP blieb fünf Tage Top-Thema, Firmen schweigen. ZAKs Berufungsfrist gegen Google lief ohne bestätigte Einreichung ab.</p>
+          <div class="sidebar-status-grid">
+            <div class="status-card">
+              <span class="status-card-label">Woche</span>
+              <span class="status-card-value">10. – 16. August 2026 (KW 33)</span>
+            </div>
+            <div class="status-card">
+              <span class="status-card-label">Quellenlage</span>
+              <span class="status-card-value" data-ui-map="trust" data-raw-value="gemischt">gemischt</span>
+            </div>
+          </div>
+        </section>
+
+        <section class="sidebar-block regulation-panel">
+          <h3>Regulatorik</h3>
+          <article class="panel-item regulation-item" data-id="wk33-en18286-status" data-category="regulation">
+            <details>
+              <summary>EN 18286: Amtsblatt-Zitierung bleibt aus, kein Fortschritt gegenüber KW 32</summary>
+              <div class="panel-detail compact-panel-details">
+                <div class="compact-panel-summary">
+                  <div class="story-meta"><span class="badge" data-trust="hoch" data-ui-map="trust" data-raw-value="hoch">hoch</span></div>
+                  <div class="compact-panel-stats">
+                    <span class="chip">Quellen: <span data-source-count>0</span></span>
+                    <span class="chip">Rollen</span>
+                  </div>
+                  <div class="compact-role-row" data-role-summary></div>
+                </div>
+                <p>Die Kommissions-Normungsseite listet EN 18286 weiterhin nur als Entwurf &#x27;prEN&#x27;, ohne Amtsblatt-Zitierung – trotz CEN-CENELECs bestätigter Freigabe (12.07.) und Mitgliederverteilung (22.07., nationale Umsetzung bis 31.01.2027).</p>
+                <p><strong>EU-/DE-Impact:</strong> Direkt für Zertifizierungs-/Assurance-Beratung: ohne Amtsblatt-Zitierung entsteht weiterhin keine Konformitätsvermutung für Hochrisiko-Anbieter.</p>
+                <div class="sources">
+                  <ol class="compact-source-list">
+                  <li>
+                    <a href="https://digital-strategy.ec.europa.eu/en/policies/ai-act-standardisation" target="_blank" rel="noopener noreferrer">Standardisation of the AI Act</a>
+                    <div class="source-meta-row"><span class="source-pill" data-ui-map="role" data-raw-value="faktenanker" data-source-role>faktenanker</span></div>
+                  </li>
+                  </ol>
+                </div>
+              </div>
+            </details>
+          </article>
+          <article class="panel-item regulation-item" data-id="wk33-claude-foundry-eu-zone" data-category="regulation">
+            <details>
+              <summary>Claude auf Microsoft Foundry: weiterhin keine EU-Datenzone</summary>
+              <div class="panel-detail compact-panel-details">
+                <div class="compact-panel-summary">
+                  <div class="story-meta"><span class="badge" data-trust="hoch" data-ui-map="trust" data-raw-value="hoch">hoch</span></div>
+                  <div class="compact-panel-stats">
+                    <span class="chip">Quellen: <span data-source-count>0</span></span>
+                    <span class="chip">Rollen</span>
+                  </div>
+                  <div class="compact-role-row" data-role-summary></div>
+                </div>
+                <p>Sieben Wochen nach GA bietet Foundry für Claude weiterhin nur Global-/US-Datenzonen; Anthropics Compliance-Seite nennt für die EU-Zone unverändert nur &#x27;Coming 2026&#x27; ohne Datum.</p>
+                <p><strong>EU-/DE-Impact:</strong> Direkt: europäische Foundry-Kunden mit Datenresidenzpflichten können Claude dort weiterhin nicht regelkonform nutzen.</p>
+                <div class="sources">
+                  <ol class="compact-source-list">
+                  <li>
+                    <a href="https://learn.microsoft.com/en-us/answers/questions/5867930/timeline-for-claude-in-microsoft-foundry-to-run-on" target="_blank" rel="noopener noreferrer">Timeline for Claude in Microsoft Foundry to run on Azure EU infrastructure</a>
+                    <div class="source-meta-row"><span class="source-pill" data-ui-map="role" data-raw-value="developer_dokumentation" data-source-role>developer_dokumentation</span></div>
+                  </li>
+                  </ol>
+                </div>
+              </div>
+            </details>
+          </article>
+          <article class="panel-item regulation-item" data-id="wk33-schrems-iii-latombe-distinction" data-category="regulation">
+            <details>
+              <summary>noyb &#x27;Schrems III&#x27; weiterhin nicht eingereicht – separater Latombe-Fall bereits beim EuGH anhängig</summary>
+              <div class="panel-detail compact-panel-details">
+                <div class="compact-panel-summary">
+                  <div class="story-meta"><span class="badge" data-trust="mittel" data-ui-map="trust" data-raw-value="mittel">mittel</span></div>
+                  <div class="compact-panel-stats">
+                    <span class="chip">Quellen: <span data-source-count>0</span></span>
+                    <span class="chip">Rollen</span>
+                  </div>
+                  <div class="compact-role-row" data-role-summary></div>
+                </div>
+                <p>noybs angekündigte Klage gegen den DPF-Angemessenheitsbeschluss ist weiterhin nicht eingereicht. Separat: eine bereits anhängige Klage von MEP Philippe Latombe (C-703/25 P, Berufung 31.10.2025) greift denselben Beschluss eigenständig an.</p>
+                <p><strong>EU-/DE-Impact:</strong> Direkt, EU-weit: beide Verfahren könnten die Rechtsgrundlage für EU-US-Datentransfers (auch für viele KI-Dienste) infrage stellen, sind aber rechtlich getrennt zu behandeln.</p>
+                <div class="sources">
+                  <ol class="compact-source-list">
+                  <li>
+                    <a href="https://noyb.eu/en/project/eu-us-transfers" target="_blank" rel="noopener noreferrer">noyb – EU-US Transfers Projektseite</a>
+                    <div class="source-meta-row"><span class="source-pill" data-ui-map="role" data-raw-value="faktenanker" data-source-role>faktenanker</span></div>
+                  </li>
+                  </ol>
+                </div>
+              </div>
+            </details>
+          </article>
+        </section>
+
+        <section class="sidebar-block product-panel">
+          <h3>Produkte & Plattformen</h3>
+          <article class="panel-item product-item" data-id="wk33-gpt56cyber-spark-hub-recap" data-category="product">
+            <details>
+              <summary>Wochenrückblick: GPT-5.6-Cyber und KI-Agenten in der Bundesverwaltung</summary>
+              <div class="panel-detail compact-panel-details">
+                <div class="compact-panel-summary">
+                  <div class="story-meta"><span class="chip">OpenAI / BMDS</span><span class="badge" data-trust="mittel" data-ui-map="trust" data-raw-value="mittel">mittel</span></div>
+                  <div class="compact-panel-stats">
+                    <span class="chip">Quellen: <span data-source-count>0</span></span>
+                    <span class="chip">Rollen</span>
+                  </div>
+                  <div class="compact-role-row" data-role-summary></div>
+                </div>
+                <p>Bereits Daily-Story (10.08.): OpenAI veröffentlichte GPT-5.6-Cyber, Reaktion auf den Astra-Stopp, ohne bestätigten EU-Zugang. Der Bund pilotiert KI-Agenten bei Wasserstoffnetz-Genehmigungen (SPARK) und in Kommunen (Agentic AI Hub, Runde bis 14.08.).</p>
+                <p><strong>Business-Relevanz:</strong> Herstellerangaben (OpenAI) bzw. Ministeriumsangaben (BMDS) zu Effizienz/Zugang sind nicht unabhängig geprüft; Behörden Spiegel kritisiert fehlende Trainings-/Risikobewertungsprozesse für die Bundes-KI-Agenten.</p>
+                <div class="sources">
+                  <ol class="compact-source-list">
+                  <li>
+                    <a href="https://openai.com/index/expanding-daybreak-as-the-cyber-defense-window-narrows/" target="_blank" rel="noopener noreferrer">Expanding Daybreak as the cyber defense window narrows</a>
+                    <div class="source-meta-row"><span class="source-pill" data-ui-map="role" data-raw-value="produktquelle" data-source-role>produktquelle</span></div>
+                  </li>
+                  <li>
+                    <a href="https://www.behoerden-spiegel.de/2026/08/10/ki-agenten-im-bund/" target="_blank" rel="noopener noreferrer">KI-Agenten im Bund</a>
+                    <div class="source-meta-row"><span class="source-pill" data-ui-map="role" data-raw-value="enterprise_signal" data-source-role>enterprise_signal</span></div>
+                  </li>
+                  </ol>
+                </div>
+              </div>
+            </details>
+          </article>
+          <article class="panel-item product-item" data-id="wk33-mistral-sovereignty-infra-recap" data-category="product">
+            <details>
+              <summary>Wochenrückblick: Mistral macht EU-Souveränität zum Produkt</summary>
+              <div class="panel-detail compact-panel-details">
+                <div class="compact-panel-summary">
+                  <div class="story-meta"><span class="chip">Mistral AI</span><span class="badge" data-trust="mittel" data-ui-map="trust" data-raw-value="mittel">mittel</span></div>
+                  <div class="compact-panel-stats">
+                    <span class="chip">Quellen: <span data-source-count>0</span></span>
+                    <span class="chip">Rollen</span>
+                  </div>
+                  <div class="compact-role-row" data-role-summary></div>
+                </div>
+                <p>Bereits Daily-Story (11.08.): Mistral machte Regional Endpoints (EU-/US-Wahl) GA, startete Priority-Tier-Preview, öffnete für Drittmodelle (Z.ai GLM-5.2). Separat: &#x27;European Compute Units&#x27; (bis 1 GW bis 2030; ASML, CMA CGM, Amadeus, Caisse des Dépôts genannt).</p>
+                <p><strong>Business-Relevanz:</strong> Regional-Endpoints/Priority-Tier sind primärquellenbelegte Produktfakten; das 1-GW-Ziel ist Mistrals eigene Zielgröße, Teilnehmerrolle der vier Firmen beruht auf Zitaten, nicht auf offengelegten Verträgen.</p>
+                <div class="sources">
+                  <ol class="compact-source-list">
+                  <li>
+                    <a href="https://mistral.ai/news/regional-inference-open-models-new-compute/" target="_blank" rel="noopener noreferrer">In-region inference, open models, and new European infrastructure for sovereign AI</a>
+                    <div class="source-meta-row"><span class="source-pill" data-ui-map="role" data-raw-value="produktquelle" data-source-role>produktquelle</span></div>
+                  </li>
+                  </ol>
+                </div>
+              </div>
+            </details>
+          </article>
+          <article class="panel-item product-item" data-id="wk33-abn-amro-mistral-nachtrag" data-category="product">
+            <details>
+              <summary>Nachtrag: ABN AMRO und Mistral kooperieren für europäische Souveränität</summary>
+              <div class="panel-detail compact-panel-details">
+                <div class="compact-panel-summary">
+                  <div class="story-meta"><span class="chip">Mistral AI / ABN AMRO</span><span class="badge" data-trust="mittel" data-ui-map="trust" data-raw-value="mittel">mittel</span></div>
+                  <div class="compact-panel-stats">
+                    <span class="chip">Quellen: <span data-source-count>0</span></span>
+                    <span class="chip">Rollen</span>
+                  </div>
+                  <div class="compact-role-row" data-role-summary></div>
+                </div>
+                <p>ABN AMRO und Mistral kündigten am 05.08. eine strategische Partnerschaft an – erste Kooperation mit einer großen niederländischen Bank, Fokus Cybersecurity/Compliance, reduzierte Nicht-EU-Abhängigkeit. Fiel zwischen zwei Tagesfenster, hier nachgeholt.</p>
+                <p><strong>Business-Relevanz:</strong> Primärquellenbestätigte Partnerschaft (abnamro.com); konkrete erste Anwendungsfälle oder eine gemeinsame technische Roadmap sind bislang nicht bekannt.</p>
+                <div class="sources">
+                  <ol class="compact-source-list">
+                  <li>
+                    <a href="https://www.abnamro.com/en/news/abn-amro-and-mistral-enter-strategic-partnership-to-strengthen-european-ai-innovation" target="_blank" rel="noopener noreferrer">ABN AMRO and Mistral enter strategic partnership to strengthen European AI innovation</a>
+                    <div class="source-meta-row"><span class="source-pill" data-ui-map="role" data-raw-value="unternehmensquelle" data-source-role>unternehmensquelle</span></div>
+                  </li>
+                  </ol>
+                </div>
+              </div>
+            </details>
+          </article>
+        </section>
+
+        <section class="sidebar-block global-panel">
+          <h3>Global mit EU-Impact</h3>
+        </section>
+
+        <section class="sidebar-block watchlist-archive-panel">
+          <h3>Watchlist & Archiv</h3>
+          <div class="section-stack watchlist">
+            <article class="panel-item watch-item" data-id="wk33-litellm-company-silence">
+              <details>
+                <summary>LiteLLM-Betroffene bleiben weiter stumm</summary>
+                <div class="panel-detail compact-panel-details">
+                  <div class="compact-panel-summary">
+                    <div class="story-meta"><span class="badge" data-trust="watchlist" data-ui-map="trust" data-raw-value="watchlist">watchlist</span></div>
+                    <div class="compact-panel-stats">
+                      <span class="chip">Quellen: <span data-source-count>0</span></span>
+                      <span class="chip">Rollen</span>
+                    </div>
+                    <div class="compact-role-row" data-role-summary></div>
+                  </div>
+                  <p>Auch nach fünf Tagen Berichterstattung hat sich keine der von CloudSEK oder Hudson Rock genannten Firmen (Siemens, VW, Deutsche Bahn, Orange, TomTom, BT Group u.a.) öffentlich geäußert.</p>
+                  <p><strong>Warum beobachten:</strong> Entscheidet, ob aus einer plausiblen Exposure-Analyse ein bestätigter Vorfall bei europäischen Großunternehmen wird.</p>
+                  <p><strong>Nächstes Signal:</strong> Offizielle Stellungnahme einer genannten Firma oder eine Datenschutzbehörden-Meldung.</p>
+                  <div class="sources">
+                    <ol class="compact-source-list">
+                    <li>
+                      <a href="https://www.cloudsek.com/blog/ai-supply-chain-breach-2500-companies-434000-cicd-pipelines" target="_blank" rel="noopener noreferrer">2,500+ Companies and 434,000 CI/CD Pipelines Exposed in the Largest AI Supply Chain Breach of 2026</a>
+                      <div class="source-meta-row"><span class="source-pill" data-ui-map="role" data-raw-value="enterprise_signal" data-source-role>enterprise_signal</span></div>
+                    </li>
+                    </ol>
+                  </div>
+                </div>
+              </details>
+            </article>
+            <article class="panel-item watch-item" data-id="wk33-gigafactories-tender-candidates">
+              <details>
+                <summary>EU-KI-Gigafactories: Bewerberkreis wächst vor Fristablauf</summary>
+                <div class="panel-detail compact-panel-details">
+                  <div class="compact-panel-summary">
+                    <div class="story-meta"><span class="badge" data-trust="mittel" data-ui-map="trust" data-raw-value="mittel">mittel</span></div>
+                    <div class="compact-panel-stats">
+                      <span class="chip">Quellen: <span data-source-count>0</span></span>
+                      <span class="chip">Rollen</span>
+                    </div>
+                    <div class="compact-role-row" data-role-summary></div>
+                  </div>
+                  <p>Neben Frankreichs AION-Konsortium ist ein spanisches Zwei-Standort-Projekt (bis zu 5 Mrd. Euro) als weiterer Bewerber aufgetaucht; Gebotsfrist bleibt der 12.11.2026.</p>
+                  <p><strong>Warum beobachten:</strong> Die Standortentscheidungen bestimmen maßgeblich, wo Europas künftige KI-Rechenkapazität entsteht.</p>
+                  <p><strong>Nächstes Signal:</strong> Weitere benannte Konsortien oder erste Standortankündigungen vor Fristablauf.</p>
+                  <div class="sources">
+                    <ol class="compact-source-list">
+                    <li>
+                      <a href="https://ec.europa.eu/commission/presscorner/detail/en/ip_26_1708" target="_blank" rel="noopener noreferrer">EU launches AI Gigafactories call to boost Europe&#x27;s computing capacity</a>
+                      <div class="source-meta-row"><span class="source-pill" data-ui-map="role" data-raw-value="faktenanker" data-source-role>faktenanker</span></div>
+                    </li>
+                    </ol>
+                  </div>
+                </div>
+              </details>
+            </article>
+            <article class="panel-item watch-item" data-id="wk33-china-mofcom-export-controls">
+              <details>
+                <summary>Chinas MOFCOM-Exportkontrollen für KI-Modellgewichte weiter in Konsultation</summary>
+                <div class="panel-detail compact-panel-details">
+                  <div class="compact-panel-summary">
+                    <div class="story-meta"><span class="badge" data-trust="watchlist" data-ui-map="trust" data-raw-value="watchlist">watchlist</span></div>
+                    <div class="compact-panel-stats">
+                      <span class="chip">Quellen: <span data-source-count>0</span></span>
+                      <span class="chip">Rollen</span>
+                    </div>
+                    <div class="compact-role-row" data-role-summary></div>
+                  </div>
+                  <p>Chinas Handelsministerium konsultiert weiterhin mit Alibaba, ByteDance und Z.ai über mögliche Exportbeschränkungen für Modellgewichte und Trainingsdaten; kein Zeitplan, keine neuen Details seit Ende Juli.</p>
+                  <p><strong>Warum beobachten:</strong> Würde europäische Nutzung offener chinesischer Modelle als Souveränitäts-Alternative direkt betreffen.</p>
+                  <p><strong>Nächstes Signal:</strong> Ein formeller MOFCOM/MOST-Regelentwurf oder eine Unternehmensbestätigung.</p>
+                  <div class="sources">
+                    <ol class="compact-source-list">
+                    <li>
+                      <a href="https://www.trendingtopics.eu/china-weighs-export-controls-on-ai-models-including-open-weight-llms/" target="_blank" rel="noopener noreferrer">China Weighs Export Controls on AI Models, Including Open Weight LLMs</a>
+                      <div class="source-meta-row"><span class="source-pill" data-ui-map="role" data-raw-value="frühindikator" data-source-role>frühindikator</span></div>
+                    </li>
+                    </ol>
+                  </div>
+                </div>
+              </details>
+            </article>
+            <article class="panel-item watch-item" data-id="wk33-ijcai-ecai-ai-office-speaker">
+              <details>
+                <summary>EU-AI-Office-Vertreter spricht bei IJCAI-ECAI 2026 in Bremen</summary>
+                <div class="panel-detail compact-panel-details">
+                  <div class="compact-panel-summary">
+                    <div class="story-meta"><span class="badge" data-trust="watchlist" data-ui-map="trust" data-raw-value="watchlist">watchlist</span></div>
+                    <div class="compact-panel-stats">
+                      <span class="chip">Quellen: <span data-source-count>0</span></span>
+                      <span class="chip">Rollen</span>
+                    </div>
+                    <div class="compact-role-row" data-role-summary></div>
+                  </div>
+                  <p>Die IJCAI-ECAI-2026-Konferenz öffnete am 15.08. in Bremen; ein Vertreter des EU AI Office ist für den 19.08. angekündigt, um AI-Act-Umsetzung mit Forschung/Industrie zu diskutieren.</p>
+                  <p><strong>Warum beobachten:</strong> Möglicher Ort für neue AI-Office-Aussagen zur praktischen Durchsetzung, außerhalb offizieller Pressemitteilungen.</p>
+                  <p><strong>Nächstes Signal:</strong> Inhalt und etwaige neue Ankündigungen aus dem Vortrag am 19.08.</p>
+                  <div class="sources">
+                    <ol class="compact-source-list">
+                    <li>
+                      <a href="https://2026.ijcai.org/" target="_blank" rel="noopener noreferrer">IJCAI-ECAI 2026</a>
+                      <div class="source-meta-row"><span class="source-pill" data-ui-map="role" data-raw-value="enterprise_signal" data-source-role>enterprise_signal</span></div>
+                    </li>
+                    </ol>
+                  </div>
+                </div>
+              </details>
+            </article>
+          </div>
+
+          <div class="section-stack archive-references">
+            <article class="archive-item" data-id="wk33-litellm-teampcp-thread">
+              <span class="badge relation-type" data-ui-map="relation-type" data-raw-value="recurring_theme">recurring_theme</span>
+              <h4>LiteLLM/TeamPCP-Lieferkettenangriff (verfolgt seit 11.08.)</h4>
+              <p class="sidebar-meta">Von CloudSEKs Exposure-Kartierung über Hudson Rocks Archiv-Fund bis zur Fünf-Monats-Bestandsaufnahme – fünf Tage ohne Firmenreaktion, diese Woche als Rückblick synthetisiert.</p>
+            </article>
+            <article class="archive-item" data-id="wk33-anthropic-watermarking-thread">
+              <span class="badge relation-type" data-ui-map="relation-type" data-raw-value="follow_up">follow_up</span>
+              <h4>Anthropics Claude-Wasserzeichen (verfolgt seit 11.08.)</h4>
+              <p class="sidebar-meta">Nach der Ankündigung folgt diese Woche die technische Vertiefung – erster beobachteter Fall, wie ein EU-Transparenz-Code-Unterzeichner Details zur Umsetzung offenlegt.</p>
+            </article>
+            <article class="archive-item" data-id="wk33-en18286-standards-thread">
+              <span class="badge relation-type" data-ui-map="relation-type" data-raw-value="recurring_theme">recurring_theme</span>
+              <h4>EN-18286-Normungsstatus (verfolgt seit Weekly W29)</h4>
+              <p class="sidebar-meta">Diskrepanz zwischen CEN-CENELEC-Freigabe und ausstehender Amtsblatt-Zitierung besteht auch diese Woche unverändert fort.</p>
+            </article>
+            <article class="archive-item" data-id="wk33-mistral-sovereignty-thread">
+              <span class="badge relation-type" data-ui-map="relation-type" data-raw-value="recurring_theme">recurring_theme</span>
+              <h4>Mistral als europäischer Souveränitäts-Vorzeigeanbieter (verfolgt seit Weekly W29)</h4>
+              <p class="sidebar-meta">Regional Endpoints, European Compute Units und die nachgetragene ABN-AMRO-Partnerschaft zeigen diese Woche drei konkrete Produkt-/Kooperationsschritte statt reiner Positionierung.</p>
+            </article>
+            <article class="archive-item" data-id="wk33-zak-google-thread">
+              <span class="badge relation-type" data-ui-map="relation-type" data-raw-value="follow_up">follow_up</span>
+              <h4>ZAK-Entscheidung gegen Google/Perplexity (verfolgt seit 14.07.)</h4>
+              <p class="sidebar-meta">Die Berufungsfrist lief diese Woche ab, ohne dass eine Einreichung bestätigt werden konnte – Ausgang bleibt offen.</p>
+            </article>
+          </div>
+        </section>
+      </aside>
+    </section>
+  </main>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const labelMaps = {
+        category: {
+          regulation: 'Regulierung',
+          product: 'Produkte & Plattformen',
+          global_eu: 'Global mit EU-Impact',
+          enterprise_ai: 'Enterprise AI',
+          governance: 'Governance',
+          watchlist: 'Watchlist'
+        },
+        priority: {
+          P1: 'Sehr wichtig',
+          P2: 'Relevant',
+          P3: 'Kurz notiert'
+        },
+        trust: {
+          hoch: 'Hohe Quellenlage',
+          mittel: 'Mittlere Quellenlage',
+          niedrig: 'Niedrige Quellenlage',
+          gemischt: 'Gemischte Quellenlage',
+          watchlist: 'Watchlist'
+        },
+        role: {
+          faktenanker: 'Faktenanker',
+          policy_interpretation: 'Policy-Interpretation',
+          marktverifikation: 'Marktverifikation',
+          produktquelle: 'Produktquelle',
+          enterprise_signal: 'Enterprise-Signal',
+          'frühindikator': 'Frühindikator',
+          unternehmensquelle: 'Unternehmensquelle',
+          developer_dokumentation: 'Entwicklerdokumentation'
+        },
+        'source-type': {
+          official: 'Offizielle Quelle',
+          vendor: 'Anbieterquelle',
+          media: 'Medienbericht',
+          research: 'Research',
+          community: 'Community',
+          documentation: 'Dokumentation',
+          legal: 'Rechtstext'
+        },
+        'relation-type': {
+          follow_up: 'Follow-up',
+          recurring_theme: 'Wiederkehrendes Thema',
+          precedent: 'Präzedenzfall',
+          trendline: 'Trendlinie'
+        }
+      };
+
+      const mapLabel = (group, rawValue) => {
+        if (!rawValue) return '';
+        return (labelMaps[group] && labelMaps[group][rawValue]) || rawValue;
+      };
+
+      document.querySelectorAll('[data-ui-map]').forEach((element) => {
+        const group = element.dataset.uiMap;
+        const rawValue = element.dataset.rawValue || element.textContent.trim();
+        const mappedValue = mapLabel(group === 'weekly-trust' ? 'trust' : group, rawValue);
+
+        if (group === 'weekly-trust') {
+          element.textContent = `Vertrauensbild: ${mappedValue}`;
+          return;
+        }
+
+        element.textContent = mappedValue;
+      });
+
+      document.querySelectorAll('.panel-item').forEach((item) => {
+        const roleSummary = item.querySelector('[data-role-summary]');
+        const roleNodes = Array.from(item.querySelectorAll('[data-source-role]'));
+        const sourceCountNode = item.querySelector('[data-source-count]');
+        const uniqueRoles = [...new Set(roleNodes.map((node) => node.dataset.rawValue).filter(Boolean))];
+
+        if (sourceCountNode) sourceCountNode.textContent = String(roleNodes.length);
+
+        if (roleSummary) {
+          roleSummary.innerHTML = '';
+          uniqueRoles.forEach((role) => {
+            const pill = document.createElement('span');
+            pill.className = 'source-pill';
+            pill.textContent = mapLabel('role', role);
+            roleSummary.appendChild(pill);
+          });
+        }
+      });
+    });
+  </script>
+</body>
+</html>
