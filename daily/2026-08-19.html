@@ -1,0 +1,1141 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ChatGPT-Werbung startet in 31 EU-Märkten, OpenAI pausiert Training nach Astra-Cyberrisiko</title>
+  <style>
+    :root {
+      --bg: #eef3f9;
+      --bg-radial: radial-gradient(circle at top left, rgba(49, 91, 217, 0.14), transparent 32rem), radial-gradient(circle at top right, rgba(31, 122, 77, 0.10), transparent 28rem), #eef3f9;
+      --surface: #ffffff;
+      --surface-soft: #f7f9fd;
+      --surface-blue: #f1f5ff;
+      --text: #111b2e;
+      --muted: #66748c;
+      --muted-2: #8190a8;
+      --border: #d9e2ef;
+      --border-strong: #bfcae0;
+      --accent: #244ed8;
+      --accent-strong: #1739a8;
+      --accent-soft: #e8efff;
+      --success: #1f7a4d;
+      --success-soft: #e7f5ee;
+      --warning: #b26a00;
+      --warning-soft: #fff3dc;
+      --risk: #a63f3f;
+      --risk-soft: #fdecec;
+      --watch: #2563eb;
+      --watch-soft: #eaf1ff;
+      --shadow: 0 18px 45px rgba(17, 30, 58, 0.10);
+      --shadow-soft: 0 8px 24px rgba(17, 30, 58, 0.07);
+      --radius-xl: 26px;
+      --radius-lg: 18px;
+      --radius-md: 14px;
+      --radius-sm: 10px;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      padding: 34px;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--bg-radial);
+      color: var(--text);
+      line-height: 1.55;
+    }
+
+    h1, h2, h3, h4, p { margin: 0; }
+    h1 { max-width: 920px; font-size: clamp(32px, 5vw, 56px); line-height: 0.98; letter-spacing: -0.045em; }
+    h2 { font-size: clamp(22px, 3vw, 34px); line-height: 1.08; letter-spacing: -0.03em; }
+    h3 { font-size: 20px; line-height: 1.18; letter-spacing: -0.02em; }
+    h4 { font-size: 15px; line-height: 1.25; }
+    a { color: var(--accent-strong); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    .daily-briefing {
+      max-width: 1220px;
+      margin: 0 auto;
+      display: grid;
+      gap: 24px;
+    }
+
+    .hero,
+    .top-story,
+    .story-card,
+    .sidebar-block {
+      background: rgba(255, 255, 255, 0.92);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow-soft);
+      backdrop-filter: blur(12px);
+    }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      padding: 30px;
+      display: grid;
+      gap: 18px;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      height: 5px;
+      background: linear-gradient(90deg, #244ed8, #1f7a4d, #b26a00);
+      pointer-events: none;
+    }
+
+    .hero > * { position: relative; }
+
+    .eyebrow,
+    .story-kicker,
+    .section-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      line-height: 1;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-weight: 800;
+    }
+
+    .eyebrow::before,
+    .section-label::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 0 5px var(--accent-soft);
+      flex: 0 0 auto;
+    }
+
+    .briefing-summary {
+      max-width: 880px;
+      color: var(--muted);
+      font-size: 17px;
+    }
+
+    .meta-row,
+    .story-meta,
+    .filter-row,
+    .source-meta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .chip,
+    .badge,
+    .filter-button,
+    .source-pill {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 800;
+      line-height: 1;
+      white-space: nowrap;
+    }
+
+    .chip {
+      padding: 9px 11px;
+      background: var(--accent-soft);
+      color: var(--accent-strong);
+      border: 1px solid rgba(36, 78, 216, 0.12);
+    }
+
+    .badge {
+      padding: 8px 10px;
+      border: 1px solid var(--border);
+      background: var(--surface-soft);
+      color: var(--muted);
+    }
+
+    .badge[data-trust="hoch"] { background: var(--success-soft); color: var(--success); border-color: rgba(31, 122, 77, 0.20); }
+    .badge[data-trust="mittel"], .badge[data-trust="gemischt"] { background: var(--warning-soft); color: var(--warning); border-color: rgba(178, 106, 0, 0.22); }
+    .badge[data-trust="niedrig"] { background: var(--risk-soft); color: var(--risk); border-color: rgba(166, 63, 63, 0.22); }
+    .badge[data-trust="watchlist"] { background: var(--watch-soft); color: var(--watch); border-color: rgba(37, 99, 235, 0.18); }
+
+    .main-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 2.05fr) minmax(300px, 0.95fr);
+      gap: 24px;
+      align-items: start;
+    }
+
+    .main-column,
+    .priority-stories,
+    .sidebar {
+      display: grid;
+      gap: 18px;
+      min-width: 0;
+    }
+
+    .top-story,
+    .story-card {
+      padding: 22px;
+      display: grid;
+      gap: 15px;
+      min-width: 0;
+    }
+
+    .top-story {
+      border-color: rgba(36, 78, 216, 0.24);
+      box-shadow: var(--shadow);
+    }
+
+    .story-header {
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      align-items: flex-start;
+      min-width: 0;
+    }
+
+    .story-title-block,
+    .story-text-stack {
+      display: grid;
+      gap: 8px;
+      min-width: 0;
+    }
+
+    .story-title-block h2,
+    .story-title-block h3 {
+      overflow-wrap: anywhere;
+    }
+
+    .field-note { color: var(--muted); }
+    .field-note strong { color: var(--text); }
+
+    .takeaway {
+      border: 1px solid var(--border);
+      background: linear-gradient(180deg, #fbfcff, #f6f8fc);
+      border-radius: var(--radius-lg);
+      padding: 16px;
+      display: grid;
+      gap: 6px;
+    }
+
+    .takeaway strong {
+      font-size: 13px;
+      letter-spacing: 0.02em;
+    }
+
+    .score-strip {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 10px;
+      max-width: 100%;
+      min-width: 0;
+    }
+
+    .score-item {
+      --score: 1;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      background: var(--surface-soft);
+      padding: 12px;
+      display: grid;
+      gap: 8px;
+      min-height: 88px;
+      min-width: 0;
+      overflow: hidden;
+    }
+
+    .score-topline {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 6px;
+      min-width: 0;
+      max-width: 100%;
+    }
+
+    .score-value {
+      min-width: 0;
+      max-width: 100%;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      font-size: 24px;
+      line-height: 1;
+      font-weight: 900;
+      letter-spacing: -0.04em;
+    }
+
+    .score-max {
+      color: var(--muted-2);
+      font-size: 11px;
+      font-weight: 800;
+      flex: 0 0 auto;
+    }
+
+    .score-label {
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.15;
+      font-weight: 750;
+      overflow-wrap: anywhere;
+      hyphens: auto;
+    }
+
+    .meter {
+      width: 100%;
+      min-width: 0;
+      height: 7px;
+      border-radius: 999px;
+      background: #e4e9f2;
+      overflow: hidden;
+    }
+
+    .meter > span {
+      display: block;
+      height: 100%;
+      width: clamp(0%, calc(var(--score) * 20%), 100%);
+      max-width: 100%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, var(--accent), #1f7a4d);
+    }
+
+    .filter-panel {
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      background: rgba(255, 255, 255, 0.78);
+      box-shadow: var(--shadow-soft);
+      padding: 14px;
+      display: grid;
+      gap: 10px;
+    }
+
+    .filter-label {
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 850;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .filter-button {
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--muted);
+      padding: 8px 10px;
+      cursor: pointer;
+      transition: background 0.18s ease, color 0.18s ease, border-color 0.18s ease, transform 0.18s ease;
+    }
+
+    .filter-button:hover {
+      transform: translateY(-1px);
+      border-color: var(--border-strong);
+    }
+
+    .filter-button.active,
+    .filter-button[aria-pressed="true"] {
+      background: var(--text);
+      color: #ffffff;
+      border-color: var(--text);
+    }
+
+    .is-filtered-out { display: none !important; }
+
+    .filter-empty-state {
+      display: none;
+      border: 1px dashed var(--border-strong);
+      border-radius: var(--radius-lg);
+      background: rgba(255, 255, 255, 0.7);
+      padding: 16px;
+      color: var(--muted);
+    }
+
+    .filter-empty-state.is-visible { display: block; }
+
+    .sidebar-status-grid,
+    .compact-source-summary,
+    .compact-source-details,
+    .compact-role-row {
+      display: grid;
+      gap: 10px;
+    }
+
+    .sidebar-status-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .status-card {
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      background: var(--surface-soft);
+      padding: 12px;
+      display: grid;
+      gap: 5px;
+    }
+
+    .status-card-label {
+      font-size: 11px;
+      font-weight: 850;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--muted-2);
+    }
+
+    .status-card-value {
+      font-size: 14px;
+      font-weight: 800;
+      color: var(--text);
+    }
+
+    .compact-source-header {
+      display: grid;
+      gap: 8px;
+    }
+
+    .compact-source-stats {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .compact-source-list {
+      margin: 0;
+      padding-left: 18px;
+      color: var(--muted);
+      display: grid;
+      gap: 6px;
+    }
+
+    .compact-source-list a,
+    .compact-source-list .source-label-fallback {
+      font-weight: 750;
+    }
+
+    .story-card { box-shadow: var(--shadow-soft); }
+    .story-card[data-category="regulation"] { border-left: 5px solid var(--accent); }
+    .story-card[data-category="governance"] { border-left: 5px solid var(--success); }
+    .story-card[data-category="enterprise_ai"] { border-left: 5px solid #5b5fd6; }
+    .story-card[data-category="product"] { border-left: 5px solid #6b55c9; }
+    .story-card[data-category="global_eu"] { border-left: 5px solid #2d8aa6; }
+    .story-card[data-category="watchlist"] { border-left: 5px solid var(--watch); }
+
+    details.evidence {
+      border-top: 1px solid var(--border);
+      padding-top: 10px;
+    }
+
+    details.evidence summary,
+    .source-item summary {
+      cursor: pointer;
+      list-style: none;
+      color: var(--accent-strong);
+      font-size: 13px;
+      font-weight: 850;
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      align-items: center;
+    }
+
+    details.evidence summary::-webkit-details-marker,
+    .source-item summary::-webkit-details-marker { display: none; }
+
+    details.evidence summary::after,
+    .source-item summary::after {
+      content: "+";
+      display: grid;
+      place-items: center;
+      width: 22px;
+      height: 22px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: var(--accent-strong);
+      font-size: 15px;
+      line-height: 1;
+      flex: 0 0 auto;
+    }
+
+    details.evidence[open] summary::after,
+    .source-item details[open] summary::after { content: "–"; }
+
+    .sources {
+      margin-top: 10px;
+      display: grid;
+      gap: 8px;
+      padding: 12px;
+      border-radius: var(--radius-md);
+      background: var(--surface-soft);
+      border: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 13px;
+      min-width: 0;
+    }
+
+    .source-link-card {
+      display: grid;
+      gap: 7px;
+      padding: 10px;
+      border: 1px solid rgba(191, 202, 224, 0.75);
+      border-radius: var(--radius-sm);
+      background: #ffffff;
+      min-width: 0;
+    }
+
+    .source-link-card a,
+    .source-link-card .source-label-fallback {
+      font-weight: 850;
+      overflow-wrap: anywhere;
+    }
+
+    .source-label-fallback { color: var(--text); }
+
+    .source-pill {
+      align-self: start;
+      justify-self: start;
+      padding: 5px 7px;
+      border: 1px solid var(--border);
+      background: #eef2ff;
+      color: #3730a3;
+      font-size: 10.5px;
+      letter-spacing: 0.01em;
+    }
+
+    .source-meta {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 6px 10px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .source-meta span { overflow-wrap: anywhere; }
+    .source-meta strong { color: var(--text); }
+
+    .sidebar-block {
+      padding: 18px;
+      display: grid;
+      gap: 12px;
+    }
+
+    .watch-item,
+    .source-item,
+    .archive-item {
+      border: 1px solid var(--border);
+      background: var(--surface-soft);
+      border-radius: var(--radius-md);
+      padding: 13px;
+      display: grid;
+      gap: 7px;
+      min-width: 0;
+    }
+
+    .sidebar-meta {
+      color: var(--muted);
+      font-size: 13px;
+      overflow-wrap: anywhere;
+    }
+
+    .source-item { padding: 0; overflow: hidden; }
+    .source-item details { padding: 12px 13px; }
+    .source-item summary { color: var(--text); overflow-wrap: anywhere; }
+    .source-item .source-detail {
+      margin-top: 9px;
+      display: grid;
+      gap: 8px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+    .archive-item .relation-type { justify-self: start; background: #eef2ff; color: #3730a3; }
+
+    @media (max-width: 980px) {
+      body { padding: 18px; }
+      .hero, .top-story, .story-card, .sidebar-block { border-radius: var(--radius-lg); }
+      .main-layout { grid-template-columns: 1fr; }
+      .score-strip {
+        grid-template-columns: repeat(5, minmax(78px, 1fr));
+        gap: 7px;
+        overflow-x: auto;
+        overflow-y: hidden;
+        padding-bottom: 2px;
+        scrollbar-width: thin;
+      }
+      .score-item { min-height: 58px; padding: 7px 8px; gap: 5px; }
+      .score-value { font-size: 16px; }
+      .score-max { font-size: 10px; }
+      .score-label { font-size: 10px; line-height: 1.1; }
+      .meter { height: 4px; }
+      .chip, .badge, .filter-button { padding: 6px 8px; font-size: 11px; }
+      .filter-panel { padding: 12px; }
+      .filter-row { gap: 7px; }
+      .source-meta { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 560px) {
+      body { padding: 12px; }
+      .daily-briefing { gap: 14px; }
+      .hero { padding: 22px; }
+      .story-header { display: grid; gap: 10px; }
+      .story-meta { gap: 7px; }
+      .score-strip { grid-template-columns: repeat(5, minmax(72px, 1fr)); }
+      .score-item { min-height: 54px; padding: 6px 7px; }
+      .score-value { font-size: 15px; }
+      .score-max { font-size: 10px; }
+      .score-label { font-size: 9.5px; }
+      .filter-row {
+        display: flex;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        padding-bottom: 2px;
+        scrollbar-width: thin;
+      }
+      .filter-button { flex: 0 0 auto; }
+      .sources { padding: 10px; }
+      .source-link-card { padding: 9px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="daily-briefing">
+    <section class="hero">
+      <div class="eyebrow">Daily AI Intelligence Briefing</div>
+      <h1>ChatGPT-Werbung startet in 31 EU-Märkten, OpenAI pausiert Training nach Astra-Cyberrisiko</h1>
+      <p class="briefing-summary">OpenAI startet ChatGPT-Werbung ab 24.08. in 31 EU-Märkten, mit DSGVO-Einwilligungsdesign. Parallel pausiert OpenAI RL-Training, nachdem Astra eine „kritische&quot; Cyberrisiko-Schwelle nicht ausschließen ließ – EU-Beteiligung unbestätigt. Zudem: acht Monate unbehobene Copilot-Lücke.</p>
+      <div class="meta-row">
+        <span class="chip">Datum: 2026-08-19</span>
+        <span class="chip">Fenster: Mittwoch, 19.08.2026</span>
+        <span class="chip">Fokus: Deutschland / EU</span>
+        <span class="badge" data-trust="hoch" data-ui-map="overall-trust" data-raw-value="hoch">Status: hoch</span>
+      </div>
+    </section>
+
+    <section class="main-layout">
+      <section class="main-column">
+        <article class="top-story">
+          <div class="story-header">
+            <div class="story-title-block">
+              <div class="story-kicker">Top Story</div>
+              <h2>OpenAI startet ChatGPT-Werbung in 31 europäischen Märkten – mit DSGVO-Einwilligungsdesign</h2>
+            </div>
+            <span class="chip" data-ui-map="priority" data-raw-value="P1">P1</span>
+          </div>
+          <p>OpenAI kündigte am 19.08. an, ab dem 24.08. Werbung in ChatGPT (Free/Go) in 31 europäischen Märkten einzuführen, darunter Deutschland, Frankreich, Spanien, Italien, die Niederlande und Österreich. Zum Start sind Anzeigen nicht personalisiert: Das Targeting nutzt nur Gesprächsthema, groben Standort, Gerätetyp, Tageszeit und Sprache – nicht Chatverlauf oder gespeicherte Erinnerungen. Für künftiges personalisiertes Targeting will OpenAI eine ausdrückliche Einwilligung einholen, was das Unternehmen als DSGVO-Konformitätsdesign framt. Anzeigen sind optisch von Antworten getrennt; Werbetreibende erhalten keinen Zugriff auf Chatinhalte. Plus-, Pro- und Enterprise-Abos bleiben werbefrei.</p>
+          <div class="score-strip">
+            <div class="score-item" style="--score: 5"><div class="score-topline"><span class="score-value">5</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">EU / DE-Relevanz</div></div>
+            <div class="score-item" style="--score: 4"><div class="score-topline"><span class="score-value">4</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Business Impact</div></div>
+            <div class="score-item" style="--score: 3"><div class="score-topline"><span class="score-value">3</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Regulatorik</div></div>
+            <div class="score-item" style="--score: 2"><div class="score-topline"><span class="score-value">2</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Technologie</div></div>
+            <div class="score-item" style="--score: 3"><div class="score-topline"><span class="score-value">3</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Lernwert</div></div>
+          </div>
+          <div class="takeaway">
+            <strong>Einschätzung</strong>
+            <p class="field-note">Erster großer Werbe-Rollout eines führenden Chatbot-Anbieters in der EU mit explizit einwilligungsbasiertem Design – ein Praxisbeispiel dafür, wie ein US-Anbieter DSGVO-Anforderungen in ein Consumer-KI-Produkt übersetzt, das Unternehmen als Vergleichsmaßstab für eigene KI-Compliance-Entscheidungen dienen kann.</p>
+          </div>
+          <details class="evidence">
+            <summary>Quellen</summary>
+            <div class="sources">
+              <article class="source-link-card">
+                <a href="https://openai.com/index/chatgpt-ads-expands-across-europe/" target="_blank" rel="noopener noreferrer">OpenAI: ChatGPT Ads expands across Europe</a>
+                <div class="source-meta-row">
+                  <span class="source-pill" data-ui-map="role" data-raw-value="produktquelle">produktquelle</span>
+                  <span class="source-pill" data-ui-map="source-type" data-raw-value="vendor">vendor</span>
+                </div>
+                <div class="source-meta">
+                  <span><strong>Publisher:</strong> OpenAI</span>
+                  <span><strong>Veröffentlicht:</strong> 2026-08-19</span>
+                  <span><strong>Abgerufen:</strong> 2026-08-19</span>
+                </div>
+              </article>
+              <article class="source-link-card">
+                <a href="https://dataconomy.com/2026/08/19/openai-chatgpt-ads-launch-european-markets-august-24/" target="_blank" rel="noopener noreferrer">Dataconomy: OpenAI To Launch ChatGPT Ads In 31 European Markets On August 24</a>
+                <div class="source-meta-row">
+                  <span class="source-pill" data-ui-map="role" data-raw-value="enterprise_signal">enterprise_signal</span>
+                  <span class="source-pill" data-ui-map="source-type" data-raw-value="media">media</span>
+                </div>
+                <div class="source-meta">
+                  <span><strong>Publisher:</strong> Dataconomy</span>
+                  <span><strong>Veröffentlicht:</strong> 2026-08-19</span>
+                  <span><strong>Abgerufen:</strong> 2026-08-19</span>
+                </div>
+              </article>
+              <article class="source-link-card">
+                <a href="https://digiday.com/marketing/openai-builds-offerings-on-consent-as-it-expands-chatgpt-ads-to-europe/" target="_blank" rel="noopener noreferrer">Digiday: OpenAI builds offerings on consent as it expands ChatGPT ads to Europe</a>
+                <div class="source-meta-row">
+                  <span class="source-pill" data-ui-map="role" data-raw-value="enterprise_signal">enterprise_signal</span>
+                  <span class="source-pill" data-ui-map="source-type" data-raw-value="media">media</span>
+                </div>
+                <div class="source-meta">
+                  <span><strong>Publisher:</strong> Digiday</span>
+                  <span><strong>Veröffentlicht:</strong> 2026-08-19</span>
+                  <span><strong>Abgerufen:</strong> 2026-08-19</span>
+                </div>
+              </article>
+            </div>
+          </details>
+          <details class="evidence">
+            <summary>Weitere Recherche</summary>
+            <div class="sources">
+              <p class="field-note">Bestätigen deutsche oder EU-Datenschutzbehörden das beschriebene Einwilligungsdesign als DSGVO-konform, oder gibt es nach dem Start am 24.08. erste kritische Rückmeldungen?</p>
+            </div>
+          </details>
+        </article>
+
+        <section class="priority-stories">
+          <div class="section-label">Weitere priorisierte Entwicklungen</div>
+          <div class="filter-panel" aria-label="Story-Filter">
+            <div class="filter-label">Filter</div>
+            <div class="filter-row" id="story-filter-row">
+              <button class="filter-button active" type="button" data-filter="all" aria-pressed="true">Alle</button>
+            </div>
+          </div>
+
+          <article class="story-card" data-id="openai-astra-critical-cyber-pause" data-category="global_eu" data-trust-status="hoch">
+            <div class="story-header">
+              <div class="story-title-block">
+                <div class="story-kicker">Global / AI Safety</div>
+                <h3>OpenAI pausiert Frontier-Training: Astra lässt „kritische&quot; Cyberrisiko-Schwelle nicht ausschließen</h3>
+              </div>
+              <div class="story-meta">
+                <span class="chip" data-ui-map="category" data-raw-value="global_eu">global_eu</span>
+                <span class="chip" data-ui-map="priority" data-raw-value="P1">P1</span>
+              </div>
+            </div>
+            <div class="story-text-stack">
+              <p>OpenAI erklärte am 18./19.08.: Astra erreicht bei Cybersicherheit eine Leistung, bei der die „kritische&quot; Schwelle im Preparedness Framework nicht ausschließbar ist. Auslöser laut Forbes: ein Juli-Vorfall, bei dem ein Modell eine Zero-Day-Lücke in Hugging Face fand. OpenAI pausiert RL-Training, kündigt externe Tests an.</p>
+              <p class="field-note"><strong>Warum relevant:</strong> Erste öffentlich dokumentierte Annäherung eines OpenAI-Modells an die höchste Cyber-Risikostufe – ein Präzedenzfall dafür, wie Frontier-Labs mit selbst festgestellten kritischen Fähigkeiten umgehen.</p>
+              <p class="field-note"><strong>EU-/DE-Impact:</strong> Indirekt: OpenAI unterzeichnete den GPAI-Systemrisiko-Code (Art. 55, seit 02.08. durchsetzbar), doch keine Quelle nennt eine EU-Behörde, ENISA oder das EU-KI-Büro als an Astras Tests beteiligt.</p>
+              <p class="field-note"><strong>Einordnung:</strong> Für EU-Unternehmen vor allem als Signal zur Vorbereitung auf Art.-55-Meldepflichten bei systemischem Risiko relevant, nicht als Beleg für eine bereits laufende EU-Beteiligung.</p>
+            </div>
+            <div class="score-strip">
+              <div class="score-item" style="--score: 2"><div class="score-topline"><span class="score-value">2</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">EU / DE-Relevanz</div></div>
+              <div class="score-item" style="--score: 4"><div class="score-topline"><span class="score-value">4</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Business Impact</div></div>
+              <div class="score-item" style="--score: 3"><div class="score-topline"><span class="score-value">3</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Regulatorik</div></div>
+              <div class="score-item" style="--score: 5"><div class="score-topline"><span class="score-value">5</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Technologie</div></div>
+              <div class="score-item" style="--score: 4"><div class="score-topline"><span class="score-value">4</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Lernwert</div></div>
+            </div>
+            <details class="evidence">
+              <summary>Quellen & Unsicherheit</summary>
+              <div class="sources">
+                <p class="field-note"><strong>Quellenlage:</strong> <span data-ui-map="trust" data-raw-value="hoch">hoch</span></p>
+                <article class="source-link-card">
+                  <a href="https://openai.com/index/pacing-model-development-cyber-capabilities/" target="_blank" rel="noopener noreferrer">OpenAI: Pacing model development in an era of cyber-critical capabilities</a>
+                  <div class="source-meta-row">
+                    <span class="source-pill" data-ui-map="role" data-raw-value="produktquelle">produktquelle</span>
+                    <span class="source-pill" data-ui-map="source-type" data-raw-value="vendor">vendor</span>
+                  </div>
+                  <div class="source-meta">
+                    <span><strong>Publisher:</strong> OpenAI</span>
+                    <span><strong>Veröffentlicht:</strong> 2026-08-19</span>
+                    <span><strong>Abgerufen:</strong> 2026-08-19</span>
+                  </div>
+                </article>
+                <article class="source-link-card">
+                  <a href="https://www.helpnetsecurity.com/2026/08/19/openai-model-safety-updates/" target="_blank" rel="noopener noreferrer">Help Net Security: OpenAI puts major frontier AI training run on hold over cyber risks</a>
+                  <div class="source-meta-row">
+                    <span class="source-pill" data-ui-map="role" data-raw-value="enterprise_signal">enterprise_signal</span>
+                    <span class="source-pill" data-ui-map="source-type" data-raw-value="media">media</span>
+                  </div>
+                  <div class="source-meta">
+                    <span><strong>Publisher:</strong> Help Net Security</span>
+                    <span><strong>Veröffentlicht:</strong> 2026-08-19</span>
+                    <span><strong>Abgerufen:</strong> 2026-08-19</span>
+                  </div>
+                </article>
+                <article class="source-link-card">
+                  <a href="https://www.forbes.com/sites/ashishbhatia/2026/08/19/openai-paused-ai-training-for-two-weeks-heres-what-that-means/" target="_blank" rel="noopener noreferrer">Forbes: OpenAI Paused AI Training For Two Weeks. Here&#x27;s What That Means</a>
+                  <div class="source-meta-row">
+                    <span class="source-pill" data-ui-map="role" data-raw-value="enterprise_signal">enterprise_signal</span>
+                    <span class="source-pill" data-ui-map="source-type" data-raw-value="media">media</span>
+                  </div>
+                  <div class="source-meta">
+                    <span><strong>Publisher:</strong> Forbes</span>
+                    <span><strong>Veröffentlicht:</strong> 2026-08-19</span>
+                    <span><strong>Abgerufen:</strong> 2026-08-19</span>
+                  </div>
+                </article>
+                <article class="source-link-card">
+                  <a href="https://www.axios.com/2026/08/18/openai-pause-astra-preparedness-framework" target="_blank" rel="noopener noreferrer">Axios: OpenAI Astra may have hit critical cyber threshold, prompting safety overhaul</a>
+                  <div class="source-meta-row">
+                    <span class="source-pill" data-ui-map="role" data-raw-value="enterprise_signal">enterprise_signal</span>
+                    <span class="source-pill" data-ui-map="source-type" data-raw-value="media">media</span>
+                  </div>
+                  <div class="source-meta">
+                    <span><strong>Publisher:</strong> Axios</span>
+                    <span><strong>Veröffentlicht:</strong> 2026-08-18</span>
+                    <span><strong>Abgerufen:</strong> 2026-08-19</span>
+                  </div>
+                </article>
+                <p class="field-note"><strong>Unsicherheit:</strong> Die „kritische&quot;-Einstufung ist OpenAIs eigene, bislang unabhängig unbestätigte Selbsteinschätzung; OpenAI steuert Zeitpunkt und Reihenfolge aller Angaben, so Forbes.</p>
+              </div>
+            </details>
+            <details class="evidence">
+              <summary>Weitere Recherche</summary>
+              <div class="sources">
+                <p class="field-note">Bestätigt OpenAI eine formelle Art.-55-Meldung an die EU-Kommission für Astra, oder beteiligt sich eine EU-Behörde konkret an den angekündigten externen Tests?</p>
+              </div>
+            </details>
+          </article>
+          <article class="story-card" data-id="microsoft-copilot-cosnitch-patch" data-category="enterprise_ai" data-trust-status="hoch">
+            <div class="story-header">
+              <div class="story-title-block">
+                <div class="story-kicker">Enterprise AI / Security</div>
+                <h3>Microsoft patcht Copilot-Lücke „CoSnitch&quot; – acht Monate nach Meldung</h3>
+              </div>
+              <div class="story-meta">
+                <span class="chip" data-ui-map="category" data-raw-value="enterprise_ai">enterprise_ai</span>
+                <span class="chip" data-ui-map="priority" data-raw-value="P2">P2</span>
+              </div>
+            </div>
+            <div class="story-text-stack">
+              <p>Varonis meldete im Dezember 2025 eine kritische One-Click-Lücke (CVE-2026-24301, „CoSnitch&quot;) in Copilot Personal: Ein Klick genügte für Datenabgriff aus verbundenen Konten (Gmail, Drive, Kalender). Microsoft patchte erst am 18.08. – acht Monate später. Dritte Varonis-Copilot-Lücke, keine aktive Ausnutzung bekannt.</p>
+              <p class="field-note"><strong>Warum relevant:</strong> Zeigt, wie lange auch kritische Datenexfiltrations-Lücken in weit verbreiteter Enterprise-KI-Software offen bleiben können, bevor ein Hersteller patcht.</p>
+              <p class="field-note"><strong>EU-/DE-Impact:</strong> Copilot ist in deutschen und europäischen Unternehmen breit im Einsatz; die Patch-Verzögerung ist ein Signal für IT-Sicherheits- und KI-Governance-Verantwortliche, eigene Copilot-Zugriffsrechte zu prüfen.</p>
+              <p class="field-note"><strong>Einordnung:</strong> Unabhängig von einer EU-spezifischen Regelverletzung ein praktischer Anlass, Patch-Management-Fristen bei Enterprise-KI-Anbietern kritisch zu hinterfragen.</p>
+            </div>
+            <div class="score-strip">
+              <div class="score-item" style="--score: 2"><div class="score-topline"><span class="score-value">2</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">EU / DE-Relevanz</div></div>
+              <div class="score-item" style="--score: 3"><div class="score-topline"><span class="score-value">3</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Business Impact</div></div>
+              <div class="score-item" style="--score: 1"><div class="score-topline"><span class="score-value">1</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Regulatorik</div></div>
+              <div class="score-item" style="--score: 3"><div class="score-topline"><span class="score-value">3</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Technologie</div></div>
+              <div class="score-item" style="--score: 3"><div class="score-topline"><span class="score-value">3</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Lernwert</div></div>
+            </div>
+            <details class="evidence">
+              <summary>Quellen & Unsicherheit</summary>
+              <div class="sources">
+                <p class="field-note"><strong>Quellenlage:</strong> <span data-ui-map="trust" data-raw-value="hoch">hoch</span></p>
+                <article class="source-link-card">
+                  <a href="https://www.varonis.com/blog/cosnitch" target="_blank" rel="noopener noreferrer">Varonis: CoSnitch – When Your AI Assistant Becomes Its Own Whistleblower</a>
+                  <div class="source-meta-row">
+                    <span class="source-pill" data-ui-map="role" data-raw-value="enterprise_signal">enterprise_signal</span>
+                    <span class="source-pill" data-ui-map="source-type" data-raw-value="vendor">vendor</span>
+                  </div>
+                  <div class="source-meta">
+                    <span><strong>Publisher:</strong> Varonis</span>
+                    <span><strong>Veröffentlicht:</strong> 2026-08-18</span>
+                    <span><strong>Abgerufen:</strong> 2026-08-19</span>
+                  </div>
+                </article>
+                <article class="source-link-card">
+                  <a href="https://www.csoonline.com/article/4211342/microsoft-finally-patches-critical-one-click-copilot-vulnerability-more-than-eight-months-after-learning-of-it-2.html" target="_blank" rel="noopener noreferrer">CSO Online: Microsoft finally patches critical one-click Copilot vulnerability, almost eight months after learning of it</a>
+                  <div class="source-meta-row">
+                    <span class="source-pill" data-ui-map="role" data-raw-value="enterprise_signal">enterprise_signal</span>
+                    <span class="source-pill" data-ui-map="source-type" data-raw-value="media">media</span>
+                  </div>
+                  <div class="source-meta">
+                    <span><strong>Publisher:</strong> CSO Online</span>
+                    <span><strong>Veröffentlicht:</strong> 2026-08-18</span>
+                    <span><strong>Abgerufen:</strong> 2026-08-19</span>
+                  </div>
+                </article>
+                <article class="source-link-card">
+                  <a href="https://thehackernews.com/2026/08/microsoft-copilot-personal-flaws-could.html" target="_blank" rel="noopener noreferrer">The Hacker News: Microsoft Copilot Personal Flaws Could Let One Click Exfiltrate Data From Connected Apps</a>
+                  <div class="source-meta-row">
+                    <span class="source-pill" data-ui-map="role" data-raw-value="enterprise_signal">enterprise_signal</span>
+                    <span class="source-pill" data-ui-map="source-type" data-raw-value="media">media</span>
+                  </div>
+                  <div class="source-meta">
+                    <span><strong>Publisher:</strong> The Hacker News</span>
+                    <span><strong>Veröffentlicht:</strong> 2026-08-19</span>
+                    <span><strong>Abgerufen:</strong> 2026-08-19</span>
+                  </div>
+                </article>
+                <p class="field-note"><strong>Unsicherheit:</strong> Keine bestätigten Fälle aktiver Ausnutzung vor dem Patch; Ausmaß der Verzögerung stammt aus Varonis&#x27; eigener Timeline, nicht aus einer Microsoft-Stellungnahme zur Ursache.</p>
+              </div>
+            </details>
+            <details class="evidence">
+              <summary>Weitere Recherche</summary>
+              <div class="sources">
+                <p class="field-note">Veröffentlicht Microsoft eine Erklärung zur achtmonatigen Verzögerung, oder findet Varonis eine vierte Copilot-Schwachstelle in dieser Reihe?</p>
+              </div>
+            </details>
+          </article>
+          <article class="story-card" data-id="standards-regulatory-recheck-0819" data-category="regulation" data-trust-status="hoch">
+            <div class="story-header">
+              <div class="story-title-block">
+                <div class="story-kicker">Regulierung / Recheck</div>
+                <h3>Regulierungs-Recheck: Fünf offene Fäden ohne neue Entwicklung</h3>
+              </div>
+              <div class="story-meta">
+                <span class="chip" data-ui-map="category" data-raw-value="regulation">regulation</span>
+                <span class="chip" data-ui-map="priority" data-raw-value="P3">P3</span>
+              </div>
+            </div>
+            <div class="story-text-stack">
+              <p>Fünf Beobachtungsfäden unverändert: Keine LiteLLM-Firma (Siemens, VW, Deutsche Bahn u.a.) äußerte sich. Die ZAK-Berufungsfrist gegen Google ist verstrichen, Einreichung unbestätigt. Noybs „Schrems III&quot; nicht eingereicht. EN 18286 fehlt die Amtsblatt-Zitierung. Claude auf Foundry nur Global-/US-Datenzone.</p>
+              <p class="field-note"><strong>Warum relevant:</strong> Alle fünf sind seit Wochen aktive Beobachtungsfäden mit direkter Bedeutung für Lieferketten-Sicherheit, Medienrecht, EU-US-Datentransfers und AI-Act-Konformitätsvermutung.</p>
+              <p class="field-note"><strong>EU-/DE-Impact:</strong> Direkt, EU-weit: Rechtsgrundlage für EU-US-Datentransfers, Medienrechtseinordnung von KI-Suche, Konformitätsvermutung für Hochrisiko-KI und Enterprise-Datenresidenz hängen jeweils an diesen offenen Punkten.</p>
+              <p class="field-note"><strong>Einordnung:</strong> Kein Anlass zur Neubewertung – alle fünf Fäden bleiben in bekannter Warteposition; nächste Prüfung im nächsten Daily/Weekly.</p>
+            </div>
+            <div class="score-strip">
+              <div class="score-item" style="--score: 5"><div class="score-topline"><span class="score-value">5</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">EU / DE-Relevanz</div></div>
+              <div class="score-item" style="--score: 3"><div class="score-topline"><span class="score-value">3</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Business Impact</div></div>
+              <div class="score-item" style="--score: 4"><div class="score-topline"><span class="score-value">4</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Regulatorik</div></div>
+              <div class="score-item" style="--score: 2"><div class="score-topline"><span class="score-value">2</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Technologie</div></div>
+              <div class="score-item" style="--score: 3"><div class="score-topline"><span class="score-value">3</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Lernwert</div></div>
+            </div>
+            <details class="evidence">
+              <summary>Quellen & Unsicherheit</summary>
+              <div class="sources">
+                <p class="field-note"><strong>Quellenlage:</strong> <span data-ui-map="trust" data-raw-value="hoch">hoch</span></p>
+                <article class="source-link-card">
+                  <a href="https://www.cencenelec.eu/news-events/news/2026/en-in-the-spotlight/2026-07-30-ai-quality-management/" target="_blank" rel="noopener noreferrer">CEN-CENELEC: EN 18286 in the Spotlight – Supporting Compliance with the AI Act</a>
+                  <div class="source-meta-row">
+                    <span class="source-pill" data-ui-map="role" data-raw-value="faktenanker">faktenanker</span>
+                    <span class="source-pill" data-ui-map="source-type" data-raw-value="official">official</span>
+                  </div>
+                  <div class="source-meta">
+                    <span><strong>Publisher:</strong> CEN-CENELEC</span>
+                    <span><strong>Veröffentlicht:</strong> 2026-07-30</span>
+                    <span><strong>Abgerufen:</strong> 2026-08-19</span>
+                  </div>
+                </article>
+                <article class="source-link-card">
+                  <a href="https://learn.microsoft.com/en-us/answers/questions/5867930/timeline-for-claude-in-microsoft-foundry-to-run-on" target="_blank" rel="noopener noreferrer">Microsoft Learn Q&amp;A: Timeline for Claude in Microsoft Foundry to run on Azure EU infrastructure</a>
+                  <div class="source-meta-row">
+                    <span class="source-pill" data-ui-map="role" data-raw-value="developer_dokumentation">developer_dokumentation</span>
+                    <span class="source-pill" data-ui-map="source-type" data-raw-value="documentation">documentation</span>
+                  </div>
+                  <div class="source-meta">
+                    <span><strong>Publisher:</strong> Microsoft Learn</span>
+                    <span><strong>Veröffentlicht:</strong> </span>
+                    <span><strong>Abgerufen:</strong> 2026-08-19</span>
+                  </div>
+                </article>
+                <article class="source-link-card">
+                  <a href="https://noyb.eu/en/project/eu-us-transfers" target="_blank" rel="noopener noreferrer">noyb: EU-US Transfers Projektseite</a>
+                  <div class="source-meta-row">
+                    <span class="source-pill" data-ui-map="role" data-raw-value="faktenanker">faktenanker</span>
+                    <span class="source-pill" data-ui-map="source-type" data-raw-value="official">official</span>
+                  </div>
+                  <div class="source-meta">
+                    <span><strong>Publisher:</strong> noyb</span>
+                    <span><strong>Veröffentlicht:</strong> </span>
+                    <span><strong>Abgerufen:</strong> 2026-08-19</span>
+                  </div>
+                </article>
+                <p class="field-note"><strong>Unsicherheit:</strong> Das Ausbleiben einer Entwicklung ist selbst die Aussage, direkt anhand der jeweiligen Primär- bzw. Fachquellen re-verifiziert, nicht spekulativ interpretiert.</p>
+              </div>
+            </details>
+            <details class="evidence">
+              <summary>Weitere Recherche</summary>
+              <div class="sources">
+                <p class="field-note">Welcher der fünf Fäden löst sich zuerst: eine LiteLLM-Firmenstellungnahme, die ZAK-Berufung, noybs Klageeinreichung, die EN-18286-Zitierung oder eine Claude-EU-Datenzone?</p>
+              </div>
+            </details>
+          </article>
+          <div class="filter-empty-state" id="story-filter-empty-state">
+            Keine Stories für diesen Filter sichtbar. Wähle einen anderen Filter oder prüfe, ob in diesem Lauf nur andere Kategorien vorkommen.
+          </div>
+        </section>
+      </section>
+
+      <aside class="sidebar">
+        <section class="sidebar-block">
+          <h3>Tageslage</h3>
+          <p class="sidebar-meta">OpenAI startet ChatGPT-Werbung ab 24.08. in 31 EU-Märkten, mit DSGVO-Einwilligungsdesign. Parallel pausiert OpenAI RL-Training, nachdem Astra eine „kritische&quot; Cyberrisiko-Schwelle nicht ausschließen ließ – EU-Beteiligung unbestätigt. Zudem: acht Monate unbehobene Copilot-Lücke.</p>
+          <div class="sidebar-status-grid">
+            <div class="status-card">
+              <span class="status-card-label">Fenster</span>
+              <span class="status-card-value">Mittwoch, 19.08.2026</span>
+            </div>
+            <div class="status-card">
+              <span class="status-card-label">Quellenlage</span>
+              <span class="status-card-value" data-ui-map="trust" data-raw-value="hoch">hoch</span>
+            </div>
+          </div>
+        </section>
+
+        <section class="sidebar-block watchlist">
+          <h3>Watchlist</h3>
+          <article class="watch-item" data-id="delfos-ijcai-ecai-talk">
+            <div class="story-meta"><span class="badge" data-trust="watchlist" data-ui-map="trust" data-raw-value="watchlist">watchlist</span></div>
+            <h4>EU-KI-Büro auf der IJCAI-ECAI in Bremen ohne Ergebnisbericht</h4>
+            <p class="sidebar-meta">Jeroen Delfos vom EU-KI-Büro sollte am 19.08. auf der IJCAI-ECAI 2026 in Bremen zur Umsetzung des AI Acts sprechen. Der Vortrag stand im Programm, Berichterstattung über Inhalt oder Ergebnis fehlt bislang.</p>
+            <p class="sidebar-meta"><strong>Warum beobachten:</strong> Direktes EU-KI-Büro-Statement zur Normungs- und Umsetzungsarbeit, in Deutschland gehalten, kurz nach Beginn der Art.-50-Durchsetzung.</p>
+            <p class="sidebar-meta"><strong>Nächstes Signal:</strong> Presseberichterstattung oder eine Zusammenfassung/Aufzeichnung des Vortrags durch IJCAI oder das EU-KI-Büro.</p>
+          </article>
+          <article class="watch-item" data-id="zai-glm-5-3-weights">
+            <div class="story-meta"><span class="badge" data-trust="watchlist" data-ui-map="trust" data-raw-value="watchlist">watchlist</span></div>
+            <h4>Z.ai verzögert GLM-5.3-Gewichte nach Cyber-Fähigkeitstests</h4>
+            <p class="sidebar-meta">Z.ai stellte am 14.08. GLM-5.3 vor, laut Hersteller mit führenden offenen Coding- und Cybersicherheits-Benchmarks. Die Gewichte werden rund zwei Wochen auf ca. 28.08. verschoben, während Sicherheitstests laufen.</p>
+            <p class="sidebar-meta"><strong>Warum beobachten:</strong> Teil des globalen Wettlaufs um offene Gewichte mit wachsenden Cyber-Fähigkeiten; bislang keine erkennbare EU-Reaktion oder -Stellungnahme, daher nur als Beobachtung geführt.</p>
+            <p class="sidebar-meta"><strong>Nächstes Signal:</strong> Tatsächliche Veröffentlichung der Gewichte um den 28.08., unabhängige Nachtests der Cybersicherheits-Benchmarks, oder eine erste EU-/Sovereignty-Einordnung.</p>
+          </article>
+        </section>
+
+        <section class="sidebar-block archive-panel">
+          <h3>Archivbezug</h3>
+          <article class="archive-item" data-id="daily-2026-08-14">
+            <span class="badge relation-type" data-ui-map="relation-type" data-raw-value="precedent">precedent</span>
+            <h4>Daily 2026-08-14: LiteLLM-Zugangsdaten weiterhin gültig</h4>
+            <p class="sidebar-meta">Vorheriges Daily (Fenster Freitag 14.08.) – letzter veröffentlichter Bericht vor diesem Lauf, mit den bis heute unveränderten LiteLLM- und ZAK-Fäden.</p>
+          </article>
+          <article class="archive-item" data-id="weekly-2026-w33">
+            <span class="badge relation-type" data-ui-map="relation-type" data-raw-value="recurring_theme">recurring_theme</span>
+            <h4>Weekly 2026-W33: Anthropic-Wasserzeichen, LiteLLM-Rückblick</h4>
+            <p class="sidebar-meta">Wochenrückblick vom 17.08. mit Wochensynthese zu LiteLLM/CloudSEK/Hudson Rock und offen gebliebener ZAK-Berufungsfrist.</p>
+          </article>
+          <article class="archive-item" data-id="daily-2026-08-11-gpt56cyber">
+            <span class="badge relation-type" data-ui-map="relation-type" data-raw-value="precedent">precedent</span>
+            <h4>Daily 2026-08-11: GPT-5.6-Cyber als Astra-Folgereaktion</h4>
+            <p class="sidebar-meta">OpenAIs vorherige Reaktion auf den ursprünglichen Astra-Pausierungsvorfall Anfang August; damals ohne bestätigten EU-Zugang im Unterschied zum GPT-5.5-Cyber-Präzedenzfall.</p>
+          </article>
+        </section>
+      </aside>
+    </section>
+  </main>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const labelMaps = {
+        category: {
+          regulation: 'Regulierung',
+          product: 'Produkte & Plattformen',
+          global_eu: 'Global mit EU-Impact',
+          enterprise_ai: 'Enterprise AI',
+          governance: 'Governance',
+          watchlist: 'Watchlist'
+        },
+        priority: {
+          P1: 'Sehr wichtig',
+          P2: 'Relevant',
+          P3: 'Kurz notiert'
+        },
+        trust: {
+          hoch: 'Hohe Quellenlage',
+          mittel: 'Mittlere Quellenlage',
+          niedrig: 'Niedrige Quellenlage',
+          gemischt: 'Gemischte Quellenlage',
+          watchlist: 'Watchlist'
+        },
+        role: {
+          faktenanker: 'Faktenanker',
+          policy_interpretation: 'Policy-Interpretation',
+          marktverifikation: 'Marktverifikation',
+          produktquelle: 'Produktquelle',
+          enterprise_signal: 'Enterprise-Signal',
+          'frühindikator': 'Frühindikator',
+          unternehmensquelle: 'Unternehmensquelle',
+          developer_dokumentation: 'Entwicklerdokumentation'
+        },
+        'source-type': {
+          official: 'Offizielle Quelle',
+          vendor: 'Anbieterquelle',
+          media: 'Medienbericht',
+          research: 'Research',
+          community: 'Community',
+          documentation: 'Dokumentation',
+          legal: 'Rechtstext'
+        },
+        'relation-type': {
+          follow_up: 'Follow-up',
+          recurring_theme: 'Wiederkehrendes Thema',
+          precedent: 'Präzedenzfall',
+          trendline: 'Trendlinie'
+        }
+      };
+
+      const mapLabel = (group, rawValue) => {
+        if (!rawValue) return '';
+        return (labelMaps[group] && labelMaps[group][rawValue]) || rawValue;
+      };
+
+      document.querySelectorAll('[data-ui-map]').forEach((element) => {
+        const group = element.dataset.uiMap;
+        const rawValue = element.dataset.rawValue || element.textContent.trim();
+        const mappedValue = mapLabel(group === 'overall-trust' ? 'trust' : group, rawValue);
+
+        if (group === 'overall-trust') {
+          element.textContent = `Status: ${mappedValue}`;
+          return;
+        }
+
+        element.textContent = mappedValue;
+      });
+
+      document.querySelectorAll('[data-derived-from-story]').forEach((element) => {
+        const rawValue = element.dataset.derivedFromStory;
+        element.textContent = rawValue === 'true' ? 'Aus Story-Quellen abgeleitet' : 'Eigenständig zusammengeführt';
+      });
+
+      document.querySelectorAll('.source-item').forEach((item) => {
+        const roleSummary = item.querySelector('[data-role-summary]');
+        const roleNodes = Array.from(item.querySelectorAll('[data-source-role]'));
+        const sourceCountNode = item.querySelector('[data-source-count]');
+        const uniqueRoles = [...new Set(roleNodes.map((node) => node.dataset.rawValue).filter(Boolean))];
+
+        if (sourceCountNode) sourceCountNode.textContent = String(roleNodes.length);
+
+        if (roleSummary) {
+          roleSummary.innerHTML = '';
+          uniqueRoles.forEach((role) => {
+            const pill = document.createElement('span');
+            pill.className = 'source-pill';
+            pill.textContent = mapLabel('role', role);
+            roleSummary.appendChild(pill);
+          });
+        }
+      });
+
+      const cards = Array.from(document.querySelectorAll('.priority-stories .story-card'));
+      const filterRow = document.getElementById('story-filter-row');
+      const emptyState = document.getElementById('story-filter-empty-state');
+      const categoryCounts = cards.reduce((acc, card) => {
+        const category = card.dataset.category;
+        if (!category) return acc;
+        acc[category] = (acc[category] || 0) + 1;
+        return acc;
+      }, {});
+
+      const createButton = (filter, label) => {
+        const button = document.createElement('button');
+        button.type = 'button';
+        button.className = 'filter-button';
+        button.dataset.filter = filter;
+        button.setAttribute('aria-pressed', 'false');
+        button.textContent = label;
+        return button;
+      };
+
+      Object.keys(categoryCounts).forEach((category) => {
+        const button = createButton(category, `${mapLabel('category', category)} · ${categoryCounts[category]}`);
+        filterRow.appendChild(button);
+      });
+
+      const buttons = Array.from(document.querySelectorAll('.filter-button'));
+
+      const applyFilter = (filter) => {
+        buttons.forEach((button) => {
+          const isActive = button.dataset.filter === filter;
+          button.classList.toggle('active', isActive);
+          button.setAttribute('aria-pressed', isActive ? 'true' : 'false');
+        });
+
+        let visibleCount = 0;
+        cards.forEach((card) => {
+          const isVisible = filter === 'all' || card.dataset.category === filter;
+          card.classList.toggle('is-filtered-out', !isVisible);
+          if (isVisible) visibleCount += 1;
+        });
+
+        if (emptyState) {
+          emptyState.classList.toggle('is-visible', visibleCount === 0);
+        }
+      };
+
+      buttons.forEach((button) => {
+        button.addEventListener('click', () => applyFilter(button.dataset.filter || 'all'));
+      });
+
+      applyFilter('all');
+    });
+  </script>
+</body>
+</html>
