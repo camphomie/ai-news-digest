@@ -1,0 +1,1119 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Intelligence Weekly – KW 34: KI-Brillen-Streit in Deutschland, EU-AI-Office in Bremen</title>
+  <style>
+    :root {
+      --bg: #eef3f9;
+      --bg-radial: radial-gradient(circle at top left, rgba(49, 91, 217, 0.14), transparent 32rem), radial-gradient(circle at top right, rgba(31, 122, 77, 0.10), transparent 28rem), #eef3f9;
+      --surface: #ffffff;
+      --surface-soft: #f7f9fd;
+      --surface-blue: #f1f5ff;
+      --text: #111b2e;
+      --muted: #66748c;
+      --muted-2: #8190a8;
+      --border: #d9e2ef;
+      --border-strong: #bfcae0;
+      --accent: #244ed8;
+      --accent-strong: #1739a8;
+      --accent-soft: #e8efff;
+      --success: #1f7a4d;
+      --success-soft: #e7f5ee;
+      --warning: #b26a00;
+      --warning-soft: #fff3dc;
+      --risk: #a63f3f;
+      --risk-soft: #fdecec;
+      --watch: #2563eb;
+      --watch-soft: #eaf1ff;
+      --shadow: 0 18px 45px rgba(17, 30, 58, 0.10);
+      --shadow-soft: 0 8px 24px rgba(17, 30, 58, 0.07);
+      --radius-xl: 26px;
+      --radius-lg: 18px;
+      --radius-md: 14px;
+      --radius-sm: 10px;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      padding: 34px;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--bg-radial);
+      color: var(--text);
+      line-height: 1.58;
+    }
+
+    h1, h2, h3, h4, p { margin: 0; }
+    h1 { max-width: 940px; font-size: clamp(32px, 5vw, 56px); line-height: 0.98; letter-spacing: -0.045em; }
+    h2 { font-size: clamp(22px, 3vw, 34px); line-height: 1.08; letter-spacing: -0.03em; }
+    h3 { font-size: 20px; line-height: 1.18; letter-spacing: -0.02em; }
+    h4 { font-size: 15px; line-height: 1.25; }
+    a { color: var(--accent-strong); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    .weekly-briefing {
+      max-width: 1220px;
+      margin: 0 auto;
+      display: grid;
+      gap: 24px;
+    }
+
+    .hero,
+    .executive-summary,
+    .weekly-assessment,
+    .theme-block,
+    .sidebar-block {
+      background: rgba(255, 255, 255, 0.92);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow-soft);
+      backdrop-filter: blur(12px);
+      min-width: 0;
+    }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      padding: 30px;
+      display: grid;
+      gap: 18px;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      height: 5px;
+      background: linear-gradient(90deg, #244ed8, #1f7a4d, #b26a00);
+      pointer-events: none;
+    }
+
+    .hero > * { position: relative; }
+
+    .eyebrow,
+    .story-kicker,
+    .section-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      line-height: 1;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-weight: 800;
+    }
+
+    .eyebrow::before,
+    .section-label::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 0 5px var(--accent-soft);
+      flex: 0 0 auto;
+    }
+
+    .weekly-summary,
+    .field-note,
+    .sidebar-meta {
+      color: var(--muted);
+    }
+
+    .weekly-summary {
+      max-width: 880px;
+      font-size: 17px;
+    }
+
+    .meta-row,
+    .story-meta,
+    .source-meta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .chip,
+    .badge,
+    .source-pill {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 800;
+      line-height: 1;
+      white-space: nowrap;
+    }
+
+    .chip {
+      padding: 9px 11px;
+      background: var(--accent-soft);
+      color: var(--accent-strong);
+      border: 1px solid rgba(36, 78, 216, 0.12);
+    }
+
+    .badge {
+      padding: 8px 10px;
+      border: 1px solid var(--border);
+      background: var(--surface-soft);
+      color: var(--muted);
+    }
+
+    .badge[data-trust="hoch"] { background: var(--success-soft); color: var(--success); border-color: rgba(31, 122, 77, 0.20); }
+    .badge[data-trust="mittel"], .badge[data-trust="gemischt"] { background: var(--warning-soft); color: var(--warning); border-color: rgba(178, 106, 0, 0.22); }
+    .badge[data-trust="niedrig"] { background: var(--risk-soft); color: var(--risk); border-color: rgba(166, 63, 63, 0.22); }
+    .badge[data-trust="watchlist"] { background: var(--watch-soft); color: var(--watch); border-color: rgba(37, 99, 235, 0.18); }
+
+    .main-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 2.05fr) minmax(300px, 0.95fr);
+      gap: 24px;
+      align-items: start;
+    }
+
+    .main-column,
+    .main-developments,
+    .sidebar,
+    .section-stack {
+      display: grid;
+      gap: 18px;
+      min-width: 0;
+    }
+
+    .executive-summary,
+    .weekly-assessment,
+    .theme-block,
+    .sidebar-block {
+      padding: 22px;
+      display: grid;
+      gap: 15px;
+    }
+
+    .weekly-assessment {
+      border-color: rgba(36, 78, 216, 0.24);
+      box-shadow: var(--shadow);
+    }
+
+    .story-header {
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      align-items: flex-start;
+      min-width: 0;
+    }
+
+    .story-title-block,
+    .story-text-stack {
+      display: grid;
+      gap: 8px;
+      min-width: 0;
+    }
+
+    .story-title-block h3,
+    .sidebar-block h3,
+    .sidebar-block h4 {
+      overflow-wrap: anywhere;
+    }
+
+    .takeaway,
+    .analysis-note {
+      border: 1px solid var(--border);
+      background: linear-gradient(180deg, #fbfcff, #f6f8fc);
+      border-radius: var(--radius-lg);
+      padding: 16px;
+      display: grid;
+      gap: 6px;
+    }
+
+    .takeaway strong,
+    .analysis-note strong {
+      font-size: 13px;
+      letter-spacing: 0.02em;
+    }
+
+    .score-strip {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 10px;
+      max-width: 100%;
+      min-width: 0;
+    }
+
+    .score-item {
+      --score: 1;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      background: var(--surface-soft);
+      padding: 12px;
+      display: grid;
+      gap: 8px;
+      min-height: 88px;
+      min-width: 0;
+      overflow: hidden;
+    }
+
+    .score-topline {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 6px;
+      min-width: 0;
+      max-width: 100%;
+    }
+
+    .score-value {
+      min-width: 0;
+      max-width: 100%;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      font-size: 24px;
+      line-height: 1;
+      font-weight: 900;
+      letter-spacing: -0.04em;
+    }
+
+    .score-max {
+      color: var(--muted-2);
+      font-size: 11px;
+      font-weight: 800;
+      flex: 0 0 auto;
+    }
+
+    .score-label {
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.15;
+      font-weight: 750;
+      overflow-wrap: anywhere;
+      hyphens: auto;
+    }
+
+    .meter {
+      width: 100%;
+      min-width: 0;
+      height: 7px;
+      border-radius: 999px;
+      background: #e4e9f2;
+      overflow: hidden;
+    }
+
+    .meter > span {
+      display: block;
+      height: 100%;
+      width: clamp(0%, calc(var(--score) * 20%), 100%);
+      max-width: 100%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, var(--accent), #1f7a4d);
+    }
+
+    .theme-block { box-shadow: var(--shadow-soft); }
+    .theme-block[data-category="regulation"] { border-left: 5px solid var(--accent); }
+    .theme-block[data-category="governance"] { border-left: 5px solid var(--success); }
+    .theme-block[data-category="enterprise_ai"] { border-left: 5px solid #5b5fd6; }
+    .theme-block[data-category="product"] { border-left: 5px solid #6b55c9; }
+    .theme-block[data-category="global_eu"] { border-left: 5px solid #2d8aa6; }
+    .theme-block[data-category="watchlist"] { border-left: 5px solid var(--watch); }
+
+    .sidebar-status-grid,
+    .compact-panel-summary,
+    .compact-panel-details,
+    .compact-role-row {
+      display: grid;
+      gap: 10px;
+    }
+
+    .sidebar-status-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .status-card {
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      background: var(--surface-soft);
+      padding: 12px;
+      display: grid;
+      gap: 5px;
+    }
+
+    .status-card-label {
+      font-size: 11px;
+      font-weight: 850;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--muted-2);
+    }
+
+    .status-card-value {
+      font-size: 14px;
+      font-weight: 800;
+      color: var(--text);
+    }
+
+    .compact-panel-stats {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .compact-source-list {
+      margin: 0;
+      padding-left: 18px;
+      color: var(--muted);
+      display: grid;
+      gap: 6px;
+    }
+
+    .compact-source-list a,
+    .compact-source-list .source-label-fallback {
+      font-weight: 750;
+    }
+
+    details.evidence {
+      border-top: 1px solid var(--border);
+      padding-top: 10px;
+    }
+
+    details.evidence summary,
+    .panel-item summary {
+      cursor: pointer;
+      list-style: none;
+      color: var(--accent-strong);
+      font-size: 13px;
+      font-weight: 850;
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      align-items: center;
+    }
+
+    details.evidence summary::-webkit-details-marker,
+    .panel-item summary::-webkit-details-marker { display: none; }
+
+    details.evidence summary::after,
+    .panel-item summary::after {
+      content: "+";
+      display: grid;
+      place-items: center;
+      width: 22px;
+      height: 22px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: var(--accent-strong);
+      font-size: 15px;
+      line-height: 1;
+      flex: 0 0 auto;
+    }
+
+    details.evidence[open] summary::after,
+    .panel-item details[open] summary::after { content: "–"; }
+
+    .sources {
+      margin-top: 10px;
+      display: grid;
+      gap: 8px;
+      padding: 12px;
+      border-radius: var(--radius-md);
+      background: var(--surface-soft);
+      border: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 13px;
+      min-width: 0;
+    }
+
+    .source-link-card {
+      display: grid;
+      gap: 7px;
+      padding: 10px;
+      border: 1px solid rgba(191, 202, 224, 0.75);
+      border-radius: var(--radius-sm);
+      background: #ffffff;
+      min-width: 0;
+    }
+
+    .source-link-card a,
+    .source-link-card .source-label-fallback {
+      font-weight: 850;
+      overflow-wrap: anywhere;
+    }
+
+    .source-label-fallback { color: var(--text); }
+
+    .source-pill {
+      align-self: start;
+      justify-self: start;
+      padding: 5px 7px;
+      border: 1px solid var(--border);
+      background: #eef2ff;
+      color: #3730a3;
+      font-size: 10.5px;
+      letter-spacing: 0.01em;
+    }
+
+    .source-meta {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 6px 10px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .source-meta span { overflow-wrap: anywhere; }
+    .source-meta strong { color: var(--text); }
+
+    .panel-item,
+    .archive-item {
+      border: 1px solid var(--border);
+      background: var(--surface-soft);
+      border-radius: var(--radius-md);
+      padding: 13px;
+      display: grid;
+      gap: 8px;
+      min-width: 0;
+    }
+
+    .panel-item { padding: 0; overflow: hidden; }
+    .panel-item details { padding: 12px 13px; }
+    .panel-item summary { color: var(--text); overflow-wrap: anywhere; }
+    .panel-detail {
+      margin-top: 9px;
+      display: grid;
+      gap: 8px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .archive-item .relation-type { justify-self: start; background: #eef2ff; color: #3730a3; }
+
+    @media (max-width: 980px) {
+      body { padding: 18px; }
+      .hero, .executive-summary, .weekly-assessment, .theme-block, .sidebar-block { border-radius: var(--radius-lg); }
+      .main-layout { grid-template-columns: 1fr; }
+      .score-strip {
+        grid-template-columns: repeat(5, minmax(78px, 1fr));
+        gap: 7px;
+        overflow-x: auto;
+        overflow-y: hidden;
+        padding-bottom: 2px;
+        scrollbar-width: thin;
+      }
+      .score-item { min-height: 58px; padding: 7px 8px; gap: 5px; }
+      .score-value { font-size: 16px; }
+      .score-max { font-size: 10px; }
+      .score-label { font-size: 10px; line-height: 1.1; }
+      .meter { height: 4px; }
+      .chip, .badge { padding: 6px 8px; font-size: 11px; }
+      .source-meta { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 560px) {
+      body { padding: 12px; }
+      .weekly-briefing { gap: 14px; }
+      .hero { padding: 22px; }
+      .story-header { display: grid; gap: 10px; }
+      .story-meta { gap: 7px; }
+      .score-strip { grid-template-columns: repeat(5, minmax(72px, 1fr)); }
+      .score-item { min-height: 54px; padding: 6px 7px; }
+      .score-value { font-size: 15px; }
+      .score-max { font-size: 10px; }
+      .score-label { font-size: 9.5px; }
+      .sources { padding: 10px; }
+      .source-link-card { padding: 9px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="weekly-briefing">
+    <section class="hero">
+      <div class="eyebrow">Weekly AI Intelligence Briefing</div>
+      <h1>AI Intelligence Weekly – KW 34: KI-Brillen-Streit in Deutschland, EU-AI-Office in Bremen</h1>
+      <p class="weekly-summary">Ein sehr dünnes Wochenende ohne neue EU-KI-Story: Diese Weekly holt einen liegengebliebenen Fund nach – HateAid zeigt Meta wegen KI-Brillen an, die Bundesnetzagentur sieht keinen Verbotsgrund. Dazu: EU-AI-Office-Auftritt in Bremen, ChatGPT-Ads-Details vor dem EU-Start, dritte Woche Schweigen bei LiteLLM.</p>
+      <div class="meta-row">
+        <span class="chip">Woche: 17. – 23. August 2026 (KW 34)</span>
+        <span class="chip">Fokus: Deutschland / EU</span>
+        <span class="badge" data-trust="gemischt" data-ui-map="weekly-trust" data-raw-value="gemischt">Vertrauensbild: gemischt</span>
+        <span class="chip">Leitmuster: KI-Wearables als neues Aufsichtsfeld</span>
+      </div>
+    </section>
+
+    <section class="main-layout">
+      <section class="main-column">
+        <article class="executive-summary">
+          <div class="section-label">Executive Summary</div>
+          <h2>Wöchentliche Lage in Kürze</h2>
+          <p class="field-note">Kein bestätigtes, wochenend-datiertes EU-KI-Ereignis trotz breiter Recherche. Stattdessen ein Nachtrag: HateAid erstattete am 12.08. Strafanzeige gegen Meta wegen der Ray-Ban-Meta-Brille, die Bundesnetzagentur sieht am 15.08. wegen der LED-Anzeige keinen Verbotsgrund – gegensätzliche Lesarten derselben Vorschrift. Auf der IJCAI-ECAI 2026 in Bremen erläuterte die Kommission erstmals ihre Art.-14-Auslegung. Details zum ChatGPT-Werbestart (31 Märkte, irische Aufsicht) ergänzen die bereits gemeldete Ankündigung. Bei EN 18286, ZAK-Berufung, &#x27;Schrems III&#x27; und Foundry-EU-Zone keine Bewegung. LiteLLM/TeamPCP bleibt dritte Woche ohne Firmenreaktion – bewusst nur Watchlist.</p>
+        </article>
+
+        <article class="weekly-assessment">
+          <div class="section-label">Wocheneinschätzung</div>
+          <h2>KI-Wearables als neues Aufsichtsfeld</h2>
+          <p class="field-note">Eine der dünnsten Wochen dieses Berichtszeitraums: kein neues Kernereignis, aber ein aufschlussreicher Nachtrag zur Aufsicht über KI-Wearables und eine seltene inhaltliche Konkretisierung der Kommission zur menschlichen Aufsicht.</p>
+          <div class="score-strip">
+            <div class="score-item" style="--score: 4"><div class="score-topline"><span class="score-value">4</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">EU / DE-Relevanz</div></div>
+            <div class="score-item" style="--score: 3"><div class="score-topline"><span class="score-value">3</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Business Impact</div></div>
+            <div class="score-item" style="--score: 3"><div class="score-topline"><span class="score-value">3</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Regulatorik</div></div>
+            <div class="score-item" style="--score: 2"><div class="score-topline"><span class="score-value">2</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Technologie</div></div>
+            <div class="score-item" style="--score: 3"><div class="score-topline"><span class="score-value">3</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Lernwert</div></div>
+          </div>
+        </article>
+
+        <section class="main-developments">
+          <div class="section-label">Hauptentwicklungen der Woche</div>
+          <article class="theme-block" data-id="wk34-meta-glasses-hateaid-bnetza" data-category="governance">
+            <div class="story-header">
+              <div class="story-title-block">
+                <div class="story-kicker">DATENSCHUTZ / KI-HARDWARE</div>
+                <h3>KI-Brillen-Streit: HateAid zeigt Meta an, Bundesnetzagentur sieht keinen Verbotsgrund</h3>
+              </div>
+              <div class="story-meta">
+                <span class="chip" data-ui-map="category" data-raw-value="governance">governance</span>
+                <span class="chip" data-ui-map="priority" data-raw-value="P1">P1</span>
+              </div>
+            </div>
+            <div class="story-text-stack">
+              <p class="field-note"><strong>Thema:</strong> Aufsicht über KI-fähige Aufnahme-Wearables</p>
+              <p>Nachtrag: HateAid erstattete am 12.08. bei der Frankfurter ZIT Strafanzeige gegen Meta, Ray-Ban, Oakley und vier Optikhändler wegen der Ray-Ban-Meta-Brille (§8 TDDDG). Die Bundesnetzagentur sieht laut Stellungnahme vom 15.08. keinen Verbotsgrund: die LED-Anzeige mache Aufnahmen erkennbar; ein Verfahren läuft nicht.</p>
+              <p class="field-note"><strong>Strategische Relevanz:</strong> Erste konkrete Rechtsauslegungs-Kontroverse zu KI-fähigen Aufnahme-Wearables in Deutschland: Zivilgesellschaft und Regulierer lesen dieselbe Vorschrift (§8 TDDDG) gegensätzlich.</p>
+              <p class="field-note"><strong>EU-/DE-Impact:</strong> Direkt, national: testet die Reichweite des TDDDG bei KI-Wearables und liefert ein Präzedenzsignal für andere Landesbehörden und EU-Staaten mit ähnlichen Produkten.</p>
+              <p class="field-note"><strong>Einordnung:</strong> Ein LED-Signal reicht der Bundesnetzagentur aktuell als Transparenzmaßnahme – HateAid hält genau das für unzureichend. Der Streit ist juristisch offen, keine Seite hat vor Gericht gewonnen.</p>
+            </div>
+            <div class="score-strip">
+              <div class="score-item" style="--score: 4"><div class="score-topline"><span class="score-value">4</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">EU / DE-Relevanz</div></div>
+              <div class="score-item" style="--score: 3"><div class="score-topline"><span class="score-value">3</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Business Impact</div></div>
+              <div class="score-item" style="--score: 4"><div class="score-topline"><span class="score-value">4</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Regulatorik</div></div>
+              <div class="score-item" style="--score: 2"><div class="score-topline"><span class="score-value">2</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Technologie</div></div>
+              <div class="score-item" style="--score: 4"><div class="score-topline"><span class="score-value">4</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Lernwert</div></div>
+            </div>
+            <details class="evidence">
+              <summary>Quellen & Unsicherheit</summary>
+              <div class="sources">
+                <p class="field-note"><strong>Quellenlage:</strong> <span data-ui-map="trust" data-raw-value="mittel">mittel</span></p>
+                <article class="source-link-card">
+                  <a href="https://hateaid.org/en/criminal-complaint-against-meta-over-smart-glasses/" target="_blank" rel="noopener noreferrer">Big Brother is watching: HateAid files Criminal Complaint against Meta over Smart Glasses</a>
+                  <div class="source-meta-row">
+                    <span class="source-pill" data-ui-map="role" data-raw-value="faktenanker">faktenanker</span>
+                    <span class="source-pill" data-ui-map="source-type" data-raw-value="legal">legal</span>
+                  </div>
+                  <div class="source-meta">
+                    <span><strong>Publisher:</strong> HateAid</span>
+                    <span><strong>Veröffentlicht:</strong> 2026-08-12</span>
+                    <span><strong>Abgerufen:</strong> 2026-08-24</span>
+                  </div>
+                </article>
+                <article class="source-link-card">
+                  <a href="https://www.heise.de/news/Smart-Glasses-Bundesnetzagentur-verfolgt-kein-Verbot-von-Metas-Kamera-Brille-11415153.html" target="_blank" rel="noopener noreferrer">Kein Verbot für Meta-Brillen: Behörde sieht LED-Signal als ausreichend</a>
+                  <div class="source-meta-row">
+                    <span class="source-pill" data-ui-map="role" data-raw-value="enterprise_signal">enterprise_signal</span>
+                    <span class="source-pill" data-ui-map="source-type" data-raw-value="media">media</span>
+                  </div>
+                  <div class="source-meta">
+                    <span><strong>Publisher:</strong> heise online</span>
+                    <span><strong>Veröffentlicht:</strong> 2026-08-15</span>
+                    <span><strong>Abgerufen:</strong> 2026-08-24</span>
+                  </div>
+                </article>
+                <p class="field-note"><strong>Unsicherheit:</strong> BNetzA-Position ist über heise (Klasse A) direkt bestätigt; HateAids rechtliche Bewertung ist deren eigene Position, kein Gerichtsurteil – der Streit ist ungeklärt.</p>
+              </div>
+            </details>
+            <details class="evidence">
+              <summary>Weitere Recherche</summary>
+              <div class="sources">
+                <p class="field-note">Eröffnet die Staatsanwaltschaft ein Ermittlungsverfahren aufgrund der HateAid-Anzeige, äußert sich Meta dazu, oder ziehen weitere Landesdatenschutzbehörden nach?</p>
+              </div>
+            </details>
+          </article>
+          <article class="theme-block" data-id="wk34-ijcai-ecai-delfos-ai-act" data-category="regulation">
+            <div class="story-header">
+              <div class="story-title-block">
+                <div class="story-kicker">AI ACT / UMSETZUNG</div>
+                <h3>EU-Kommission auf KI-Weltkongress in Bremen: &#x27;Von der Gesetzgebung zur Umsetzung&#x27;</h3>
+              </div>
+              <div class="story-meta">
+                <span class="chip" data-ui-map="category" data-raw-value="regulation">regulation</span>
+                <span class="chip" data-ui-map="priority" data-raw-value="P2">P2</span>
+              </div>
+            </div>
+            <div class="story-text-stack">
+              <p class="field-note"><strong>Thema:</strong> AI-Act-Praxis auf der IJCAI-ECAI 2026</p>
+              <p>Bei einer AI-Act-Session der IJCAI-ECAI 2026 in Bremen betonte EU-Kommissionsvertreter Jeroen Delfos (DG CNECT) den Übergang von der Gesetzgebung zur Umsetzung. Klarstellung: Art. 14 (menschliche Aufsicht) verlangt kein Eingreifen bei jedem Schritt, nur eine Systemauslegung mit Überwachungs- und Eingriffsmöglichkeit.</p>
+              <p class="field-note"><strong>Strategische Relevanz:</strong> Schließt einen seit 17.08. offenen Watchlist-Punkt: erster inhaltlicher Beleg, wie die Kommission Art.-14-Pflichten auslegt, außerhalb offizieller Leitlinien.</p>
+              <p class="field-note"><strong>EU-/DE-Impact:</strong> Direkt: liefert Compliance-Teams eine erste inoffizielle Konkretisierung der Aufsichtspflicht nach Art. 14 AI Act für Deployer von Hochrisiko-Systemen in Deutschland/EU.</p>
+              <p class="field-note"><strong>Einordnung:</strong> Menschliche Aufsicht heißt laut Kommission Gestaltung für Eingriffsmöglichkeit, nicht Dauerkontrolle jedes Schritts – eine praktische, aber inoffizielle Auslegungshilfe.</p>
+            </div>
+            <div class="score-strip">
+              <div class="score-item" style="--score: 4"><div class="score-topline"><span class="score-value">4</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">EU / DE-Relevanz</div></div>
+              <div class="score-item" style="--score: 2"><div class="score-topline"><span class="score-value">2</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Business Impact</div></div>
+              <div class="score-item" style="--score: 4"><div class="score-topline"><span class="score-value">4</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Regulatorik</div></div>
+              <div class="score-item" style="--score: 2"><div class="score-topline"><span class="score-value">2</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Technologie</div></div>
+              <div class="score-item" style="--score: 4"><div class="score-topline"><span class="score-value">4</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Lernwert</div></div>
+            </div>
+            <details class="evidence">
+              <summary>Quellen & Unsicherheit</summary>
+              <div class="sources">
+                <p class="field-note"><strong>Quellenlage:</strong> <span data-ui-map="trust" data-raw-value="mittel">mittel</span></p>
+                <article class="source-link-card">
+                  <a href="https://gi.de/meldung/ijcai-2026-daily-reporting" target="_blank" rel="noopener noreferrer">IJCAI 2026: Daily Reporting from the Conference</a>
+                  <div class="source-meta-row">
+                    <span class="source-pill" data-ui-map="role" data-raw-value="policy_interpretation">policy_interpretation</span>
+                    <span class="source-pill" data-ui-map="source-type" data-raw-value="community">community</span>
+                  </div>
+                  <div class="source-meta">
+                    <span><strong>Publisher:</strong> Gesellschaft für Informatik</span>
+                    <span><strong>Veröffentlicht:</strong> nicht angegeben</span>
+                    <span><strong>Abgerufen:</strong> 2026-08-24</span>
+                  </div>
+                </article>
+                <article class="source-link-card">
+                  <a href="https://www.techtimes.com/articles/324425/20260814/eu-ai-act-enforcer-joins-ijcai-ecai-2026-worlds-oldest-ai-conference-opens-saturday.htm" target="_blank" rel="noopener noreferrer">EU AI Act Enforcer Joins IJCAI-ECAI 2026 as World&#x27;s Oldest AI Conference Opens Saturday</a>
+                  <div class="source-meta-row">
+                    <span class="source-pill" data-ui-map="role" data-raw-value="enterprise_signal">enterprise_signal</span>
+                    <span class="source-pill" data-ui-map="source-type" data-raw-value="media">media</span>
+                  </div>
+                  <div class="source-meta">
+                    <span><strong>Publisher:</strong> Tech Times</span>
+                    <span><strong>Veröffentlicht:</strong> 2026-08-14</span>
+                    <span><strong>Abgerufen:</strong> 2026-08-24</span>
+                  </div>
+                </article>
+                <p class="field-note"><strong>Unsicherheit:</strong> Einzige inhaltliche Quelle ist die Konferenzberichterstattung der Gesellschaft für Informatik, kein Kommissions-Originaltext oder zweite unabhängige inhaltliche Bestätigung.</p>
+              </div>
+            </details>
+            <details class="evidence">
+              <summary>Weitere Recherche</summary>
+              <div class="sources">
+                <p class="field-note">Veröffentlicht die Kommission diese Auslegung als förmliche Leitlinie, und äußert sich das AI Office zu SME-/Hochschul-Erleichterungen, die Delfos in Bremen ankündigte?</p>
+              </div>
+            </details>
+          </article>
+          <article class="theme-block" data-id="wk34-chatgpt-ads-eu-launch-mechanics" data-category="regulation">
+            <div class="story-header">
+              <div class="story-title-block">
+                <div class="story-kicker">PRODUKT / DATENSCHUTZ</div>
+                <h3>ChatGPT-Werbung: Details vor EU-Start – 31 Märkte, irische Aufsicht federführend</h3>
+              </div>
+              <div class="story-meta">
+                <span class="chip" data-ui-map="category" data-raw-value="regulation">regulation</span>
+                <span class="chip" data-ui-map="priority" data-raw-value="P3">P3</span>
+              </div>
+            </div>
+            <div class="story-text-stack">
+              <p class="field-note"><strong>Thema:</strong> Konsens-first-Design vor dem EU-Anlauf</p>
+              <p>Ergänzung zur Ankündigung vom 19.08.: Die 31 Märkte des ChatGPT-Werbestarts am 24.08. sind die 27 EU-Staaten plus Norwegen, Island, Liechtenstein und die Schweiz. Federführende Aufsicht ist die irische DPC, da OpenAI Ireland Limited als Verantwortlicher fungiert. Werbetreibende erhalten laut OpenAI keine Chatinhalte, nur aggregierte Kennzahlen.</p>
+              <p class="field-note"><strong>Strategische Relevanz:</strong> Präzisiert die bereits gemeldete Ankündigung um die konkrete Aufsichtszuständigkeit und den Länderkreis – wichtig zur Einordnung, sobald der Start am 24.08. tatsächlich erfolgt.</p>
+              <p class="field-note"><strong>EU-/DE-Impact:</strong> Direkt: die irische DPC wird zur zentralen Ansprechstelle für DSGVO-Fragen rund um ChatGPT-Werbung in der gesamten EU/EWR, nicht nur für Deutschland.</p>
+              <p class="field-note"><strong>Einordnung:</strong> Die irische DPC hat sich öffentlich noch nicht dazu geäußert, ob dieses Werbemodell die Einwilligungsanforderungen erfüllt – das bleibt der eigentliche Prüfstein, nicht die Ankündigung selbst.</p>
+            </div>
+            <div class="score-strip">
+              <div class="score-item" style="--score: 4"><div class="score-topline"><span class="score-value">4</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">EU / DE-Relevanz</div></div>
+              <div class="score-item" style="--score: 3"><div class="score-topline"><span class="score-value">3</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Business Impact</div></div>
+              <div class="score-item" style="--score: 3"><div class="score-topline"><span class="score-value">3</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Regulatorik</div></div>
+              <div class="score-item" style="--score: 1"><div class="score-topline"><span class="score-value">1</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Technologie</div></div>
+              <div class="score-item" style="--score: 3"><div class="score-topline"><span class="score-value">3</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Lernwert</div></div>
+            </div>
+            <details class="evidence">
+              <summary>Quellen & Unsicherheit</summary>
+              <div class="sources">
+                <p class="field-note"><strong>Quellenlage:</strong> <span data-ui-map="trust" data-raw-value="mittel">mittel</span></p>
+                <article class="source-link-card">
+                  <a href="https://www.euronews.com/next/2026/08/21/chatgpt-to-start-showing-ads-across-europe-next-week" target="_blank" rel="noopener noreferrer">ChatGPT to start showing ads across Europe next week</a>
+                  <div class="source-meta-row">
+                    <span class="source-pill" data-ui-map="role" data-raw-value="enterprise_signal">enterprise_signal</span>
+                    <span class="source-pill" data-ui-map="source-type" data-raw-value="media">media</span>
+                  </div>
+                  <div class="source-meta">
+                    <span><strong>Publisher:</strong> Euronews</span>
+                    <span><strong>Veröffentlicht:</strong> 2026-08-21</span>
+                    <span><strong>Abgerufen:</strong> 2026-08-24</span>
+                  </div>
+                </article>
+                <article class="source-link-card">
+                  <a href="https://www.techtimes.com/articles/325091/20260820/chatgpt-ads-reach-europe-monday-opting-out-changes-which-ads-you-see-not-whether-you-see-them.htm" target="_blank" rel="noopener noreferrer">ChatGPT Ads Reach Europe Monday: Opting Out Changes Which Ads You See, Not Whether You See Them</a>
+                  <div class="source-meta-row">
+                    <span class="source-pill" data-ui-map="role" data-raw-value="enterprise_signal">enterprise_signal</span>
+                    <span class="source-pill" data-ui-map="source-type" data-raw-value="media">media</span>
+                  </div>
+                  <div class="source-meta">
+                    <span><strong>Publisher:</strong> Tech Times</span>
+                    <span><strong>Veröffentlicht:</strong> 2026-08-20</span>
+                    <span><strong>Abgerufen:</strong> 2026-08-24</span>
+                  </div>
+                </article>
+                <p class="field-note"><strong>Unsicherheit:</strong> Details stammen aus Sekundärquellen (Euronews, TechTimes); der Start selbst (24.08.) liegt außerhalb dieses Berichtsfensters, eine DPC-Reaktion liegt noch nicht vor.</p>
+              </div>
+            </details>
+            <details class="evidence">
+              <summary>Weitere Recherche</summary>
+              <div class="sources">
+                <p class="field-note">Äußert sich die irische DPC nach dem tatsächlichen Start am 24.08. zur Einwilligungskonformität, und gibt es erste Reaktionen oder Beschwerden aus EU-Mitgliedstaaten?</p>
+              </div>
+            </details>
+          </article>
+        </section>
+      </section>
+
+      <aside class="sidebar">
+        <section class="sidebar-block">
+          <h3>Wochenlage</h3>
+          <p class="sidebar-meta">Ein sehr dünnes Wochenende ohne neue EU-KI-Story: Diese Weekly holt einen liegengebliebenen Fund nach – HateAid zeigt Meta wegen KI-Brillen an, die Bundesnetzagentur sieht keinen Verbotsgrund. Dazu: EU-AI-Office-Auftritt in Bremen, ChatGPT-Ads-Details vor dem EU-Start, dritte Woche Schweigen bei LiteLLM.</p>
+          <div class="sidebar-status-grid">
+            <div class="status-card">
+              <span class="status-card-label">Woche</span>
+              <span class="status-card-value">17. – 23. August 2026 (KW 34)</span>
+            </div>
+            <div class="status-card">
+              <span class="status-card-label">Quellenlage</span>
+              <span class="status-card-value" data-ui-map="trust" data-raw-value="gemischt">gemischt</span>
+            </div>
+          </div>
+        </section>
+
+        <section class="sidebar-block regulation-panel">
+          <h3>Regulatorik</h3>
+          <article class="panel-item regulation-item" data-id="wk34-en18286-status" data-category="regulation">
+            <details>
+              <summary>EN 18286: Amtsblatt-Zitierung bleibt weiter aus</summary>
+              <div class="panel-detail compact-panel-details">
+                <div class="compact-panel-summary">
+                  <div class="story-meta"><span class="badge" data-trust="hoch" data-ui-map="trust" data-raw-value="hoch">hoch</span></div>
+                  <div class="compact-panel-stats">
+                    <span class="chip">Quellen: <span data-source-count>0</span></span>
+                    <span class="chip">Rollen</span>
+                  </div>
+                  <div class="compact-role-row" data-role-summary></div>
+                </div>
+                <p>Die Kommissions-Normungsseite listet EN 18286 unverändert nur als Entwurf &#x27;prEN&#x27;, ohne Amtsblatt-Zitierung – trotz CEN-CENELECs bestätigter Freigabe (12.07.) und Mitgliederverteilung (22.07.).</p>
+                <p><strong>EU-/DE-Impact:</strong> Direkt für Zertifizierungs-/Assurance-Beratung: ohne Amtsblatt-Zitierung entsteht weiterhin keine Konformitätsvermutung für Hochrisiko-Anbieter.</p>
+                <div class="sources">
+                  <ol class="compact-source-list">
+                  <li>
+                    <a href="https://digital-strategy.ec.europa.eu/en/policies/ai-act-standardisation" target="_blank" rel="noopener noreferrer">Standardisation of the AI Act</a>
+                    <div class="source-meta-row"><span class="source-pill" data-ui-map="role" data-raw-value="faktenanker" data-source-role>faktenanker</span></div>
+                  </li>
+                  </ol>
+                </div>
+              </div>
+            </details>
+          </article>
+          <article class="panel-item regulation-item" data-id="wk34-zak-appeal-status" data-category="regulation">
+            <details>
+              <summary>ZAK/Google: Berufungsstatus weiterhin ungeklärt</summary>
+              <div class="panel-detail compact-panel-details">
+                <div class="compact-panel-summary">
+                  <div class="story-meta"><span class="badge" data-trust="mittel" data-ui-map="trust" data-raw-value="mittel">mittel</span></div>
+                  <div class="compact-panel-stats">
+                    <span class="chip">Quellen: <span data-source-count>0</span></span>
+                    <span class="chip">Rollen</span>
+                  </div>
+                  <div class="compact-role-row" data-role-summary></div>
+                </div>
+                <p>Google kündigte nach der ZAK-Entscheidung (14.07.) sofort Berufung an; eine tatsächliche Einreichung ist auch mehr als eine Woche nach Fristablauf (14.08.) nicht öffentlich dokumentiert.</p>
+                <p><strong>EU-/DE-Impact:</strong> Direkt, national: der rechtliche Bestand von ZAKs Einstufung von KI-Suchfunktionen als eigene Inhalte bleibt ungeklärt, mit Präzedenzwirkung für andere Anbieter.</p>
+                <div class="sources">
+                  <ol class="compact-source-list">
+                  <li>
+                    <a href="https://www.ad-hoc-news.de/wirtschaft/ki-suchmaschinen-zak-stuft-google-und-perplexity-als-inhalteanbieter-ein/69768077" target="_blank" rel="noopener noreferrer">KI-Suchmaschinen: ZAK stuft Google und Perplexity als Inhalteanbieter ein</a>
+                    <div class="source-meta-row"><span class="source-pill" data-ui-map="role" data-raw-value="policy_interpretation" data-source-role>policy_interpretation</span></div>
+                  </li>
+                  </ol>
+                </div>
+              </div>
+            </details>
+          </article>
+          <article class="panel-item regulation-item" data-id="wk34-schrems-iii-latombe" data-category="regulation">
+            <details>
+              <summary>noyb &#x27;Schrems III&#x27; weiterhin nicht eingereicht, Latombe-Verfahren läuft separat weiter</summary>
+              <div class="panel-detail compact-panel-details">
+                <div class="compact-panel-summary">
+                  <div class="story-meta"><span class="badge" data-trust="mittel" data-ui-map="trust" data-raw-value="mittel">mittel</span></div>
+                  <div class="compact-panel-stats">
+                    <span class="chip">Quellen: <span data-source-count>0</span></span>
+                    <span class="chip">Rollen</span>
+                  </div>
+                  <div class="compact-role-row" data-role-summary></div>
+                </div>
+                <p>noybs angekündigte Klage gegen den DPF-Angemessenheitsbeschluss ist weiterhin nicht eingereicht. Der unabhängige, bereits beim EuGH anhängige Fall Latombe (C-703/25 P) hat noch keinen Verhandlungstermin.</p>
+                <p><strong>EU-/DE-Impact:</strong> Direkt, EU-weit: beide Verfahren könnten die Rechtsgrundlage für EU-US-Datentransfers – auch für viele KI-Dienste – infrage stellen, sind aber rechtlich getrennt zu behandeln.</p>
+                <div class="sources">
+                  <ol class="compact-source-list">
+                  <li>
+                    <a href="https://noyb.eu/en/project/eu-us-transfers" target="_blank" rel="noopener noreferrer">noyb – EU-US Transfers Projektseite</a>
+                    <div class="source-meta-row"><span class="source-pill" data-ui-map="role" data-raw-value="faktenanker" data-source-role>faktenanker</span></div>
+                  </li>
+                  </ol>
+                </div>
+              </div>
+            </details>
+          </article>
+          <article class="panel-item regulation-item" data-id="wk34-claude-foundry-eu-zone" data-category="regulation">
+            <details>
+              <summary>Claude auf Microsoft Foundry: weiterhin keine EU-Datenzone</summary>
+              <div class="panel-detail compact-panel-details">
+                <div class="compact-panel-summary">
+                  <div class="story-meta"><span class="badge" data-trust="hoch" data-ui-map="trust" data-raw-value="hoch">hoch</span></div>
+                  <div class="compact-panel-stats">
+                    <span class="chip">Quellen: <span data-source-count>0</span></span>
+                    <span class="chip">Rollen</span>
+                  </div>
+                  <div class="compact-role-row" data-role-summary></div>
+                </div>
+                <p>Acht Wochen nach GA bietet Foundry für Claude weiterhin nur Global-/US-Datenzonen; Anthropics Compliance-Seite nennt für die EU-Zone unverändert nur &#x27;Coming 2026&#x27; ohne festes Datum.</p>
+                <p><strong>EU-/DE-Impact:</strong> Direkt: europäische Foundry-Kunden mit Datenresidenzpflichten können Claude dort weiterhin nicht regelkonform nutzen.</p>
+                <div class="sources">
+                  <ol class="compact-source-list">
+                  <li>
+                    <a href="https://learn.microsoft.com/en-us/answers/questions/5867930/timeline-for-claude-in-microsoft-foundry-to-run-on" target="_blank" rel="noopener noreferrer">Timeline for Claude in Microsoft Foundry to run on Azure EU infrastructure</a>
+                    <div class="source-meta-row"><span class="source-pill" data-ui-map="role" data-raw-value="developer_dokumentation" data-source-role>developer_dokumentation</span></div>
+                  </li>
+                  </ol>
+                </div>
+              </div>
+            </details>
+          </article>
+        </section>
+
+        <section class="sidebar-block product-panel">
+          <h3>Produkte & Plattformen</h3>
+        </section>
+
+        <section class="sidebar-block global-panel">
+          <h3>Global mit EU-Impact</h3>
+        </section>
+
+        <section class="sidebar-block watchlist-archive-panel">
+          <h3>Watchlist & Archiv</h3>
+          <div class="section-stack watchlist">
+            <article class="panel-item watch-item" data-id="wk34-litellm-continued-silence">
+              <details>
+                <summary>LiteLLM-Betroffene schweigen auch in dritter Woche</summary>
+                <div class="panel-detail compact-panel-details">
+                  <div class="compact-panel-summary">
+                    <div class="story-meta"><span class="badge" data-trust="watchlist" data-ui-map="trust" data-raw-value="watchlist">watchlist</span></div>
+                    <div class="compact-panel-stats">
+                      <span class="chip">Quellen: <span data-source-count>0</span></span>
+                      <span class="chip">Rollen</span>
+                    </div>
+                    <div class="compact-role-row" data-role-summary></div>
+                  </div>
+                  <p>Auch diese Woche äußerte sich keine der von CloudSEK/Hudson Rock genannten Firmen (Siemens, VW, Deutsche Bahn, Orange, TomTom, BT Group) zum LiteLLM/TeamPCP-Datenleck; keine neue unabhängige Forschung.</p>
+                  <p><strong>Warum beobachten:</strong> Dritte Woche ohne jede Firmenreaktion verstärkt die Frage, ob überhaupt eine offizielle Aufarbeitung erfolgt.</p>
+                  <p><strong>Nächstes Signal:</strong> Eine offizielle Stellungnahme einer genannten Firma oder eine Meldung an eine Datenschutzbehörde.</p>
+                  <div class="sources">
+                    <ol class="compact-source-list">
+                    <li>
+                      <a href="https://www.cloudsek.com/blog/ai-supply-chain-breach-2500-companies-434000-cicd-pipelines" target="_blank" rel="noopener noreferrer">2,500+ Companies and 434,000 CI/CD Pipelines Exposed in the Largest AI Supply Chain Breach of 2026</a>
+                      <div class="source-meta-row"><span class="source-pill" data-ui-map="role" data-raw-value="enterprise_signal" data-source-role>enterprise_signal</span></div>
+                    </li>
+                    </ol>
+                  </div>
+                </div>
+              </details>
+            </article>
+            <article class="panel-item watch-item" data-id="wk34-glm53-cyber-capability">
+              <details>
+                <summary>Z.ai veröffentlicht GLM-5.3 mit selbst attestierter, schnell wachsender Cyber-Fähigkeit</summary>
+                <div class="panel-detail compact-panel-details">
+                  <div class="compact-panel-summary">
+                    <div class="story-meta"><span class="badge" data-trust="watchlist" data-ui-map="trust" data-raw-value="watchlist">watchlist</span></div>
+                    <div class="compact-panel-stats">
+                      <span class="chip">Quellen: <span data-source-count>0</span></span>
+                      <span class="chip">Rollen</span>
+                    </div>
+                    <div class="compact-role-row" data-role-summary></div>
+                  </div>
+                  <p>GLM-5.3 (API live seit 18.08.) erreicht laut Z.ai höhere Cyber-Benchmarks als GLM-5.2 (CyberGym 84,5%); Gewichte sollen erst um den 28.08. erscheinen. Keine EU-Reaktion oder EU-Bezug gefunden.</p>
+                  <p><strong>Warum beobachten:</strong> Ähnliches Muster wie bei OpenAIs Astra-Pause (&#x27;Cyber-Fähigkeit wächst schneller als erwartet&#x27;), diesmal bei einem offenen chinesischen Modell.</p>
+                  <p><strong>Nächstes Signal:</strong> Die tatsächliche Gewichte-Veröffentlichung (~28.08.) oder eine EU-/deutsche Reaktion.</p>
+                  <div class="sources">
+                    <ol class="compact-source-list">
+                    <li>
+                      <a href="https://www.unite.ai/z-ai-launches-glm-5-3-with-frontier-coding-and-a-cyber-capability-that-outgrew-its-training/" target="_blank" rel="noopener noreferrer">Z.ai Launches GLM-5.3 With Frontier Coding and a Cyber Capability That Outgrew Its Training</a>
+                      <div class="source-meta-row"><span class="source-pill" data-ui-map="role" data-raw-value="frühindikator" data-source-role>frühindikator</span></div>
+                    </li>
+                    </ol>
+                  </div>
+                </div>
+              </details>
+            </article>
+            <article class="panel-item watch-item" data-id="wk34-anthropic-ipo-reporting">
+              <details>
+                <summary>Berichte über möglichen Anthropic-Börsengang im Oktober</summary>
+                <div class="panel-detail compact-panel-details">
+                  <div class="compact-panel-summary">
+                    <div class="story-meta"><span class="badge" data-trust="watchlist" data-ui-map="trust" data-raw-value="watchlist">watchlist</span></div>
+                    <div class="compact-panel-stats">
+                      <span class="chip">Quellen: <span data-source-count>0</span></span>
+                      <span class="chip">Rollen</span>
+                    </div>
+                    <div class="compact-role-row" data-role-summary></div>
+                  </div>
+                  <p>Medien (Fortune, Forbes, seit 13.08.) berichten über Investoren-Erwartungen an einen Anthropic-Börsengang mit ~2 Billionen US-Dollar Zielbewertung im Oktober. Kein EU-Investor oder AI-Act-Bezug gefunden.</p>
+                  <p><strong>Warum beobachten:</strong> Ein Börsengang dieser Größenordnung würde Governance- und Transparenzerwartungen an einen zentralen EU-AI-Act-GPAI-Anbieter erhöhen.</p>
+                  <p><strong>Nächstes Signal:</strong> Eine tatsächliche S-1-Einreichung oder eine EU-institutionelle bzw. -investorbezogene Bestätigung.</p>
+                  <div class="sources">
+                    <ol class="compact-source-list">
+                    <li>
+                      <a href="https://fortune.com/2026/08/13/anthropic-ipo-2-trillion-october-largest-ever-spacex/" target="_blank" rel="noopener noreferrer">Anthropic reportedly plans a $2 trillion IPO in October—the largest ever—that will eclipse SpaceX</a>
+                      <div class="source-meta-row"><span class="source-pill" data-ui-map="role" data-raw-value="marktverifikation" data-source-role>marktverifikation</span></div>
+                    </li>
+                    </ol>
+                  </div>
+                </div>
+              </details>
+            </article>
+            <article class="panel-item watch-item" data-id="wk34-gigafactories-tender-candidates">
+              <details>
+                <summary>EU-KI-Gigafactories: Bewerberkreis unverändert vor Fristablauf</summary>
+                <div class="panel-detail compact-panel-details">
+                  <div class="compact-panel-summary">
+                    <div class="story-meta"><span class="badge" data-trust="mittel" data-ui-map="trust" data-raw-value="mittel">mittel</span></div>
+                    <div class="compact-panel-stats">
+                      <span class="chip">Quellen: <span data-source-count>0</span></span>
+                      <span class="chip">Rollen</span>
+                    </div>
+                    <div class="compact-role-row" data-role-summary></div>
+                  </div>
+                  <p>Neben Frankreichs AION-Konsortium bleibt ein spanisches Zwei-Standort-Projekt (bis zu 5 Mrd. Euro) der einzige weitere bekannte Bewerber; kein neues Konsortium diese Woche, Gebotsfrist bleibt der 12.11.2026.</p>
+                  <p><strong>Warum beobachten:</strong> Die Standortentscheidungen bestimmen maßgeblich, wo Europas künftige KI-Rechenkapazität entsteht.</p>
+                  <p><strong>Nächstes Signal:</strong> Weitere benannte Konsortien oder erste Standortankündigungen vor Fristablauf.</p>
+                  <div class="sources">
+                    <ol class="compact-source-list">
+                    <li>
+                      <a href="https://ec.europa.eu/commission/presscorner/detail/en/ip_26_1708" target="_blank" rel="noopener noreferrer">EU launches AI Gigafactories call to boost Europe&#x27;s computing capacity</a>
+                      <div class="source-meta-row"><span class="source-pill" data-ui-map="role" data-raw-value="faktenanker" data-source-role>faktenanker</span></div>
+                    </li>
+                    </ol>
+                  </div>
+                </div>
+              </details>
+            </article>
+          </div>
+
+          <div class="section-stack archive-references">
+            <article class="archive-item" data-id="wk34-meta-glasses-thread">
+              <span class="badge relation-type" data-ui-map="relation-type" data-raw-value="recurring_theme">recurring_theme</span>
+              <h4>Meta KI-Brillen und Verdeckt-Aufnahme-Debatte (verfolgt seit 08.07.)</h4>
+              <p class="sidebar-meta">Vom Prototyp-Stadium (&#x27;Super Sensing&#x27;, Juli) zur konkreten Regulierungsauseinandersetzung: HateAid-Strafanzeige und BNetzA-Stellungnahme markieren die erste reale Eskalationsstufe.</p>
+            </article>
+            <article class="archive-item" data-id="wk34-litellm-teampcp-thread">
+              <span class="badge relation-type" data-ui-map="relation-type" data-raw-value="recurring_theme">recurring_theme</span>
+              <h4>LiteLLM/TeamPCP-Lieferkettenangriff (verfolgt seit 11.08.)</h4>
+              <p class="sidebar-meta">Dritte Woche ohne jede Firmenreaktion – diese Weekly führt den Fall bewusst nur als Watchlist-Punkt, um keine unveränderte Faktenlage erneut als Geschichte zu erzählen.</p>
+            </article>
+            <article class="archive-item" data-id="wk34-zak-google-thread">
+              <span class="badge relation-type" data-ui-map="relation-type" data-raw-value="follow_up">follow_up</span>
+              <h4>ZAK-Entscheidung gegen Google/Perplexity (verfolgt seit 14.07.)</h4>
+              <p class="sidebar-meta">Auch mehr als eine Woche nach Fristablauf keine bestätigte Berufungseinreichung – der Ausgang bleibt offen.</p>
+            </article>
+            <article class="archive-item" data-id="wk34-en18286-standards-thread">
+              <span class="badge relation-type" data-ui-map="relation-type" data-raw-value="recurring_theme">recurring_theme</span>
+              <h4>EN-18286-Normungsstatus (verfolgt seit Weekly W29)</h4>
+              <p class="sidebar-meta">Diskrepanz zwischen CEN-CENELEC-Freigabe und ausstehender Amtsblatt-Zitierung besteht auch diese Woche unverändert fort.</p>
+            </article>
+            <article class="archive-item" data-id="wk34-anthropic-watermarking-thread">
+              <span class="badge relation-type" data-ui-map="relation-type" data-raw-value="follow_up">follow_up</span>
+              <h4>Anthropics Claude-Wasserzeichen und geplante Detection-API (verfolgt seit 11.08.)</h4>
+              <p class="sidebar-meta">Die seit 15.08. angekündigte öffentliche Detection-API ist weiterhin nicht nachweisbar erschienen; kein neues Datum gefunden.</p>
+            </article>
+          </div>
+        </section>
+      </aside>
+    </section>
+  </main>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const labelMaps = {
+        category: {
+          regulation: 'Regulierung',
+          product: 'Produkte & Plattformen',
+          global_eu: 'Global mit EU-Impact',
+          enterprise_ai: 'Enterprise AI',
+          governance: 'Governance',
+          watchlist: 'Watchlist'
+        },
+        priority: {
+          P1: 'Sehr wichtig',
+          P2: 'Relevant',
+          P3: 'Kurz notiert'
+        },
+        trust: {
+          hoch: 'Hohe Quellenlage',
+          mittel: 'Mittlere Quellenlage',
+          niedrig: 'Niedrige Quellenlage',
+          gemischt: 'Gemischte Quellenlage',
+          watchlist: 'Watchlist'
+        },
+        role: {
+          faktenanker: 'Faktenanker',
+          policy_interpretation: 'Policy-Interpretation',
+          marktverifikation: 'Marktverifikation',
+          produktquelle: 'Produktquelle',
+          enterprise_signal: 'Enterprise-Signal',
+          'frühindikator': 'Frühindikator',
+          unternehmensquelle: 'Unternehmensquelle',
+          developer_dokumentation: 'Entwicklerdokumentation'
+        },
+        'source-type': {
+          official: 'Offizielle Quelle',
+          vendor: 'Anbieterquelle',
+          media: 'Medienbericht',
+          research: 'Research',
+          community: 'Community',
+          documentation: 'Dokumentation',
+          legal: 'Rechtstext'
+        },
+        'relation-type': {
+          follow_up: 'Follow-up',
+          recurring_theme: 'Wiederkehrendes Thema',
+          precedent: 'Präzedenzfall',
+          trendline: 'Trendlinie'
+        }
+      };
+
+      const mapLabel = (group, rawValue) => {
+        if (!rawValue) return '';
+        return (labelMaps[group] && labelMaps[group][rawValue]) || rawValue;
+      };
+
+      document.querySelectorAll('[data-ui-map]').forEach((element) => {
+        const group = element.dataset.uiMap;
+        const rawValue = element.dataset.rawValue || element.textContent.trim();
+        const mappedValue = mapLabel(group === 'weekly-trust' ? 'trust' : group, rawValue);
+
+        if (group === 'weekly-trust') {
+          element.textContent = `Vertrauensbild: ${mappedValue}`;
+          return;
+        }
+
+        element.textContent = mappedValue;
+      });
+
+      document.querySelectorAll('.panel-item').forEach((item) => {
+        const roleSummary = item.querySelector('[data-role-summary]');
+        const roleNodes = Array.from(item.querySelectorAll('[data-source-role]'));
+        const sourceCountNode = item.querySelector('[data-source-count]');
+        const uniqueRoles = [...new Set(roleNodes.map((node) => node.dataset.rawValue).filter(Boolean))];
+
+        if (sourceCountNode) sourceCountNode.textContent = String(roleNodes.length);
+
+        if (roleSummary) {
+          roleSummary.innerHTML = '';
+          uniqueRoles.forEach((role) => {
+            const pill = document.createElement('span');
+            pill.className = 'source-pill';
+            pill.textContent = mapLabel('role', role);
+            roleSummary.appendChild(pill);
+          });
+        }
+      });
+    });
+  </script>
+</body>
+</html>
