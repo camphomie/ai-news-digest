@@ -1,6 +1,25 @@
 {
   "reports": [
     {
+      "id": "daily-2026-08-25",
+      "mode": "daily",
+      "title": "Daily Briefing 25.08.2026: ChatGPT-Werbung live in Deutschland – Forscherinnen warnen",
+      "date_label": "25.08.2026",
+      "window_start": "2026-08-25",
+      "window_end": "2026-08-25",
+      "public_url": "https://ai-news.camphausen.eu/daily/2026-08-25.html",
+      "published_at": "2026-08-26T02:03:36Z",
+      "summary": "ChatGPT zeigt seit 24.08. EU-weit Werbung; zwei deutsche Forscherinnen warnen vor Verzerrung zugunsten kommerzieller Interessen. Dazu ein Recheck zu ZAK, EN 18286, Claude/Foundry und Schrems III.",
+      "trust_status": "gemischt",
+      "tags": [
+        "ChatGPT",
+        "Werbung",
+        "DSGVO",
+        "AI Act",
+        "Standards"
+      ]
+    },
+    {
       "id": "daily-2026-08-19",
       "mode": "daily",
       "title": "Daily Briefing 19.08.2026",
