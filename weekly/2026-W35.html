@@ -1,0 +1,1252 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Wochenbericht KW 35: Kabinettsklausur, Cyberabwehr-Allianz und ChatGPT-Werbung in Deutschland</title>
+  <style>
+    :root {
+      --bg: #eef3f9;
+      --bg-radial: radial-gradient(circle at top left, rgba(49, 91, 217, 0.14), transparent 32rem), radial-gradient(circle at top right, rgba(31, 122, 77, 0.10), transparent 28rem), #eef3f9;
+      --surface: #ffffff;
+      --surface-soft: #f7f9fd;
+      --surface-blue: #f1f5ff;
+      --text: #111b2e;
+      --muted: #66748c;
+      --muted-2: #8190a8;
+      --border: #d9e2ef;
+      --border-strong: #bfcae0;
+      --accent: #244ed8;
+      --accent-strong: #1739a8;
+      --accent-soft: #e8efff;
+      --success: #1f7a4d;
+      --success-soft: #e7f5ee;
+      --warning: #b26a00;
+      --warning-soft: #fff3dc;
+      --risk: #a63f3f;
+      --risk-soft: #fdecec;
+      --watch: #2563eb;
+      --watch-soft: #eaf1ff;
+      --shadow: 0 18px 45px rgba(17, 30, 58, 0.10);
+      --shadow-soft: 0 8px 24px rgba(17, 30, 58, 0.07);
+      --radius-xl: 26px;
+      --radius-lg: 18px;
+      --radius-md: 14px;
+      --radius-sm: 10px;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      padding: 34px;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--bg-radial);
+      color: var(--text);
+      line-height: 1.58;
+    }
+
+    h1, h2, h3, h4, p { margin: 0; }
+    h1 { max-width: 940px; font-size: clamp(32px, 5vw, 56px); line-height: 0.98; letter-spacing: -0.045em; }
+    h2 { font-size: clamp(22px, 3vw, 34px); line-height: 1.08; letter-spacing: -0.03em; }
+    h3 { font-size: 20px; line-height: 1.18; letter-spacing: -0.02em; }
+    h4 { font-size: 15px; line-height: 1.25; }
+    a { color: var(--accent-strong); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    .weekly-briefing {
+      max-width: 1220px;
+      margin: 0 auto;
+      display: grid;
+      gap: 24px;
+    }
+
+    .hero,
+    .executive-summary,
+    .weekly-assessment,
+    .theme-block,
+    .sidebar-block {
+      background: rgba(255, 255, 255, 0.92);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow-soft);
+      backdrop-filter: blur(12px);
+      min-width: 0;
+    }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      padding: 30px;
+      display: grid;
+      gap: 18px;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      height: 5px;
+      background: linear-gradient(90deg, #244ed8, #1f7a4d, #b26a00);
+      pointer-events: none;
+    }
+
+    .hero > * { position: relative; }
+
+    .eyebrow,
+    .story-kicker,
+    .section-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      line-height: 1;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-weight: 800;
+    }
+
+    .eyebrow::before,
+    .section-label::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 0 5px var(--accent-soft);
+      flex: 0 0 auto;
+    }
+
+    .weekly-summary,
+    .field-note,
+    .sidebar-meta {
+      color: var(--muted);
+    }
+
+    .weekly-summary {
+      max-width: 880px;
+      font-size: 17px;
+    }
+
+    .meta-row,
+    .story-meta,
+    .source-meta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .chip,
+    .badge,
+    .source-pill {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 800;
+      line-height: 1;
+      white-space: nowrap;
+    }
+
+    .chip {
+      padding: 9px 11px;
+      background: var(--accent-soft);
+      color: var(--accent-strong);
+      border: 1px solid rgba(36, 78, 216, 0.12);
+    }
+
+    .badge {
+      padding: 8px 10px;
+      border: 1px solid var(--border);
+      background: var(--surface-soft);
+      color: var(--muted);
+    }
+
+    .badge[data-trust="hoch"] { background: var(--success-soft); color: var(--success); border-color: rgba(31, 122, 77, 0.20); }
+    .badge[data-trust="mittel"], .badge[data-trust="gemischt"] { background: var(--warning-soft); color: var(--warning); border-color: rgba(178, 106, 0, 0.22); }
+    .badge[data-trust="niedrig"] { background: var(--risk-soft); color: var(--risk); border-color: rgba(166, 63, 63, 0.22); }
+    .badge[data-trust="watchlist"] { background: var(--watch-soft); color: var(--watch); border-color: rgba(37, 99, 235, 0.18); }
+
+    .main-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 2.05fr) minmax(300px, 0.95fr);
+      gap: 24px;
+      align-items: start;
+    }
+
+    .main-column,
+    .main-developments,
+    .sidebar,
+    .section-stack {
+      display: grid;
+      gap: 18px;
+      min-width: 0;
+    }
+
+    .executive-summary,
+    .weekly-assessment,
+    .theme-block,
+    .sidebar-block {
+      padding: 22px;
+      display: grid;
+      gap: 15px;
+    }
+
+    .weekly-assessment {
+      border-color: rgba(36, 78, 216, 0.24);
+      box-shadow: var(--shadow);
+    }
+
+    .story-header {
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      align-items: flex-start;
+      min-width: 0;
+    }
+
+    .story-title-block,
+    .story-text-stack {
+      display: grid;
+      gap: 8px;
+      min-width: 0;
+    }
+
+    .story-title-block h3,
+    .sidebar-block h3,
+    .sidebar-block h4 {
+      overflow-wrap: anywhere;
+    }
+
+    .takeaway,
+    .analysis-note {
+      border: 1px solid var(--border);
+      background: linear-gradient(180deg, #fbfcff, #f6f8fc);
+      border-radius: var(--radius-lg);
+      padding: 16px;
+      display: grid;
+      gap: 6px;
+    }
+
+    .takeaway strong,
+    .analysis-note strong {
+      font-size: 13px;
+      letter-spacing: 0.02em;
+    }
+
+    .score-strip {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 10px;
+      max-width: 100%;
+      min-width: 0;
+    }
+
+    .score-item {
+      --score: 1;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      background: var(--surface-soft);
+      padding: 12px;
+      display: grid;
+      gap: 8px;
+      min-height: 88px;
+      min-width: 0;
+      overflow: hidden;
+    }
+
+    .score-topline {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 6px;
+      min-width: 0;
+      max-width: 100%;
+    }
+
+    .score-value {
+      min-width: 0;
+      max-width: 100%;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      font-size: 24px;
+      line-height: 1;
+      font-weight: 900;
+      letter-spacing: -0.04em;
+    }
+
+    .score-max {
+      color: var(--muted-2);
+      font-size: 11px;
+      font-weight: 800;
+      flex: 0 0 auto;
+    }
+
+    .score-label {
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.15;
+      font-weight: 750;
+      overflow-wrap: anywhere;
+      hyphens: auto;
+    }
+
+    .meter {
+      width: 100%;
+      min-width: 0;
+      height: 7px;
+      border-radius: 999px;
+      background: #e4e9f2;
+      overflow: hidden;
+    }
+
+    .meter > span {
+      display: block;
+      height: 100%;
+      width: clamp(0%, calc(var(--score) * 20%), 100%);
+      max-width: 100%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, var(--accent), #1f7a4d);
+    }
+
+    .theme-block { box-shadow: var(--shadow-soft); }
+    .theme-block[data-category="regulation"] { border-left: 5px solid var(--accent); }
+    .theme-block[data-category="governance"] { border-left: 5px solid var(--success); }
+    .theme-block[data-category="enterprise_ai"] { border-left: 5px solid #5b5fd6; }
+    .theme-block[data-category="product"] { border-left: 5px solid #6b55c9; }
+    .theme-block[data-category="global_eu"] { border-left: 5px solid #2d8aa6; }
+    .theme-block[data-category="watchlist"] { border-left: 5px solid var(--watch); }
+
+    .sidebar-status-grid,
+    .compact-panel-summary,
+    .compact-panel-details,
+    .compact-role-row {
+      display: grid;
+      gap: 10px;
+    }
+
+    .sidebar-status-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .status-card {
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      background: var(--surface-soft);
+      padding: 12px;
+      display: grid;
+      gap: 5px;
+    }
+
+    .status-card-label {
+      font-size: 11px;
+      font-weight: 850;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--muted-2);
+    }
+
+    .status-card-value {
+      font-size: 14px;
+      font-weight: 800;
+      color: var(--text);
+    }
+
+    .compact-panel-stats {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .compact-source-list {
+      margin: 0;
+      padding-left: 18px;
+      color: var(--muted);
+      display: grid;
+      gap: 6px;
+    }
+
+    .compact-source-list a,
+    .compact-source-list .source-label-fallback {
+      font-weight: 750;
+    }
+
+    details.evidence {
+      border-top: 1px solid var(--border);
+      padding-top: 10px;
+    }
+
+    details.evidence summary,
+    .panel-item summary {
+      cursor: pointer;
+      list-style: none;
+      color: var(--accent-strong);
+      font-size: 13px;
+      font-weight: 850;
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      align-items: center;
+    }
+
+    details.evidence summary::-webkit-details-marker,
+    .panel-item summary::-webkit-details-marker { display: none; }
+
+    details.evidence summary::after,
+    .panel-item summary::after {
+      content: "+";
+      display: grid;
+      place-items: center;
+      width: 22px;
+      height: 22px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: var(--accent-strong);
+      font-size: 15px;
+      line-height: 1;
+      flex: 0 0 auto;
+    }
+
+    details.evidence[open] summary::after,
+    .panel-item details[open] summary::after { content: "–"; }
+
+    .sources {
+      margin-top: 10px;
+      display: grid;
+      gap: 8px;
+      padding: 12px;
+      border-radius: var(--radius-md);
+      background: var(--surface-soft);
+      border: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 13px;
+      min-width: 0;
+    }
+
+    .source-link-card {
+      display: grid;
+      gap: 7px;
+      padding: 10px;
+      border: 1px solid rgba(191, 202, 224, 0.75);
+      border-radius: var(--radius-sm);
+      background: #ffffff;
+      min-width: 0;
+    }
+
+    .source-link-card a,
+    .source-link-card .source-label-fallback {
+      font-weight: 850;
+      overflow-wrap: anywhere;
+    }
+
+    .source-label-fallback { color: var(--text); }
+
+    .source-pill {
+      align-self: start;
+      justify-self: start;
+      padding: 5px 7px;
+      border: 1px solid var(--border);
+      background: #eef2ff;
+      color: #3730a3;
+      font-size: 10.5px;
+      letter-spacing: 0.01em;
+    }
+
+    .source-meta {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 6px 10px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .source-meta span { overflow-wrap: anywhere; }
+    .source-meta strong { color: var(--text); }
+
+    .panel-item,
+    .archive-item {
+      border: 1px solid var(--border);
+      background: var(--surface-soft);
+      border-radius: var(--radius-md);
+      padding: 13px;
+      display: grid;
+      gap: 8px;
+      min-width: 0;
+    }
+
+    .panel-item { padding: 0; overflow: hidden; }
+    .panel-item details { padding: 12px 13px; }
+    .panel-item summary { color: var(--text); overflow-wrap: anywhere; }
+    .panel-detail {
+      margin-top: 9px;
+      display: grid;
+      gap: 8px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .archive-item .relation-type { justify-self: start; background: #eef2ff; color: #3730a3; }
+
+    @media (max-width: 980px) {
+      body { padding: 18px; }
+      .hero, .executive-summary, .weekly-assessment, .theme-block, .sidebar-block { border-radius: var(--radius-lg); }
+      .main-layout { grid-template-columns: 1fr; }
+      .score-strip {
+        grid-template-columns: repeat(5, minmax(78px, 1fr));
+        gap: 7px;
+        overflow-x: auto;
+        overflow-y: hidden;
+        padding-bottom: 2px;
+        scrollbar-width: thin;
+      }
+      .score-item { min-height: 58px; padding: 7px 8px; gap: 5px; }
+      .score-value { font-size: 16px; }
+      .score-max { font-size: 10px; }
+      .score-label { font-size: 10px; line-height: 1.1; }
+      .meter { height: 4px; }
+      .chip, .badge { padding: 6px 8px; font-size: 11px; }
+      .source-meta { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 560px) {
+      body { padding: 12px; }
+      .weekly-briefing { gap: 14px; }
+      .hero { padding: 22px; }
+      .story-header { display: grid; gap: 10px; }
+      .story-meta { gap: 7px; }
+      .score-strip { grid-template-columns: repeat(5, minmax(72px, 1fr)); }
+      .score-item { min-height: 54px; padding: 6px 7px; }
+      .score-value { font-size: 15px; }
+      .score-max { font-size: 10px; }
+      .score-label { font-size: 9.5px; }
+      .sources { padding: 10px; }
+      .source-link-card { padding: 9px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="weekly-briefing">
+    <section class="hero">
+      <div class="eyebrow">Weekly AI Intelligence Briefing</div>
+      <h1>Wochenbericht KW 35: Kabinettsklausur, Cyberabwehr-Allianz und ChatGPT-Werbung in Deutschland</h1>
+      <p class="weekly-summary">Dünnes Wochenende, aber substanzielle Woche: Bundeskabinett diskutiert KI-Industriepolitik in Neuhardenberg, ein globaler Cyberabwehr-Appell erhält deutsche Unterschriften, Meta schließt eine Sicherheitslücke bei Smart Glasses, ChatGPT-Werbung startet in Deutschland.</p>
+      <div class="meta-row">
+        <span class="chip">Woche: Woche vom 24.–30. August 2026 (Wochenende 29./30.08. + Rückblick Mo–Fr)</span>
+        <span class="chip">Fokus: Deutschland / EU</span>
+        <span class="badge" data-trust="gemischt" data-ui-map="weekly-trust" data-raw-value="gemischt">Vertrauensbild: gemischt</span>
+        <span class="chip">Leitmuster: Industriepolitik trifft KI-Souveränität</span>
+      </div>
+    </section>
+
+    <section class="main-layout">
+      <section class="main-column">
+        <article class="executive-summary">
+          <div class="section-label">Executive Summary</div>
+          <h2>Wöchentliche Lage in Kürze</h2>
+          <p class="field-note">Das Berichtswochenende (29./30.08.) blieb ohne belastbare, wochenend-datierte EU/DE-Entwicklung – wie schon KW32–KW34. Die Substanz liegt im Wochenrückblick: Das Bundeskabinett diskutierte in Neuhardenberg (25./26.08.) mit Cohere-CEO Aidan Gomez und Siemens-CEO Roland Busch industrielle KI-Souveränität, ohne Beschlüsse zu fassen. Ein globaler Cyberabwehr-Appell (27.08.) erhielt bestätigte Unterschriften von Telekom und SAP. Meta schloss eine Sicherheitslücke bei Smart Glasses (28.08.), ChatGPT-Werbung ging in Deutschland live (24.08.) und stieß auf akademische Kritik. Die Regulierungsfäden (EN 18286, ZAK, Foundry, Schrems III) blieben unverändert.</p>
+        </article>
+
+        <article class="weekly-assessment">
+          <div class="section-label">Wocheneinschätzung</div>
+          <h2>Industriepolitik trifft KI-Souveränität</h2>
+          <p class="field-note">Kein Wochenend-Highlight, aber eine inhaltlich dichte Woche mit klarem Industriepolitik-Schwerpunkt. Die Neuhardenberg-Klausur liefert keine Beschlüsse, aber ein deutliches Signal, dass KI-Souveränität und industrielle Wettbewerbsfähigkeit auf höchster Regierungsebene zusammengedacht werden.</p>
+          <div class="score-strip">
+            <div class="score-item" style="--score: 4"><div class="score-topline"><span class="score-value">4</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">EU / DE-Relevanz</div></div>
+            <div class="score-item" style="--score: 3"><div class="score-topline"><span class="score-value">3</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Business Impact</div></div>
+            <div class="score-item" style="--score: 3"><div class="score-topline"><span class="score-value">3</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Regulatorik</div></div>
+            <div class="score-item" style="--score: 3"><div class="score-topline"><span class="score-value">3</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Technologie</div></div>
+            <div class="score-item" style="--score: 4"><div class="score-topline"><span class="score-value">4</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Lernwert</div></div>
+          </div>
+        </article>
+
+        <section class="main-developments">
+          <div class="section-label">Hauptentwicklungen der Woche</div>
+          <article class="theme-block" data-id="weekly-2026-w35-neuhardenberg" data-category="governance">
+            <div class="story-header">
+              <div class="story-title-block">
+                <div class="story-kicker">Industriepolitik</div>
+                <h3>Kabinettsklausur in Neuhardenberg: Bundesregierung sucht industriellen KI-Kurs, ohne Beschlüsse zu fassen</h3>
+              </div>
+              <div class="story-meta">
+                <span class="chip" data-ui-map="category" data-raw-value="governance">governance</span>
+                <span class="chip" data-ui-map="priority" data-raw-value="P1">P1</span>
+              </div>
+            </div>
+            <div class="story-text-stack">
+              <p class="field-note"><strong>Thema:</strong> KI-Souveränität und industrielle Wettbewerbsfähigkeit</p>
+              <p>Das Bundeskabinett tagte am 25./26.08. in Neuhardenberg zu industrieller Wettbewerbsfähigkeit. Cohere-CEO Aidan Gomez und Siemens-CEO Roland Busch hielten Impulsvorträge; gezeigt wurden KI-Anwendungen von BKA und Bundeszoll. Digitalminister Wildberger betonte souveräne KI-Infrastruktur. Konkrete Beschlüsse gab es laut Bundesregierung nicht.</p>
+              <p class="field-note"><strong>Strategische Relevanz:</strong> Höchste Regierungsebene verknüpft KI explizit mit Industriepolitik und Souveränität – ein Stimmungsbild für kommende Förderprogramme und Regulierungsschwerpunkte, kein konkretes Politikergebnis.</p>
+              <p class="field-note"><strong>EU-/DE-Impact:</strong> Direkt, national – erste dokumentierte Positionierung des Bundeskabinetts zu industrieller KI seit Amtsantritt dieser Konstellation, mit einem europäischen KI-Anbieter (Cohere) als eingeladenem Impulsgeber.</p>
+              <p class="field-note"><strong>Einordnung:</strong> Beobachten, ob aus der Klausur konkrete Förderprogramme oder eine KI-Industriestrategie folgen – bislang reine Agenda-Setzung.</p>
+            </div>
+            <div class="score-strip">
+              <div class="score-item" style="--score: 4"><div class="score-topline"><span class="score-value">4</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">EU / DE-Relevanz</div></div>
+              <div class="score-item" style="--score: 3"><div class="score-topline"><span class="score-value">3</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Business Impact</div></div>
+              <div class="score-item" style="--score: 2"><div class="score-topline"><span class="score-value">2</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Regulatorik</div></div>
+              <div class="score-item" style="--score: 3"><div class="score-topline"><span class="score-value">3</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Technologie</div></div>
+              <div class="score-item" style="--score: 4"><div class="score-topline"><span class="score-value">4</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Lernwert</div></div>
+            </div>
+            <details class="evidence">
+              <summary>Quellen & Unsicherheit</summary>
+              <div class="sources">
+                <p class="field-note"><strong>Quellenlage:</strong> <span data-ui-map="trust" data-raw-value="hoch">hoch</span></p>
+                <article class="source-link-card">
+                  <a href="https://www.bundesregierung.de/breg-de/aktuelles/kabinettsklausur-neuhardenberg-2449986" target="_blank" rel="noopener noreferrer">Gute Rahmenbedingungen für Wettbewerbsfähigkeit schaffen</a>
+                  <div class="source-meta-row">
+                    <span class="source-pill" data-ui-map="role" data-raw-value="faktenanker">faktenanker</span>
+                    <span class="source-pill" data-ui-map="source-type" data-raw-value="official">official</span>
+                  </div>
+                  <div class="source-meta">
+                    <span><strong>Publisher:</strong> Bundesregierung</span>
+                    <span><strong>Veröffentlicht:</strong> 2026-08-25</span>
+                    <span><strong>Abgerufen:</strong> 2026-08-31</span>
+                  </div>
+                </article>
+                <article class="source-link-card">
+                  <a href="https://www.it-boltwise.de/kabinettsklausur-in-neuhardenberg-koalition-setzt-reformtempo-bei-wachstum-und-ki.html" target="_blank" rel="noopener noreferrer">Kabinettsklausur in Neuhardenberg: Koalition setzt Reformtempo bei Wachstum und KI</a>
+                  <div class="source-meta-row">
+                    <span class="source-pill" data-ui-map="role" data-raw-value="policy_interpretation">policy_interpretation</span>
+                    <span class="source-pill" data-ui-map="source-type" data-raw-value="media">media</span>
+                  </div>
+                  <div class="source-meta">
+                    <span><strong>Publisher:</strong> IT-Boltwise</span>
+                    <span><strong>Veröffentlicht:</strong> 2026-08-25</span>
+                    <span><strong>Abgerufen:</strong> 2026-08-31</span>
+                  </div>
+                </article>
+                <article class="source-link-card">
+                  <a href="https://www.epochtimes.de/politik/deutschland/kabinettsklausur-in-neuhardenberg-merz-setzt-auf-wirtschaft-und-ki-a5590354.html" target="_blank" rel="noopener noreferrer">Kabinettsklausur in Neuhardenberg: Merz setzt auf Wirtschaft und KI</a>
+                  <div class="source-meta-row">
+                    <span class="source-pill" data-ui-map="role" data-raw-value="policy_interpretation">policy_interpretation</span>
+                    <span class="source-pill" data-ui-map="source-type" data-raw-value="media">media</span>
+                  </div>
+                  <div class="source-meta">
+                    <span><strong>Publisher:</strong> Epoch Times</span>
+                    <span><strong>Veröffentlicht:</strong> 2026-08-25</span>
+                    <span><strong>Abgerufen:</strong> 2026-08-31</span>
+                  </div>
+                </article>
+                <p class="field-note"><strong>Unsicherheit:</strong> Bundesregierung selbst bestätigt: keine konkreten Beschlüsse. Nicht als Politikentscheidung überzeichnen.</p>
+              </div>
+            </details>
+            <details class="evidence">
+              <summary>Weitere Recherche</summary>
+              <div class="sources">
+                <p class="field-note">Welche konkreten Maßnahmen könnten aus der Neuhardenberg-Klausur zur KI-Industriepolitik werden, und wie unterscheidet sich das vom bisherigen KI-MIG/Bundesnetzagentur-Ansatz?</p>
+              </div>
+            </details>
+          </article>
+          <article class="theme-block" data-id="weekly-2026-w35-cyberdefense-letter" data-category="global_eu">
+            <div class="story-header">
+              <div class="story-title-block">
+                <div class="story-kicker">Cybersecurity</div>
+                <h3>Wochenrückblick: Globaler KI-Cyberabwehr-Appell erhält bestätigte Unterschriften von Telekom und SAP</h3>
+              </div>
+              <div class="story-meta">
+                <span class="chip" data-ui-map="category" data-raw-value="global_eu">global_eu</span>
+                <span class="chip" data-ui-map="priority" data-raw-value="P2">P2</span>
+              </div>
+            </div>
+            <div class="story-text-stack">
+              <p class="field-note"><strong>Thema:</strong> KI-gestützte Cyberabwehr</p>
+              <p>Über 110 Organisationen, darunter OpenAI, Anthropic, Google, Microsoft und AWS, warnten am 27.08. vor KI-Cyberangriffen und forderten eine globale Verteidigungs-„Surge&quot;. Telekoms Unterschrift wurde direkt bestätigt; SAPs Teilnahme über zwei Direktabrufe. Anthropic stellte parallel einen „Model Hardware Standard&quot; vor.</p>
+              <p class="field-note"><strong>Strategische Relevanz:</strong> Zwei deutsche Großunternehmen positionieren sich in einer globalen Sicherheitsinitiative – relevantes Signal für Enterprise-Risikomanagement und den EU-Cybersicherheits-Aktionsplan.</p>
+              <p class="field-note"><strong>EU-/DE-Impact:</strong> Direkt über Telekom und SAP; angeschlossen an EU-Kommissionsgespräche mit OpenAI/Anthropic vom 03.08. und den EU-Cybersicherheits-Aktionsplan. Keine EU-institutionelle Reaktion auf den Appell gefunden.</p>
+              <p class="field-note"><strong>Einordnung:</strong> Der Appell bleibt eine Selbstverpflichtung der Industrie ohne bestätigte EU-Regierungsreaktion – als Frühindikator für kommende ENISA-Aktivität beobachten.</p>
+            </div>
+            <div class="score-strip">
+              <div class="score-item" style="--score: 3"><div class="score-topline"><span class="score-value">3</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">EU / DE-Relevanz</div></div>
+              <div class="score-item" style="--score: 4"><div class="score-topline"><span class="score-value">4</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Business Impact</div></div>
+              <div class="score-item" style="--score: 3"><div class="score-topline"><span class="score-value">3</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Regulatorik</div></div>
+              <div class="score-item" style="--score: 3"><div class="score-topline"><span class="score-value">3</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Technologie</div></div>
+              <div class="score-item" style="--score: 3"><div class="score-topline"><span class="score-value">3</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Lernwert</div></div>
+            </div>
+            <details class="evidence">
+              <summary>Quellen & Unsicherheit</summary>
+              <div class="sources">
+                <p class="field-note"><strong>Quellenlage:</strong> <span data-ui-map="trust" data-raw-value="hoch">hoch</span></p>
+                <article class="source-link-card">
+                  <a href="https://techcrunch.com/2026/08/27/openai-anthropic-google-and-100-other-companies-call-for-action-to-defend-against-rogue-ai/" target="_blank" rel="noopener noreferrer">OpenAI, Anthropic, Google, and 100 other companies call for action to defend against rogue AI</a>
+                  <div class="source-meta-row">
+                    <span class="source-pill" data-ui-map="role" data-raw-value="marktverifikation">marktverifikation</span>
+                    <span class="source-pill" data-ui-map="source-type" data-raw-value="media">media</span>
+                  </div>
+                  <div class="source-meta">
+                    <span><strong>Publisher:</strong> TechCrunch</span>
+                    <span><strong>Veröffentlicht:</strong> 2026-08-27</span>
+                    <span><strong>Abgerufen:</strong> 2026-08-31</span>
+                  </div>
+                </article>
+                <article class="source-link-card">
+                  <a href="https://openai.com/collective-cyberdefense/" target="_blank" rel="noopener noreferrer">Collective Cyber Defense open letter</a>
+                  <div class="source-meta-row">
+                    <span class="source-pill" data-ui-map="role" data-raw-value="unternehmensquelle">unternehmensquelle</span>
+                    <span class="source-pill" data-ui-map="source-type" data-raw-value="vendor">vendor</span>
+                  </div>
+                  <div class="source-meta">
+                    <span><strong>Publisher:</strong> OpenAI</span>
+                    <span><strong>Veröffentlicht:</strong> 2026-08-27</span>
+                    <span><strong>Abgerufen:</strong> 2026-08-31</span>
+                  </div>
+                </article>
+                <article class="source-link-card">
+                  <a href="https://www.anthropic.com/news/model-hardware-standard-research-preview" target="_blank" rel="noopener noreferrer">Anthropic Model Hardware Standard research preview</a>
+                  <div class="source-meta-row">
+                    <span class="source-pill" data-ui-map="role" data-raw-value="produktquelle">produktquelle</span>
+                    <span class="source-pill" data-ui-map="source-type" data-raw-value="vendor">vendor</span>
+                  </div>
+                  <div class="source-meta">
+                    <span><strong>Publisher:</strong> Anthropic</span>
+                    <span><strong>Veröffentlicht:</strong> 2026-08-27</span>
+                    <span><strong>Abgerufen:</strong> 2026-08-31</span>
+                  </div>
+                </article>
+                <p class="field-note"><strong>Unsicherheit:</strong> Die Kombination &quot;SAP und Deutsche Telekom gemeinsam genannt&quot; bleibt nur suchsynthese-basiert; beide Unterschriften sind aber je einzeln direktquellenbestätigt.</p>
+              </div>
+            </details>
+            <details class="evidence">
+              <summary>Weitere Recherche</summary>
+              <div class="sources">
+                <p class="field-note">Wird die EU-Kommission oder ENISA offiziell auf den Cyberabwehr-Appell reagieren, und welche konkreten Fördermaßnahmen für unterfinanzierte kritische Infrastruktur könnten folgen?</p>
+              </div>
+            </details>
+          </article>
+          <article class="theme-block" data-id="weekly-2026-w35-chatgpt-ads" data-category="product">
+            <div class="story-header">
+              <div class="story-title-block">
+                <div class="story-kicker">Produkt / Datenschutz</div>
+                <h3>Wochenrückblick: ChatGPT-Werbung live in Deutschland, Forscherinnen warnen vor Interessenkonflikten</h3>
+              </div>
+              <div class="story-meta">
+                <span class="chip" data-ui-map="category" data-raw-value="product">product</span>
+                <span class="chip" data-ui-map="priority" data-raw-value="P2">P2</span>
+              </div>
+            </div>
+            <div class="story-text-stack">
+              <p class="field-note"><strong>Thema:</strong> KI-Werbung und Verbraucherschutz</p>
+              <p>ChatGPT-Werbung ging am 24.08. in 31 europäischen Märkten inklusive Deutschland live, zunächst ohne Personalisierung. Am 25.08. warnten die Forscherinnen Alicia von Schenk (Uni Würzburg) und Karoline Ströhlein (Uni Regensburg), Sprachmodelle könnten in Konfliktsituationen zugunsten kommerzieller Interessen handeln, ohne die sichtbare Antwort zu verändern.</p>
+              <p class="field-note"><strong>Strategische Relevanz:</strong> Erste akademische Kritik an einem KI-Werbemodell in Deutschland – relevant für Compliance-Verantwortliche, die KI-gestützte Kundenkommunikation einsetzen oder beraten.</p>
+              <p class="field-note"><strong>EU-/DE-Impact:</strong> Direkt, EU-weit – federführende Aufsicht ist die irische DPC; bislang keine Stellungnahme einer deutschen oder irischen Behörde zur Konformität mit Einwilligungspflichten.</p>
+              <p class="field-note"><strong>Einordnung:</strong> Die Kritik bleibt eine allgemeine Risikoeinschätzung ohne dokumentierten Einzelfall – konkrete Fälle oder Regulatorenreaktionen sind der nächste Prüfpunkt.</p>
+            </div>
+            <div class="score-strip">
+              <div class="score-item" style="--score: 4"><div class="score-topline"><span class="score-value">4</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">EU / DE-Relevanz</div></div>
+              <div class="score-item" style="--score: 3"><div class="score-topline"><span class="score-value">3</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Business Impact</div></div>
+              <div class="score-item" style="--score: 3"><div class="score-topline"><span class="score-value">3</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Regulatorik</div></div>
+              <div class="score-item" style="--score: 2"><div class="score-topline"><span class="score-value">2</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Technologie</div></div>
+              <div class="score-item" style="--score: 3"><div class="score-topline"><span class="score-value">3</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Lernwert</div></div>
+            </div>
+            <details class="evidence">
+              <summary>Quellen & Unsicherheit</summary>
+              <div class="sources">
+                <p class="field-note"><strong>Quellenlage:</strong> <span data-ui-map="trust" data-raw-value="mittel">mittel</span></p>
+                <article class="source-link-card">
+                  <a href="https://help.openai.com/en/articles/20001047-ads-in-chatgpt" target="_blank" rel="noopener noreferrer">Ads in ChatGPT</a>
+                  <div class="source-meta-row">
+                    <span class="source-pill" data-ui-map="role" data-raw-value="produktquelle">produktquelle</span>
+                    <span class="source-pill" data-ui-map="source-type" data-raw-value="vendor">vendor</span>
+                  </div>
+                  <div class="source-meta">
+                    <span><strong>Publisher:</strong> OpenAI</span>
+                    <span><strong>Veröffentlicht:</strong> 2026-08-19</span>
+                    <span><strong>Abgerufen:</strong> 2026-08-31</span>
+                  </div>
+                </article>
+                <article class="source-link-card">
+                  <a href="https://www.basicthinking.de/" target="_blank" rel="noopener noreferrer">ChatGPT-Werbung: Forscherinnen warnen vor Interessenkonflikten</a>
+                  <div class="source-meta-row">
+                    <span class="source-pill" data-ui-map="role" data-raw-value="enterprise_signal">enterprise_signal</span>
+                    <span class="source-pill" data-ui-map="source-type" data-raw-value="media">media</span>
+                  </div>
+                  <div class="source-meta">
+                    <span><strong>Publisher:</strong> BASIC thinking</span>
+                    <span><strong>Veröffentlicht:</strong> 2026-08-25</span>
+                    <span><strong>Abgerufen:</strong> 2026-08-31</span>
+                  </div>
+                </article>
+                <p class="field-note"><strong>Unsicherheit:</strong> Produktfakt primärquellenbestätigt; Forscherinnen-Warnung ist allgemeine Risikoeinschätzung, kein dokumentierter Einzelfall.</p>
+              </div>
+            </details>
+            <details class="evidence">
+              <summary>Weitere Recherche</summary>
+              <div class="sources">
+                <p class="field-note">Gibt es einen dokumentierten Fall, in dem ChatGPT-Werbung nachweislich zugunsten eines Werbekunden geantwortet hat, und wie reagiert die irische DPC darauf?</p>
+              </div>
+            </details>
+          </article>
+          <article class="theme-block" data-id="weekly-2026-w35-claudeforce-memory" data-category="enterprise_ai">
+            <div class="story-header">
+              <div class="story-title-block">
+                <div class="story-kicker">Enterprise AI</div>
+                <h3>Wochenrückblick: Salesforce/Anthropic „Claudeforce&quot; und vereinheitlichtes Claude-Memory</h3>
+              </div>
+              <div class="story-meta">
+                <span class="chip" data-ui-map="category" data-raw-value="enterprise_ai">enterprise_ai</span>
+                <span class="chip" data-ui-map="priority" data-raw-value="P3">P3</span>
+              </div>
+            </div>
+            <div class="story-text-stack">
+              <p class="field-note"><strong>Thema:</strong> Agentic AI in Unternehmen</p>
+              <p>Salesforce und Anthropic kündigten am 26.08. „Claudeforce&quot; an: ein CRM-Plugin mit 37 Sales-Skills, Claude wird Reasoning-Modell von Agentforce. Zuvor vereinheitlichte Anthropic (25./26.08.) Claudes Memory über Chat und Cowork, standardmäßig aktiv bei Konsumenten-Tarifen, per Admin deaktivierbar bei Team/Enterprise.</p>
+              <p class="field-note"><strong>Strategische Relevanz:</strong> Zwei Produktfakten mit hoher Enterprise-Relevanz für europäische Salesforce/Slack-Nutzer, aber ohne EU-spezifische Datenresidenz-Aussage.</p>
+              <p class="field-note"><strong>EU-/DE-Impact:</strong> Indirekt – Salesforce/Slack sind in deutschen Unternehmen verbreitet, doch beide Ankündigungen enthalten keine EU-spezifische DSGVO- oder Datenresidenz-Zusage.</p>
+              <p class="field-note"><strong>Einordnung:</strong> Für EU-Unternehmen vor allem die Admin-Kontrollen (Memory-Opt-out, Sensible-Themen-Schalter) relevant, nicht die Reichweite selbst.</p>
+            </div>
+            <div class="score-strip">
+              <div class="score-item" style="--score: 2"><div class="score-topline"><span class="score-value">2</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">EU / DE-Relevanz</div></div>
+              <div class="score-item" style="--score: 3"><div class="score-topline"><span class="score-value">3</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Business Impact</div></div>
+              <div class="score-item" style="--score: 1"><div class="score-topline"><span class="score-value">1</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Regulatorik</div></div>
+              <div class="score-item" style="--score: 3"><div class="score-topline"><span class="score-value">3</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Technologie</div></div>
+              <div class="score-item" style="--score: 3"><div class="score-topline"><span class="score-value">3</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Lernwert</div></div>
+            </div>
+            <details class="evidence">
+              <summary>Quellen & Unsicherheit</summary>
+              <div class="sources">
+                <p class="field-note"><strong>Quellenlage:</strong> <span data-ui-map="trust" data-raw-value="hoch">hoch</span></p>
+                <article class="source-link-card">
+                  <a href="https://www.salesforce.com/news/press-releases/2026/08/26/salesforce-and-anthropic-announce-claudeforce/" target="_blank" rel="noopener noreferrer">Salesforce and Anthropic Announce Claudeforce</a>
+                  <div class="source-meta-row">
+                    <span class="source-pill" data-ui-map="role" data-raw-value="unternehmensquelle">unternehmensquelle</span>
+                    <span class="source-pill" data-ui-map="source-type" data-raw-value="vendor">vendor</span>
+                  </div>
+                  <div class="source-meta">
+                    <span><strong>Publisher:</strong> Salesforce</span>
+                    <span><strong>Veröffentlicht:</strong> 2026-08-26</span>
+                    <span><strong>Abgerufen:</strong> 2026-08-31</span>
+                  </div>
+                </article>
+                <article class="source-link-card">
+                  <a href="https://claude.com/blog/claudes-memory-works-everywhere-and-you-decide-whats-in-it" target="_blank" rel="noopener noreferrer">Claude&#x27;s memory works everywhere, and you decide what&#x27;s in it</a>
+                  <div class="source-meta-row">
+                    <span class="source-pill" data-ui-map="role" data-raw-value="produktquelle">produktquelle</span>
+                    <span class="source-pill" data-ui-map="source-type" data-raw-value="vendor">vendor</span>
+                  </div>
+                  <div class="source-meta">
+                    <span><strong>Publisher:</strong> Anthropic</span>
+                    <span><strong>Veröffentlicht:</strong> 2026-08-25</span>
+                    <span><strong>Abgerufen:</strong> 2026-08-31</span>
+                  </div>
+                </article>
+                <p class="field-note"><strong>Unsicherheit:</strong> EU-Bezug bleibt bei beiden Meldungen indirekt/eigene Einordnung dieses Briefings, keine offizielle EU-spezifische Aussage der Anbieter.</p>
+              </div>
+            </details>
+            <details class="evidence">
+              <summary>Weitere Recherche</summary>
+              <div class="sources">
+                <p class="field-note">Werden Salesforce oder Anthropic bei der geplanten Open-Beta im September 2026 eine EU-spezifische Datenresidenz- oder Compliance-Aussage nachreichen?</p>
+              </div>
+            </details>
+          </article>
+          <article class="theme-block" data-id="weekly-2026-w35-meta-led-fix" data-category="governance">
+            <div class="story-header">
+              <div class="story-title-block">
+                <div class="story-kicker">Datenschutz / Produkt</div>
+                <h3>Wochenrückblick: Meta schließt LED-Sicherheitslücke bei Smart Glasses</h3>
+              </div>
+              <div class="story-meta">
+                <span class="chip" data-ui-map="category" data-raw-value="governance">governance</span>
+                <span class="chip" data-ui-map="priority" data-raw-value="P3">P3</span>
+              </div>
+            </div>
+            <div class="story-text-stack">
+              <p class="field-note"><strong>Thema:</strong> Smart-Glasses-Streit Deutschland</p>
+              <p>Meta schloss am 28.08. die Lücke, dass eine laufende Aufnahme trotz nachträglich abgedeckter LED weiterlief. Sekundärquelle t3n.de verknüpft dies mit der deutschen Verbotsdebatte (HateAids Strafanzeige 12.08., BNetzA-Position 15.08.). Bislang keine Reaktion von HateAid oder Bundesnetzagentur.</p>
+              <p class="field-note"><strong>Strategische Relevanz:</strong> Technisches Update adressiert exakt den Kern des laufenden deutschen Rechtsstreits um erkennbare Aufnahmefunktion nach §8 TDDDG.</p>
+              <p class="field-note"><strong>EU-/DE-Impact:</strong> Direkt, aber interpretiert – schließt die technische Lücke im Zentrum des seit Juli laufenden deutschen Streits, ohne dass eine der Streitparteien bislang reagiert hat.</p>
+              <p class="field-note"><strong>Einordnung:</strong> Beobachten, ob die technische Lösung die rechtliche Auseinandersetzung entschärft oder ob HateAid an der Strafanzeige festhält.</p>
+            </div>
+            <div class="score-strip">
+              <div class="score-item" style="--score: 4"><div class="score-topline"><span class="score-value">4</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">EU / DE-Relevanz</div></div>
+              <div class="score-item" style="--score: 2"><div class="score-topline"><span class="score-value">2</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Business Impact</div></div>
+              <div class="score-item" style="--score: 3"><div class="score-topline"><span class="score-value">3</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Regulatorik</div></div>
+              <div class="score-item" style="--score: 2"><div class="score-topline"><span class="score-value">2</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Technologie</div></div>
+              <div class="score-item" style="--score: 3"><div class="score-topline"><span class="score-value">3</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Lernwert</div></div>
+            </div>
+            <details class="evidence">
+              <summary>Quellen & Unsicherheit</summary>
+              <div class="sources">
+                <p class="field-note"><strong>Quellenlage:</strong> <span data-ui-map="trust" data-raw-value="mittel">mittel</span></p>
+                <article class="source-link-card">
+                  <a href="https://www.t3n.de/" target="_blank" rel="noopener noreferrer">Meta schließt Aufnahme-dann-Abdecken-Sicherheitslücke</a>
+                  <div class="source-meta-row">
+                    <span class="source-pill" data-ui-map="role" data-raw-value="enterprise_signal">enterprise_signal</span>
+                    <span class="source-pill" data-ui-map="source-type" data-raw-value="media">media</span>
+                  </div>
+                  <div class="source-meta">
+                    <span><strong>Publisher:</strong> t3n</span>
+                    <span><strong>Veröffentlicht:</strong> 2026-08-28</span>
+                    <span><strong>Abgerufen:</strong> 2026-08-31</span>
+                  </div>
+                </article>
+                <article class="source-link-card">
+                  <a href="https://www.deskmodder.de/blog/2026/08/15/meta-smart-glasses-bundesnetzagentur-sieht-derzeit-keinen-grund-fuer-ein-verbot/" target="_blank" rel="noopener noreferrer">Meta Smart Glasses: Bundesnetzagentur sieht derzeit keinen Grund für ein Verbot</a>
+                  <div class="source-meta-row">
+                    <span class="source-pill" data-ui-map="role" data-raw-value="enterprise_signal">enterprise_signal</span>
+                    <span class="source-pill" data-ui-map="source-type" data-raw-value="media">media</span>
+                  </div>
+                  <div class="source-meta">
+                    <span><strong>Publisher:</strong> Deskmodder</span>
+                    <span><strong>Veröffentlicht:</strong> 2026-08-15</span>
+                    <span><strong>Abgerufen:</strong> 2026-08-31</span>
+                  </div>
+                </article>
+                <p class="field-note"><strong>Unsicherheit:</strong> Produktfakt mehrfach unabhängig bestätigt; EU-/DE-rechtliche Einordnung bleibt eigene Analyse dieses Briefings ohne Stellungnahme der Streitparteien.</p>
+              </div>
+            </details>
+            <details class="evidence">
+              <summary>Weitere Recherche</summary>
+              <div class="sources">
+                <p class="field-note">Wird die Staatsanwaltschaft Frankfurt angesichts des LED-Updates ein Ermittlungsverfahren eröffnen oder ablehnen, und äußert sich die Bundesnetzagentur erneut?</p>
+              </div>
+            </details>
+          </article>
+        </section>
+      </section>
+
+      <aside class="sidebar">
+        <section class="sidebar-block">
+          <h3>Wochenlage</h3>
+          <p class="sidebar-meta">Dünnes Wochenende, aber substanzielle Woche: Bundeskabinett diskutiert KI-Industriepolitik in Neuhardenberg, ein globaler Cyberabwehr-Appell erhält deutsche Unterschriften, Meta schließt eine Sicherheitslücke bei Smart Glasses, ChatGPT-Werbung startet in Deutschland.</p>
+          <div class="sidebar-status-grid">
+            <div class="status-card">
+              <span class="status-card-label">Woche</span>
+              <span class="status-card-value">Woche vom 24.–30. August 2026 (Wochenende 29./30.08. + Rückblick Mo–Fr)</span>
+            </div>
+            <div class="status-card">
+              <span class="status-card-label">Quellenlage</span>
+              <span class="status-card-value" data-ui-map="trust" data-raw-value="gemischt">gemischt</span>
+            </div>
+          </div>
+        </section>
+
+        <section class="sidebar-block regulation-panel">
+          <h3>Regulatorik</h3>
+          <article class="panel-item regulation-item" data-id="weekly-2026-w35-en18286" data-category="regulation">
+            <details>
+              <summary>EN 18286: weiterhin keine Amtsblatt-Zitierung</summary>
+              <div class="panel-detail compact-panel-details">
+                <div class="compact-panel-summary">
+                  <div class="story-meta"><span class="badge" data-trust="hoch" data-ui-map="trust" data-raw-value="hoch">hoch</span></div>
+                  <div class="compact-panel-stats">
+                    <span class="chip">Quellen: <span data-source-count>0</span></span>
+                    <span class="chip">Rollen</span>
+                  </div>
+                  <div class="compact-role-row" data-role-summary></div>
+                </div>
+                <p>Die europäische Norm für KI-Qualitätsmanagementsysteme (Art. 17 AI Act) ist seit 12.07. bei CEN-CENELEC genehmigt, doch die Kommissionsseite zeigt weiterhin keine Amtsblatt-Zitierung. „Q4 2026&quot; bleibt der einzige Zielzeitraum.</p>
+                <p><strong>EU-/DE-Impact:</strong> Direkt, EU-weit – ohne Amtsblatt-Zitierung entfällt die Konformitätsvermutung nach Art. 40 für Unternehmen, die sich an der Norm orientieren.</p>
+                <div class="sources">
+                  <ol class="compact-source-list">
+                  <li>
+                    <a href="https://digital-strategy.ec.europa.eu/en/policies/ai-act-standardisation" target="_blank" rel="noopener noreferrer">Standardisation of the AI Act</a>
+                    <div class="source-meta-row"><span class="source-pill" data-ui-map="role" data-raw-value="faktenanker" data-source-role>faktenanker</span></div>
+                  </li>
+                  </ol>
+                </div>
+              </div>
+            </details>
+          </article>
+          <article class="panel-item regulation-item" data-id="weekly-2026-w35-zak-appeal" data-category="regulation">
+            <details>
+              <summary>ZAK-Berufungsfrist gegen Google/Perplexity weiterhin ohne bestätigte Einreichung</summary>
+              <div class="panel-detail compact-panel-details">
+                <div class="compact-panel-summary">
+                  <div class="story-meta"><span class="badge" data-trust="mittel" data-ui-map="trust" data-raw-value="mittel">mittel</span></div>
+                  <div class="compact-panel-stats">
+                    <span class="chip">Quellen: <span data-source-count>0</span></span>
+                    <span class="chip">Rollen</span>
+                  </div>
+                  <div class="compact-role-row" data-role-summary></div>
+                </div>
+                <p>Die einmonatige Berufungsfrist gegen ZAKs Juli-Einstufung von Google AI Overviews/Perplexity als Inhalteanbieter ist seit Wochen abgelaufen; eine tatsächliche Einreichung ist weiterhin nicht bestätigt.</p>
+                <p><strong>EU-/DE-Impact:</strong> Direkt, national – deutsches Medienrecht vs. DSA-Haftungsschirm.</p>
+                <div class="sources">
+                  <ol class="compact-source-list">
+                  <li>
+                    <a href="https://www.ad-hoc-news.de/" target="_blank" rel="noopener noreferrer">ZAK-Berufungsfrist gegen Google-KI-Einstufung läuft aus</a>
+                    <div class="source-meta-row"><span class="source-pill" data-ui-map="role" data-raw-value="marktverifikation" data-source-role>marktverifikation</span></div>
+                  </li>
+                  </ol>
+                </div>
+              </div>
+            </details>
+          </article>
+          <article class="panel-item regulation-item" data-id="weekly-2026-w35-foundry-euzone" data-category="regulation">
+            <details>
+              <summary>Claude auf Microsoft Foundry weiterhin ohne EU-Datenzone</summary>
+              <div class="panel-detail compact-panel-details">
+                <div class="compact-panel-summary">
+                  <div class="story-meta"><span class="badge" data-trust="hoch" data-ui-map="trust" data-raw-value="hoch">hoch</span></div>
+                  <div class="compact-panel-stats">
+                    <span class="chip">Quellen: <span data-source-count>0</span></span>
+                    <span class="chip">Rollen</span>
+                  </div>
+                  <div class="compact-role-row" data-role-summary></div>
+                </div>
+                <p>Acht Wochen nach GA bietet Microsoft Foundry für Claude weiterhin nur Global-/US-Datenzonen; Anthropics eigene Compliance-Seite nennt die EU-Zone weiterhin nur „Coming 2026&quot; ohne festes Datum.</p>
+                <p><strong>EU-/DE-Impact:</strong> Direkt – relevant für europäische Enterprise-Kunden mit Datenresidenzanforderungen, die Claude über Foundry statt AWS/Google Vertex beziehen wollen.</p>
+                <div class="sources">
+                  <ol class="compact-source-list">
+                  <li>
+                    <a href="https://learn.microsoft.com/" target="_blank" rel="noopener noreferrer">Microsoft Foundry Q&amp;A-Dokumentation</a>
+                    <div class="source-meta-row"><span class="source-pill" data-ui-map="role" data-raw-value="developer_dokumentation" data-source-role>developer_dokumentation</span></div>
+                  </li>
+                  </ol>
+                </div>
+              </div>
+            </details>
+          </article>
+          <article class="panel-item regulation-item" data-id="weekly-2026-w35-schrems3" data-category="regulation">
+            <details>
+              <summary>noyb/„Schrems III&quot;: Klage gegen EU-US-Datenschutzrahmen weiterhin nicht eingereicht</summary>
+              <div class="panel-detail compact-panel-details">
+                <div class="compact-panel-summary">
+                  <div class="story-meta"><span class="badge" data-trust="mittel" data-ui-map="trust" data-raw-value="mittel">mittel</span></div>
+                  <div class="compact-panel-stats">
+                    <span class="chip">Quellen: <span data-source-count>0</span></span>
+                    <span class="chip">Rollen</span>
+                  </div>
+                  <div class="compact-role-row" data-role-summary></div>
+                </div>
+                <p>Noybs im Juni angekündigte Klage gegen den EU-US Data Privacy Framework ist mehr als acht Wochen nach der eigenen „coming weeks&quot;-Ankündigung weiterhin nicht beim EuGH eingereicht.</p>
+                <p><strong>EU-/DE-Impact:</strong> Direkt, EU-weit – betrifft die Rechtsgrundlage für EU-US-Datentransfers, auf die viele KI-Dienste angewiesen sind.</p>
+                <div class="sources">
+                  <ol class="compact-source-list">
+                  <li>
+                    <a href="https://noyb.eu/en" target="_blank" rel="noopener noreferrer">noyb.eu Newsroom</a>
+                    <div class="source-meta-row"><span class="source-pill" data-ui-map="role" data-raw-value="faktenanker" data-source-role>faktenanker</span></div>
+                  </li>
+                  </ol>
+                </div>
+              </div>
+            </details>
+          </article>
+        </section>
+
+        <section class="sidebar-block product-panel">
+          <h3>Produkte & Plattformen</h3>
+          <article class="panel-item product-item" data-id="weekly-2026-w35-glm53" data-category="product">
+            <details>
+              <summary>Z.ai veröffentlicht GLM-5.3-Gewichte offen, mit neuer Hyperscaler-Lizenzklausel</summary>
+              <div class="panel-detail compact-panel-details">
+                <div class="compact-panel-summary">
+                  <div class="story-meta"><span class="chip">Z.ai / GLM-5.3</span><span class="badge" data-trust="watchlist" data-ui-map="trust" data-raw-value="watchlist">watchlist</span></div>
+                  <div class="compact-panel-stats">
+                    <span class="chip">Quellen: <span data-source-count>0</span></span>
+                    <span class="chip">Rollen</span>
+                  </div>
+                  <div class="compact-role-row" data-role-summary></div>
+                </div>
+                <p>Mit einem Tag Verzug veröffentlichte Z.ai die vollständigen GLM-5.3-Gewichte auf Hugging Face. Die neue Lizenz verlangt von Unternehmen mit über 10 Mrd. USD Jahresumsatz eine Sicherheitsprüfung durch Z.ai vor kommerziellem Hosting.</p>
+                <p><strong>Business-Relevanz:</strong> Löst den seit Wochen offenen Watchlist-Punkt auf; bleibt aber ohne erkennbare EU-Regulierungsreaktion oder deutsche Enterprise-Stellungnahme.</p>
+                <div class="sources">
+                  <ol class="compact-source-list">
+                  <li>
+                    <a href="https://thenewstack.io/zai-glm-weights-license/" target="_blank" rel="noopener noreferrer">Z.ai&#x27;s GLM-5.3 goes open weight, but its new license aims at hyperscalers</a>
+                    <div class="source-meta-row"><span class="source-pill" data-ui-map="role" data-raw-value="marktverifikation" data-source-role>marktverifikation</span></div>
+                  </li>
+                  </ol>
+                </div>
+              </div>
+            </details>
+          </article>
+        </section>
+
+        <section class="sidebar-block global-panel">
+          <h3>Global mit EU-Impact</h3>
+          <article class="panel-item global-item" data-id="weekly-2026-w35-alephalpha-cohere" data-category="global_eu">
+            <details>
+              <summary>Aleph Alpha × Cohere: Fusion weiterhin nicht formal abgeschlossen</summary>
+              <div class="panel-detail compact-panel-details">
+                <div class="compact-panel-summary">
+                  <div class="story-meta"><span class="chip">Deutschland / Kanada</span><span class="badge" data-trust="mittel" data-ui-map="trust" data-raw-value="mittel">mittel</span></div>
+                  <div class="compact-panel-stats">
+                    <span class="chip">Quellen: <span data-source-count>0</span></span>
+                    <span class="chip">Rollen</span>
+                  </div>
+                  <div class="compact-role-row" data-role-summary></div>
+                </div>
+                <p>Die im April angekündigte Fusion zu einem „transatlantischen KI-Champion&quot; wartet weiterhin auf die kartellrechtliche Freigabe durch Bundeskartellamt, EU-Kommission und kanadische Wettbewerbsbehörde. Keine Abschlussmeldung in dieser Woche gefunden.</p>
+                <p><strong>EU-/DE-Impact:</strong> Direkt – deutsches Unternehmen, Bundeskartellamt als eine von drei Freigabestellen; Cohere-CEO Gomez war zeitgleich Gast der Neuhardenberg-Klausur, ohne belegte Verbindung zur Fusion.</p>
+                <div class="sources">
+                  <ol class="compact-source-list">
+                  <li>
+                    <a href="https://techcrunch.com/2026/04/24/cohere-acquires-merges-with-german-based-startup-to-create-a-transatlantic-ai-powerhouse/" target="_blank" rel="noopener noreferrer">Cohere acquires, merges with Germany-based startup to create a &#x27;transatlantic AI powerhouse&#x27;</a>
+                    <div class="source-meta-row"><span class="source-pill" data-ui-map="role" data-raw-value="marktverifikation" data-source-role>marktverifikation</span></div>
+                  </li>
+                  </ol>
+                </div>
+              </div>
+            </details>
+          </article>
+        </section>
+
+        <section class="sidebar-block watchlist-archive-panel">
+          <h3>Watchlist & Archiv</h3>
+          <div class="section-stack watchlist">
+            <article class="panel-item watch-item" data-id="weekly-2026-w35-watchlist-meta-reaction">
+              <details>
+                <summary>Meta-Glasses-LED-Fix: deutsche Reaktion steht noch aus</summary>
+                <div class="panel-detail compact-panel-details">
+                  <div class="compact-panel-summary">
+                    <div class="story-meta"><span class="badge" data-trust="watchlist" data-ui-map="trust" data-raw-value="watchlist">watchlist</span></div>
+                    <div class="compact-panel-stats">
+                      <span class="chip">Quellen: <span data-source-count>0</span></span>
+                      <span class="chip">Rollen</span>
+                    </div>
+                    <div class="compact-role-row" data-role-summary></div>
+                  </div>
+                  <p>Weder HateAid noch Bundesnetzagentur haben sich bislang zum 28.08.-Update geäußert, das die zentrale technische Lücke des laufenden Streits schließt.</p>
+                  <p><strong>Warum beobachten:</strong> Könnte die rechtliche Auseinandersetzung entschärfen oder HateAid zu einer Neubewertung der Strafanzeige bewegen.</p>
+                  <p><strong>Nächstes Signal:</strong> Eine Stellungnahme von HateAid, Bundesnetzagentur oder der Staatsanwaltschaft Frankfurt.</p>
+                  <div class="sources">
+                    <ol class="compact-source-list">
+                    <li>
+                      <a href="https://www.computerbase.de/news/wearables/smart-glasses-hateaid-zeigt-meta-ray-ban-und-haendler-an.98859/" target="_blank" rel="noopener noreferrer">Smart Glasses: HateAid zeigt Meta, Ray-Ban und Händler an</a>
+                      <div class="source-meta-row"><span class="source-pill" data-ui-map="role" data-raw-value="enterprise_signal" data-source-role>enterprise_signal</span></div>
+                    </li>
+                    </ol>
+                  </div>
+                </div>
+              </details>
+            </article>
+            <article class="panel-item watch-item" data-id="weekly-2026-w35-watchlist-anthropic-ipo">
+              <details>
+                <summary>Anthropic-IPO: weiterhin kein öffentliches S-1</summary>
+                <div class="panel-detail compact-panel-details">
+                  <div class="compact-panel-summary">
+                    <div class="story-meta"><span class="badge" data-trust="watchlist" data-ui-map="trust" data-raw-value="watchlist">watchlist</span></div>
+                    <div class="compact-panel-stats">
+                      <span class="chip">Quellen: <span data-source-count>0</span></span>
+                      <span class="chip">Rollen</span>
+                    </div>
+                    <div class="compact-role-row" data-role-summary></div>
+                  </div>
+                  <p>CNBC berichtete am 21.08., das künftige S-1 werde „AI backlash&quot; explizit als Risikofaktor nennen. Weiterhin keine öffentliche Einreichung, kein EU-Bezug.</p>
+                  <p><strong>Warum beobachten:</strong> Eine der größten erwarteten Tech-IPOs des Jahres, mit potenzieller Signalwirkung für europäische KI-Investitionen.</p>
+                  <p><strong>Nächstes Signal:</strong> Die tatsächliche öffentliche S-1-Einreichung bei der SEC.</p>
+                  <div class="sources">
+                    <ol class="compact-source-list">
+                    <li>
+                      <a href="https://www.cnbc.com/2026/08/21/-anthropic-ipo-filing-will-show-ai-backlash-as-risk-sources-say.html" target="_blank" rel="noopener noreferrer">Anthropic IPO filing will show AI backlash as a risk factor, sources say</a>
+                      <div class="source-meta-row"><span class="source-pill" data-ui-map="role" data-raw-value="marktverifikation" data-source-role>marktverifikation</span></div>
+                    </li>
+                    </ol>
+                  </div>
+                </div>
+              </details>
+            </article>
+          </div>
+
+          <div class="section-stack archive-references">
+            <article class="archive-item" data-id="weekly-2026-w35-archive-meta-glasses">
+              <span class="badge relation-type" data-ui-map="relation-type" data-raw-value="follow_up">follow_up</span>
+              <h4>Meta-Smart-Glasses-Streit Deutschland</h4>
+              <p class="sidebar-meta">Fortsetzung des seit 08.07. laufenden Streits; HateAid-Anzeige 12.08., BNetzA-Position 15.08., Meta-LED-Fix 28.08.</p>
+            </article>
+            <article class="archive-item" data-id="weekly-2026-w35-archive-litellm">
+              <span class="badge relation-type" data-ui-map="relation-type" data-raw-value="recurring_theme">recurring_theme</span>
+              <h4>LiteLLM/TeamPCP-Lieferkettenleck</h4>
+              <p class="sidebar-meta">Vierte Weekly-Ausgabe in Folge ohne Stellungnahme einer benannten Firma; nicht erneut als eigene Meldung aufgenommen, da keine neue Substanz.</p>
+            </article>
+          </div>
+        </section>
+      </aside>
+    </section>
+  </main>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const labelMaps = {
+        category: {
+          regulation: 'Regulierung',
+          product: 'Produkte & Plattformen',
+          global_eu: 'Global mit EU-Impact',
+          enterprise_ai: 'Enterprise AI',
+          governance: 'Governance',
+          watchlist: 'Watchlist'
+        },
+        priority: {
+          P1: 'Sehr wichtig',
+          P2: 'Relevant',
+          P3: 'Kurz notiert'
+        },
+        trust: {
+          hoch: 'Hohe Quellenlage',
+          mittel: 'Mittlere Quellenlage',
+          niedrig: 'Niedrige Quellenlage',
+          gemischt: 'Gemischte Quellenlage',
+          watchlist: 'Watchlist'
+        },
+        role: {
+          faktenanker: 'Faktenanker',
+          policy_interpretation: 'Policy-Interpretation',
+          marktverifikation: 'Marktverifikation',
+          produktquelle: 'Produktquelle',
+          enterprise_signal: 'Enterprise-Signal',
+          'frühindikator': 'Frühindikator',
+          unternehmensquelle: 'Unternehmensquelle',
+          developer_dokumentation: 'Entwicklerdokumentation'
+        },
+        'source-type': {
+          official: 'Offizielle Quelle',
+          vendor: 'Anbieterquelle',
+          media: 'Medienbericht',
+          research: 'Research',
+          community: 'Community',
+          documentation: 'Dokumentation',
+          legal: 'Rechtstext'
+        },
+        'relation-type': {
+          follow_up: 'Follow-up',
+          recurring_theme: 'Wiederkehrendes Thema',
+          precedent: 'Präzedenzfall',
+          trendline: 'Trendlinie'
+        }
+      };
+
+      const mapLabel = (group, rawValue) => {
+        if (!rawValue) return '';
+        return (labelMaps[group] && labelMaps[group][rawValue]) || rawValue;
+      };
+
+      document.querySelectorAll('[data-ui-map]').forEach((element) => {
+        const group = element.dataset.uiMap;
+        const rawValue = element.dataset.rawValue || element.textContent.trim();
+        const mappedValue = mapLabel(group === 'weekly-trust' ? 'trust' : group, rawValue);
+
+        if (group === 'weekly-trust') {
+          element.textContent = `Vertrauensbild: ${mappedValue}`;
+          return;
+        }
+
+        element.textContent = mappedValue;
+      });
+
+      document.querySelectorAll('.panel-item').forEach((item) => {
+        const roleSummary = item.querySelector('[data-role-summary]');
+        const roleNodes = Array.from(item.querySelectorAll('[data-source-role]'));
+        const sourceCountNode = item.querySelector('[data-source-count]');
+        const uniqueRoles = [...new Set(roleNodes.map((node) => node.dataset.rawValue).filter(Boolean))];
+
+        if (sourceCountNode) sourceCountNode.textContent = String(roleNodes.length);
+
+        if (roleSummary) {
+          roleSummary.innerHTML = '';
+          uniqueRoles.forEach((role) => {
+            const pill = document.createElement('span');
+            pill.className = 'source-pill';
+            pill.textContent = mapLabel('role', role);
+            roleSummary.appendChild(pill);
+          });
+        }
+      });
+    });
+  </script>
+</body>
+</html>
