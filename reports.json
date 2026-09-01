@@ -1,6 +1,25 @@
 {
   "reports": [
     {
+      "id": "daily-2026-08-31",
+      "mode": "daily",
+      "title": "Daily Briefing 31.08.2026",
+      "date_label": "31.08.2026",
+      "window_start": "2026-08-31",
+      "window_end": "2026-08-31",
+      "public_url": "https://ai-news.camphausen.eu/daily/2026-08-31.html",
+      "published_at": "2026-09-01T05:05:32Z",
+      "summary": "Dünnes, aber reales Nachrichtenfenster: OpenAI öffnet Selbstbedienungs-Werbebuchung für Deutschland/Österreich/Schweiz, EU-Kommissarin Virkkunen vertritt die EU beim G20-Digitalministertreffen. Vier Standards-/Regulierungsfäden bleiben unverändert.",
+      "trust_status": "hoch",
+      "tags": [
+        "OpenAI",
+        "ChatGPT Ads",
+        "EU-Kommission",
+        "G20",
+        "AI Act"
+      ]
+    },
+    {
       "id": "daily-2026-08-28",
       "mode": "daily",
       "title": "Daily Briefing 28.08.2026: Meta schließt Smart-Glasses-Sicherheitslücke, SAP-Unterschrift bestätigt",
