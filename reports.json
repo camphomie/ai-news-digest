@@ -1,6 +1,23 @@
 {
   "reports": [
     {
+      "id": "daily-2026-09-02",
+      "mode": "daily",
+      "title": "Daily Briefing 02.09.2026",
+      "date_label": "02.09.2026",
+      "window_start": "2026-09-02",
+      "window_end": "2026-09-02",
+      "public_url": "https://ai-news.camphausen.eu/daily/2026-09-02.html",
+      "published_at": "2026-09-03T04:24:27Z",
+      "summary": "G20-Gipfel: Virkkunen relativiert EU-US-Regulierungslücke trotz US-Leitprinzipien",
+      "trust_status": "hoch",
+      "tags": [
+        "G20",
+        "AI Act",
+        "Governance"
+      ]
+    },
+    {
       "id": "daily-2026-09-01",
       "mode": "daily",
       "title": "Daily Briefing 01.09.2026",
