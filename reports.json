@@ -1,6 +1,24 @@
 {
   "reports": [
     {
+      "id": "daily-2026-09-03",
+      "mode": "daily",
+      "title": "Daily Briefing 03.09.2026: GPT-6 Astra erreicht 'Critical'-Schwelle – EU greift nur nachträglich",
+      "date_label": "03.09.2026",
+      "window_start": "2026-09-03",
+      "window_end": "2026-09-03",
+      "public_url": "https://ai-news.camphausen.eu/daily/2026-09-03.html",
+      "published_at": "2026-09-04T04:34:02Z",
+      "summary": "OpenAI veröffentlicht mit GPT-6 Astra sein erstes Modell auf der 'Critical'-Cyberschwelle – die EU kann laut Art. 92 AI Act nur nachträglich eingreifen. Sieben Standards- und Governance-Fäden bleiben unverändert.",
+      "trust_status": "hoch",
+      "tags": [
+        "AI Act",
+        "GPT-6 Astra",
+        "OpenAI",
+        "Governance"
+      ]
+    },
+    {
       "id": "daily-2026-09-02",
       "mode": "daily",
       "title": "Daily Briefing 02.09.2026",
