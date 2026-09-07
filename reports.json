@@ -55,6 +55,24 @@
       ]
     },
     {
+      "id": "weekly-2026-W36",
+      "mode": "weekly",
+      "title": "Wochenbericht KW 36: GPT-6 Astra, Prager KI-Deklaration und ein dünnes Wochenende",
+      "date_label": "31.08.–06.09.2026",
+      "window_start": "2026-08-31",
+      "window_end": "2026-09-06",
+      "public_url": "https://ai-news.camphausen.eu/weekly/2026-W36.html",
+      "published_at": "2026-09-07T06:06:02Z",
+      "summary": "Die IFA 2026 in Berlin liefert das einzige wochenend-datierte Ereignis. Die Substanz der Woche liegt im Rückblick: GPT-6 Astra überschreitet die 'Critical'-Schwelle, neun mittel-/osteuropäische Staaten koordinieren KI-Politik in Prag, der BGH verhandelt über KI-Trainingsdaten und Urheberrecht, ChatGPT wird zur VLOSE.",
+      "trust_status": "gemischt",
+      "tags": [
+        "AI Act",
+        "Governance",
+        "Enterprise AI",
+        "Regulierung"
+      ]
+    },
+    {
       "id": "daily-2026-08-31",
       "mode": "daily",
       "title": "Daily Briefing 31.08.2026",
