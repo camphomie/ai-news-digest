@@ -1,6 +1,24 @@
 {
   "reports": [
     {
+      "id": "daily-2026-09-09",
+      "mode": "daily",
+      "title": "Daily Briefing 09.09.2026",
+      "date_label": "09.09.2026",
+      "window_start": "2026-09-09",
+      "window_end": "2026-09-09",
+      "public_url": "https://ai-news.camphausen.eu/daily/2026-09-09.html",
+      "published_at": "2026-09-10T04:59:34Z",
+      "summary": "Metas KI-Agent Muse startet nur in den USA – interne Tests zeigten eine Sicherheitslücke bei privaten Fotos. Ein Anthropic-Forscher warnt öffentlich vor Superintelligenz-Risiken, sein Alignment-Lead stimmt zu.",
+      "trust_status": "mittel",
+      "tags": [
+        "Enterprise AI",
+        "Governance",
+        "Meta",
+        "Anthropic"
+      ]
+    },
+    {
       "id": "daily-2026-09-08",
       "mode": "daily",
       "title": "Daily Briefing 08.09.2026",
