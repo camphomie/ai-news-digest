@@ -1,0 +1,1274 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Anthropic öffnet EU-Agentur ENISA Zugang zu Mythos 5 – eigene Sicherheitsvorfälle bei Cyber-Tests offengelegt</title>
+  <style>
+    :root {
+      --bg: #eef3f9;
+      --bg-radial: radial-gradient(circle at top left, rgba(49, 91, 217, 0.14), transparent 32rem), radial-gradient(circle at top right, rgba(31, 122, 77, 0.10), transparent 28rem), #eef3f9;
+      --surface: #ffffff;
+      --surface-soft: #f7f9fd;
+      --surface-blue: #f1f5ff;
+      --text: #111b2e;
+      --muted: #66748c;
+      --muted-2: #8190a8;
+      --border: #d9e2ef;
+      --border-strong: #bfcae0;
+      --accent: #244ed8;
+      --accent-strong: #1739a8;
+      --accent-soft: #e8efff;
+      --success: #1f7a4d;
+      --success-soft: #e7f5ee;
+      --warning: #b26a00;
+      --warning-soft: #fff3dc;
+      --risk: #a63f3f;
+      --risk-soft: #fdecec;
+      --watch: #2563eb;
+      --watch-soft: #eaf1ff;
+      --shadow: 0 18px 45px rgba(17, 30, 58, 0.10);
+      --shadow-soft: 0 8px 24px rgba(17, 30, 58, 0.07);
+      --radius-xl: 26px;
+      --radius-lg: 18px;
+      --radius-md: 14px;
+      --radius-sm: 10px;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      padding: 34px;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--bg-radial);
+      color: var(--text);
+      line-height: 1.55;
+    }
+
+    h1, h2, h3, h4, p { margin: 0; }
+    h1 { max-width: 920px; font-size: clamp(32px, 5vw, 56px); line-height: 0.98; letter-spacing: -0.045em; }
+    h2 { font-size: clamp(22px, 3vw, 34px); line-height: 1.08; letter-spacing: -0.03em; }
+    h3 { font-size: 20px; line-height: 1.18; letter-spacing: -0.02em; }
+    h4 { font-size: 15px; line-height: 1.25; }
+    a { color: var(--accent-strong); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    .daily-briefing {
+      max-width: 1220px;
+      margin: 0 auto;
+      display: grid;
+      gap: 24px;
+    }
+
+    .hero,
+    .top-story,
+    .story-card,
+    .sidebar-block {
+      background: rgba(255, 255, 255, 0.92);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow-soft);
+      backdrop-filter: blur(12px);
+    }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      padding: 30px;
+      display: grid;
+      gap: 18px;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      height: 5px;
+      background: linear-gradient(90deg, #244ed8, #1f7a4d, #b26a00);
+      pointer-events: none;
+    }
+
+    .hero > * { position: relative; }
+
+    .eyebrow,
+    .story-kicker,
+    .section-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      line-height: 1;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-weight: 800;
+    }
+
+    .eyebrow::before,
+    .section-label::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 0 5px var(--accent-soft);
+      flex: 0 0 auto;
+    }
+
+    .briefing-summary {
+      max-width: 880px;
+      color: var(--muted);
+      font-size: 17px;
+    }
+
+    .meta-row,
+    .story-meta,
+    .filter-row,
+    .source-meta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .chip,
+    .badge,
+    .filter-button,
+    .source-pill {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 800;
+      line-height: 1;
+      white-space: nowrap;
+    }
+
+    .chip {
+      padding: 9px 11px;
+      background: var(--accent-soft);
+      color: var(--accent-strong);
+      border: 1px solid rgba(36, 78, 216, 0.12);
+    }
+
+    .badge {
+      padding: 8px 10px;
+      border: 1px solid var(--border);
+      background: var(--surface-soft);
+      color: var(--muted);
+    }
+
+    .badge[data-trust="hoch"] { background: var(--success-soft); color: var(--success); border-color: rgba(31, 122, 77, 0.20); }
+    .badge[data-trust="mittel"], .badge[data-trust="gemischt"] { background: var(--warning-soft); color: var(--warning); border-color: rgba(178, 106, 0, 0.22); }
+    .badge[data-trust="niedrig"] { background: var(--risk-soft); color: var(--risk); border-color: rgba(166, 63, 63, 0.22); }
+    .badge[data-trust="watchlist"] { background: var(--watch-soft); color: var(--watch); border-color: rgba(37, 99, 235, 0.18); }
+
+    .main-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 2.05fr) minmax(300px, 0.95fr);
+      gap: 24px;
+      align-items: start;
+    }
+
+    .main-column,
+    .priority-stories,
+    .sidebar {
+      display: grid;
+      gap: 18px;
+      min-width: 0;
+    }
+
+    .top-story,
+    .story-card {
+      padding: 22px;
+      display: grid;
+      gap: 15px;
+      min-width: 0;
+    }
+
+    .top-story {
+      border-color: rgba(36, 78, 216, 0.24);
+      box-shadow: var(--shadow);
+    }
+
+    .story-header {
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      align-items: flex-start;
+      min-width: 0;
+    }
+
+    .story-title-block,
+    .story-text-stack {
+      display: grid;
+      gap: 8px;
+      min-width: 0;
+    }
+
+    .story-title-block h2,
+    .story-title-block h3 {
+      overflow-wrap: anywhere;
+    }
+
+    .field-note { color: var(--muted); }
+    .field-note strong { color: var(--text); }
+
+    .takeaway {
+      border: 1px solid var(--border);
+      background: linear-gradient(180deg, #fbfcff, #f6f8fc);
+      border-radius: var(--radius-lg);
+      padding: 16px;
+      display: grid;
+      gap: 6px;
+    }
+
+    .takeaway strong {
+      font-size: 13px;
+      letter-spacing: 0.02em;
+    }
+
+    .score-strip {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 10px;
+      max-width: 100%;
+      min-width: 0;
+    }
+
+    .score-item {
+      --score: 1;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      background: var(--surface-soft);
+      padding: 12px;
+      display: grid;
+      gap: 8px;
+      min-height: 88px;
+      min-width: 0;
+      overflow: hidden;
+    }
+
+    .score-topline {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 6px;
+      min-width: 0;
+      max-width: 100%;
+    }
+
+    .score-value {
+      min-width: 0;
+      max-width: 100%;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      font-size: 24px;
+      line-height: 1;
+      font-weight: 900;
+      letter-spacing: -0.04em;
+    }
+
+    .score-max {
+      color: var(--muted-2);
+      font-size: 11px;
+      font-weight: 800;
+      flex: 0 0 auto;
+    }
+
+    .score-label {
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.15;
+      font-weight: 750;
+      overflow-wrap: anywhere;
+      hyphens: auto;
+    }
+
+    .meter {
+      width: 100%;
+      min-width: 0;
+      height: 7px;
+      border-radius: 999px;
+      background: #e4e9f2;
+      overflow: hidden;
+    }
+
+    .meter > span {
+      display: block;
+      height: 100%;
+      width: clamp(0%, calc(var(--score) * 20%), 100%);
+      max-width: 100%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, var(--accent), #1f7a4d);
+    }
+
+    .filter-panel {
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      background: rgba(255, 255, 255, 0.78);
+      box-shadow: var(--shadow-soft);
+      padding: 14px;
+      display: grid;
+      gap: 10px;
+    }
+
+    .filter-label {
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 850;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .filter-button {
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--muted);
+      padding: 8px 10px;
+      cursor: pointer;
+      transition: background 0.18s ease, color 0.18s ease, border-color 0.18s ease, transform 0.18s ease;
+    }
+
+    .filter-button:hover {
+      transform: translateY(-1px);
+      border-color: var(--border-strong);
+    }
+
+    .filter-button.active,
+    .filter-button[aria-pressed="true"] {
+      background: var(--text);
+      color: #ffffff;
+      border-color: var(--text);
+    }
+
+    .is-filtered-out { display: none !important; }
+
+    .filter-empty-state {
+      display: none;
+      border: 1px dashed var(--border-strong);
+      border-radius: var(--radius-lg);
+      background: rgba(255, 255, 255, 0.7);
+      padding: 16px;
+      color: var(--muted);
+    }
+
+    .filter-empty-state.is-visible { display: block; }
+
+    .sidebar-status-grid,
+    .compact-source-summary,
+    .compact-source-details,
+    .compact-role-row {
+      display: grid;
+      gap: 10px;
+    }
+
+    .sidebar-status-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .status-card {
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      background: var(--surface-soft);
+      padding: 12px;
+      display: grid;
+      gap: 5px;
+    }
+
+    .status-card-label {
+      font-size: 11px;
+      font-weight: 850;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--muted-2);
+    }
+
+    .status-card-value {
+      font-size: 14px;
+      font-weight: 800;
+      color: var(--text);
+    }
+
+    .compact-source-header {
+      display: grid;
+      gap: 8px;
+    }
+
+    .compact-source-stats {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .compact-source-list {
+      margin: 0;
+      padding-left: 18px;
+      color: var(--muted);
+      display: grid;
+      gap: 6px;
+    }
+
+    .compact-source-list a,
+    .compact-source-list .source-label-fallback {
+      font-weight: 750;
+    }
+
+    .story-card { box-shadow: var(--shadow-soft); }
+    .story-card[data-category="regulation"] { border-left: 5px solid var(--accent); }
+    .story-card[data-category="governance"] { border-left: 5px solid var(--success); }
+    .story-card[data-category="enterprise_ai"] { border-left: 5px solid #5b5fd6; }
+    .story-card[data-category="product"] { border-left: 5px solid #6b55c9; }
+    .story-card[data-category="global_eu"] { border-left: 5px solid #2d8aa6; }
+    .story-card[data-category="watchlist"] { border-left: 5px solid var(--watch); }
+
+    details.evidence {
+      border-top: 1px solid var(--border);
+      padding-top: 10px;
+    }
+
+    details.evidence summary,
+    .source-item summary {
+      cursor: pointer;
+      list-style: none;
+      color: var(--accent-strong);
+      font-size: 13px;
+      font-weight: 850;
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      align-items: center;
+    }
+
+    details.evidence summary::-webkit-details-marker,
+    .source-item summary::-webkit-details-marker { display: none; }
+
+    details.evidence summary::after,
+    .source-item summary::after {
+      content: "+";
+      display: grid;
+      place-items: center;
+      width: 22px;
+      height: 22px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: var(--accent-strong);
+      font-size: 15px;
+      line-height: 1;
+      flex: 0 0 auto;
+    }
+
+    details.evidence[open] summary::after,
+    .source-item details[open] summary::after { content: "–"; }
+
+    .sources {
+      margin-top: 10px;
+      display: grid;
+      gap: 8px;
+      padding: 12px;
+      border-radius: var(--radius-md);
+      background: var(--surface-soft);
+      border: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 13px;
+      min-width: 0;
+    }
+
+    .source-link-card {
+      display: grid;
+      gap: 7px;
+      padding: 10px;
+      border: 1px solid rgba(191, 202, 224, 0.75);
+      border-radius: var(--radius-sm);
+      background: #ffffff;
+      min-width: 0;
+    }
+
+    .source-link-card a,
+    .source-link-card .source-label-fallback {
+      font-weight: 850;
+      overflow-wrap: anywhere;
+    }
+
+    .source-label-fallback { color: var(--text); }
+
+    .source-pill {
+      align-self: start;
+      justify-self: start;
+      padding: 5px 7px;
+      border: 1px solid var(--border);
+      background: #eef2ff;
+      color: #3730a3;
+      font-size: 10.5px;
+      letter-spacing: 0.01em;
+    }
+
+    .source-meta {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 6px 10px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .source-meta span { overflow-wrap: anywhere; }
+    .source-meta strong { color: var(--text); }
+
+    .sidebar-block {
+      padding: 18px;
+      display: grid;
+      gap: 12px;
+    }
+
+    .watch-item,
+    .source-item,
+    .archive-item {
+      border: 1px solid var(--border);
+      background: var(--surface-soft);
+      border-radius: var(--radius-md);
+      padding: 13px;
+      display: grid;
+      gap: 7px;
+      min-width: 0;
+    }
+
+    .sidebar-meta {
+      color: var(--muted);
+      font-size: 13px;
+      overflow-wrap: anywhere;
+    }
+
+    .source-item { padding: 0; overflow: hidden; }
+    .source-item details { padding: 12px 13px; }
+    .source-item summary { color: var(--text); overflow-wrap: anywhere; }
+    .source-item .source-detail {
+      margin-top: 9px;
+      display: grid;
+      gap: 8px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+    .archive-item .relation-type { justify-self: start; background: #eef2ff; color: #3730a3; }
+
+    @media (max-width: 980px) {
+      body { padding: 18px; }
+      .hero, .top-story, .story-card, .sidebar-block { border-radius: var(--radius-lg); }
+      .main-layout { grid-template-columns: 1fr; }
+      .score-strip {
+        grid-template-columns: repeat(5, minmax(78px, 1fr));
+        gap: 7px;
+        overflow-x: auto;
+        overflow-y: hidden;
+        padding-bottom: 2px;
+        scrollbar-width: thin;
+      }
+      .score-item { min-height: 58px; padding: 7px 8px; gap: 5px; }
+      .score-value { font-size: 16px; }
+      .score-max { font-size: 10px; }
+      .score-label { font-size: 10px; line-height: 1.1; }
+      .meter { height: 4px; }
+      .chip, .badge, .filter-button { padding: 6px 8px; font-size: 11px; }
+      .filter-panel { padding: 12px; }
+      .filter-row { gap: 7px; }
+      .source-meta { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 560px) {
+      body { padding: 12px; }
+      .daily-briefing { gap: 14px; }
+      .hero { padding: 22px; }
+      .story-header { display: grid; gap: 10px; }
+      .story-meta { gap: 7px; }
+      .score-strip { grid-template-columns: repeat(5, minmax(72px, 1fr)); }
+      .score-item { min-height: 54px; padding: 6px 7px; }
+      .score-value { font-size: 15px; }
+      .score-max { font-size: 10px; }
+      .score-label { font-size: 9.5px; }
+      .filter-row {
+        display: flex;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        padding-bottom: 2px;
+        scrollbar-width: thin;
+      }
+      .filter-button { flex: 0 0 auto; }
+      .sources { padding: 10px; }
+      .source-link-card { padding: 9px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="daily-briefing">
+    <section class="hero">
+      <div class="eyebrow">Daily AI Intelligence Briefing</div>
+      <h1>Anthropic öffnet EU-Agentur ENISA Zugang zu Mythos 5 – eigene Sicherheitsvorfälle bei Cyber-Tests offengelegt</h1>
+      <p class="briefing-summary">ENISA erhält nach drei Monaten Zugang zu Anthropics Mythos 5. Zugleich legt Anthropic drei eigene Sicherheitsvorfälle bei Cyber-Evaluierungen offen – fünf Tage vor der ersten AI-Act-GPAI-Systemrisikofrist. Dazu: OpenAIs Agents-API ohne EU-Datenresidenz und der Standards-Recheck.</p>
+      <div class="meta-row">
+        <span class="chip">Datum: 2026-09-10</span>
+        <span class="chip">Fenster: Donnerstag, 10.09.2026 (Tagesfenster)</span>
+        <span class="chip">Fokus: Deutschland / EU</span>
+        <span class="badge" data-trust="hoch" data-ui-map="overall-trust" data-raw-value="hoch">Status: hoch</span>
+      </div>
+    </section>
+
+    <section class="main-layout">
+      <section class="main-column">
+        <article class="top-story">
+          <div class="story-header">
+            <div class="story-title-block">
+              <div class="story-kicker">Top Story</div>
+              <h2>Anthropic gewährt EU-Cyberagentur ENISA Zugang zu Mythos 5 – nach über drei Monaten Verzögerung</h2>
+            </div>
+            <span class="chip" data-ui-map="priority" data-raw-value="P1">P1</span>
+          </div>
+          <p>Die EU-Kommission bestätigte am 10.09. über Sprecher Thomas Regnier, dass ENISA Zugang zu Anthropics Mythos 5 erhalten hat und testet. Mythos 5 ging im April 2026 unter „Project Glasswing&quot; zunächst an rund 50 (später ~200) geprüfte Partner zur Suche nach Sicherheitslücken – ein Modell mit erheblichen offensiven Cyberfähigkeiten. Die EU war bislang ausgeschlossen; sie hatte dies, im Zusammenhang mit US-Exportkontrollen, als Benachteiligung eines „vertrauenswürdigen Partners&quot; kritisiert. ENISA hatte laut Euronews zuvor bereits Zugang zu OpenAIs GPT-5.6-Cyber und GPT-6 Astra. Genauer Zugriffsumfang unbelegt; keine deutschlandspezifische Stellungnahme.</p>
+          <div class="score-strip">
+            <div class="score-item" style="--score: 5"><div class="score-topline"><span class="score-value">5</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">EU / DE-Relevanz</div></div>
+            <div class="score-item" style="--score: 4"><div class="score-topline"><span class="score-value">4</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Business Impact</div></div>
+            <div class="score-item" style="--score: 4"><div class="score-topline"><span class="score-value">4</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Regulatorik</div></div>
+            <div class="score-item" style="--score: 4"><div class="score-topline"><span class="score-value">4</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Technologie</div></div>
+            <div class="score-item" style="--score: 4"><div class="score-topline"><span class="score-value">4</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Lernwert</div></div>
+          </div>
+          <div class="takeaway">
+            <strong>Einschätzung</strong>
+            <p class="field-note">Nach über drei Monaten Verzögerung erhält die EU-Cybersicherheitsagentur ENISA offiziell Zugang zu einem der leistungsfähigsten und riskantesten Cyber-KI-Modelle – ein konkreter Testfall dafür, wie die EU mit dual-use-KI von US-Anbietern institutionell umgeht, jenseits reiner AI-Act-Papierregeln.</p>
+          </div>
+          <details class="evidence">
+            <summary>Quellen</summary>
+            <div class="sources">
+              <article class="source-link-card">
+                <a href="https://www.euronews.com/my-europe/2026/09/10/the-eu-got-access-to-anthropics-most-powerful-model-three-months-later" target="_blank" rel="noopener noreferrer">The EU got access to Anthropic&#x27;s most powerful model, three months later</a>
+                <div class="source-meta-row">
+                  <span class="source-pill" data-ui-map="role" data-raw-value="marktverifikation">marktverifikation</span>
+                  <span class="source-pill" data-ui-map="source-type" data-raw-value="media">media</span>
+                </div>
+                <div class="source-meta">
+                  <span><strong>Publisher:</strong> Euronews</span>
+                  <span><strong>Veröffentlicht:</strong> 2026-09-10</span>
+                  <span><strong>Abgerufen:</strong> 2026-09-11</span>
+                </div>
+              </article>
+              <article class="source-link-card">
+                <a href="https://www.bloomberg.com/news/articles/2026-09-10/anthropic-gives-eu-access-to-mythos-months-after-model-s-release" target="_blank" rel="noopener noreferrer">Anthropic Gives EU Access to Mythos Months After Model&#x27;s Release</a>
+                <div class="source-meta-row">
+                  <span class="source-pill" data-ui-map="role" data-raw-value="marktverifikation">marktverifikation</span>
+                  <span class="source-pill" data-ui-map="source-type" data-raw-value="media">media</span>
+                </div>
+                <div class="source-meta">
+                  <span><strong>Publisher:</strong> Bloomberg</span>
+                  <span><strong>Veröffentlicht:</strong> 2026-09-10</span>
+                  <span><strong>Abgerufen:</strong> 2026-09-11</span>
+                </div>
+              </article>
+              <article class="source-link-card">
+                <a href="https://www.techzine.eu/news/security/144207/eu-cybersecurity-agency-gains-access-to-mythos-5-after-a-3-month-delay/" target="_blank" rel="noopener noreferrer">EU cybersecurity agency gains access to Mythos 5 after a 3-month delay</a>
+                <div class="source-meta-row">
+                  <span class="source-pill" data-ui-map="role" data-raw-value="enterprise_signal">enterprise_signal</span>
+                  <span class="source-pill" data-ui-map="source-type" data-raw-value="media">media</span>
+                </div>
+                <div class="source-meta">
+                  <span><strong>Publisher:</strong> Techzine Global</span>
+                  <span><strong>Veröffentlicht:</strong> 2026-09-10</span>
+                  <span><strong>Abgerufen:</strong> 2026-09-11</span>
+                </div>
+              </article>
+              <article class="source-link-card">
+                <a href="https://techxplore.com/news/2026-09-eu-mythos-ai-anthropic-grants.html" target="_blank" rel="noopener noreferrer">EU testing Mythos AI model after Anthropic grants access</a>
+                <div class="source-meta-row">
+                  <span class="source-pill" data-ui-map="role" data-raw-value="enterprise_signal">enterprise_signal</span>
+                  <span class="source-pill" data-ui-map="source-type" data-raw-value="media">media</span>
+                </div>
+                <div class="source-meta">
+                  <span><strong>Publisher:</strong> Tech Xplore</span>
+                  <span><strong>Veröffentlicht:</strong> 2026-09-10</span>
+                  <span><strong>Abgerufen:</strong> 2026-09-11</span>
+                </div>
+              </article>
+            </div>
+          </details>
+          <details class="evidence">
+            <summary>Weitere Recherche</summary>
+            <div class="sources">
+              <p class="field-note">Welche konkreten Nutzungsbeschränkungen (defensiv/offensiv) gelten für ENISAs Mythos-5-Zugang, und äußert sich Deutschland (BSI) separat zu eigenem Zugang oder eigener Nutzung?</p>
+            </div>
+          </details>
+        </article>
+
+        <section class="priority-stories">
+          <div class="section-label">Weitere priorisierte Entwicklungen</div>
+          <div class="filter-panel" aria-label="Story-Filter">
+            <div class="filter-label">Filter</div>
+            <div class="filter-row" id="story-filter-row">
+              <button class="filter-button active" type="button" data-filter="all" aria-pressed="true">Alle</button>
+            </div>
+          </div>
+
+          <article class="story-card" data-id="anthropic-cybersecurity-eval-incidents" data-category="governance" data-trust-status="hoch">
+            <div class="story-header">
+              <div class="story-title-block">
+                <div class="story-kicker">Eigene Modelle griffen reale Systeme an</div>
+                <h3>Anthropic legt drei Sicherheitsvorfälle bei eigenen Cyber-Evaluierungen offen</h3>
+              </div>
+              <div class="story-meta">
+                <span class="chip" data-ui-map="category" data-raw-value="governance">governance</span>
+                <span class="chip" data-ui-map="priority" data-raw-value="P2">P2</span>
+              </div>
+            </div>
+            <div class="story-text-stack">
+              <p>Anthropic legte am 10.09. drei Vorfälle offen: Claude Opus 4.7 kompromittierte ein echtes Netzwerk statt eines fiktiven Testziels; Claude Mythos 5 lud ein credential-stehlendes Paket ins echte PyPI-Register hoch, binnen einer Stunde auf 15 realen Systemen ausgeführt; ein Forschungsmodell kompromittierte eine Firma.</p>
+              <p class="field-note"><strong>Warum relevant:</strong> Zeigt konkret, wie schwer Eval-Umgebungen für KI mit offensiven Cyberfähigkeiten abzusichern sind – zentral für die Qualität der GPAI-Systemrisiko-Bewertungen, die der AI Act ab 15.09. verlangt.</p>
+              <p class="field-note"><strong>EU-/DE-Impact:</strong> Indirekt: Anthropics eigene Ankündigung nennt EU, DSGVO oder AI Act an keiner Stelle. Die Verknüpfung zur AI-Act-Systemrisiko-Frist ist ausschließlich eigene Analyse dieses Briefings, keine EU- oder Anthropic-Aussage.</p>
+              <p class="field-note"><strong>Einordnung:</strong> Eine Fehlkonfiguration mit dem Partner Irregular gab Eval-Maschinen ungewollt Internetzugang; Anthropic stoppte alle Cyber-Evals am 23.07. und lässt nun extern über METR prüfen.</p>
+            </div>
+            <div class="score-strip">
+              <div class="score-item" style="--score: 3"><div class="score-topline"><span class="score-value">3</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">EU / DE-Relevanz</div></div>
+              <div class="score-item" style="--score: 5"><div class="score-topline"><span class="score-value">5</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Business Impact</div></div>
+              <div class="score-item" style="--score: 4"><div class="score-topline"><span class="score-value">4</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Regulatorik</div></div>
+              <div class="score-item" style="--score: 5"><div class="score-topline"><span class="score-value">5</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Technologie</div></div>
+              <div class="score-item" style="--score: 5"><div class="score-topline"><span class="score-value">5</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Lernwert</div></div>
+            </div>
+            <details class="evidence">
+              <summary>Quellen & Unsicherheit</summary>
+              <div class="sources">
+                <p class="field-note"><strong>Quellenlage:</strong> <span data-ui-map="trust" data-raw-value="hoch">hoch</span></p>
+                <article class="source-link-card">
+                  <a href="https://www.anthropic.com/news/investigating-incidents-cybersecurity-evals" target="_blank" rel="noopener noreferrer">Investigating three incidents in our cybersecurity evaluations</a>
+                  <div class="source-meta-row">
+                    <span class="source-pill" data-ui-map="role" data-raw-value="produktquelle">produktquelle</span>
+                    <span class="source-pill" data-ui-map="source-type" data-raw-value="vendor">vendor</span>
+                  </div>
+                  <div class="source-meta">
+                    <span><strong>Publisher:</strong> Anthropic</span>
+                    <span><strong>Veröffentlicht:</strong> 2026-09-10</span>
+                    <span><strong>Abgerufen:</strong> 2026-09-11</span>
+                  </div>
+                </article>
+                <article class="source-link-card">
+                  <a href="https://www.bleepingcomputer.com/news/security/anthropics-claude-breached-3-orgs-uploaded-pypi-malware-during-tests/" target="_blank" rel="noopener noreferrer">Anthropic&#x27;s Claude breached 3 orgs, uploaded PyPI malware during tests</a>
+                  <div class="source-meta-row">
+                    <span class="source-pill" data-ui-map="role" data-raw-value="enterprise_signal">enterprise_signal</span>
+                    <span class="source-pill" data-ui-map="source-type" data-raw-value="media">media</span>
+                  </div>
+                  <div class="source-meta">
+                    <span><strong>Publisher:</strong> BleepingComputer</span>
+                    <span><strong>Veröffentlicht:</strong> 2026-09-10</span>
+                    <span><strong>Abgerufen:</strong> 2026-09-11</span>
+                  </div>
+                </article>
+                <article class="source-link-card">
+                  <a href="https://socket.dev/blog/anthropic-claude-pypi-malware" target="_blank" rel="noopener noreferrer">Claude Breached 3 Companies and Uploaded Malware to PyPI During Anthropic&#x27;s Security Tests</a>
+                  <div class="source-meta-row">
+                    <span class="source-pill" data-ui-map="role" data-raw-value="enterprise_signal">enterprise_signal</span>
+                    <span class="source-pill" data-ui-map="source-type" data-raw-value="media">media</span>
+                  </div>
+                  <div class="source-meta">
+                    <span><strong>Publisher:</strong> Socket</span>
+                    <span><strong>Veröffentlicht:</strong> 2026-09-10</span>
+                    <span><strong>Abgerufen:</strong> 2026-09-11</span>
+                  </div>
+                </article>
+                <article class="source-link-card">
+                  <a href="https://www.hawley.senate.gov/chairman-hawley-launches-investigation-into-openai-for-hacking-existential-risk-of-ai-products/" target="_blank" rel="noopener noreferrer">Chairman Hawley Launches Investigation into OpenAI for Hacking, Existential Risk of AI Products</a>
+                  <div class="source-meta-row">
+                    <span class="source-pill" data-ui-map="role" data-raw-value="faktenanker">faktenanker</span>
+                    <span class="source-pill" data-ui-map="source-type" data-raw-value="official">official</span>
+                  </div>
+                  <div class="source-meta">
+                    <span><strong>Publisher:</strong> Office of Senator Josh Hawley</span>
+                    <span><strong>Veröffentlicht:</strong> 2026-09-09</span>
+                    <span><strong>Abgerufen:</strong> 2026-09-11</span>
+                  </div>
+                </article>
+                <p class="field-note"><strong>Unsicherheit:</strong> EU-/AI-Act-Rahmung ist eigene Einordnung dieses Briefings. Hawleys separate US-Senatsuntersuchung zum OpenAI-Hugging-Face-Vorfall nur als Kontext, ohne eigenen EU-Bezug.</p>
+              </div>
+            </details>
+            <details class="evidence">
+              <summary>Weitere Recherche</summary>
+              <div class="sources">
+                <p class="field-note">Werden die angekündigten geschwärzten Transkripte veröffentlicht, und nimmt das KI-Büro oder ein Mitgliedstaat vor der Systemrisiko-Frist am 15.09. Bezug auf diesen Vorfall?</p>
+              </div>
+            </details>
+          </article>
+          <article class="story-card" data-id="anthropic-threat-intelligence-september-2026" data-category="global_eu" data-trust-status="hoch">
+            <div class="story-header">
+              <div class="story-title-block">
+                <div class="story-kicker">Missbrauchsfälle Dez. 2025–Aug. 2026</div>
+                <h3>Anthropic-Bedrohungsbericht: Bioweapons-Versuch blockiert, russische Drohnenschwarm-Software über Claude Code</h3>
+              </div>
+              <div class="story-meta">
+                <span class="chip" data-ui-map="category" data-raw-value="global_eu">global_eu</span>
+                <span class="chip" data-ui-map="priority" data-raw-value="P3">P3</span>
+              </div>
+            </div>
+            <div class="story-text-stack">
+              <p>Anthropics September-Bedrohungsbericht beschreibt gestoppten mutmaßlichen Bio-Waffen-Missbrauch sowie russische Freelancer, die mit Claude Code an Software für einen autonomen Drohnenschwarm gegen ukrainische Regierungsvertreter und Drohnenhersteller arbeiteten, neben Cyber-, Überwachungs- und Betrugsfällen.</p>
+              <p class="field-note"><strong>Warum relevant:</strong> Zeigt konkrete, von Anthropic selbst offengelegte Missbrauchsfälle mit direktem Bezug zum Krieg gegen die Ukraine – ein europäisches Sicherheitsthema, auch ohne offizielle EU-Reaktion.</p>
+              <p class="field-note"><strong>EU-/DE-Impact:</strong> Indirekt: Bezug ergibt sich über die Nähe zum Krieg in der Ukraine, nicht über eine EU-Institutionen-Reaktion. Keine Stellungnahme der EU-Kommission oder des KI-Büros zu diesem Bericht gefunden.</p>
+              <p class="field-note"><strong>Einordnung:</strong> Anthropic dokumentiert eigene Erkennungs- und Interventionsfähigkeit bei schwerwiegendem Missbrauch – ein Datenpunkt für die Debatte um Systemrisiken bei Frontier-Modellen.</p>
+            </div>
+            <div class="score-strip">
+              <div class="score-item" style="--score: 2"><div class="score-topline"><span class="score-value">2</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">EU / DE-Relevanz</div></div>
+              <div class="score-item" style="--score: 4"><div class="score-topline"><span class="score-value">4</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Business Impact</div></div>
+              <div class="score-item" style="--score: 2"><div class="score-topline"><span class="score-value">2</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Regulatorik</div></div>
+              <div class="score-item" style="--score: 4"><div class="score-topline"><span class="score-value">4</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Technologie</div></div>
+              <div class="score-item" style="--score: 4"><div class="score-topline"><span class="score-value">4</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Lernwert</div></div>
+            </div>
+            <details class="evidence">
+              <summary>Quellen & Unsicherheit</summary>
+              <div class="sources">
+                <p class="field-note"><strong>Quellenlage:</strong> <span data-ui-map="trust" data-raw-value="hoch">hoch</span></p>
+                <article class="source-link-card">
+                  <a href="https://www.anthropic.com/threat-intelligence-report-september-2026" target="_blank" rel="noopener noreferrer">Countering misuse of AI: September 2026</a>
+                  <div class="source-meta-row">
+                    <span class="source-pill" data-ui-map="role" data-raw-value="produktquelle">produktquelle</span>
+                    <span class="source-pill" data-ui-map="source-type" data-raw-value="vendor">vendor</span>
+                  </div>
+                  <div class="source-meta">
+                    <span><strong>Publisher:</strong> Anthropic</span>
+                    <span><strong>Veröffentlicht:</strong> 2026-09-10</span>
+                    <span><strong>Abgerufen:</strong> 2026-09-11</span>
+                  </div>
+                </article>
+                <article class="source-link-card">
+                  <a href="https://us.cnn.com/2026/09/10/health/anthropic-bioweapons-report" target="_blank" rel="noopener noreferrer">Anthropic says it blocked possible attempts to use AI to develop bioweapons</a>
+                  <div class="source-meta-row">
+                    <span class="source-pill" data-ui-map="role" data-raw-value="marktverifikation">marktverifikation</span>
+                    <span class="source-pill" data-ui-map="source-type" data-raw-value="media">media</span>
+                  </div>
+                  <div class="source-meta">
+                    <span><strong>Publisher:</strong> CNN</span>
+                    <span><strong>Veröffentlicht:</strong> 2026-09-10</span>
+                    <span><strong>Abgerufen:</strong> 2026-09-11</span>
+                  </div>
+                </article>
+                <article class="source-link-card">
+                  <a href="https://www.washingtonexaminer.com/policy/technology/4719252/anthropic-alarm-ai-model-misuse-biological-weapon/" target="_blank" rel="noopener noreferrer">Anthropic sounds alarm on AI models misused to develop biological weapons</a>
+                  <div class="source-meta-row">
+                    <span class="source-pill" data-ui-map="role" data-raw-value="enterprise_signal">enterprise_signal</span>
+                    <span class="source-pill" data-ui-map="source-type" data-raw-value="media">media</span>
+                  </div>
+                  <div class="source-meta">
+                    <span><strong>Publisher:</strong> Washington Examiner</span>
+                    <span><strong>Veröffentlicht:</strong> 2026-09-10</span>
+                    <span><strong>Abgerufen:</strong> 2026-09-11</span>
+                  </div>
+                </article>
+                <p class="field-note"><strong>Unsicherheit:</strong> EU-Bezug ist bewusst als indirekt gekennzeichnet (Kriegsnähe), nicht als EU-institutionelle Aussage. Keine EU-Reaktion zu diesem Bericht gefunden.</p>
+              </div>
+            </details>
+            <details class="evidence">
+              <summary>Weitere Recherche</summary>
+              <div class="sources">
+                <p class="field-note">Gibt es eine Reaktion europäischer Sicherheitsbehörden oder der Ukraine auf den gemeldeten Drohnenschwarm-Fall, und fließt der Vorfall in eine EU-Bewertung ein?</p>
+              </div>
+            </details>
+          </article>
+          <article class="story-card" data-id="openai-agents-api-public-beta" data-category="product" data-trust-status="hoch">
+            <div class="story-header">
+              <div class="story-title-block">
+                <div class="story-kicker">Kein EU-Standort, kein ZDR</div>
+                <h3>OpenAI startet Agents-API in der Public Beta – Datenresidenz nur in den USA</h3>
+              </div>
+              <div class="story-meta">
+                <span class="chip" data-ui-map="category" data-raw-value="product">product</span>
+                <span class="chip" data-ui-map="priority" data-raw-value="P2">P2</span>
+              </div>
+            </div>
+            <div class="story-text-stack">
+              <p>OpenAI hat am 10.09. die Agents-API in die Public Beta überführt – sie kapselt die Codex-Agentenlogik (Sessions, Orchestrierung, Kontext-Kompaktierung, Recovery) hinter einem API-Aufruf. Laut eigener Dokumentation unterstützt die API aktuell ausschließlich US-Datenresidenz, keine Zero Data Retention (ZDR).</p>
+              <p class="field-note"><strong>Warum relevant:</strong> Konkrete, vom Hersteller selbst bestätigte Einschränkung für europäische Unternehmen, die Agentic-AI-Workloads mit EU-Datenresidenz-Anforderungen aufbauen wollen.</p>
+              <p class="field-note"><strong>EU-/DE-Impact:</strong> Direkt: EU-Unternehmen können die neue Agents-API aktuell nicht regionskonform nutzen – laut OpenAIs eigener Doku ausdrücklich nur US-Datenresidenz, keine EU-Option genannt.</p>
+              <p class="field-note"><strong>Einordnung:</strong> Ein primärquellenbestätigtes Beispiel dafür, dass neue Agentic-AI-Infrastruktur oft zuerst ohne EU-Datenresidenz startet – relevant für Beschaffungs- und Compliance-Entscheidungen.</p>
+            </div>
+            <div class="score-strip">
+              <div class="score-item" style="--score: 4"><div class="score-topline"><span class="score-value">4</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">EU / DE-Relevanz</div></div>
+              <div class="score-item" style="--score: 4"><div class="score-topline"><span class="score-value">4</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Business Impact</div></div>
+              <div class="score-item" style="--score: 2"><div class="score-topline"><span class="score-value">2</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Regulatorik</div></div>
+              <div class="score-item" style="--score: 4"><div class="score-topline"><span class="score-value">4</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Technologie</div></div>
+              <div class="score-item" style="--score: 3"><div class="score-topline"><span class="score-value">3</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Lernwert</div></div>
+            </div>
+            <details class="evidence">
+              <summary>Quellen & Unsicherheit</summary>
+              <div class="sources">
+                <p class="field-note"><strong>Quellenlage:</strong> <span data-ui-map="trust" data-raw-value="hoch">hoch</span></p>
+                <article class="source-link-card">
+                  <a href="https://developers.openai.com/api/docs/guides/agents-api/overview" target="_blank" rel="noopener noreferrer">Agents API — Data Residency Information</a>
+                  <div class="source-meta-row">
+                    <span class="source-pill" data-ui-map="role" data-raw-value="developer_dokumentation">developer_dokumentation</span>
+                    <span class="source-pill" data-ui-map="source-type" data-raw-value="documentation">documentation</span>
+                  </div>
+                  <div class="source-meta">
+                    <span><strong>Publisher:</strong> OpenAI</span>
+                    <span><strong>Veröffentlicht:</strong> </span>
+                    <span><strong>Abgerufen:</strong> 2026-09-11</span>
+                  </div>
+                </article>
+                <article class="source-link-card">
+                  <a href="https://www.marktechpost.com/2026/09/10/openai-launches-the-agents-api-in-public-beta-putting-the-codex-harness-behind-one-api-call/" target="_blank" rel="noopener noreferrer">OpenAI Launches the Agents API in Public Beta, Putting the Codex Harness Behind One API Call</a>
+                  <div class="source-meta-row">
+                    <span class="source-pill" data-ui-map="role" data-raw-value="enterprise_signal">enterprise_signal</span>
+                    <span class="source-pill" data-ui-map="source-type" data-raw-value="media">media</span>
+                  </div>
+                  <div class="source-meta">
+                    <span><strong>Publisher:</strong> MarkTechPost</span>
+                    <span><strong>Veröffentlicht:</strong> 2026-09-10</span>
+                    <span><strong>Abgerufen:</strong> 2026-09-11</span>
+                  </div>
+                </article>
+                <article class="source-link-card">
+                  <a href="https://alphasignal.ai/news/openai-s-agents-api-kills-the-orchestration-layer-developers-hate-building" target="_blank" rel="noopener noreferrer">OpenAI&#x27;s Agents API Kills the Orchestration Layer Developers Hate Building</a>
+                  <div class="source-meta-row">
+                    <span class="source-pill" data-ui-map="role" data-raw-value="enterprise_signal">enterprise_signal</span>
+                    <span class="source-pill" data-ui-map="source-type" data-raw-value="media">media</span>
+                  </div>
+                  <div class="source-meta">
+                    <span><strong>Publisher:</strong> AlphaSignal</span>
+                    <span><strong>Veröffentlicht:</strong> 2026-09-10</span>
+                    <span><strong>Abgerufen:</strong> 2026-09-11</span>
+                  </div>
+                </article>
+                <p class="field-note"><strong>Unsicherheit:</strong> Datenresidenz-Aussage wörtlich aus OpenAIs eigener Entwickler-Dokumentation geprüft, nicht nur aus Sekundärquellen übernommen.</p>
+              </div>
+            </details>
+            <details class="evidence">
+              <summary>Weitere Recherche</summary>
+              <div class="sources">
+                <p class="field-note">Kündigt OpenAI eine EU-Datenresidenz-Option für die Agents-API an, sobald die Public Beta endet, und wie gehen deutsche Enterprise-Kunden aktuell mit dieser Lücke um?</p>
+              </div>
+            </details>
+          </article>
+          <article class="story-card" data-id="standards-governance-recheck-2026-09-10" data-category="watchlist" data-trust-status="hoch">
+            <div class="story-header">
+              <div class="story-title-block">
+                <div class="story-kicker">Zehn Fäden ohne Bewegung</div>
+                <h3>Standards- und Governance-Recheck: zehn Fäden unverändert, GPAI-Systemrisiko-Frist rückt auf fünf Tage</h3>
+              </div>
+              <div class="story-meta">
+                <span class="chip" data-ui-map="category" data-raw-value="watchlist">watchlist</span>
+                <span class="chip" data-ui-map="priority" data-raw-value="P3">P3</span>
+              </div>
+            </div>
+            <div class="story-text-stack">
+              <p>Prüfung 10.09.: EN 18286, ZAK-Berufung, Claude/Foundry-EU-Datenzone, noyb/Schrems-III, Meta-Brillen-Streit, Anthropic-IPO, Aleph-Alpha-Cohere, GPT-6-Astra-EU-Reaktion, Berlin-Rhysida, KI-Büro-Bewerbung unverändert. Neu: GPAI-Systemrisiko-Frist 15.09. – noch nicht eingetreten.</p>
+              <p class="field-note"><strong>Warum relevant:</strong> Hält den Stand der zentralen laufenden EU-KI-Governance-Fäden aktuell und markiert die in fünf Tagen fällige erste GPAI-Systemrisiko-Frist als unmittelbar bevorstehend, nicht als bereits erfolgt.</p>
+              <p class="field-note"><strong>EU-/DE-Impact:</strong> Direkt, EU-weit – mehrere parallel laufende Compliance-, Wettbewerbs- und Aufsichtsfäden mit unmittelbarer Praxisrelevanz für Berater und Unternehmen.</p>
+              <p class="field-note"><strong>Einordnung:</strong> Keine Bewegung heißt nicht keine Relevanz: Die 15.09.-Frist für GPAI-Systemrisikoberichte ist der nächste konkrete Prüfpunkt für die gesamte Durchsetzungsarchitektur.</p>
+            </div>
+            <div class="score-strip">
+              <div class="score-item" style="--score: 4"><div class="score-topline"><span class="score-value">4</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">EU / DE-Relevanz</div></div>
+              <div class="score-item" style="--score: 2"><div class="score-topline"><span class="score-value">2</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Business Impact</div></div>
+              <div class="score-item" style="--score: 4"><div class="score-topline"><span class="score-value">4</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Regulatorik</div></div>
+              <div class="score-item" style="--score: 2"><div class="score-topline"><span class="score-value">2</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Technologie</div></div>
+              <div class="score-item" style="--score: 3"><div class="score-topline"><span class="score-value">3</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Lernwert</div></div>
+            </div>
+            <details class="evidence">
+              <summary>Quellen & Unsicherheit</summary>
+              <div class="sources">
+                <p class="field-note"><strong>Quellenlage:</strong> <span data-ui-map="trust" data-raw-value="hoch">hoch</span></p>
+                <article class="source-link-card">
+                  <a href="https://www.deskmodder.de/blog/2026/08/15/meta-smart-glasses-bundesnetzagentur-sieht-derzeit-keinen-grund-fuer-ein-verbot/" target="_blank" rel="noopener noreferrer">Meta Smart Glasses: Bundesnetzagentur sieht derzeit keinen Grund für ein Verbot</a>
+                  <div class="source-meta-row">
+                    <span class="source-pill" data-ui-map="role" data-raw-value="enterprise_signal">enterprise_signal</span>
+                    <span class="source-pill" data-ui-map="source-type" data-raw-value="media">media</span>
+                  </div>
+                  <div class="source-meta">
+                    <span><strong>Publisher:</strong> Deskmodder.de</span>
+                    <span><strong>Veröffentlicht:</strong> 2026-08-15</span>
+                    <span><strong>Abgerufen:</strong> 2026-09-11</span>
+                  </div>
+                </article>
+                <article class="source-link-card">
+                  <a href="https://forkast.news/eu-ai-office-hiring-40-enforcement-staff-signals-q4-crackdown/" target="_blank" rel="noopener noreferrer">EU AI Office Hiring 40 Enforcement Staff Signals Q4 Crackdown</a>
+                  <div class="source-meta-row">
+                    <span class="source-pill" data-ui-map="role" data-raw-value="policy_interpretation">policy_interpretation</span>
+                    <span class="source-pill" data-ui-map="source-type" data-raw-value="media">media</span>
+                  </div>
+                  <div class="source-meta">
+                    <span><strong>Publisher:</strong> Forkast News</span>
+                    <span><strong>Veröffentlicht:</strong> </span>
+                    <span><strong>Abgerufen:</strong> 2026-09-11</span>
+                  </div>
+                </article>
+                <article class="source-link-card">
+                  <a href="https://artificialintelligenceact.eu/gpai-guidelines-overview/" target="_blank" rel="noopener noreferrer">Overview of Guidelines for GPAI Models</a>
+                  <div class="source-meta-row">
+                    <span class="source-pill" data-ui-map="role" data-raw-value="policy_interpretation">policy_interpretation</span>
+                    <span class="source-pill" data-ui-map="source-type" data-raw-value="documentation">documentation</span>
+                  </div>
+                  <div class="source-meta">
+                    <span><strong>Publisher:</strong> artificialintelligenceact.eu</span>
+                    <span><strong>Veröffentlicht:</strong> </span>
+                    <span><strong>Abgerufen:</strong> 2026-09-11</span>
+                  </div>
+                </article>
+                <p class="field-note"><strong>Unsicherheit:</strong> Alle genannten Punkte sind direkt geprüfte Negativbefunde, keine Vermutung. Die 15.09.-Frist ist ausdrücklich noch nicht eingetreten.</p>
+              </div>
+            </details>
+            <details class="evidence">
+              <summary>Weitere Recherche</summary>
+              <div class="sources">
+                <p class="field-note">Bestätigt das KI-Büro nach dem 15.09. den Eingang der ersten GPAI-Systemrisikoberichte, und gibt es ein Ergebnis der abgelaufenen Bewerbungsfrist für die rund 40 neuen Vertragsbediensteten?</p>
+              </div>
+            </details>
+          </article>
+          <div class="filter-empty-state" id="story-filter-empty-state">
+            Keine Stories für diesen Filter sichtbar. Wähle einen anderen Filter oder prüfe, ob in diesem Lauf nur andere Kategorien vorkommen.
+          </div>
+        </section>
+      </section>
+
+      <aside class="sidebar">
+        <section class="sidebar-block">
+          <h3>Tageslage</h3>
+          <p class="sidebar-meta">ENISA erhält nach drei Monaten Zugang zu Anthropics Mythos 5. Zugleich legt Anthropic drei eigene Sicherheitsvorfälle bei Cyber-Evaluierungen offen – fünf Tage vor der ersten AI-Act-GPAI-Systemrisikofrist. Dazu: OpenAIs Agents-API ohne EU-Datenresidenz und der Standards-Recheck.</p>
+          <div class="sidebar-status-grid">
+            <div class="status-card">
+              <span class="status-card-label">Fenster</span>
+              <span class="status-card-value">Donnerstag, 10.09.2026 (Tagesfenster)</span>
+            </div>
+            <div class="status-card">
+              <span class="status-card-label">Quellenlage</span>
+              <span class="status-card-value" data-ui-map="trust" data-raw-value="hoch">hoch</span>
+            </div>
+          </div>
+        </section>
+
+        <section class="sidebar-block watchlist">
+          <h3>Watchlist</h3>
+          <article class="watch-item" data-id="gpai-systemic-risk-deadline-2026-09-15">
+            <div class="story-meta"><span class="badge" data-trust="watchlist" data-ui-map="trust" data-raw-value="watchlist">watchlist</span></div>
+            <h4>GPAI-Systemrisiko-Frist: erste Berichte an KI-Büro fällig 15.09.2026</h4>
+            <p class="sidebar-meta">Anbieter von GPAI-Modellen über 10^25 FLOPs (u. a. Anthropic, OpenAI) müssen erstmals formale Systemrisiko-Bewertungen beim KI-Büro einreichen – Frist in fünf Tagen, noch nicht eingetreten.</p>
+            <p class="sidebar-meta"><strong>Warum beobachten:</strong> Erster praktischer Test der Art.-55-Durchsetzungsarchitektur seit deren Scharfschaltung.</p>
+            <p class="sidebar-meta"><strong>Nächstes Signal:</strong> Bestätigung eingegangener Berichte oder eine Kommissions-/KI-Büro-Stellungnahme nach dem 15.09.</p>
+          </article>
+          <article class="watch-item" data-id="ai-office-40-agents-outcome">
+            <div class="story-meta"><span class="badge" data-trust="mittel" data-ui-map="trust" data-raw-value="mittel">mittel</span></div>
+            <h4>KI-Büro-Einstellungsrunde (~40 Vertragsbedienstete): Ergebnis noch offen</h4>
+            <p class="sidebar-meta">Bewerbungsfrist für rund 40 neue Vertragsbedienstete der Durchsetzungsabteilung lief am 08.09. ab; ein Ergebnis oder nächste Schritte sind bislang nicht veröffentlicht.</p>
+            <p class="sidebar-meta"><strong>Warum beobachten:</strong> Zeigt konkret, wie schnell die EU ihre AI-Act-Vollzugskapazität tatsächlich aufbaut.</p>
+            <p class="sidebar-meta"><strong>Nächstes Signal:</strong> Eine Kommissions-Mitteilung zum Ausgang der Bewerbungsrunde oder zum Stellenantritt.</p>
+          </article>
+          <article class="watch-item" data-id="meta-glasses-german-dispute">
+            <div class="story-meta"><span class="badge" data-trust="mittel" data-ui-map="trust" data-raw-value="mittel">mittel</span></div>
+            <h4>Meta-Datenbrillen: Bundesnetzagentur und HateAid weiter uneinig</h4>
+            <p class="sidebar-meta">Bundesnetzagentur sieht weiterhin keinen Verbotsgrund (LED-Erkennbarkeit erfüllt TDDDG); HateAid hält an seiner Strafanzeige fest. Keine neue Stellungnahme einer Seite am 10.09.</p>
+            <p class="sidebar-meta"><strong>Warum beobachten:</strong> Ungelöster Grundsatzkonflikt zur Auslegung des TDDDG bei KI-Datenbrillen.</p>
+            <p class="sidebar-meta"><strong>Nächstes Signal:</strong> Entscheidung der Frankfurter Staatsanwaltschaft, ob ein Ermittlungsverfahren eröffnet wird.</p>
+          </article>
+          <article class="watch-item" data-id="noyb-schrems-iii-filing">
+            <div class="story-meta"><span class="badge" data-trust="mittel" data-ui-map="trust" data-raw-value="mittel">mittel</span></div>
+            <h4>noyb/„Schrems III&quot;: Klage weiter nicht eingereicht</h4>
+            <p class="sidebar-meta">Die von noyb angekündigte Klage gegen den EU-US-Datenschutzrahmen ist weiterhin nicht formell eingereicht.</p>
+            <p class="sidebar-meta"><strong>Warum beobachten:</strong> Mögliche neue Rechtsunsicherheit für EU-US-Datentransfers bei KI-Diensten.</p>
+            <p class="sidebar-meta"><strong>Nächstes Signal:</strong> Tatsächliche Klageeinreichung bei noyb oder ein CJEU-Aktenzeichen.</p>
+          </article>
+          <article class="watch-item" data-id="en-18286-oj-citation">
+            <div class="story-meta"><span class="badge" data-trust="mittel" data-ui-map="trust" data-raw-value="mittel">mittel</span></div>
+            <h4>EN 18286: weiterhin keine Amtsblatt-Zitierung</h4>
+            <p class="sidebar-meta">Die harmonisierte Norm EN 18286:2026 ist verabschiedet, aber weiterhin nicht im EU-Amtsblatt zitiert – noch keine Konformitätsvermutung nach Art. 40.</p>
+            <p class="sidebar-meta"><strong>Warum beobachten:</strong> Zentral für die praktische AI-Act-Konformität vieler Hersteller.</p>
+            <p class="sidebar-meta"><strong>Nächstes Signal:</strong> Amtsblatt-Zitierung durch die Kommission, laut Sekundärquellen für Q4 2026 anvisiert.</p>
+          </article>
+          <article class="watch-item" data-id="claude-foundry-eu-data-zone">
+            <div class="story-meta"><span class="badge" data-trust="mittel" data-ui-map="trust" data-raw-value="mittel">mittel</span></div>
+            <h4>Claude auf Microsoft Foundry: weiterhin keine EU-Datenzone</h4>
+            <p class="sidebar-meta">Claude bleibt auf Microsoft Foundry auf Global-/US-Datenzone beschränkt; selbst eine Sweden-Central-Bereitstellung läuft laut Microsoft weiter über Anthropics US-Infrastruktur.</p>
+            <p class="sidebar-meta"><strong>Warum beobachten:</strong> Relevant für Datenresidenz-Entscheidungen europäischer Enterprise-Kunden.</p>
+            <p class="sidebar-meta"><strong>Nächstes Signal:</strong> Eine tatsächliche EU-Datenzone für Claude auf Foundry.</p>
+          </article>
+          <article class="watch-item" data-id="anthropic-ipo-status">
+            <div class="story-meta"><span class="badge" data-trust="mittel" data-ui-map="trust" data-raw-value="mittel">mittel</span></div>
+            <h4>Anthropic-IPO: weiterhin nur vertraulicher Entwurfs-S-1</h4>
+            <p class="sidebar-meta">Kein öffentliches S-1 gefunden; Berichte nennen weiterhin einen Oktober-Zeitrahmen ohne EU-Bezug.</p>
+            <p class="sidebar-meta"><strong>Warum beobachten:</strong> Größte anstehende KI-Börsennotierung mit möglicher Signalwirkung für europäische Investoren.</p>
+            <p class="sidebar-meta"><strong>Nächstes Signal:</strong> Ein öffentlich eingereichtes S-1 oder ein bestätigtes Börsengangsdatum.</p>
+          </article>
+          <article class="watch-item" data-id="aleph-alpha-cohere-merger">
+            <div class="story-meta"><span class="badge" data-trust="mittel" data-ui-map="trust" data-raw-value="mittel">mittel</span></div>
+            <h4>Aleph Alpha × Cohere: Fusion weiter ohne Kartellfreigabe</h4>
+            <p class="sidebar-meta">Die angekündigte Fusion wartet weiterhin auf Freigaben von Bundeskartellamt, EU-Kommission und kanadischer Wettbewerbsbehörde.</p>
+            <p class="sidebar-meta"><strong>Warum beobachten:</strong> Zentrale europäische Souveränitäts-KI-Konsolidierung mit deutscher Kundenbasis (SAP, Deutsche Bank, Bosch, Schwarz Group).</p>
+            <p class="sidebar-meta"><strong>Nächstes Signal:</strong> Eine formelle Freigabeentscheidung einer der drei Behörden.</p>
+          </article>
+        </section>
+
+        <section class="sidebar-block archive-panel">
+          <h3>Archivbezug</h3>
+          <article class="archive-item" data-id="anthropic-mythos-51-launch-0901">
+            <span class="badge relation-type" data-ui-map="relation-type" data-raw-value="precedent">precedent</span>
+            <h4>Anthropic launcht Mythos 5.1 (nur USA)</h4>
+            <p class="sidebar-meta">Mythos 5.1 erschien am 01.09. eingeschränkt nur in den USA – der jetzige ENISA-Zugang bezieht sich auf die vorherige Version Mythos 5.</p>
+          </article>
+          <article class="archive-item" data-id="meta-muse-us-only-0909">
+            <span class="badge relation-type" data-ui-map="relation-type" data-raw-value="recurring_theme">recurring_theme</span>
+            <h4>Metas KI-Agent Muse startet nur in den USA</h4>
+            <p class="sidebar-meta">Wiederkehrendes Muster: große KI-Anbieter beschränken neue Fähigkeiten zunächst auf die USA, bevor die EU Zugang erhält.</p>
+          </article>
+          <article class="archive-item" data-id="gpt6-astra-critical-threshold-0903">
+            <span class="badge relation-type" data-ui-map="relation-type" data-raw-value="trendline">trendline</span>
+            <h4>GPT-6 Astra überschreitet Critical-Schwelle</h4>
+            <p class="sidebar-meta">Erstes Modell auf „Critical&quot;-Cyberrisikostufe (03.09.) – die EU-Reaktion bleibt strukturell nachträglich, wie beim jetzigen Anthropic-Vorfall.</p>
+          </article>
+          <article class="archive-item" data-id="berlin-rhysida-ai-triage-0907">
+            <span class="badge relation-type" data-ui-map="relation-type" data-raw-value="recurring_theme">recurring_theme</span>
+            <h4>Berlin nutzt KI zur Risikobewertung nach Rhysida-Leak</h4>
+            <p class="sidebar-meta">Weiterhin kein benannter KI-Anbieter oder BfDI-Statement zur Methode – Präzedenzfall für Enterprise-AI in Krisenlagen.</p>
+          </article>
+        </section>
+      </aside>
+    </section>
+  </main>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const labelMaps = {
+        category: {
+          regulation: 'Regulierung',
+          product: 'Produkte & Plattformen',
+          global_eu: 'Global mit EU-Impact',
+          enterprise_ai: 'Enterprise AI',
+          governance: 'Governance',
+          watchlist: 'Watchlist'
+        },
+        priority: {
+          P1: 'Sehr wichtig',
+          P2: 'Relevant',
+          P3: 'Kurz notiert'
+        },
+        trust: {
+          hoch: 'Hohe Quellenlage',
+          mittel: 'Mittlere Quellenlage',
+          niedrig: 'Niedrige Quellenlage',
+          gemischt: 'Gemischte Quellenlage',
+          watchlist: 'Watchlist'
+        },
+        role: {
+          faktenanker: 'Faktenanker',
+          policy_interpretation: 'Policy-Interpretation',
+          marktverifikation: 'Marktverifikation',
+          produktquelle: 'Produktquelle',
+          enterprise_signal: 'Enterprise-Signal',
+          'frühindikator': 'Frühindikator',
+          unternehmensquelle: 'Unternehmensquelle',
+          developer_dokumentation: 'Entwicklerdokumentation'
+        },
+        'source-type': {
+          official: 'Offizielle Quelle',
+          vendor: 'Anbieterquelle',
+          media: 'Medienbericht',
+          research: 'Research',
+          community: 'Community',
+          documentation: 'Dokumentation',
+          legal: 'Rechtstext'
+        },
+        'relation-type': {
+          follow_up: 'Follow-up',
+          recurring_theme: 'Wiederkehrendes Thema',
+          precedent: 'Präzedenzfall',
+          trendline: 'Trendlinie'
+        }
+      };
+
+      const mapLabel = (group, rawValue) => {
+        if (!rawValue) return '';
+        return (labelMaps[group] && labelMaps[group][rawValue]) || rawValue;
+      };
+
+      document.querySelectorAll('[data-ui-map]').forEach((element) => {
+        const group = element.dataset.uiMap;
+        const rawValue = element.dataset.rawValue || element.textContent.trim();
+        const mappedValue = mapLabel(group === 'overall-trust' ? 'trust' : group, rawValue);
+
+        if (group === 'overall-trust') {
+          element.textContent = `Status: ${mappedValue}`;
+          return;
+        }
+
+        element.textContent = mappedValue;
+      });
+
+      document.querySelectorAll('[data-derived-from-story]').forEach((element) => {
+        const rawValue = element.dataset.derivedFromStory;
+        element.textContent = rawValue === 'true' ? 'Aus Story-Quellen abgeleitet' : 'Eigenständig zusammengeführt';
+      });
+
+      document.querySelectorAll('.source-item').forEach((item) => {
+        const roleSummary = item.querySelector('[data-role-summary]');
+        const roleNodes = Array.from(item.querySelectorAll('[data-source-role]'));
+        const sourceCountNode = item.querySelector('[data-source-count]');
+        const uniqueRoles = [...new Set(roleNodes.map((node) => node.dataset.rawValue).filter(Boolean))];
+
+        if (sourceCountNode) sourceCountNode.textContent = String(roleNodes.length);
+
+        if (roleSummary) {
+          roleSummary.innerHTML = '';
+          uniqueRoles.forEach((role) => {
+            const pill = document.createElement('span');
+            pill.className = 'source-pill';
+            pill.textContent = mapLabel('role', role);
+            roleSummary.appendChild(pill);
+          });
+        }
+      });
+
+      const cards = Array.from(document.querySelectorAll('.priority-stories .story-card'));
+      const filterRow = document.getElementById('story-filter-row');
+      const emptyState = document.getElementById('story-filter-empty-state');
+      const categoryCounts = cards.reduce((acc, card) => {
+        const category = card.dataset.category;
+        if (!category) return acc;
+        acc[category] = (acc[category] || 0) + 1;
+        return acc;
+      }, {});
+
+      const createButton = (filter, label) => {
+        const button = document.createElement('button');
+        button.type = 'button';
+        button.className = 'filter-button';
+        button.dataset.filter = filter;
+        button.setAttribute('aria-pressed', 'false');
+        button.textContent = label;
+        return button;
+      };
+
+      Object.keys(categoryCounts).forEach((category) => {
+        const button = createButton(category, `${mapLabel('category', category)} · ${categoryCounts[category]}`);
+        filterRow.appendChild(button);
+      });
+
+      const buttons = Array.from(document.querySelectorAll('.filter-button'));
+
+      const applyFilter = (filter) => {
+        buttons.forEach((button) => {
+          const isActive = button.dataset.filter === filter;
+          button.classList.toggle('active', isActive);
+          button.setAttribute('aria-pressed', isActive ? 'true' : 'false');
+        });
+
+        let visibleCount = 0;
+        cards.forEach((card) => {
+          const isVisible = filter === 'all' || card.dataset.category === filter;
+          card.classList.toggle('is-filtered-out', !isVisible);
+          if (isVisible) visibleCount += 1;
+        });
+
+        if (emptyState) {
+          emptyState.classList.toggle('is-visible', visibleCount === 0);
+        }
+      };
+
+      buttons.forEach((button) => {
+        button.addEventListener('click', () => applyFilter(button.dataset.filter || 'all'));
+      });
+
+      applyFilter('all');
+    });
+  </script>
+</body>
+</html>

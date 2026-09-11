@@ -1,6 +1,25 @@
 {
   "reports": [
     {
+      "id": "daily-2026-09-10",
+      "mode": "daily",
+      "title": "Daily Briefing 10.09.2026",
+      "date_label": "10.09.2026",
+      "window_start": "2026-09-10",
+      "window_end": "2026-09-10",
+      "public_url": "https://ai-news.camphausen.eu/daily/2026-09-10.html",
+      "published_at": "2026-09-11T04:39:56Z",
+      "summary": "ENISA erhält nach drei Monaten Zugang zu Anthropics Mythos 5. Zugleich legt Anthropic drei eigene Sicherheitsvorfälle bei Cyber-Evaluierungen offen – fünf Tage vor der ersten AI-Act-GPAI-Systemrisikofrist. Dazu: OpenAIs Agents-API ohne EU-Datenresidenz und der Standards-Recheck.",
+      "trust_status": "hoch",
+      "tags": [
+        "AI Act",
+        "Governance",
+        "Cybersecurity",
+        "Anthropic",
+        "OpenAI"
+      ]
+    },
+    {
       "id": "daily-2026-09-09",
       "mode": "daily",
       "title": "Daily Briefing 09.09.2026",
