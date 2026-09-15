@@ -1,6 +1,23 @@
 {
   "reports": [
     {
+      "id": "daily-2026-09-14",
+      "mode": "daily",
+      "title": "Daily Briefing 14.09.2026",
+      "date_label": "14.09.2026",
+      "window_start": "2026-09-14",
+      "window_end": "2026-09-14",
+      "public_url": "https://ai-news.camphausen.eu/daily/2026-09-14.html",
+      "published_at": "2026-09-15T04:56:18Z",
+      "summary": "Deutschland weist Amodeis 'Pace the Frontier'-Vorstoß zurück; EU verweist auf AI-Act-Pflichten (Art. 55). Dazu: EU-Start dreier GenAI-Verwaltungspilotprojekte und der Standards-Recheck.",
+      "trust_status": "hoch",
+      "tags": [
+        "AI Act",
+        "Governance",
+        "Pace the Frontier"
+      ]
+    },
+    {
       "id": "daily-2026-09-10",
       "mode": "daily",
       "title": "Daily Briefing 10.09.2026",

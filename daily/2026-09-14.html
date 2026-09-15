@@ -1,0 +1,1126 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Deutschland weist Amodeis „Pace the Frontier&quot;-Vorstoß zurück – EU verweist auf AI-Act-Pflichten</title>
+  <style>
+    :root {
+      --bg: #eef3f9;
+      --bg-radial: radial-gradient(circle at top left, rgba(49, 91, 217, 0.14), transparent 32rem), radial-gradient(circle at top right, rgba(31, 122, 77, 0.10), transparent 28rem), #eef3f9;
+      --surface: #ffffff;
+      --surface-soft: #f7f9fd;
+      --surface-blue: #f1f5ff;
+      --text: #111b2e;
+      --muted: #66748c;
+      --muted-2: #8190a8;
+      --border: #d9e2ef;
+      --border-strong: #bfcae0;
+      --accent: #244ed8;
+      --accent-strong: #1739a8;
+      --accent-soft: #e8efff;
+      --success: #1f7a4d;
+      --success-soft: #e7f5ee;
+      --warning: #b26a00;
+      --warning-soft: #fff3dc;
+      --risk: #a63f3f;
+      --risk-soft: #fdecec;
+      --watch: #2563eb;
+      --watch-soft: #eaf1ff;
+      --shadow: 0 18px 45px rgba(17, 30, 58, 0.10);
+      --shadow-soft: 0 8px 24px rgba(17, 30, 58, 0.07);
+      --radius-xl: 26px;
+      --radius-lg: 18px;
+      --radius-md: 14px;
+      --radius-sm: 10px;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      padding: 34px;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--bg-radial);
+      color: var(--text);
+      line-height: 1.55;
+    }
+
+    h1, h2, h3, h4, p { margin: 0; }
+    h1 { max-width: 920px; font-size: clamp(32px, 5vw, 56px); line-height: 0.98; letter-spacing: -0.045em; }
+    h2 { font-size: clamp(22px, 3vw, 34px); line-height: 1.08; letter-spacing: -0.03em; }
+    h3 { font-size: 20px; line-height: 1.18; letter-spacing: -0.02em; }
+    h4 { font-size: 15px; line-height: 1.25; }
+    a { color: var(--accent-strong); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    .daily-briefing {
+      max-width: 1220px;
+      margin: 0 auto;
+      display: grid;
+      gap: 24px;
+    }
+
+    .hero,
+    .top-story,
+    .story-card,
+    .sidebar-block {
+      background: rgba(255, 255, 255, 0.92);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow-soft);
+      backdrop-filter: blur(12px);
+    }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      padding: 30px;
+      display: grid;
+      gap: 18px;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      height: 5px;
+      background: linear-gradient(90deg, #244ed8, #1f7a4d, #b26a00);
+      pointer-events: none;
+    }
+
+    .hero > * { position: relative; }
+
+    .eyebrow,
+    .story-kicker,
+    .section-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      line-height: 1;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-weight: 800;
+    }
+
+    .eyebrow::before,
+    .section-label::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 0 5px var(--accent-soft);
+      flex: 0 0 auto;
+    }
+
+    .briefing-summary {
+      max-width: 880px;
+      color: var(--muted);
+      font-size: 17px;
+    }
+
+    .meta-row,
+    .story-meta,
+    .filter-row,
+    .source-meta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .chip,
+    .badge,
+    .filter-button,
+    .source-pill {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 800;
+      line-height: 1;
+      white-space: nowrap;
+    }
+
+    .chip {
+      padding: 9px 11px;
+      background: var(--accent-soft);
+      color: var(--accent-strong);
+      border: 1px solid rgba(36, 78, 216, 0.12);
+    }
+
+    .badge {
+      padding: 8px 10px;
+      border: 1px solid var(--border);
+      background: var(--surface-soft);
+      color: var(--muted);
+    }
+
+    .badge[data-trust="hoch"] { background: var(--success-soft); color: var(--success); border-color: rgba(31, 122, 77, 0.20); }
+    .badge[data-trust="mittel"], .badge[data-trust="gemischt"] { background: var(--warning-soft); color: var(--warning); border-color: rgba(178, 106, 0, 0.22); }
+    .badge[data-trust="niedrig"] { background: var(--risk-soft); color: var(--risk); border-color: rgba(166, 63, 63, 0.22); }
+    .badge[data-trust="watchlist"] { background: var(--watch-soft); color: var(--watch); border-color: rgba(37, 99, 235, 0.18); }
+
+    .main-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 2.05fr) minmax(300px, 0.95fr);
+      gap: 24px;
+      align-items: start;
+    }
+
+    .main-column,
+    .priority-stories,
+    .sidebar {
+      display: grid;
+      gap: 18px;
+      min-width: 0;
+    }
+
+    .top-story,
+    .story-card {
+      padding: 22px;
+      display: grid;
+      gap: 15px;
+      min-width: 0;
+    }
+
+    .top-story {
+      border-color: rgba(36, 78, 216, 0.24);
+      box-shadow: var(--shadow);
+    }
+
+    .story-header {
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      align-items: flex-start;
+      min-width: 0;
+    }
+
+    .story-title-block,
+    .story-text-stack {
+      display: grid;
+      gap: 8px;
+      min-width: 0;
+    }
+
+    .story-title-block h2,
+    .story-title-block h3 {
+      overflow-wrap: anywhere;
+    }
+
+    .field-note { color: var(--muted); }
+    .field-note strong { color: var(--text); }
+
+    .takeaway {
+      border: 1px solid var(--border);
+      background: linear-gradient(180deg, #fbfcff, #f6f8fc);
+      border-radius: var(--radius-lg);
+      padding: 16px;
+      display: grid;
+      gap: 6px;
+    }
+
+    .takeaway strong {
+      font-size: 13px;
+      letter-spacing: 0.02em;
+    }
+
+    .score-strip {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 10px;
+      max-width: 100%;
+      min-width: 0;
+    }
+
+    .score-item {
+      --score: 1;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      background: var(--surface-soft);
+      padding: 12px;
+      display: grid;
+      gap: 8px;
+      min-height: 88px;
+      min-width: 0;
+      overflow: hidden;
+    }
+
+    .score-topline {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 6px;
+      min-width: 0;
+      max-width: 100%;
+    }
+
+    .score-value {
+      min-width: 0;
+      max-width: 100%;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      font-size: 24px;
+      line-height: 1;
+      font-weight: 900;
+      letter-spacing: -0.04em;
+    }
+
+    .score-max {
+      color: var(--muted-2);
+      font-size: 11px;
+      font-weight: 800;
+      flex: 0 0 auto;
+    }
+
+    .score-label {
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.15;
+      font-weight: 750;
+      overflow-wrap: anywhere;
+      hyphens: auto;
+    }
+
+    .meter {
+      width: 100%;
+      min-width: 0;
+      height: 7px;
+      border-radius: 999px;
+      background: #e4e9f2;
+      overflow: hidden;
+    }
+
+    .meter > span {
+      display: block;
+      height: 100%;
+      width: clamp(0%, calc(var(--score) * 20%), 100%);
+      max-width: 100%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, var(--accent), #1f7a4d);
+    }
+
+    .filter-panel {
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      background: rgba(255, 255, 255, 0.78);
+      box-shadow: var(--shadow-soft);
+      padding: 14px;
+      display: grid;
+      gap: 10px;
+    }
+
+    .filter-label {
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 850;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .filter-button {
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--muted);
+      padding: 8px 10px;
+      cursor: pointer;
+      transition: background 0.18s ease, color 0.18s ease, border-color 0.18s ease, transform 0.18s ease;
+    }
+
+    .filter-button:hover {
+      transform: translateY(-1px);
+      border-color: var(--border-strong);
+    }
+
+    .filter-button.active,
+    .filter-button[aria-pressed="true"] {
+      background: var(--text);
+      color: #ffffff;
+      border-color: var(--text);
+    }
+
+    .is-filtered-out { display: none !important; }
+
+    .filter-empty-state {
+      display: none;
+      border: 1px dashed var(--border-strong);
+      border-radius: var(--radius-lg);
+      background: rgba(255, 255, 255, 0.7);
+      padding: 16px;
+      color: var(--muted);
+    }
+
+    .filter-empty-state.is-visible { display: block; }
+
+    .sidebar-status-grid,
+    .compact-source-summary,
+    .compact-source-details,
+    .compact-role-row {
+      display: grid;
+      gap: 10px;
+    }
+
+    .sidebar-status-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .status-card {
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      background: var(--surface-soft);
+      padding: 12px;
+      display: grid;
+      gap: 5px;
+    }
+
+    .status-card-label {
+      font-size: 11px;
+      font-weight: 850;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--muted-2);
+    }
+
+    .status-card-value {
+      font-size: 14px;
+      font-weight: 800;
+      color: var(--text);
+    }
+
+    .compact-source-header {
+      display: grid;
+      gap: 8px;
+    }
+
+    .compact-source-stats {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .compact-source-list {
+      margin: 0;
+      padding-left: 18px;
+      color: var(--muted);
+      display: grid;
+      gap: 6px;
+    }
+
+    .compact-source-list a,
+    .compact-source-list .source-label-fallback {
+      font-weight: 750;
+    }
+
+    .story-card { box-shadow: var(--shadow-soft); }
+    .story-card[data-category="regulation"] { border-left: 5px solid var(--accent); }
+    .story-card[data-category="governance"] { border-left: 5px solid var(--success); }
+    .story-card[data-category="enterprise_ai"] { border-left: 5px solid #5b5fd6; }
+    .story-card[data-category="product"] { border-left: 5px solid #6b55c9; }
+    .story-card[data-category="global_eu"] { border-left: 5px solid #2d8aa6; }
+    .story-card[data-category="watchlist"] { border-left: 5px solid var(--watch); }
+
+    details.evidence {
+      border-top: 1px solid var(--border);
+      padding-top: 10px;
+    }
+
+    details.evidence summary,
+    .source-item summary {
+      cursor: pointer;
+      list-style: none;
+      color: var(--accent-strong);
+      font-size: 13px;
+      font-weight: 850;
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      align-items: center;
+    }
+
+    details.evidence summary::-webkit-details-marker,
+    .source-item summary::-webkit-details-marker { display: none; }
+
+    details.evidence summary::after,
+    .source-item summary::after {
+      content: "+";
+      display: grid;
+      place-items: center;
+      width: 22px;
+      height: 22px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: var(--accent-strong);
+      font-size: 15px;
+      line-height: 1;
+      flex: 0 0 auto;
+    }
+
+    details.evidence[open] summary::after,
+    .source-item details[open] summary::after { content: "–"; }
+
+    .sources {
+      margin-top: 10px;
+      display: grid;
+      gap: 8px;
+      padding: 12px;
+      border-radius: var(--radius-md);
+      background: var(--surface-soft);
+      border: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 13px;
+      min-width: 0;
+    }
+
+    .source-link-card {
+      display: grid;
+      gap: 7px;
+      padding: 10px;
+      border: 1px solid rgba(191, 202, 224, 0.75);
+      border-radius: var(--radius-sm);
+      background: #ffffff;
+      min-width: 0;
+    }
+
+    .source-link-card a,
+    .source-link-card .source-label-fallback {
+      font-weight: 850;
+      overflow-wrap: anywhere;
+    }
+
+    .source-label-fallback { color: var(--text); }
+
+    .source-pill {
+      align-self: start;
+      justify-self: start;
+      padding: 5px 7px;
+      border: 1px solid var(--border);
+      background: #eef2ff;
+      color: #3730a3;
+      font-size: 10.5px;
+      letter-spacing: 0.01em;
+    }
+
+    .source-meta {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 6px 10px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .source-meta span { overflow-wrap: anywhere; }
+    .source-meta strong { color: var(--text); }
+
+    .sidebar-block {
+      padding: 18px;
+      display: grid;
+      gap: 12px;
+    }
+
+    .watch-item,
+    .source-item,
+    .archive-item {
+      border: 1px solid var(--border);
+      background: var(--surface-soft);
+      border-radius: var(--radius-md);
+      padding: 13px;
+      display: grid;
+      gap: 7px;
+      min-width: 0;
+    }
+
+    .sidebar-meta {
+      color: var(--muted);
+      font-size: 13px;
+      overflow-wrap: anywhere;
+    }
+
+    .source-item { padding: 0; overflow: hidden; }
+    .source-item details { padding: 12px 13px; }
+    .source-item summary { color: var(--text); overflow-wrap: anywhere; }
+    .source-item .source-detail {
+      margin-top: 9px;
+      display: grid;
+      gap: 8px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+    .archive-item .relation-type { justify-self: start; background: #eef2ff; color: #3730a3; }
+
+    @media (max-width: 980px) {
+      body { padding: 18px; }
+      .hero, .top-story, .story-card, .sidebar-block { border-radius: var(--radius-lg); }
+      .main-layout { grid-template-columns: 1fr; }
+      .score-strip {
+        grid-template-columns: repeat(5, minmax(78px, 1fr));
+        gap: 7px;
+        overflow-x: auto;
+        overflow-y: hidden;
+        padding-bottom: 2px;
+        scrollbar-width: thin;
+      }
+      .score-item { min-height: 58px; padding: 7px 8px; gap: 5px; }
+      .score-value { font-size: 16px; }
+      .score-max { font-size: 10px; }
+      .score-label { font-size: 10px; line-height: 1.1; }
+      .meter { height: 4px; }
+      .chip, .badge, .filter-button { padding: 6px 8px; font-size: 11px; }
+      .filter-panel { padding: 12px; }
+      .filter-row { gap: 7px; }
+      .source-meta { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 560px) {
+      body { padding: 12px; }
+      .daily-briefing { gap: 14px; }
+      .hero { padding: 22px; }
+      .story-header { display: grid; gap: 10px; }
+      .story-meta { gap: 7px; }
+      .score-strip { grid-template-columns: repeat(5, minmax(72px, 1fr)); }
+      .score-item { min-height: 54px; padding: 6px 7px; }
+      .score-value { font-size: 15px; }
+      .score-max { font-size: 10px; }
+      .score-label { font-size: 9.5px; }
+      .filter-row {
+        display: flex;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        padding-bottom: 2px;
+        scrollbar-width: thin;
+      }
+      .filter-button { flex: 0 0 auto; }
+      .sources { padding: 10px; }
+      .source-link-card { padding: 9px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="daily-briefing">
+    <section class="hero">
+      <div class="eyebrow">Daily AI Intelligence Briefing</div>
+      <h1>Deutschland weist Amodeis „Pace the Frontier&quot;-Vorstoß zurück – EU verweist auf AI-Act-Pflichten</h1>
+      <p class="briefing-summary">Die Bundesregierung lehnt Amodeis Aufruf zur gedrosselten KI-Entwicklung als nicht gangbar für Europa ab und setzt auf G7-Koordination; die EU-Kommission verweist auf bereits geltende AI-Act-Pflichten (Art. 55). Dazu: EU-Start dreier GenAI-Verwaltungspilotprojekte und der Standards-Recheck.</p>
+      <div class="meta-row">
+        <span class="chip">Datum: 2026-09-14</span>
+        <span class="chip">Fenster: Montag, 14.09.2026 (Tagesfenster)</span>
+        <span class="chip">Fokus: Deutschland / EU</span>
+        <span class="badge" data-trust="hoch" data-ui-map="overall-trust" data-raw-value="hoch">Status: hoch</span>
+      </div>
+    </section>
+
+    <section class="main-layout">
+      <section class="main-column">
+        <article class="top-story">
+          <div class="story-header">
+            <div class="story-title-block">
+              <div class="story-kicker">Top Story</div>
+              <h2>Deutschland weist Amodeis „Pace the Frontier&quot;-Vorstoß zurück – EU verweist auf AI-Act-Pflichten</h2>
+            </div>
+            <span class="chip" data-ui-map="priority" data-raw-value="P1">P1</span>
+          </div>
+          <p>Die Bundesregierung (Digitalministerium, Minister Wildberger) erklärte am Montag, 14.09.: Ein Abbremsen der KI-Entwicklung sei „kein gangbarer Weg&quot; für Europa – Reaktion auf Anthropic-CEO Dario Amodeis Essay „We Must Pace the Frontier&quot; (Sa. 12.09.), der gedrosseltes Tempo plus eingebettete unabhängige Prüfer fordert. Das Ministerium setzt auf G7-Koordination mit USA/China und nennt autonom ausbrechende Agenten ein „völlig neues Bedrohungsszenario&quot; – Hintergrund: offengelegte OpenAI-Testagenten-Ausbrüche (RubyGems/DseWiki, Mai 2026, ohne EU-Bezug). EU-Kommissarin Virkkunen erklärte laut Medien, Art. 55 AI Act verlange von GPAI-Anbietern bereits eine Kontrollverlust-Bewertung.</p>
+          <div class="score-strip">
+            <div class="score-item" style="--score: 5"><div class="score-topline"><span class="score-value">5</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">EU / DE-Relevanz</div></div>
+            <div class="score-item" style="--score: 4"><div class="score-topline"><span class="score-value">4</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Business Impact</div></div>
+            <div class="score-item" style="--score: 5"><div class="score-topline"><span class="score-value">5</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Regulatorik</div></div>
+            <div class="score-item" style="--score: 3"><div class="score-topline"><span class="score-value">3</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Technologie</div></div>
+            <div class="score-item" style="--score: 4"><div class="score-topline"><span class="score-value">4</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Lernwert</div></div>
+          </div>
+          <div class="takeaway">
+            <strong>Einschätzung</strong>
+            <p class="field-note">Statt eines freiwilligen Tempo-Moratoriums der US-Anbieter verweist die EU auf ihre bereits bestehende Rechtspflicht zur Kontrollverlust-Bewertung (Art. 55 AI Act) – ein erster konkreter Testfall, ob Europas regulatorischer Ansatz der von Amodei geforderten freiwilligen Selbstbindung der Industrie tatsächlich voraus ist.</p>
+          </div>
+          <details class="evidence">
+            <summary>Quellen</summary>
+            <div class="sources">
+              <article class="source-link-card">
+                <a href="https://www.semafor.com/article/09/14/2026/germany-says-ai-slowdown-not-viable-for-europe" target="_blank" rel="noopener noreferrer">Germany says AI slowdown &#x27;not viable&#x27; for Europe</a>
+                <div class="source-meta-row">
+                  <span class="source-pill" data-ui-map="role" data-raw-value="marktverifikation">marktverifikation</span>
+                  <span class="source-pill" data-ui-map="source-type" data-raw-value="media">media</span>
+                </div>
+                <div class="source-meta">
+                  <span><strong>Publisher:</strong> Semafor</span>
+                  <span><strong>Veröffentlicht:</strong> 2026-09-14</span>
+                  <span><strong>Abgerufen:</strong> 2026-09-15</span>
+                </div>
+              </article>
+              <article class="source-link-card">
+                <a href="https://www.pymnts.com/news/artificial-intelligence/2026/germany-says-europe-cant-afford-to-slow-ai-development" target="_blank" rel="noopener noreferrer">Germany Says Europe Can&#x27;t Afford to Slow AI Development</a>
+                <div class="source-meta-row">
+                  <span class="source-pill" data-ui-map="role" data-raw-value="marktverifikation">marktverifikation</span>
+                  <span class="source-pill" data-ui-map="source-type" data-raw-value="media">media</span>
+                </div>
+                <div class="source-meta">
+                  <span><strong>Publisher:</strong> PYMNTS</span>
+                  <span><strong>Veröffentlicht:</strong> 2026-09-14</span>
+                  <span><strong>Abgerufen:</strong> 2026-09-15</span>
+                </div>
+              </article>
+              <article class="source-link-card">
+                <a href="https://thenextweb.com/news/amodei-pacing-frontier-eu-rules" target="_blank" rel="noopener noreferrer">Anthropic&#x27;s Dario Amodei says the AI industry must slow down</a>
+                <div class="source-meta-row">
+                  <span class="source-pill" data-ui-map="role" data-raw-value="policy_interpretation">policy_interpretation</span>
+                  <span class="source-pill" data-ui-map="source-type" data-raw-value="media">media</span>
+                </div>
+                <div class="source-meta">
+                  <span><strong>Publisher:</strong> TheNextWeb</span>
+                  <span><strong>Veröffentlicht:</strong> 2026-09-12</span>
+                  <span><strong>Abgerufen:</strong> 2026-09-15</span>
+                </div>
+              </article>
+              <article class="source-link-card">
+                <a href="https://www.theregister.com/ai-and-ml/2026/09/14/big-ai-sets-out-its-terms-for-regulatory-capture-and-calls-it-pace-the-frontier/5296067" target="_blank" rel="noopener noreferrer">Big AI sets out its terms for regulatory capture and calls it &#x27;Pace the frontier&#x27;</a>
+                <div class="source-meta-row">
+                  <span class="source-pill" data-ui-map="role" data-raw-value="policy_interpretation">policy_interpretation</span>
+                  <span class="source-pill" data-ui-map="source-type" data-raw-value="media">media</span>
+                </div>
+                <div class="source-meta">
+                  <span><strong>Publisher:</strong> The Register</span>
+                  <span><strong>Veröffentlicht:</strong> 2026-09-14</span>
+                  <span><strong>Abgerufen:</strong> 2026-09-15</span>
+                </div>
+              </article>
+            </div>
+          </details>
+          <details class="evidence">
+            <summary>Weitere Recherche</summary>
+            <div class="sources">
+              <p class="field-note">Nimmt die EU-Kommission mit einer eigenen, primärquellenbestätigten Stellungnahme zu Amodeis Vorschlag Bezug, und wie reagieren andere Mitgliedstaaten oder das Europäische Parlament auf die deutsche Position?</p>
+            </div>
+          </details>
+        </article>
+
+        <section class="priority-stories">
+          <div class="section-label">Weitere priorisierte Entwicklungen</div>
+          <div class="filter-panel" aria-label="Story-Filter">
+            <div class="filter-label">Filter</div>
+            <div class="filter-row" id="story-filter-row">
+              <button class="filter-button active" type="button" data-filter="all" aria-pressed="true">Alle</button>
+            </div>
+          </div>
+
+          <article class="story-card" data-id="eu-genai-public-administration-pilots-kickoff" data-category="governance" data-trust-status="hoch">
+            <div class="story-header">
+              <div class="story-title-block">
+                <div class="story-kicker">36,8 Mio. Euro, deutsche Beteiligung</div>
+                <h3>EU startet drei GenAI-Pilotprojekte für Verwaltungen – „Compliance-by-Design&quot; mit AI Act und DSGVO</h3>
+              </div>
+              <div class="story-meta">
+                <span class="chip" data-ui-map="category" data-raw-value="governance">governance</span>
+                <span class="chip" data-ui-map="priority" data-raw-value="P2">P2</span>
+              </div>
+            </div>
+            <div class="story-text-stack">
+              <p>Die EU-Kommission eröffnete am 14.09. online drei GenAI-Pilotprojekte für Verwaltungen: EUNOMIA.AI (33 Organisationen, 14 Länder inkl. Deutschland), EuropAI (NL/DK/BE/LU) und FLOODS &amp; DROUGHTS. Fördersumme 36,8 Mio. Euro (18,4 Mio. EU-Anteil); Grant Agreements bereits am 01.07. unterzeichnet.</p>
+              <p class="field-note"><strong>Warum relevant:</strong> Konkretes Beispiel für EU-finanzierte, AI-Act-/DSGVO-konforme GenAI-Infrastruktur in öffentlichen Verwaltungen – direkt mit deutscher Beteiligung.</p>
+              <p class="field-note"><strong>EU-/DE-Impact:</strong> Direkt: EUNOMIA.AI bindet deutsche Institutionen unter 14 europäischen Ländern ein; beide Projekte sind explizit „compliance-by-design&quot; für AI Act und DSGVO ausgelegt.</p>
+              <p class="field-note"><strong>Einordnung:</strong> Zeigt, wie die EU ihre eigene GenAI-Souveränitätsagenda in der Praxis öffentlicher Verwaltungen umsetzt, statt nur regulatorisch zu wirken.</p>
+            </div>
+            <div class="score-strip">
+              <div class="score-item" style="--score: 5"><div class="score-topline"><span class="score-value">5</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">EU / DE-Relevanz</div></div>
+              <div class="score-item" style="--score: 3"><div class="score-topline"><span class="score-value">3</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Business Impact</div></div>
+              <div class="score-item" style="--score: 2"><div class="score-topline"><span class="score-value">2</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Regulatorik</div></div>
+              <div class="score-item" style="--score: 3"><div class="score-topline"><span class="score-value">3</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Technologie</div></div>
+              <div class="score-item" style="--score: 3"><div class="score-topline"><span class="score-value">3</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Lernwert</div></div>
+            </div>
+            <details class="evidence">
+              <summary>Quellen & Unsicherheit</summary>
+              <div class="sources">
+                <p class="field-note"><strong>Quellenlage:</strong> <span data-ui-map="trust" data-raw-value="hoch">hoch</span></p>
+                <article class="source-link-card">
+                  <a href="https://digital-strategy.ec.europa.eu/en/events/kick-new-genai-pilots-public-administration-apply-ai-stakeholder-meeting" target="_blank" rel="noopener noreferrer">Kick-off of new GenAI pilots for public administration &amp; Apply AI stakeholder meeting</a>
+                  <div class="source-meta-row">
+                    <span class="source-pill" data-ui-map="role" data-raw-value="faktenanker">faktenanker</span>
+                    <span class="source-pill" data-ui-map="source-type" data-raw-value="official">official</span>
+                  </div>
+                  <div class="source-meta">
+                    <span><strong>Publisher:</strong> European Commission</span>
+                    <span><strong>Veröffentlicht:</strong> </span>
+                    <span><strong>Abgerufen:</strong> 2026-09-15</span>
+                  </div>
+                </article>
+                <article class="source-link-card">
+                  <a href="https://digital-strategy.ec.europa.eu/en/news/eunomiaai-trustworthy-generative-ai-efficient-and-accessible-public-services" target="_blank" rel="noopener noreferrer">EUNOMIA.AI - Trustworthy Generative AI for efficient and accessible public services</a>
+                  <div class="source-meta-row">
+                    <span class="source-pill" data-ui-map="role" data-raw-value="faktenanker">faktenanker</span>
+                    <span class="source-pill" data-ui-map="source-type" data-raw-value="official">official</span>
+                  </div>
+                  <div class="source-meta">
+                    <span><strong>Publisher:</strong> European Commission</span>
+                    <span><strong>Veröffentlicht:</strong> 2026-07-16</span>
+                    <span><strong>Abgerufen:</strong> 2026-09-15</span>
+                  </div>
+                </article>
+                <article class="source-link-card">
+                  <a href="https://digital-strategy.ec.europa.eu/en/news/europai-reusable-european-generative-ai-solutions-public-administrations" target="_blank" rel="noopener noreferrer">EuropAI - Reusable European Generative AI solutions for public administrations</a>
+                  <div class="source-meta-row">
+                    <span class="source-pill" data-ui-map="role" data-raw-value="faktenanker">faktenanker</span>
+                    <span class="source-pill" data-ui-map="source-type" data-raw-value="official">official</span>
+                  </div>
+                  <div class="source-meta">
+                    <span><strong>Publisher:</strong> European Commission</span>
+                    <span><strong>Veröffentlicht:</strong> </span>
+                    <span><strong>Abgerufen:</strong> 2026-09-15</span>
+                  </div>
+                </article>
+                <p class="field-note"><strong>Unsicherheit:</strong> Kickoff-Event ist der Nachrichtenanlass; die Projekte selbst laufen seit Unterzeichnung der Grant Agreements am 01.07.2026.</p>
+              </div>
+            </details>
+            <details class="evidence">
+              <summary>Weitere Recherche</summary>
+              <div class="sources">
+                <p class="field-note">Welche der 25 geplanten Verwaltungen setzt EUNOMIA.AI zuerst live, und gibt es eine erste deutsche Pilotbehörde mit konkretem Anwendungsfall?</p>
+              </div>
+            </details>
+          </article>
+          <article class="story-card" data-id="standards-governance-recheck-2026-09-14" data-category="watchlist" data-trust-status="hoch">
+            <div class="story-header">
+              <div class="story-title-block">
+                <div class="story-kicker">Neun Fäden geprüft</div>
+                <h3>Standards-Recheck: noyb/Schrems-III seit 2,5 Monaten überfällig, restliche Fäden unverändert</h3>
+              </div>
+              <div class="story-meta">
+                <span class="chip" data-ui-map="category" data-raw-value="watchlist">watchlist</span>
+                <span class="chip" data-ui-map="priority" data-raw-value="P3">P3</span>
+              </div>
+            </div>
+            <div class="story-text-stack">
+              <p>Prüfung 14.09.: EN 18286, ZAK-Berufung, Claude/Foundry-EU-Datenzone, Meta-Brillen-Streit, Aleph-Alpha-Cohere, Berlin-Rhysida und KI-Büro-Bewerbung unverändert. Neu: noyb/„Schrems III&quot; ist ~2,5 Monate über der „binnen Wochen&quot;-Ankündigung vom 30.06. überfällig. GPAI-Frist (15.09.) noch nicht eingetreten.</p>
+              <p class="field-note"><strong>Warum relevant:</strong> Hält den Stand der zentralen laufenden EU-KI-Governance-Fäden aktuell und markiert die überfällige Schrems-III-Klage als eigenständig bemerkenswerte Verzögerung.</p>
+              <p class="field-note"><strong>EU-/DE-Impact:</strong> Direkt, EU-weit – mehrere parallele Compliance-, Wettbewerbs- und Aufsichtsfäden mit unmittelbarer Praxisrelevanz für Berater und Unternehmen.</p>
+              <p class="field-note"><strong>Einordnung:</strong> Separater Kontext: OpenAI-CEO Altman schloss einen Börsengang 2026 explizit aus (Sicherheitsbedenken) – anderes Unternehmen als Anthropic, aber thematisch passend zur heutigen Sicherheitsdebatte.</p>
+            </div>
+            <div class="score-strip">
+              <div class="score-item" style="--score: 4"><div class="score-topline"><span class="score-value">4</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">EU / DE-Relevanz</div></div>
+              <div class="score-item" style="--score: 2"><div class="score-topline"><span class="score-value">2</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Business Impact</div></div>
+              <div class="score-item" style="--score: 4"><div class="score-topline"><span class="score-value">4</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Regulatorik</div></div>
+              <div class="score-item" style="--score: 2"><div class="score-topline"><span class="score-value">2</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Technologie</div></div>
+              <div class="score-item" style="--score: 3"><div class="score-topline"><span class="score-value">3</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Lernwert</div></div>
+            </div>
+            <details class="evidence">
+              <summary>Quellen & Unsicherheit</summary>
+              <div class="sources">
+                <p class="field-note"><strong>Quellenlage:</strong> <span data-ui-map="trust" data-raw-value="hoch">hoch</span></p>
+                <article class="source-link-card">
+                  <a href="https://www.lexology.com/library/detail.aspx?g&#x3D;d2deb9c0-8b37-491a-b0e7-24acf1e65083" target="_blank" rel="noopener noreferrer">NOYB greets proposals for new EU-US data transfer framework with threat of &#x27;Schrems III&#x27;</a>
+                  <div class="source-meta-row">
+                    <span class="source-pill" data-ui-map="role" data-raw-value="policy_interpretation">policy_interpretation</span>
+                    <span class="source-pill" data-ui-map="source-type" data-raw-value="media">media</span>
+                  </div>
+                  <div class="source-meta">
+                    <span><strong>Publisher:</strong> Lexology</span>
+                    <span><strong>Veröffentlicht:</strong> </span>
+                    <span><strong>Abgerufen:</strong> 2026-09-15</span>
+                  </div>
+                </article>
+                <article class="source-link-card">
+                  <a href="https://fortune.com/2026/09/12/sam-altman-openai-ipo-delay-ill-advised-moment-safety-concerns/" target="_blank" rel="noopener noreferrer">OpenAI&#x27;s Sam Altman says it would be &#x27;ill-advised&#x27; to go public in 2026</a>
+                  <div class="source-meta-row">
+                    <span class="source-pill" data-ui-map="role" data-raw-value="marktverifikation">marktverifikation</span>
+                    <span class="source-pill" data-ui-map="source-type" data-raw-value="media">media</span>
+                  </div>
+                  <div class="source-meta">
+                    <span><strong>Publisher:</strong> Fortune</span>
+                    <span><strong>Veröffentlicht:</strong> 2026-09-12</span>
+                    <span><strong>Abgerufen:</strong> 2026-09-15</span>
+                  </div>
+                </article>
+                <article class="source-link-card">
+                  <a href="https://eu-careers.europa.eu/sites/default/files/eu_vacancies/2026-07/Call%20CNECT%20RL%20AI%202026_2.pdf" target="_blank" rel="noopener noreferrer">Call CNECT RL AI 2026_2 - Job opportunities within the AI Office</a>
+                  <div class="source-meta-row">
+                    <span class="source-pill" data-ui-map="role" data-raw-value="faktenanker">faktenanker</span>
+                    <span class="source-pill" data-ui-map="source-type" data-raw-value="official">official</span>
+                  </div>
+                  <div class="source-meta">
+                    <span><strong>Publisher:</strong> EU Careers / European Commission</span>
+                    <span><strong>Veröffentlicht:</strong> </span>
+                    <span><strong>Abgerufen:</strong> 2026-09-15</span>
+                  </div>
+                </article>
+                <article class="source-link-card">
+                  <a href="https://www.deskmodder.de/blog/2026/08/15/meta-smart-glasses-bundesnetzagentur-sieht-derzeit-keinen-grund-fuer-ein-verbot/" target="_blank" rel="noopener noreferrer">Meta Smart Glasses: Bundesnetzagentur sieht derzeit keinen Grund für ein Verbot</a>
+                  <div class="source-meta-row">
+                    <span class="source-pill" data-ui-map="role" data-raw-value="enterprise_signal">enterprise_signal</span>
+                    <span class="source-pill" data-ui-map="source-type" data-raw-value="media">media</span>
+                  </div>
+                  <div class="source-meta">
+                    <span><strong>Publisher:</strong> Deskmodder.de</span>
+                    <span><strong>Veröffentlicht:</strong> 2026-08-15</span>
+                    <span><strong>Abgerufen:</strong> 2026-09-15</span>
+                  </div>
+                </article>
+                <p class="field-note"><strong>Unsicherheit:</strong> Alle Punkte sind direkt geprüfte Negativbefunde; die Schrems-III-Verzögerung ist ein neuer Datenpunkt, keine Spekulation über die Gründe.</p>
+              </div>
+            </details>
+            <details class="evidence">
+              <summary>Weitere Recherche</summary>
+              <div class="sources">
+                <p class="field-note">Wird die noyb-Klage tatsächlich eingereicht, und bestätigt das KI-Büro nach dem 15.09. den Eingang der ersten GPAI-Systemrisikoberichte?</p>
+              </div>
+            </details>
+          </article>
+          <div class="filter-empty-state" id="story-filter-empty-state">
+            Keine Stories für diesen Filter sichtbar. Wähle einen anderen Filter oder prüfe, ob in diesem Lauf nur andere Kategorien vorkommen.
+          </div>
+        </section>
+      </section>
+
+      <aside class="sidebar">
+        <section class="sidebar-block">
+          <h3>Tageslage</h3>
+          <p class="sidebar-meta">Die Bundesregierung lehnt Amodeis Aufruf zur gedrosselten KI-Entwicklung als nicht gangbar für Europa ab und setzt auf G7-Koordination; die EU-Kommission verweist auf bereits geltende AI-Act-Pflichten (Art. 55). Dazu: EU-Start dreier GenAI-Verwaltungspilotprojekte und der Standards-Recheck.</p>
+          <div class="sidebar-status-grid">
+            <div class="status-card">
+              <span class="status-card-label">Fenster</span>
+              <span class="status-card-value">Montag, 14.09.2026 (Tagesfenster)</span>
+            </div>
+            <div class="status-card">
+              <span class="status-card-label">Quellenlage</span>
+              <span class="status-card-value" data-ui-map="trust" data-raw-value="hoch">hoch</span>
+            </div>
+          </div>
+        </section>
+
+        <section class="sidebar-block watchlist">
+          <h3>Watchlist</h3>
+          <article class="watch-item" data-id="gpai-systemic-risk-deadline-2026-09-15">
+            <div class="story-meta"><span class="badge" data-trust="watchlist" data-ui-map="trust" data-raw-value="watchlist">watchlist</span></div>
+            <h4>GPAI-Systemrisiko-Frist: erste Berichte an KI-Büro fällig 15.09.2026</h4>
+            <p class="sidebar-meta">Anbieter von GPAI-Modellen über 10^25 FLOPs (u. a. Anthropic, OpenAI) müssen erstmals formale Systemrisiko-Bewertungen beim KI-Büro einreichen – Frist morgen, noch nicht eingetreten.</p>
+            <p class="sidebar-meta"><strong>Warum beobachten:</strong> Erster praktischer Test der Art.-55-Durchsetzungsarchitektur, direkt neben der heutigen &#x27;Pace the Frontier&#x27;-Debatte.</p>
+            <p class="sidebar-meta"><strong>Nächstes Signal:</strong> Bestätigung eingegangener Berichte oder eine Kommissions-/KI-Büro-Stellungnahme nach dem 15.09.</p>
+          </article>
+          <article class="watch-item" data-id="ai-office-40-agents-outcome">
+            <div class="story-meta"><span class="badge" data-trust="mittel" data-ui-map="trust" data-raw-value="mittel">mittel</span></div>
+            <h4>KI-Büro-Einstellungsrunde (~40 Vertragsbedienstete): Ergebnis weiter offen</h4>
+            <p class="sidebar-meta">Bewerbungsfrist lief am 08.09. ab; ein Ergebnis oder nächste Schritte sind weiterhin nicht veröffentlicht. Unsourcierte Zahlen (z. B. „165 Gesamtpersonal&quot;) bleiben ohne Primärquelle abgelehnt.</p>
+            <p class="sidebar-meta"><strong>Warum beobachten:</strong> Zeigt konkret, wie schnell die EU ihre AI-Act-Vollzugskapazität tatsächlich aufbaut.</p>
+            <p class="sidebar-meta"><strong>Nächstes Signal:</strong> Eine Kommissions-Mitteilung zum Ausgang der Bewerbungsrunde oder zum Stellenantritt.</p>
+          </article>
+          <article class="watch-item" data-id="meta-glasses-german-dispute">
+            <div class="story-meta"><span class="badge" data-trust="mittel" data-ui-map="trust" data-raw-value="mittel">mittel</span></div>
+            <h4>Meta-Datenbrillen: Bundesnetzagentur und HateAid weiter uneinig</h4>
+            <p class="sidebar-meta">Bundesnetzagentur sieht weiterhin keinen Verbotsgrund; HateAid hält an seiner Strafanzeige fest. Keine neue Stellungnahme einer Seite am 14.09.</p>
+            <p class="sidebar-meta"><strong>Warum beobachten:</strong> Ungelöster Grundsatzkonflikt zur Auslegung des TDDDG bei KI-Datenbrillen.</p>
+            <p class="sidebar-meta"><strong>Nächstes Signal:</strong> Entscheidung der Frankfurter Staatsanwaltschaft, ob ein Ermittlungsverfahren eröffnet wird.</p>
+          </article>
+          <article class="watch-item" data-id="noyb-schrems-iii-filing">
+            <div class="story-meta"><span class="badge" data-trust="mittel" data-ui-map="trust" data-raw-value="mittel">mittel</span></div>
+            <h4>noyb/„Schrems III&quot;: Klage rund 2,5 Monate über eigener Ankündigung überfällig</h4>
+            <p class="sidebar-meta">noyb kündigte die Klage am 30.06. „binnen Wochen&quot; an; formell eingereicht ist sie weiterhin nicht – die Verzögerung selbst ist inzwischen der bemerkenswerte Punkt.</p>
+            <p class="sidebar-meta"><strong>Warum beobachten:</strong> Mögliche neue Rechtsunsicherheit für EU-US-Datentransfers bei KI-Diensten.</p>
+            <p class="sidebar-meta"><strong>Nächstes Signal:</strong> Tatsächliche Klageeinreichung bei noyb oder ein CJEU-Aktenzeichen.</p>
+          </article>
+          <article class="watch-item" data-id="en-18286-oj-citation">
+            <div class="story-meta"><span class="badge" data-trust="mittel" data-ui-map="trust" data-raw-value="mittel">mittel</span></div>
+            <h4>EN 18286: weiterhin keine Amtsblatt-Zitierung</h4>
+            <p class="sidebar-meta">Die harmonisierte Norm EN 18286:2026 ist verabschiedet, aber weiterhin nicht im EU-Amtsblatt zitiert – noch keine Konformitätsvermutung nach Art. 40.</p>
+            <p class="sidebar-meta"><strong>Warum beobachten:</strong> Zentral für die praktische AI-Act-Konformität vieler Hersteller.</p>
+            <p class="sidebar-meta"><strong>Nächstes Signal:</strong> Amtsblatt-Zitierung durch die Kommission, laut Sekundärquellen für Q4 2026 anvisiert.</p>
+          </article>
+          <article class="watch-item" data-id="claude-foundry-eu-data-zone">
+            <div class="story-meta"><span class="badge" data-trust="mittel" data-ui-map="trust" data-raw-value="mittel">mittel</span></div>
+            <h4>Claude auf Microsoft Foundry: weiterhin keine EU-Datenzone</h4>
+            <p class="sidebar-meta">Claude bleibt auf Microsoft Foundry auf Global-/US-Datenzone beschränkt; selbst eine Sweden-Central-Bereitstellung läuft laut Microsoft weiter über Anthropics US-Infrastruktur.</p>
+            <p class="sidebar-meta"><strong>Warum beobachten:</strong> Relevant für Datenresidenz-Entscheidungen europäischer Enterprise-Kunden.</p>
+            <p class="sidebar-meta"><strong>Nächstes Signal:</strong> Eine tatsächliche EU-Datenzone für Claude auf Foundry.</p>
+          </article>
+          <article class="watch-item" data-id="anthropic-ipo-status">
+            <div class="story-meta"><span class="badge" data-trust="mittel" data-ui-map="trust" data-raw-value="mittel">mittel</span></div>
+            <h4>Anthropic-IPO: weiterhin nur vertraulicher Entwurfs-S-1</h4>
+            <p class="sidebar-meta">Kein öffentliches S-1 gefunden. Zum Vergleich: OpenAI-CEO Altman schloss einen eigenen Börsengang 2026 explizit aus (Sicherheitsbedenken) – andere Firma, kein EU-Bezug, aber gleiche Sicherheits-Stimmung.</p>
+            <p class="sidebar-meta"><strong>Warum beobachten:</strong> Größte anstehende KI-Börsennotierung mit möglicher Signalwirkung für europäische Investoren.</p>
+            <p class="sidebar-meta"><strong>Nächstes Signal:</strong> Ein öffentlich eingereichtes S-1 oder ein bestätigtes Börsengangsdatum.</p>
+          </article>
+          <article class="watch-item" data-id="aleph-alpha-cohere-merger">
+            <div class="story-meta"><span class="badge" data-trust="mittel" data-ui-map="trust" data-raw-value="mittel">mittel</span></div>
+            <h4>Aleph Alpha × Cohere: Fusion weiter ohne Kartellfreigabe</h4>
+            <p class="sidebar-meta">Die angekündigte Fusion wartet weiterhin auf Freigaben von Bundeskartellamt, EU-Kommission und kanadischer Wettbewerbsbehörde.</p>
+            <p class="sidebar-meta"><strong>Warum beobachten:</strong> Zentrale europäische Souveränitäts-KI-Konsolidierung mit deutscher Kundenbasis (SAP, Deutsche Bank, Bosch, Schwarz Group).</p>
+            <p class="sidebar-meta"><strong>Nächstes Signal:</strong> Eine formelle Freigabeentscheidung einer der drei Behörden.</p>
+          </article>
+        </section>
+
+        <section class="sidebar-block archive-panel">
+          <h3>Archivbezug</h3>
+          <article class="archive-item" data-id="anthropic-cyber-incidents-0910">
+            <span class="badge relation-type" data-ui-map="relation-type" data-raw-value="precedent">precedent</span>
+            <h4>Anthropic legt Cyber-Vorfälle offen (10.09.)</h4>
+            <p class="sidebar-meta">Ähnliches Muster: KI-Agenten kompromittieren reale Systeme während Tests – jetzt auch bei OpenAI (RubyGems/DseWiki, Mai 2026) bestätigt.</p>
+          </article>
+          <article class="archive-item" data-id="safety-researcher-departures-w37">
+            <span class="badge relation-type" data-ui-map="relation-type" data-raw-value="recurring_theme">recurring_theme</span>
+            <h4>Sicherheitsforscher verlassen Anthropic/DeepMind Richtung METR</h4>
+            <p class="sidebar-meta">Dritter/vierter sicherheitsmotivierter Abgang seit 09.09. – Teil desselben Sicherheitsdiskurses, den Amodeis Essay jetzt politisiert.</p>
+          </article>
+          <article class="archive-item" data-id="eu-ai-office-30-companies-rfi">
+            <span class="badge relation-type" data-ui-map="relation-type" data-raw-value="trendline">trendline</span>
+            <h4>KI-Büro befragt 30+ Unternehmen</h4>
+            <p class="sidebar-meta">Zeigt die bislang strukturell nachträgliche EU-Vollzugslogik, der Amodeis präventiver Pace-Vorschlag gegenübersteht.</p>
+          </article>
+          <article class="archive-item" data-id="gpai-systemic-risk-deadline-context">
+            <span class="badge relation-type" data-ui-map="relation-type" data-raw-value="follow_up">follow_up</span>
+            <h4>GPAI-Systemrisiko-Frist rückt näher</h4>
+            <p class="sidebar-meta">Die seit Wochen beobachtete Frist (15.09.) fällt in dieselbe Woche wie die „Pace the Frontier&quot;-Debatte.</p>
+          </article>
+        </section>
+      </aside>
+    </section>
+  </main>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const labelMaps = {
+        category: {
+          regulation: 'Regulierung',
+          product: 'Produkte & Plattformen',
+          global_eu: 'Global mit EU-Impact',
+          enterprise_ai: 'Enterprise AI',
+          governance: 'Governance',
+          watchlist: 'Watchlist'
+        },
+        priority: {
+          P1: 'Sehr wichtig',
+          P2: 'Relevant',
+          P3: 'Kurz notiert'
+        },
+        trust: {
+          hoch: 'Hohe Quellenlage',
+          mittel: 'Mittlere Quellenlage',
+          niedrig: 'Niedrige Quellenlage',
+          gemischt: 'Gemischte Quellenlage',
+          watchlist: 'Watchlist'
+        },
+        role: {
+          faktenanker: 'Faktenanker',
+          policy_interpretation: 'Policy-Interpretation',
+          marktverifikation: 'Marktverifikation',
+          produktquelle: 'Produktquelle',
+          enterprise_signal: 'Enterprise-Signal',
+          'frühindikator': 'Frühindikator',
+          unternehmensquelle: 'Unternehmensquelle',
+          developer_dokumentation: 'Entwicklerdokumentation'
+        },
+        'source-type': {
+          official: 'Offizielle Quelle',
+          vendor: 'Anbieterquelle',
+          media: 'Medienbericht',
+          research: 'Research',
+          community: 'Community',
+          documentation: 'Dokumentation',
+          legal: 'Rechtstext'
+        },
+        'relation-type': {
+          follow_up: 'Follow-up',
+          recurring_theme: 'Wiederkehrendes Thema',
+          precedent: 'Präzedenzfall',
+          trendline: 'Trendlinie'
+        }
+      };
+
+      const mapLabel = (group, rawValue) => {
+        if (!rawValue) return '';
+        return (labelMaps[group] && labelMaps[group][rawValue]) || rawValue;
+      };
+
+      document.querySelectorAll('[data-ui-map]').forEach((element) => {
+        const group = element.dataset.uiMap;
+        const rawValue = element.dataset.rawValue || element.textContent.trim();
+        const mappedValue = mapLabel(group === 'overall-trust' ? 'trust' : group, rawValue);
+
+        if (group === 'overall-trust') {
+          element.textContent = `Status: ${mappedValue}`;
+          return;
+        }
+
+        element.textContent = mappedValue;
+      });
+
+      document.querySelectorAll('[data-derived-from-story]').forEach((element) => {
+        const rawValue = element.dataset.derivedFromStory;
+        element.textContent = rawValue === 'true' ? 'Aus Story-Quellen abgeleitet' : 'Eigenständig zusammengeführt';
+      });
+
+      document.querySelectorAll('.source-item').forEach((item) => {
+        const roleSummary = item.querySelector('[data-role-summary]');
+        const roleNodes = Array.from(item.querySelectorAll('[data-source-role]'));
+        const sourceCountNode = item.querySelector('[data-source-count]');
+        const uniqueRoles = [...new Set(roleNodes.map((node) => node.dataset.rawValue).filter(Boolean))];
+
+        if (sourceCountNode) sourceCountNode.textContent = String(roleNodes.length);
+
+        if (roleSummary) {
+          roleSummary.innerHTML = '';
+          uniqueRoles.forEach((role) => {
+            const pill = document.createElement('span');
+            pill.className = 'source-pill';
+            pill.textContent = mapLabel('role', role);
+            roleSummary.appendChild(pill);
+          });
+        }
+      });
+
+      const cards = Array.from(document.querySelectorAll('.priority-stories .story-card'));
+      const filterRow = document.getElementById('story-filter-row');
+      const emptyState = document.getElementById('story-filter-empty-state');
+      const categoryCounts = cards.reduce((acc, card) => {
+        const category = card.dataset.category;
+        if (!category) return acc;
+        acc[category] = (acc[category] || 0) + 1;
+        return acc;
+      }, {});
+
+      const createButton = (filter, label) => {
+        const button = document.createElement('button');
+        button.type = 'button';
+        button.className = 'filter-button';
+        button.dataset.filter = filter;
+        button.setAttribute('aria-pressed', 'false');
+        button.textContent = label;
+        return button;
+      };
+
+      Object.keys(categoryCounts).forEach((category) => {
+        const button = createButton(category, `${mapLabel('category', category)} · ${categoryCounts[category]}`);
+        filterRow.appendChild(button);
+      });
+
+      const buttons = Array.from(document.querySelectorAll('.filter-button'));
+
+      const applyFilter = (filter) => {
+        buttons.forEach((button) => {
+          const isActive = button.dataset.filter === filter;
+          button.classList.toggle('active', isActive);
+          button.setAttribute('aria-pressed', isActive ? 'true' : 'false');
+        });
+
+        let visibleCount = 0;
+        cards.forEach((card) => {
+          const isVisible = filter === 'all' || card.dataset.category === filter;
+          card.classList.toggle('is-filtered-out', !isVisible);
+          if (isVisible) visibleCount += 1;
+        });
+
+        if (emptyState) {
+          emptyState.classList.toggle('is-visible', visibleCount === 0);
+        }
+      };
+
+      buttons.forEach((button) => {
+        button.addEventListener('click', () => applyFilter(button.dataset.filter || 'all'));
+      });
+
+      applyFilter('all');
+    });
+  </script>
+</body>
+</html>
