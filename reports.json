@@ -1,6 +1,23 @@
 {
   "reports": [
     {
+      "id": "daily-2026-09-16",
+      "mode": "daily",
+      "title": "Daily Briefing 16.09.2026",
+      "date_label": "16.09.2026",
+      "window_start": "2026-09-16",
+      "window_end": "2026-09-16",
+      "public_url": "https://ai-news.camphausen.eu/daily/2026-09-16.html",
+      "published_at": "2026-09-17T05:16:39Z",
+      "summary": "Von der Leyen nennt KI einen 'Kipppunkt' und unterstützt die Industrie-Forderung, das KI-Tempo zu drosseln – Kontrast zu Deutschlands Absage an denselben Vorschlag vor zwei Tagen. Dazu: Cohere/Aleph-Alpha besiegeln ihre 20-Mrd.-Fusion, Kanada/Deutschland finanzieren LawZero, Mistral treibt Firefox' KI-Fenster an.",
+      "trust_status": "gemischt",
+      "tags": [
+        "AI Act",
+        "Governance",
+        "Enterprise AI"
+      ]
+    },
+    {
       "id": "daily-2026-09-15",
       "mode": "daily",
       "title": "Daily Briefing 15.09.2026",
