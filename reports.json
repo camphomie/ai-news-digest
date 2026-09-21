@@ -35,6 +35,24 @@
       ]
     },
     {
+      "id": "weekly-2026-W38",
+      "mode": "weekly",
+      "title": "Wochenbericht KW 38: Europas KI-Industrie widerspricht Amodeis Tempodrosselung",
+      "date_label": "14.–20.09.2026",
+      "window_start": "2026-09-14",
+      "window_end": "2026-09-20",
+      "public_url": "https://ai-news.camphausen.eu/weekly/2026-W38.html",
+      "published_at": "2026-09-21T06:13:38Z",
+      "summary": "Mistral, Black Forest Labs, Hugging Face und Proton weisen Amodeis Tempodrosselung zurück; EU-KI-Gremium priorisiert Vor-Markt-Konformität, 19 Staaten starten IPCEI-AI unter deutscher Führung.",
+      "trust_status": "gemischt",
+      "tags": [
+        "AI Act",
+        "Governance",
+        "EU-Souveränität",
+        "Pace the Frontier"
+      ]
+    },
+    {
       "id": "daily-2026-09-14",
       "mode": "daily",
       "title": "Daily Briefing 14.09.2026",
