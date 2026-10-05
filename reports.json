@@ -1,6 +1,25 @@
 {
   "reports": [
     {
+      "id": "weekly-2026-W40",
+      "mode": "weekly",
+      "title": "Wochenbericht KW 40: USA setzt auf KI-Selbstkontrolle, Europas KI-Agenten-Lücke wächst",
+      "date_label": "28.09.-04.10.2026",
+      "window_start": "2026-09-28",
+      "window_end": "2026-10-04",
+      "public_url": "https://ai-news.camphausen.eu/weekly/2026-W40.html",
+      "published_at": "2026-10-05T06:52:32Z",
+      "summary": "Trump und sechs Tech-CEOs unterzeichnen einen unverbindlichen KI-Pakt – Kontrast zum bindenden AI Act. OpenAI durchlebt eine Sicherheitskrise, Mistral baut einen Hub in München, Anthropic startet ein Trainingsprogramm mit Capgemini.",
+      "trust_status": "gemischt",
+      "tags": [
+        "AI Act",
+        "Governance",
+        "Enterprise AI",
+        "Mistral",
+        "OpenAI"
+      ]
+    },
+    {
       "id": "daily-2026-09-16",
       "mode": "daily",
       "title": "Daily Briefing 16.09.2026",

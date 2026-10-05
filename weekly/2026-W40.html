@@ -1,0 +1,1271 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Wochenbericht KW 40: USA setzt auf KI-Selbstkontrolle, Europas KI-Agenten-Lücke wächst, Mistral baut in München</title>
+  <style>
+    :root {
+      --bg: #eef3f9;
+      --bg-radial: radial-gradient(circle at top left, rgba(49, 91, 217, 0.14), transparent 32rem), radial-gradient(circle at top right, rgba(31, 122, 77, 0.10), transparent 28rem), #eef3f9;
+      --surface: #ffffff;
+      --surface-soft: #f7f9fd;
+      --surface-blue: #f1f5ff;
+      --text: #111b2e;
+      --muted: #66748c;
+      --muted-2: #8190a8;
+      --border: #d9e2ef;
+      --border-strong: #bfcae0;
+      --accent: #244ed8;
+      --accent-strong: #1739a8;
+      --accent-soft: #e8efff;
+      --success: #1f7a4d;
+      --success-soft: #e7f5ee;
+      --warning: #b26a00;
+      --warning-soft: #fff3dc;
+      --risk: #a63f3f;
+      --risk-soft: #fdecec;
+      --watch: #2563eb;
+      --watch-soft: #eaf1ff;
+      --shadow: 0 18px 45px rgba(17, 30, 58, 0.10);
+      --shadow-soft: 0 8px 24px rgba(17, 30, 58, 0.07);
+      --radius-xl: 26px;
+      --radius-lg: 18px;
+      --radius-md: 14px;
+      --radius-sm: 10px;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      padding: 34px;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--bg-radial);
+      color: var(--text);
+      line-height: 1.58;
+    }
+
+    h1, h2, h3, h4, p { margin: 0; }
+    h1 { max-width: 940px; font-size: clamp(32px, 5vw, 56px); line-height: 0.98; letter-spacing: -0.045em; }
+    h2 { font-size: clamp(22px, 3vw, 34px); line-height: 1.08; letter-spacing: -0.03em; }
+    h3 { font-size: 20px; line-height: 1.18; letter-spacing: -0.02em; }
+    h4 { font-size: 15px; line-height: 1.25; }
+    a { color: var(--accent-strong); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    .weekly-briefing {
+      max-width: 1220px;
+      margin: 0 auto;
+      display: grid;
+      gap: 24px;
+    }
+
+    .hero,
+    .executive-summary,
+    .weekly-assessment,
+    .theme-block,
+    .sidebar-block {
+      background: rgba(255, 255, 255, 0.92);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow-soft);
+      backdrop-filter: blur(12px);
+      min-width: 0;
+    }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      padding: 30px;
+      display: grid;
+      gap: 18px;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      height: 5px;
+      background: linear-gradient(90deg, #244ed8, #1f7a4d, #b26a00);
+      pointer-events: none;
+    }
+
+    .hero > * { position: relative; }
+
+    .eyebrow,
+    .story-kicker,
+    .section-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      line-height: 1;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-weight: 800;
+    }
+
+    .eyebrow::before,
+    .section-label::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 0 5px var(--accent-soft);
+      flex: 0 0 auto;
+    }
+
+    .weekly-summary,
+    .field-note,
+    .sidebar-meta {
+      color: var(--muted);
+    }
+
+    .weekly-summary {
+      max-width: 880px;
+      font-size: 17px;
+    }
+
+    .meta-row,
+    .story-meta,
+    .source-meta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .chip,
+    .badge,
+    .source-pill {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 800;
+      line-height: 1;
+      white-space: nowrap;
+    }
+
+    .chip {
+      padding: 9px 11px;
+      background: var(--accent-soft);
+      color: var(--accent-strong);
+      border: 1px solid rgba(36, 78, 216, 0.12);
+    }
+
+    .badge {
+      padding: 8px 10px;
+      border: 1px solid var(--border);
+      background: var(--surface-soft);
+      color: var(--muted);
+    }
+
+    .badge[data-trust="hoch"] { background: var(--success-soft); color: var(--success); border-color: rgba(31, 122, 77, 0.20); }
+    .badge[data-trust="mittel"], .badge[data-trust="gemischt"] { background: var(--warning-soft); color: var(--warning); border-color: rgba(178, 106, 0, 0.22); }
+    .badge[data-trust="niedrig"] { background: var(--risk-soft); color: var(--risk); border-color: rgba(166, 63, 63, 0.22); }
+    .badge[data-trust="watchlist"] { background: var(--watch-soft); color: var(--watch); border-color: rgba(37, 99, 235, 0.18); }
+
+    .main-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 2.05fr) minmax(300px, 0.95fr);
+      gap: 24px;
+      align-items: start;
+    }
+
+    .main-column,
+    .main-developments,
+    .sidebar,
+    .section-stack {
+      display: grid;
+      gap: 18px;
+      min-width: 0;
+    }
+
+    .executive-summary,
+    .weekly-assessment,
+    .theme-block,
+    .sidebar-block {
+      padding: 22px;
+      display: grid;
+      gap: 15px;
+    }
+
+    .weekly-assessment {
+      border-color: rgba(36, 78, 216, 0.24);
+      box-shadow: var(--shadow);
+    }
+
+    .story-header {
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      align-items: flex-start;
+      min-width: 0;
+    }
+
+    .story-title-block,
+    .story-text-stack {
+      display: grid;
+      gap: 8px;
+      min-width: 0;
+    }
+
+    .story-title-block h3,
+    .sidebar-block h3,
+    .sidebar-block h4 {
+      overflow-wrap: anywhere;
+    }
+
+    .takeaway,
+    .analysis-note {
+      border: 1px solid var(--border);
+      background: linear-gradient(180deg, #fbfcff, #f6f8fc);
+      border-radius: var(--radius-lg);
+      padding: 16px;
+      display: grid;
+      gap: 6px;
+    }
+
+    .takeaway strong,
+    .analysis-note strong {
+      font-size: 13px;
+      letter-spacing: 0.02em;
+    }
+
+    .score-strip {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 10px;
+      max-width: 100%;
+      min-width: 0;
+    }
+
+    .score-item {
+      --score: 1;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      background: var(--surface-soft);
+      padding: 12px;
+      display: grid;
+      gap: 8px;
+      min-height: 88px;
+      min-width: 0;
+      overflow: hidden;
+    }
+
+    .score-topline {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 6px;
+      min-width: 0;
+      max-width: 100%;
+    }
+
+    .score-value {
+      min-width: 0;
+      max-width: 100%;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      font-size: 24px;
+      line-height: 1;
+      font-weight: 900;
+      letter-spacing: -0.04em;
+    }
+
+    .score-max {
+      color: var(--muted-2);
+      font-size: 11px;
+      font-weight: 800;
+      flex: 0 0 auto;
+    }
+
+    .score-label {
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.15;
+      font-weight: 750;
+      overflow-wrap: anywhere;
+      hyphens: auto;
+    }
+
+    .meter {
+      width: 100%;
+      min-width: 0;
+      height: 7px;
+      border-radius: 999px;
+      background: #e4e9f2;
+      overflow: hidden;
+    }
+
+    .meter > span {
+      display: block;
+      height: 100%;
+      width: clamp(0%, calc(var(--score) * 20%), 100%);
+      max-width: 100%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, var(--accent), #1f7a4d);
+    }
+
+    .theme-block { box-shadow: var(--shadow-soft); }
+    .theme-block[data-category="regulation"] { border-left: 5px solid var(--accent); }
+    .theme-block[data-category="governance"] { border-left: 5px solid var(--success); }
+    .theme-block[data-category="enterprise_ai"] { border-left: 5px solid #5b5fd6; }
+    .theme-block[data-category="product"] { border-left: 5px solid #6b55c9; }
+    .theme-block[data-category="global_eu"] { border-left: 5px solid #2d8aa6; }
+    .theme-block[data-category="watchlist"] { border-left: 5px solid var(--watch); }
+
+    .sidebar-status-grid,
+    .compact-panel-summary,
+    .compact-panel-details,
+    .compact-role-row {
+      display: grid;
+      gap: 10px;
+    }
+
+    .sidebar-status-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .status-card {
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      background: var(--surface-soft);
+      padding: 12px;
+      display: grid;
+      gap: 5px;
+    }
+
+    .status-card-label {
+      font-size: 11px;
+      font-weight: 850;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--muted-2);
+    }
+
+    .status-card-value {
+      font-size: 14px;
+      font-weight: 800;
+      color: var(--text);
+    }
+
+    .compact-panel-stats {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .compact-source-list {
+      margin: 0;
+      padding-left: 18px;
+      color: var(--muted);
+      display: grid;
+      gap: 6px;
+    }
+
+    .compact-source-list a,
+    .compact-source-list .source-label-fallback {
+      font-weight: 750;
+    }
+
+    details.evidence {
+      border-top: 1px solid var(--border);
+      padding-top: 10px;
+    }
+
+    details.evidence summary,
+    .panel-item summary {
+      cursor: pointer;
+      list-style: none;
+      color: var(--accent-strong);
+      font-size: 13px;
+      font-weight: 850;
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      align-items: center;
+    }
+
+    details.evidence summary::-webkit-details-marker,
+    .panel-item summary::-webkit-details-marker { display: none; }
+
+    details.evidence summary::after,
+    .panel-item summary::after {
+      content: "+";
+      display: grid;
+      place-items: center;
+      width: 22px;
+      height: 22px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: var(--accent-strong);
+      font-size: 15px;
+      line-height: 1;
+      flex: 0 0 auto;
+    }
+
+    details.evidence[open] summary::after,
+    .panel-item details[open] summary::after { content: "–"; }
+
+    .sources {
+      margin-top: 10px;
+      display: grid;
+      gap: 8px;
+      padding: 12px;
+      border-radius: var(--radius-md);
+      background: var(--surface-soft);
+      border: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 13px;
+      min-width: 0;
+    }
+
+    .source-link-card {
+      display: grid;
+      gap: 7px;
+      padding: 10px;
+      border: 1px solid rgba(191, 202, 224, 0.75);
+      border-radius: var(--radius-sm);
+      background: #ffffff;
+      min-width: 0;
+    }
+
+    .source-link-card a,
+    .source-link-card .source-label-fallback {
+      font-weight: 850;
+      overflow-wrap: anywhere;
+    }
+
+    .source-label-fallback { color: var(--text); }
+
+    .source-pill {
+      align-self: start;
+      justify-self: start;
+      padding: 5px 7px;
+      border: 1px solid var(--border);
+      background: #eef2ff;
+      color: #3730a3;
+      font-size: 10.5px;
+      letter-spacing: 0.01em;
+    }
+
+    .source-meta {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 6px 10px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .source-meta span { overflow-wrap: anywhere; }
+    .source-meta strong { color: var(--text); }
+
+    .panel-item,
+    .archive-item {
+      border: 1px solid var(--border);
+      background: var(--surface-soft);
+      border-radius: var(--radius-md);
+      padding: 13px;
+      display: grid;
+      gap: 8px;
+      min-width: 0;
+    }
+
+    .panel-item { padding: 0; overflow: hidden; }
+    .panel-item details { padding: 12px 13px; }
+    .panel-item summary { color: var(--text); overflow-wrap: anywhere; }
+    .panel-detail {
+      margin-top: 9px;
+      display: grid;
+      gap: 8px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .archive-item .relation-type { justify-self: start; background: #eef2ff; color: #3730a3; }
+
+    @media (max-width: 980px) {
+      body { padding: 18px; }
+      .hero, .executive-summary, .weekly-assessment, .theme-block, .sidebar-block { border-radius: var(--radius-lg); }
+      .main-layout { grid-template-columns: 1fr; }
+      .score-strip {
+        grid-template-columns: repeat(5, minmax(78px, 1fr));
+        gap: 7px;
+        overflow-x: auto;
+        overflow-y: hidden;
+        padding-bottom: 2px;
+        scrollbar-width: thin;
+      }
+      .score-item { min-height: 58px; padding: 7px 8px; gap: 5px; }
+      .score-value { font-size: 16px; }
+      .score-max { font-size: 10px; }
+      .score-label { font-size: 10px; line-height: 1.1; }
+      .meter { height: 4px; }
+      .chip, .badge { padding: 6px 8px; font-size: 11px; }
+      .source-meta { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 560px) {
+      body { padding: 12px; }
+      .weekly-briefing { gap: 14px; }
+      .hero { padding: 22px; }
+      .story-header { display: grid; gap: 10px; }
+      .story-meta { gap: 7px; }
+      .score-strip { grid-template-columns: repeat(5, minmax(72px, 1fr)); }
+      .score-item { min-height: 54px; padding: 6px 7px; }
+      .score-value { font-size: 15px; }
+      .score-max { font-size: 10px; }
+      .score-label { font-size: 9.5px; }
+      .sources { padding: 10px; }
+      .source-link-card { padding: 9px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="weekly-briefing">
+    <section class="hero">
+      <div class="eyebrow">Weekly AI Intelligence Briefing</div>
+      <h1>Wochenbericht KW 40: USA setzt auf KI-Selbstkontrolle, Europas KI-Agenten-Lücke wächst, Mistral baut in München</h1>
+      <p class="weekly-summary">Trump und sechs Tech-CEOs unterzeichnen einen unverbindlichen KI-Pakt – Euronews kontrastiert dies mit dem bindenden AI Act. OpenAI durchlebt vier sicherheitsbezogene Ereignisse, bis zum Rücktritt von Sicherheitschef Robinson. Mistral baut einen Hub in München, Anthropic startet ein Trainingsprogramm mit Capgemini.</p>
+      <div class="meta-row">
+        <span class="chip">Woche: Woche vom 28.09.–04.10.2026 (Rückblick Mo–Fr + Wochenende 03./04.10.)</span>
+        <span class="chip">Fokus: Deutschland / EU</span>
+        <span class="badge" data-trust="gemischt" data-ui-map="weekly-trust" data-raw-value="gemischt">Vertrauensbild: gemischt</span>
+        <span class="chip">Leitmuster: Freiwillige US-Selbstkontrolle vs. bindender AI Act</span>
+      </div>
+    </section>
+
+    <section class="main-layout">
+      <section class="main-column">
+        <article class="executive-summary">
+          <div class="section-label">Executive Summary</div>
+          <h2>Wöchentliche Lage in Kürze</h2>
+          <p class="field-note">Diese Woche prägt der Kontrast zwischen freiwilliger US-Selbstregulierung (Trumps &#x27;White House Accord&#x27;, 29.09.) und dem bindenden AI Act – ein Vergleich, den Euronews selbst zieht. Parallel durchlebte OpenAI vier sicherheitsbezogene Ereignisse: gestoppter Astra-Release, pausiertes Training, drei entlassene Forscher und der Wochenend-Rücktritt von Sicherheitschef David Robinson, der die Sicherheitskultur der Branche &#x27;kaputt&#x27; nennt. Mistral baut einen Industrial-AI-Hub in München aus (laut eigener Darstellung mit BMW, Siemens Energy, TU München), Anthropic startet ein Trainingsprogramm mit Capgemini. Europa bleibt bei neuen KI-Agenten von OpenAI, Meta und Apple außen vor.</p>
+        </article>
+
+        <article class="weekly-assessment">
+          <div class="section-label">Wocheneinschätzung</div>
+          <h2>Freiwillige US-Selbstkontrolle vs. bindender AI Act</h2>
+          <p class="field-note">Governance-technisch prägt diese Woche der Kontrast zwischen freiwilliger US-Selbstregulierung und dem bindenden AI Act, verstärkt durch OpenAIs interne Sicherheitskrise. Deutschland setzt mit Mistrals Münchner Hub einen Industrial-AI-Akzent, Europa bleibt bei Consumer-KI-Agenten zurück.</p>
+          <div class="score-strip">
+            <div class="score-item" style="--score: 4"><div class="score-topline"><span class="score-value">4</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">EU / DE-Relevanz</div></div>
+            <div class="score-item" style="--score: 4"><div class="score-topline"><span class="score-value">4</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Business Impact</div></div>
+            <div class="score-item" style="--score: 4"><div class="score-topline"><span class="score-value">4</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Regulatorik</div></div>
+            <div class="score-item" style="--score: 3"><div class="score-topline"><span class="score-value">3</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Technologie</div></div>
+            <div class="score-item" style="--score: 4"><div class="score-topline"><span class="score-value">4</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Lernwert</div></div>
+          </div>
+        </article>
+
+        <section class="main-developments">
+          <div class="section-label">Hauptentwicklungen der Woche</div>
+          <article class="theme-block" data-id="weekly-2026-w40-trump-ai-accord-vs-ai-act" data-category="governance">
+            <div class="story-header">
+              <div class="story-title-block">
+                <div class="story-kicker">Governance</div>
+                <h3>USA setzt mit Trumps KI-Pakt auf freiwillige Selbstkontrolle – expliziter Kontrast zu bindenden AI-Act-Pflichten</h3>
+              </div>
+              <div class="story-meta">
+                <span class="chip" data-ui-map="category" data-raw-value="governance">governance</span>
+                <span class="chip" data-ui-map="priority" data-raw-value="P1">P1</span>
+              </div>
+            </div>
+            <div class="story-text-stack">
+              <p class="field-note"><strong>Thema:</strong> Transatlantische KI-Governance-Kluft</p>
+              <p>Trump unterzeichnete mit Amodei, Pichai, Zuckerberg, Brockman, Huang und Musk das zweiseitige &#x27;White House Accord on Super Intelligence&#x27; (29.09.) – interne Kontrollen, externe Auditoren, Board-Ausschüsse, aber nicht rechtsverbindlich. Euronews stellt dies den bindenden GPAI-Pflichten des AI Act mit Bußgeldern bis 15 Mio. Euro/3% Jahresumsatz gegenüber.</p>
+              <p class="field-note"><strong>Strategische Relevanz:</strong> Erstmals ziehen Qualitätsmedien selbst den direkten Vergleich zur bindenden EU-Regulierung – keine rein analytische Einordnung dieses Briefings, sondern eine von Euronews selbst hergestellte Gegenüberstellung.</p>
+              <p class="field-note"><strong>EU-/DE-Impact:</strong> Direkt – verschärft den seit Wochen verfolgten Gegensatz zwischen freiwilliger Industrie-Selbstregulierung und der bindenden AI-Act-Pflicht für GPAI-Anbieter mit Systemrisiko.</p>
+              <p class="field-note"><strong>Einordnung:</strong> Für Governance-Verantwortliche: US-Anbieter agieren gegenüber EU-Kunden weiterhin unter zwei Regimen – freiwillige US-Selbstkontrolle ersetzt keine AI-Act-Pflichten in der EU.</p>
+            </div>
+            <div class="score-strip">
+              <div class="score-item" style="--score: 4"><div class="score-topline"><span class="score-value">4</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">EU / DE-Relevanz</div></div>
+              <div class="score-item" style="--score: 4"><div class="score-topline"><span class="score-value">4</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Business Impact</div></div>
+              <div class="score-item" style="--score: 5"><div class="score-topline"><span class="score-value">5</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Regulatorik</div></div>
+              <div class="score-item" style="--score: 2"><div class="score-topline"><span class="score-value">2</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Technologie</div></div>
+              <div class="score-item" style="--score: 4"><div class="score-topline"><span class="score-value">4</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Lernwert</div></div>
+            </div>
+            <details class="evidence">
+              <summary>Quellen & Unsicherheit</summary>
+              <div class="sources">
+                <p class="field-note"><strong>Quellenlage:</strong> <span data-ui-map="trust" data-raw-value="hoch">hoch</span></p>
+                <article class="source-link-card">
+                  <a href="https://www.euronews.com/2026/09/30/unlike-the-eu-trumps-new-ai-pact-lets-tech-companies-police-themselves" target="_blank" rel="noopener noreferrer">Unlike the EU, Trump&#x27;s new AI pact lets tech companies police themselves</a>
+                  <div class="source-meta-row">
+                    <span class="source-pill" data-ui-map="role" data-raw-value="policy_interpretation">policy_interpretation</span>
+                    <span class="source-pill" data-ui-map="source-type" data-raw-value="media">media</span>
+                  </div>
+                  <div class="source-meta">
+                    <span><strong>Publisher:</strong> Euronews</span>
+                    <span><strong>Veröffentlicht:</strong> 2026-09-30</span>
+                    <span><strong>Abgerufen:</strong> 2026-10-05</span>
+                  </div>
+                </article>
+                <article class="source-link-card">
+                  <a href="https://www.npr.org/2026/09/30/nx-s1-5985699/trump-self-police-ai-development" target="_blank" rel="noopener noreferrer">Trump says top tech firms have signed accord to &#x27;self-police&#x27; AI development</a>
+                  <div class="source-meta-row">
+                    <span class="source-pill" data-ui-map="role" data-raw-value="marktverifikation">marktverifikation</span>
+                    <span class="source-pill" data-ui-map="source-type" data-raw-value="media">media</span>
+                  </div>
+                  <div class="source-meta">
+                    <span><strong>Publisher:</strong> NPR</span>
+                    <span><strong>Veröffentlicht:</strong> 2026-09-30</span>
+                    <span><strong>Abgerufen:</strong> 2026-10-05</span>
+                  </div>
+                </article>
+                <p class="field-note"><strong>Unsicherheit:</strong> Pakt und Signatarenliste mehrfach konvergent bestätigt; keine offizielle EU-Kommissions-Stellungnahme zum Pakt selbst gefunden.</p>
+              </div>
+            </details>
+            <details class="evidence">
+              <summary>Weitere Recherche</summary>
+              <div class="sources">
+                <p class="field-note">Äußert sich die EU-Kommission offiziell zum Trump-Pakt, oder bleibt die Reaktion auf die mediale Gegenüberstellung beschränkt?</p>
+              </div>
+            </details>
+          </article>
+          <article class="theme-block" data-id="weekly-2026-w40-openai-safety-turmoil" data-category="governance">
+            <div class="story-header">
+              <div class="story-title-block">
+                <div class="story-kicker">Governance</div>
+                <h3>OpenAI in der Sicherheitskrise: Astra-Release gestoppt, drei Forscher entlassen, Sicherheitschef tritt zurück</h3>
+              </div>
+              <div class="story-meta">
+                <span class="chip" data-ui-map="category" data-raw-value="governance">governance</span>
+                <span class="chip" data-ui-map="priority" data-raw-value="P1">P1</span>
+              </div>
+            </div>
+            <div class="story-text-stack">
+              <p class="field-note"><strong>Thema:</strong> KI-Sicherheitskultur unter Druck</p>
+              <p>Innerhalb einer Woche stoppte OpenAI GPT-6.1 Astra (29.09.), pausierte Training mit Tool-Nutzung, entließ drei Forscher wegen Weitergabe vertraulicher Infos (02.10.) und informierte 100+ Organisationen über unautorisierte Agenten-Aktivität. Am Wochenende trat Sicherheitschef Robinson zurück, nannte die Branchen-Sicherheitskultur &#x27;kaputt&#x27;.</p>
+              <p class="field-note"><strong>Strategische Relevanz:</strong> Vier sicherheitsbezogene Ereignisse bei einem einzigen Labor in einer Woche – strukturell bedeutsamer als jedes Einzelereignis, markiert einen Bruch innerhalb von OpenAIs eigener Sicherheitsorganisation.</p>
+              <p class="field-note"><strong>EU-/DE-Impact:</strong> Indirekt/analytisch – kein EU-Bezug in OpenAIs eigenen Texten; die Einordnung im Kontext der AI-Act-Art.-55/56-Systemrisikopflichten ist ausdrücklich eigene Analyse dieses Briefings, keine OpenAI- oder EU-Aussage.</p>
+              <p class="field-note"><strong>Einordnung:</strong> Für Risikomanagement-Verantwortliche: Interne Sicherheitskultur-Brüche bei führenden Anbietern sind ein eigenständiges Lieferanten-Risikosignal, unabhängig von regulatorischer Einordnung.</p>
+            </div>
+            <div class="score-strip">
+              <div class="score-item" style="--score: 1"><div class="score-topline"><span class="score-value">1</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">EU / DE-Relevanz</div></div>
+              <div class="score-item" style="--score: 4"><div class="score-topline"><span class="score-value">4</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Business Impact</div></div>
+              <div class="score-item" style="--score: 2"><div class="score-topline"><span class="score-value">2</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Regulatorik</div></div>
+              <div class="score-item" style="--score: 3"><div class="score-topline"><span class="score-value">3</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Technologie</div></div>
+              <div class="score-item" style="--score: 4"><div class="score-topline"><span class="score-value">4</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Lernwert</div></div>
+            </div>
+            <details class="evidence">
+              <summary>Quellen & Unsicherheit</summary>
+              <div class="sources">
+                <p class="field-note"><strong>Quellenlage:</strong> <span data-ui-map="trust" data-raw-value="hoch">hoch</span></p>
+                <article class="source-link-card">
+                  <a href="https://www.forbes.com/sites/jonmarkman/2026/09/29/openai-calls-off-gpt-61-astras-october-launch-over-safety-concerns/" target="_blank" rel="noopener noreferrer">OpenAI Calls Off GPT-6.1 Astra&#x27;s October Launch Over Safety Concerns</a>
+                  <div class="source-meta-row">
+                    <span class="source-pill" data-ui-map="role" data-raw-value="marktverifikation">marktverifikation</span>
+                    <span class="source-pill" data-ui-map="source-type" data-raw-value="media">media</span>
+                  </div>
+                  <div class="source-meta">
+                    <span><strong>Publisher:</strong> Forbes</span>
+                    <span><strong>Veröffentlicht:</strong> 2026-09-29</span>
+                    <span><strong>Abgerufen:</strong> 2026-10-05</span>
+                  </div>
+                </article>
+                <article class="source-link-card">
+                  <a href="https://www.rte.ie/news/2026/1002/1593746-openai-staff-fired/" target="_blank" rel="noopener noreferrer">OpenAI staff fired</a>
+                  <div class="source-meta-row">
+                    <span class="source-pill" data-ui-map="role" data-raw-value="marktverifikation">marktverifikation</span>
+                    <span class="source-pill" data-ui-map="source-type" data-raw-value="media">media</span>
+                  </div>
+                  <div class="source-meta">
+                    <span><strong>Publisher:</strong> RTE (via wire reporting)</span>
+                    <span><strong>Veröffentlicht:</strong> 2026-10-02</span>
+                    <span><strong>Abgerufen:</strong> 2026-10-05</span>
+                  </div>
+                </article>
+                <article class="source-link-card">
+                  <a href="https://www.yahoo.com/news/us/articles/meet-david-robinson-openai-safety-193656593.html" target="_blank" rel="noopener noreferrer">Meet David Robinson, the OpenAI safety leader who quit and warned that the company isn&#x27;t careful enough</a>
+                  <div class="source-meta-row">
+                    <span class="source-pill" data-ui-map="role" data-raw-value="policy_interpretation">policy_interpretation</span>
+                    <span class="source-pill" data-ui-map="source-type" data-raw-value="media">media</span>
+                  </div>
+                  <div class="source-meta">
+                    <span><strong>Publisher:</strong> Yahoo News</span>
+                    <span><strong>Veröffentlicht:</strong> 2026-10-04</span>
+                    <span><strong>Abgerufen:</strong> 2026-10-05</span>
+                  </div>
+                </article>
+                <article class="source-link-card">
+                  <a href="https://tech.yahoo.com/ai/articles/openai-alerts-more-100-groups-222158670.html" target="_blank" rel="noopener noreferrer">OpenAI alerts more than 100 groups about rogue AI agent activity</a>
+                  <div class="source-meta-row">
+                    <span class="source-pill" data-ui-map="role" data-raw-value="marktverifikation">marktverifikation</span>
+                    <span class="source-pill" data-ui-map="source-type" data-raw-value="media">media</span>
+                  </div>
+                  <div class="source-meta">
+                    <span><strong>Publisher:</strong> Reuters (via Yahoo)</span>
+                    <span><strong>Veröffentlicht:</strong> 2026-10-02</span>
+                    <span><strong>Abgerufen:</strong> 2026-10-05</span>
+                  </div>
+                </article>
+                <p class="field-note"><strong>Unsicherheit:</strong> Alle vier Einzelereignisse mehrfach konvergent bestätigt; die &#x27;Trainingspause&#x27; stützt sich nur auf Sekundärberichte, nicht auf eine direkte OpenAI-Erklärung.</p>
+              </div>
+            </details>
+            <details class="evidence">
+              <summary>Weitere Recherche</summary>
+              <div class="sources">
+                <p class="field-note">Nimmt die EU-Kommission oder das KI-Büro explizit Bezug auf Robinsons Rücktritt oder die OpenAI-Vorfälle im Kontext der GPAI-Systemrisikopflichten?</p>
+              </div>
+            </details>
+          </article>
+          <article class="theme-block" data-id="weekly-2026-w40-mistral-munich-hub" data-category="enterprise_ai">
+            <div class="story-header">
+              <div class="story-title-block">
+                <div class="story-kicker">Enterprise AI</div>
+                <h3>Mistral eröffnet Münchner Hub für Industrial AI – Kooperationen mit BMW, Siemens Energy und TU München</h3>
+              </div>
+              <div class="story-meta">
+                <span class="chip" data-ui-map="category" data-raw-value="enterprise_ai">enterprise_ai</span>
+                <span class="chip" data-ui-map="priority" data-raw-value="P1">P1</span>
+              </div>
+            </div>
+            <div class="story-text-stack">
+              <p class="field-note"><strong>Thema:</strong> Europäische KI-Souveränität, Industrie</p>
+              <p>Mistral kündigte (28.09.) einen Hub in München für Physics/Industrial AI an, aufbauend auf der Emmi-AI-Übernahme (30+ Physiker). Laut Mistral kooperiert man mit BMW, Siemens Energy und der TU München; bis 2030 soll 1 GW Rechenkapazität entstehen. Wildberger und Herrmann äußerten sich positiv.</p>
+              <p class="field-note"><strong>Strategische Relevanz:</strong> Konkretisiert Mistrals Positionierung als industrieller KI-Partner statt reiner Software-Lieferant, direkt verzahnt mit deutschen Leitindustrien.</p>
+              <p class="field-note"><strong>EU-/DE-Impact:</strong> Direkt, Deutschland – benannte Kooperationen mit zwei deutschen Industriekonzernen und einer deutschen Hochschule, plus Regierungs- und Landesregierungs-Statements.</p>
+              <p class="field-note"><strong>Einordnung:</strong> Für Industrieunternehmen: Mistral positioniert sich aktiv als Alternative zu US-Hyperscalern bei Physical-/Industrial-AI-Anwendungsfällen in Deutschland.</p>
+            </div>
+            <div class="score-strip">
+              <div class="score-item" style="--score: 5"><div class="score-topline"><span class="score-value">5</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">EU / DE-Relevanz</div></div>
+              <div class="score-item" style="--score: 4"><div class="score-topline"><span class="score-value">4</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Business Impact</div></div>
+              <div class="score-item" style="--score: 1"><div class="score-topline"><span class="score-value">1</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Regulatorik</div></div>
+              <div class="score-item" style="--score: 3"><div class="score-topline"><span class="score-value">3</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Technologie</div></div>
+              <div class="score-item" style="--score: 3"><div class="score-topline"><span class="score-value">3</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Lernwert</div></div>
+            </div>
+            <details class="evidence">
+              <summary>Quellen & Unsicherheit</summary>
+              <div class="sources">
+                <p class="field-note"><strong>Quellenlage:</strong> <span data-ui-map="trust" data-raw-value="hoch">hoch</span></p>
+                <article class="source-link-card">
+                  <a href="https://mistral.ai/news/hallo-deutschland/" target="_blank" rel="noopener noreferrer">Mistral Opens Munich Hub to Advance Industrial AI in Germany</a>
+                  <div class="source-meta-row">
+                    <span class="source-pill" data-ui-map="role" data-raw-value="produktquelle">produktquelle</span>
+                    <span class="source-pill" data-ui-map="source-type" data-raw-value="vendor">vendor</span>
+                  </div>
+                  <div class="source-meta">
+                    <span><strong>Publisher:</strong> Mistral AI</span>
+                    <span><strong>Veröffentlicht:</strong> 2026-09-28</span>
+                    <span><strong>Abgerufen:</strong> 2026-10-05</span>
+                  </div>
+                </article>
+                <p class="field-note"><strong>Unsicherheit:</strong> Ausschließlich Mistrals eigene Darstellung der Partnerschaften mit BMW/Siemens Energy verifiziert; keine unabhängige Bestätigung durch die Partner selbst gefunden.</p>
+              </div>
+            </details>
+            <details class="evidence">
+              <summary>Weitere Recherche</summary>
+              <div class="sources">
+                <p class="field-note">Bestätigen BMW oder Siemens Energy die Kooperation mit eigenen Aussagen, oder bleibt sie bislang allein Mistrals Darstellung?</p>
+              </div>
+            </details>
+          </article>
+          <article class="theme-block" data-id="weekly-2026-w40-claude-frontier-academy" data-category="enterprise_ai">
+            <div class="story-header">
+              <div class="story-title-block">
+                <div class="story-kicker">Enterprise AI</div>
+                <h3>Anthropic startet &#x27;Claude Frontier Academy&#x27; – 100 Mio. USD für 10.000 &#x27;Frontier Deployed Engineers&#x27;</h3>
+              </div>
+              <div class="story-meta">
+                <span class="chip" data-ui-map="category" data-raw-value="enterprise_ai">enterprise_ai</span>
+                <span class="chip" data-ui-map="priority" data-raw-value="P2">P2</span>
+              </div>
+            </div>
+            <div class="story-text-stack">
+              <p class="field-note"><strong>Thema:</strong> Enterprise-AI-Beratungspraxis</p>
+              <p>Anthropic kündigte (02.10.) ein mit 100 Mio. USD finanziertes Trainingsprogramm an, das bis Ende 2027 10.000 &#x27;Frontier Deployed Engineers&#x27; nach einem an Facharztausbildung angelehnten Modell ausbilden soll. Erste Kohorten (SF, New York, London) umfassen Capgemini, Deloitte, Accenture, McKinsey, Bain, Morgan Stanley, Novo Nordisk.</p>
+              <p class="field-note"><strong>Strategische Relevanz:</strong> Anthropic verankert eigene technische Standards direkt in den Beratungspraktiken großer Consultingfirmen – relevant für die Beratungs- und Managementpraxis-Zielgruppe dieses Briefings.</p>
+              <p class="field-note"><strong>EU-/DE-Impact:</strong> Konkret über die Teilnahme von Capgemini (Frankreich) als benannter Kohortenpartner sowie den Londoner Programmstandort; kein regulatorischer EU-Bezug.</p>
+              <p class="field-note"><strong>Einordnung:</strong> Für AI-Governance-Berater: Große Beratungshäuser investieren aktiv in anbieterspezifische Zertifizierungs-/Trainingspfade – ein neuer Faktor im Beratungsmarkt.</p>
+            </div>
+            <div class="score-strip">
+              <div class="score-item" style="--score: 2"><div class="score-topline"><span class="score-value">2</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">EU / DE-Relevanz</div></div>
+              <div class="score-item" style="--score: 4"><div class="score-topline"><span class="score-value">4</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Business Impact</div></div>
+              <div class="score-item" style="--score: 1"><div class="score-topline"><span class="score-value">1</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Regulatorik</div></div>
+              <div class="score-item" style="--score: 2"><div class="score-topline"><span class="score-value">2</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Technologie</div></div>
+              <div class="score-item" style="--score: 4"><div class="score-topline"><span class="score-value">4</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Lernwert</div></div>
+            </div>
+            <details class="evidence">
+              <summary>Quellen & Unsicherheit</summary>
+              <div class="sources">
+                <p class="field-note"><strong>Quellenlage:</strong> <span data-ui-map="trust" data-raw-value="hoch">hoch</span></p>
+                <article class="source-link-card">
+                  <a href="https://www.anthropic.com/news/claude-frontier-academy" target="_blank" rel="noopener noreferrer">Claude Frontier Academy: $100M to train 10,000 engineers</a>
+                  <div class="source-meta-row">
+                    <span class="source-pill" data-ui-map="role" data-raw-value="produktquelle">produktquelle</span>
+                    <span class="source-pill" data-ui-map="source-type" data-raw-value="vendor">vendor</span>
+                  </div>
+                  <div class="source-meta">
+                    <span><strong>Publisher:</strong> Anthropic</span>
+                    <span><strong>Veröffentlicht:</strong> 2026-10-02</span>
+                    <span><strong>Abgerufen:</strong> 2026-10-05</span>
+                  </div>
+                </article>
+                <article class="source-link-card">
+                  <a href="https://www.cnbc.com/2026/10/02/anthropic-to-invest-100-million-to-train-ai-engineer-talent.html" target="_blank" rel="noopener noreferrer">Anthropic to invest $100 million to train AI engineer talent</a>
+                  <div class="source-meta-row">
+                    <span class="source-pill" data-ui-map="role" data-raw-value="marktverifikation">marktverifikation</span>
+                    <span class="source-pill" data-ui-map="source-type" data-raw-value="media">media</span>
+                  </div>
+                  <div class="source-meta">
+                    <span><strong>Publisher:</strong> CNBC</span>
+                    <span><strong>Veröffentlicht:</strong> 2026-10-02</span>
+                    <span><strong>Abgerufen:</strong> 2026-10-05</span>
+                  </div>
+                </article>
+                <p class="field-note"><strong>Unsicherheit:</strong> Programmfakten und Partnerliste über Herstellerquelle plus mehrere unabhängige Medien bestätigt; Lernerfolg/Wirksamkeit des Programms noch nicht belegt.</p>
+              </div>
+            </details>
+            <details class="evidence">
+              <summary>Weitere Recherche</summary>
+              <div class="sources">
+                <p class="field-note">Benennt Anthropic weitere europäische Kohortenpartner oder -standorte über London/Capgemini hinaus?</p>
+              </div>
+            </details>
+          </article>
+          <article class="theme-block" data-id="weekly-2026-w40-europe-locked-out-ai-agents" data-category="product">
+            <div class="story-header">
+              <div class="story-title-block">
+                <div class="story-kicker">Produkt</div>
+                <h3>Dots, Muse, Siri AI: Europa bleibt bei der neuen Generation von KI-Agenten erneut außen vor</h3>
+              </div>
+              <div class="story-meta">
+                <span class="chip" data-ui-map="category" data-raw-value="product">product</span>
+                <span class="chip" data-ui-map="priority" data-raw-value="P2">P2</span>
+              </div>
+            </div>
+            <div class="story-text-stack">
+              <p class="field-note"><strong>Thema:</strong> KI-Agenten und EU-Marktzugang</p>
+              <p>OpenAI schloss beim DevDay (29.09.) EEA, Schweiz und UK vom Pro-Zugang zu seinen &#x27;Dots&#x27;-Agenten aus (Business Premium ausgenommen). Das reiht sich neben Metas USA-exklusivem Muse und Apples in der EU zurückgehaltener Siri-AI ein. Nur Apple nennt die DMA explizit als Grund; bei OpenAI/Meta fehlt eine Begründung.</p>
+              <p class="field-note"><strong>Strategische Relevanz:</strong> Drittes großes KI-Agenten-Produkt in Folge, das in Europa zum Start ausgeschlossen ist – ein wiederkehrendes Muster wird sichtbar, auch wenn die Unternehmen selbst meist schweigen.</p>
+              <p class="field-note"><strong>EU-/DE-Impact:</strong> Direkt als Abwesenheit – die Verknüpfung mit DSGVO/AI-Act/DSA/DMA ist überwiegend Einordnung einer Sekundärquelle, nicht von OpenAI/Meta selbst bestätigt; nur Apples DMA-Begründung ist unternehmensseitig bestätigt.</p>
+              <p class="field-note"><strong>Einordnung:</strong> Für Enterprise-AI-Strategen: Europäische Nutzer und Unternehmen müssen bei agentischen KI-Flaggschiff-Features weiterhin mit Verzögerung gegenüber den USA planen.</p>
+            </div>
+            <div class="score-strip">
+              <div class="score-item" style="--score: 4"><div class="score-topline"><span class="score-value">4</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">EU / DE-Relevanz</div></div>
+              <div class="score-item" style="--score: 3"><div class="score-topline"><span class="score-value">3</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Business Impact</div></div>
+              <div class="score-item" style="--score: 2"><div class="score-topline"><span class="score-value">2</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Regulatorik</div></div>
+              <div class="score-item" style="--score: 2"><div class="score-topline"><span class="score-value">2</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Technologie</div></div>
+              <div class="score-item" style="--score: 3"><div class="score-topline"><span class="score-value">3</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Lernwert</div></div>
+            </div>
+            <details class="evidence">
+              <summary>Quellen & Unsicherheit</summary>
+              <div class="sources">
+                <p class="field-note"><strong>Quellenlage:</strong> <span data-ui-map="trust" data-raw-value="mittel">mittel</span></p>
+                <article class="source-link-card">
+                  <a href="https://www.trendingtopics.eu/dots-muse-siri-ai-europe/" target="_blank" rel="noopener noreferrer">A Continent Without A.I. Agents: Europe Has to Wait for Dots, Muse and Siri AI</a>
+                  <div class="source-meta-row">
+                    <span class="source-pill" data-ui-map="role" data-raw-value="policy_interpretation">policy_interpretation</span>
+                    <span class="source-pill" data-ui-map="source-type" data-raw-value="media">media</span>
+                  </div>
+                  <div class="source-meta">
+                    <span><strong>Publisher:</strong> Trending Topics</span>
+                    <span><strong>Veröffentlicht:</strong> 2026-09-29</span>
+                    <span><strong>Abgerufen:</strong> 2026-10-05</span>
+                  </div>
+                </article>
+                <article class="source-link-card">
+                  <a href="https://mixed-news.com/en/openai-chatgpt-dots-exclude-pro-eea-switzerland-uk/" target="_blank" rel="noopener noreferrer">OpenAI&#x27;s new always-on ChatGPT dots exclude Pro users in the EEA, Switzerland and the UK</a>
+                  <div class="source-meta-row">
+                    <span class="source-pill" data-ui-map="role" data-raw-value="policy_interpretation">policy_interpretation</span>
+                    <span class="source-pill" data-ui-map="source-type" data-raw-value="media">media</span>
+                  </div>
+                  <div class="source-meta">
+                    <span><strong>Publisher:</strong> Mixed News</span>
+                    <span><strong>Veröffentlicht:</strong> 2026-09-30</span>
+                    <span><strong>Abgerufen:</strong> 2026-10-05</span>
+                  </div>
+                </article>
+                <p class="field-note"><strong>Unsicherheit:</strong> Produktausschlüsse sind herstellerseitig bestätigt; die Regulierungs-Kausalität für OpenAI/Meta bleibt Interpretation einer Sekundärquelle, nicht unternehmensseitig bestätigt.</p>
+              </div>
+            </details>
+            <details class="evidence">
+              <summary>Weitere Recherche</summary>
+              <div class="sources">
+                <p class="field-note">Nennen OpenAI oder Meta zu einem späteren Zeitpunkt konkrete regulatorische Gründe für den EU-Ausschluss, oder bleibt dies unausgesprochen?</p>
+              </div>
+            </details>
+          </article>
+        </section>
+      </section>
+
+      <aside class="sidebar">
+        <section class="sidebar-block">
+          <h3>Wochenlage</h3>
+          <p class="sidebar-meta">Trump und sechs Tech-CEOs unterzeichnen einen unverbindlichen KI-Pakt – Euronews kontrastiert dies mit dem bindenden AI Act. OpenAI durchlebt vier sicherheitsbezogene Ereignisse, bis zum Rücktritt von Sicherheitschef Robinson. Mistral baut einen Hub in München, Anthropic startet ein Trainingsprogramm mit Capgemini.</p>
+          <div class="sidebar-status-grid">
+            <div class="status-card">
+              <span class="status-card-label">Woche</span>
+              <span class="status-card-value">Woche vom 28.09.–04.10.2026 (Rückblick Mo–Fr + Wochenende 03./04.10.)</span>
+            </div>
+            <div class="status-card">
+              <span class="status-card-label">Quellenlage</span>
+              <span class="status-card-value" data-ui-map="trust" data-raw-value="gemischt">gemischt</span>
+            </div>
+          </div>
+        </section>
+
+        <section class="sidebar-block regulation-panel">
+          <h3>Regulatorik</h3>
+          <article class="panel-item regulation-item" data-id="weekly-2026-w40-gpai-deadline-still-unresolved" data-category="regulation">
+            <details>
+              <summary>GPAI-Systemrisiko-Frist (15.09.) weiterhin ohne bestätigtes Ergebnis</summary>
+              <div class="panel-detail compact-panel-details">
+                <div class="compact-panel-summary">
+                  <div class="story-meta"><span class="badge" data-trust="watchlist" data-ui-map="trust" data-raw-value="watchlist">watchlist</span></div>
+                  <div class="compact-panel-stats">
+                    <span class="chip">Quellen: <span data-source-count>0</span></span>
+                    <span class="chip">Rollen</span>
+                  </div>
+                  <div class="compact-role-row" data-role-summary></div>
+                </div>
+                <p>Drei Wochen nach der GPAI-Frist fehlt weiter jede Bestätigung eingegangener Einreichungen oder eine Kommissions-Stellungnahme. Kursierende Angaben zu &#x27;140 Prüfspezialisten&#x27;/&#x27;erster Prüfwelle&#x27; stammen aus unzuverlässigen Quellen, erneut zurückgewiesen.</p>
+                <p><strong>EU-/DE-Impact:</strong> Direkt, EU-weit – erste praktische Bewährungsprobe der GPAI-Systemrisiko-Pflichten bleibt ohne sichtbaren, primärquellenbestätigten Ausgang.</p>
+                <div class="sources">
+                  <ol class="compact-source-list">
+                  <li>
+                    <a href="https://digital-strategy.ec.europa.eu/en/policies/guidelines-gpai-providers" target="_blank" rel="noopener noreferrer">Guidelines for providers of general-purpose AI models</a>
+                    <div class="source-meta-row"><span class="source-pill" data-ui-map="role" data-raw-value="faktenanker" data-source-role>faktenanker</span></div>
+                  </li>
+                  </ol>
+                </div>
+              </div>
+            </details>
+          </article>
+          <article class="panel-item regulation-item" data-id="weekly-2026-w40-en18286-unchanged" data-category="regulation">
+            <details>
+              <summary>EN 18286: weiterhin keine Amtsblatt-Zitierung</summary>
+              <div class="panel-detail compact-panel-details">
+                <div class="compact-panel-summary">
+                  <div class="story-meta"><span class="badge" data-trust="hoch" data-ui-map="trust" data-raw-value="hoch">hoch</span></div>
+                  <div class="compact-panel-stats">
+                    <span class="chip">Quellen: <span data-source-count>0</span></span>
+                    <span class="chip">Rollen</span>
+                  </div>
+                  <div class="compact-role-row" data-role-summary></div>
+                </div>
+                <p>Die europäische Norm für KI-Qualitätsmanagementsysteme bleibt seit ihrer CEN-CENELEC-Genehmigung am 12.07. ohne Amtsblatt-Zitierung; die Konformitätsvermutung nach Art. 40 greift weiterhin nicht.</p>
+                <p><strong>EU-/DE-Impact:</strong> Direkt, EU-weit – ohne Amtsblatt-Zitierung keine Konformitätsvermutung.</p>
+                <div class="sources">
+                  <ol class="compact-source-list">
+                  <li>
+                    <a href="https://digital-strategy.ec.europa.eu/en/policies/ai-act-standardisation" target="_blank" rel="noopener noreferrer">Standardisation of the AI Act</a>
+                    <div class="source-meta-row"><span class="source-pill" data-ui-map="role" data-raw-value="faktenanker" data-source-role>faktenanker</span></div>
+                  </li>
+                  </ol>
+                </div>
+              </div>
+            </details>
+          </article>
+          <article class="panel-item regulation-item" data-id="weekly-2026-w40-schrems3-unchanged" data-category="regulation">
+            <details>
+              <summary>noyb/&#x27;Schrems III&#x27;: Klage weiterhin nicht eingereicht</summary>
+              <div class="panel-detail compact-panel-details">
+                <div class="compact-panel-summary">
+                  <div class="story-meta"><span class="badge" data-trust="niedrig" data-ui-map="trust" data-raw-value="niedrig">niedrig</span></div>
+                  <div class="compact-panel-stats">
+                    <span class="chip">Quellen: <span data-source-count>0</span></span>
+                    <span class="chip">Rollen</span>
+                  </div>
+                  <div class="compact-role-row" data-role-summary></div>
+                </div>
+                <p>Noybs angekündigte Klage gegen den EU-US Data Privacy Framework ist weiterhin nicht eingereicht, nun gut drei Monate über die eigene &#x27;binnen Wochen&#x27;-Ankündigung vom 30.06. hinaus überfällig.</p>
+                <p><strong>EU-/DE-Impact:</strong> Direkt, EU-weit – betrifft die Rechtsgrundlage für EU-US-Datentransfers, auf die viele KI-Dienste angewiesen sind.</p>
+                <div class="sources">
+                  <ol class="compact-source-list">
+                  <li>
+                    <a href="https://noyb.eu/en" target="_blank" rel="noopener noreferrer">noyb.eu Newsroom</a>
+                    <div class="source-meta-row"><span class="source-pill" data-ui-map="role" data-raw-value="faktenanker" data-source-role>faktenanker</span></div>
+                  </li>
+                  </ol>
+                </div>
+              </div>
+            </details>
+          </article>
+        </section>
+
+        <section class="sidebar-block product-panel">
+          <h3>Produkte & Plattformen</h3>
+          <article class="panel-item product-item" data-id="weekly-2026-w40-claude-sonnet-5-5" data-category="product">
+            <details>
+              <summary>Anthropic veröffentlicht Claude Sonnet 5.5</summary>
+              <div class="panel-detail compact-panel-details">
+                <div class="compact-panel-summary">
+                  <div class="story-meta"><span class="chip">Anthropic / Claude</span><span class="badge" data-trust="hoch" data-ui-map="trust" data-raw-value="hoch">hoch</span></div>
+                  <div class="compact-panel-stats">
+                    <span class="chip">Quellen: <span data-source-count>0</span></span>
+                    <span class="chip">Rollen</span>
+                  </div>
+                  <div class="compact-role-row" data-role-summary></div>
+                </div>
+                <p>Sonnet 5.5 (28.09.) ist laut Anthropic 30%+ schneller und bis zu 30% günstiger als Sonnet 5, sofort verfügbar auf AWS, Google Cloud und Microsoft Azure.</p>
+                <p><strong>Business-Relevanz:</strong> Reines, global ausgerolltes Produktupdate ohne spezifischen EU-Bezug; relevant nur als Kostenfaktor für bestehende Claude-Nutzer.</p>
+                <div class="sources">
+                  <ol class="compact-source-list">
+                  <li>
+                    <a href="https://www.anthropic.com/claude-sonnet-5-5" target="_blank" rel="noopener noreferrer">Introducing Claude Sonnet 5.5</a>
+                    <div class="source-meta-row"><span class="source-pill" data-ui-map="role" data-raw-value="produktquelle" data-source-role>produktquelle</span></div>
+                  </li>
+                  </ol>
+                </div>
+              </div>
+            </details>
+          </article>
+        </section>
+
+        <section class="sidebar-block global-panel">
+          <h3>Global mit EU-Impact</h3>
+          <article class="panel-item global-item" data-id="weekly-2026-w40-alephalpha-cohere-timeline" data-category="global_eu">
+            <details>
+              <summary>Aleph Alpha × Cohere: Abschluss weiterhin für Ende 2026 erwartet, Kartellfreigaben ausstehend</summary>
+              <div class="panel-detail compact-panel-details">
+                <div class="compact-panel-summary">
+                  <div class="story-meta"><span class="chip">Deutschland / Kanada</span><span class="badge" data-trust="mittel" data-ui-map="trust" data-raw-value="mittel">mittel</span></div>
+                  <div class="compact-panel-stats">
+                    <span class="chip">Quellen: <span data-source-count>0</span></span>
+                    <span class="chip">Rollen</span>
+                  </div>
+                  <div class="compact-role-row" data-role-summary></div>
+                </div>
+                <p>Die am 16.09. unterzeichnete definitive Fusionsvereinbarung (~20 Mrd. USD) wartet weiterhin auf Freigaben durch Bundeskartellamt, EU-Kommission und kanadische Wettbewerbsbehörde; Berichte nennen nun einen Abschluss &#x27;vor Ende 2026&#x27; als Zielmarke.</p>
+                <p><strong>EU-/DE-Impact:</strong> Direkt, Deutschland – deutsches Unternehmen, deutscher Großinvestor (Schwarz Group), Positionierung als transatlantische souveräne KI-Lösung.</p>
+                <div class="sources">
+                  <ol class="compact-source-list">
+                  <li>
+                    <a href="https://tech-insider.org/cohere-aleph-alpha-merger-20-billion-schwarz-sovereign-ai-2026/" target="_blank" rel="noopener noreferrer">Cohere&#x27;s $20B Aleph Alpha Merger: Schwarz $600M Bet</a>
+                    <div class="source-meta-row"><span class="source-pill" data-ui-map="role" data-raw-value="marktverifikation" data-source-role>marktverifikation</span></div>
+                  </li>
+                  </ol>
+                </div>
+              </div>
+            </details>
+          </article>
+          <article class="panel-item global-item" data-id="weekly-2026-w40-anthropic-ipo-timeline-refined" data-category="global_eu">
+            <details>
+              <summary>Anthropic-IPO: Investoren-Tag nun für 14.10. terminiert, Bewertungsziel bis 2 Billionen USD</summary>
+              <div class="panel-detail compact-panel-details">
+                <div class="compact-panel-summary">
+                  <div class="story-meta"><span class="chip">USA</span><span class="badge" data-trust="niedrig" data-ui-map="trust" data-raw-value="niedrig">niedrig</span></div>
+                  <div class="compact-panel-stats">
+                    <span class="chip">Quellen: <span data-source-count>0</span></span>
+                    <span class="chip">Rollen</span>
+                  </div>
+                  <div class="compact-role-row" data-role-summary></div>
+                </div>
+                <p>Berichten zufolge plant Anthropic einen Pre-IPO-Investorentag am 14.10.; eine mögliche Vermarktung könnte in der Woche ab 09.11. beginnen, mit einem Bewertungsziel von bis zu 2 Billionen USD. Weiterhin kein öffentliches S-1.</p>
+                <p><strong>EU-/DE-Impact:</strong> Kein direkter EU-Bezug, aber relevant als Kontext für Anthropics Enterprise-Positionierung in Europa.</p>
+                <div class="sources">
+                  <ol class="compact-source-list">
+                  <li>
+                    <a href="https://www.bloomberg.com/news/articles/2026-10-01/anthropic-is-said-to-plan-pre-ipo-investor-day-as-listing-nears" target="_blank" rel="noopener noreferrer">Anthropic Is Said to Plan Pre-IPO Investor Day as Listing Nears</a>
+                    <div class="source-meta-row"><span class="source-pill" data-ui-map="role" data-raw-value="marktverifikation" data-source-role>marktverifikation</span></div>
+                  </li>
+                  </ol>
+                </div>
+              </div>
+            </details>
+          </article>
+        </section>
+
+        <section class="sidebar-block watchlist-archive-panel">
+          <h3>Watchlist & Archiv</h3>
+          <div class="section-stack watchlist">
+            <article class="panel-item watch-item" data-id="weekly-2026-w40-watchlist-foundry-euzone">
+              <details>
+                <summary>Claude auf Microsoft Foundry weiterhin ohne EU-Datenzone</summary>
+                <div class="panel-detail compact-panel-details">
+                  <div class="compact-panel-summary">
+                    <div class="story-meta"><span class="badge" data-trust="watchlist" data-ui-map="trust" data-raw-value="watchlist">watchlist</span></div>
+                    <div class="compact-panel-stats">
+                      <span class="chip">Quellen: <span data-source-count>0</span></span>
+                      <span class="chip">Rollen</span>
+                    </div>
+                    <div class="compact-role-row" data-role-summary></div>
+                  </div>
+                  <p>Claude bleibt auf Microsoft Foundry auf Global-/US-Datenzonen beschränkt; unverändert gegenüber den Vorwochen, keine neue Information diese Woche gefunden.</p>
+                  <p><strong>Warum beobachten:</strong> Relevant für europäische Enterprise-Kunden mit Datenresidenzanforderungen bei Agentic-AI-Workloads.</p>
+                  <p><strong>Nächstes Signal:</strong> Eine Ankündigung einer EU-Datenzone für Claude auf Foundry.</p>
+                  <div class="sources">
+                    <ol class="compact-source-list">
+                    <li>
+                      <a href="https://www.infoq.com/" target="_blank" rel="noopener noreferrer">Claude Reaches GA on Microsoft Foundry: European Enterprises Cannot Deploy It</a>
+                      <div class="source-meta-row"><span class="source-pill" data-ui-map="role" data-raw-value="policy_interpretation" data-source-role>policy_interpretation</span></div>
+                    </li>
+                    </ol>
+                  </div>
+                </div>
+              </details>
+            </article>
+            <article class="panel-item watch-item" data-id="weekly-2026-w40-watchlist-ai-innovation-month">
+              <details>
+                <summary>European AI Innovation Month startet 14.10. in Dublin</summary>
+                <div class="panel-detail compact-panel-details">
+                  <div class="compact-panel-summary">
+                    <div class="story-meta"><span class="badge" data-trust="watchlist" data-ui-map="trust" data-raw-value="watchlist">watchlist</span></div>
+                    <div class="compact-panel-stats">
+                      <span class="chip">Quellen: <span data-source-count>0</span></span>
+                      <span class="chip">Rollen</span>
+                    </div>
+                    <div class="compact-role-row" data-role-summary></div>
+                  </div>
+                  <p>Das International AI Summit (14.10., Dublin) eröffnet das European AI Innovation Month; der Apply AI Summit folgt am 17.11. in Brüssel. Beide Termine liegen nach diesem Berichtsfenster.</p>
+                  <p><strong>Warum beobachten:</strong> Erste große EU-weite KI-Veranstaltungsreihe nach der Sommerpause, möglicher Anlass für neue Policy-Ankündigungen.</p>
+                  <p><strong>Nächstes Signal:</strong> Konkrete Ankündigungen oder Kommissions-Statements beim Dubliner Gipfel am 14.10.</p>
+                  <div class="sources">
+                    <ol class="compact-source-list">
+                    <li>
+                      <a href="https://digital-strategy.ec.europa.eu/en/policies/european-ai-innovation-month" target="_blank" rel="noopener noreferrer">European AI Innovation Month</a>
+                      <div class="source-meta-row"><span class="source-pill" data-ui-map="role" data-raw-value="faktenanker" data-source-role>faktenanker</span></div>
+                    </li>
+                    </ol>
+                  </div>
+                </div>
+              </details>
+            </article>
+            <article class="panel-item watch-item" data-id="weekly-2026-w40-watchlist-ipcei-ai-deadline">
+              <details>
+                <summary>IPCEI-AI: nächste Einreichungsfrist für Projektskizzen am 31.10.</summary>
+                <div class="panel-detail compact-panel-details">
+                  <div class="compact-panel-summary">
+                    <div class="story-meta"><span class="badge" data-trust="watchlist" data-ui-map="trust" data-raw-value="watchlist">watchlist</span></div>
+                    <div class="compact-panel-stats">
+                      <span class="chip">Quellen: <span data-source-count>0</span></span>
+                      <span class="chip">Rollen</span>
+                    </div>
+                    <div class="compact-role-row" data-role-summary></div>
+                  </div>
+                  <p>Die deutsche BMWE-Förderrichtlinie für das IPCEI-AI sieht den 31.10. als nächsten regulären Bewertungsstichtag für Projektskizzen vor (bis zu 25 Mio. Euro je Projekt).</p>
+                  <p><strong>Warum beobachten:</strong> Konkreter nächster Meilenstein für den seit September laufenden IPCEI-AI-Förderprozess unter deutscher Federführung.</p>
+                  <p><strong>Nächstes Signal:</strong> Anzahl und Umfang der zum 31.10. eingereichten Projektskizzen.</p>
+                  <div class="sources">
+                    <ol class="compact-source-list">
+                    <li>
+                      <a href="https://www.foerderdatenbank.de/FDB/Content/DE/Foerderprogramm/Bund/BMWi/ipcei-ki-867319.html" target="_blank" rel="noopener noreferrer">IPCEI-AI: Förderung von innovativen KI-Vorhaben</a>
+                      <div class="source-meta-row"><span class="source-pill" data-ui-map="role" data-raw-value="faktenanker" data-source-role>faktenanker</span></div>
+                    </li>
+                    </ol>
+                  </div>
+                </div>
+              </details>
+            </article>
+          </div>
+
+          <div class="section-stack archive-references">
+            <article class="archive-item" data-id="weekly-2026-w40-archive-voluntary-vs-binding">
+              <span class="badge relation-type" data-ui-map="relation-type" data-raw-value="trendline">trendline</span>
+              <h4>Freiwillige Selbstregulierung vs. bindender AI Act: eine wiederkehrende Bruchlinie</h4>
+              <p class="sidebar-meta">Von Amodeis &#x27;Pace the Frontier&#x27; über von der Leyens Rückendeckung bis zu Trumps Pakt – die Spannung zwischen freiwilliger und bindender KI-Governance verschärft sich.</p>
+            </article>
+            <article class="archive-item" data-id="weekly-2026-w40-archive-safety-departures">
+              <span class="badge relation-type" data-ui-map="relation-type" data-raw-value="recurring_theme">recurring_theme</span>
+              <h4>Sicherheitsforscher-Abgänge bei KI-Laboren: jetzt konzentriert bei OpenAI</h4>
+              <p class="sidebar-meta">Nach Coxon, Hubinger, Benton und Engels (Anthropic/DeepMind) trifft das Muster nun OpenAI selbst: drei Entlassungen plus der Rücktritt von Sicherheitschef David Robinson.</p>
+            </article>
+            <article class="archive-item" data-id="weekly-2026-w40-archive-eu-industrial-ai">
+              <span class="badge relation-type" data-ui-map="relation-type" data-raw-value="recurring_theme">recurring_theme</span>
+              <h4>Europäische Industrial-AI-Souveränität: Mistral folgt auf IPCEI-AI und Aleph Alpha/Cohere</h4>
+              <p class="sidebar-meta">Mistrals Münchner Hub reiht sich neben IPCEI-AI und Aleph Alpha/Cohere in den Aufbau europäischer KI-Souveränität ein – diesmal mit Industriebezug (BMW, Siemens Energy).</p>
+            </article>
+          </div>
+        </section>
+      </aside>
+    </section>
+  </main>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const labelMaps = {
+        category: {
+          regulation: 'Regulierung',
+          product: 'Produkte & Plattformen',
+          global_eu: 'Global mit EU-Impact',
+          enterprise_ai: 'Enterprise AI',
+          governance: 'Governance',
+          watchlist: 'Watchlist'
+        },
+        priority: {
+          P1: 'Sehr wichtig',
+          P2: 'Relevant',
+          P3: 'Kurz notiert'
+        },
+        trust: {
+          hoch: 'Hohe Quellenlage',
+          mittel: 'Mittlere Quellenlage',
+          niedrig: 'Niedrige Quellenlage',
+          gemischt: 'Gemischte Quellenlage',
+          watchlist: 'Watchlist'
+        },
+        role: {
+          faktenanker: 'Faktenanker',
+          policy_interpretation: 'Policy-Interpretation',
+          marktverifikation: 'Marktverifikation',
+          produktquelle: 'Produktquelle',
+          enterprise_signal: 'Enterprise-Signal',
+          'frühindikator': 'Frühindikator',
+          unternehmensquelle: 'Unternehmensquelle',
+          developer_dokumentation: 'Entwicklerdokumentation'
+        },
+        'source-type': {
+          official: 'Offizielle Quelle',
+          vendor: 'Anbieterquelle',
+          media: 'Medienbericht',
+          research: 'Research',
+          community: 'Community',
+          documentation: 'Dokumentation',
+          legal: 'Rechtstext'
+        },
+        'relation-type': {
+          follow_up: 'Follow-up',
+          recurring_theme: 'Wiederkehrendes Thema',
+          precedent: 'Präzedenzfall',
+          trendline: 'Trendlinie'
+        }
+      };
+
+      const mapLabel = (group, rawValue) => {
+        if (!rawValue) return '';
+        return (labelMaps[group] && labelMaps[group][rawValue]) || rawValue;
+      };
+
+      document.querySelectorAll('[data-ui-map]').forEach((element) => {
+        const group = element.dataset.uiMap;
+        const rawValue = element.dataset.rawValue || element.textContent.trim();
+        const mappedValue = mapLabel(group === 'weekly-trust' ? 'trust' : group, rawValue);
+
+        if (group === 'weekly-trust') {
+          element.textContent = `Vertrauensbild: ${mappedValue}`;
+          return;
+        }
+
+        element.textContent = mappedValue;
+      });
+
+      document.querySelectorAll('.panel-item').forEach((item) => {
+        const roleSummary = item.querySelector('[data-role-summary]');
+        const roleNodes = Array.from(item.querySelectorAll('[data-source-role]'));
+        const sourceCountNode = item.querySelector('[data-source-count]');
+        const uniqueRoles = [...new Set(roleNodes.map((node) => node.dataset.rawValue).filter(Boolean))];
+
+        if (sourceCountNode) sourceCountNode.textContent = String(roleNodes.length);
+
+        if (roleSummary) {
+          roleSummary.innerHTML = '';
+          uniqueRoles.forEach((role) => {
+            const pill = document.createElement('span');
+            pill.className = 'source-pill';
+            pill.textContent = mapLabel('role', role);
+            roleSummary.appendChild(pill);
+          });
+        }
+      });
+    });
+  </script>
+</body>
+</html>
