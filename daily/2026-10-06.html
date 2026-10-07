@@ -1,0 +1,1111 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mistral Large 4 als EU-Flaggschiffmodell, SAP übernimmt TechWolf, neuer Bundesdatenschutzbeauftragter im Amt</title>
+  <style>
+    :root {
+      --bg: #eef3f9;
+      --bg-radial: radial-gradient(circle at top left, rgba(49, 91, 217, 0.14), transparent 32rem), radial-gradient(circle at top right, rgba(31, 122, 77, 0.10), transparent 28rem), #eef3f9;
+      --surface: #ffffff;
+      --surface-soft: #f7f9fd;
+      --surface-blue: #f1f5ff;
+      --text: #111b2e;
+      --muted: #66748c;
+      --muted-2: #8190a8;
+      --border: #d9e2ef;
+      --border-strong: #bfcae0;
+      --accent: #244ed8;
+      --accent-strong: #1739a8;
+      --accent-soft: #e8efff;
+      --success: #1f7a4d;
+      --success-soft: #e7f5ee;
+      --warning: #b26a00;
+      --warning-soft: #fff3dc;
+      --risk: #a63f3f;
+      --risk-soft: #fdecec;
+      --watch: #2563eb;
+      --watch-soft: #eaf1ff;
+      --shadow: 0 18px 45px rgba(17, 30, 58, 0.10);
+      --shadow-soft: 0 8px 24px rgba(17, 30, 58, 0.07);
+      --radius-xl: 26px;
+      --radius-lg: 18px;
+      --radius-md: 14px;
+      --radius-sm: 10px;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      padding: 34px;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--bg-radial);
+      color: var(--text);
+      line-height: 1.55;
+    }
+
+    h1, h2, h3, h4, p { margin: 0; }
+    h1 { max-width: 920px; font-size: clamp(32px, 5vw, 56px); line-height: 0.98; letter-spacing: -0.045em; }
+    h2 { font-size: clamp(22px, 3vw, 34px); line-height: 1.08; letter-spacing: -0.03em; }
+    h3 { font-size: 20px; line-height: 1.18; letter-spacing: -0.02em; }
+    h4 { font-size: 15px; line-height: 1.25; }
+    a { color: var(--accent-strong); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    .daily-briefing {
+      max-width: 1220px;
+      margin: 0 auto;
+      display: grid;
+      gap: 24px;
+    }
+
+    .hero,
+    .top-story,
+    .story-card,
+    .sidebar-block {
+      background: rgba(255, 255, 255, 0.92);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow-soft);
+      backdrop-filter: blur(12px);
+    }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      padding: 30px;
+      display: grid;
+      gap: 18px;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      height: 5px;
+      background: linear-gradient(90deg, #244ed8, #1f7a4d, #b26a00);
+      pointer-events: none;
+    }
+
+    .hero > * { position: relative; }
+
+    .eyebrow,
+    .story-kicker,
+    .section-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      line-height: 1;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-weight: 800;
+    }
+
+    .eyebrow::before,
+    .section-label::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 0 5px var(--accent-soft);
+      flex: 0 0 auto;
+    }
+
+    .briefing-summary {
+      max-width: 880px;
+      color: var(--muted);
+      font-size: 17px;
+    }
+
+    .meta-row,
+    .story-meta,
+    .filter-row,
+    .source-meta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .chip,
+    .badge,
+    .filter-button,
+    .source-pill {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 800;
+      line-height: 1;
+      white-space: nowrap;
+    }
+
+    .chip {
+      padding: 9px 11px;
+      background: var(--accent-soft);
+      color: var(--accent-strong);
+      border: 1px solid rgba(36, 78, 216, 0.12);
+    }
+
+    .badge {
+      padding: 8px 10px;
+      border: 1px solid var(--border);
+      background: var(--surface-soft);
+      color: var(--muted);
+    }
+
+    .badge[data-trust="hoch"] { background: var(--success-soft); color: var(--success); border-color: rgba(31, 122, 77, 0.20); }
+    .badge[data-trust="mittel"], .badge[data-trust="gemischt"] { background: var(--warning-soft); color: var(--warning); border-color: rgba(178, 106, 0, 0.22); }
+    .badge[data-trust="niedrig"] { background: var(--risk-soft); color: var(--risk); border-color: rgba(166, 63, 63, 0.22); }
+    .badge[data-trust="watchlist"] { background: var(--watch-soft); color: var(--watch); border-color: rgba(37, 99, 235, 0.18); }
+
+    .main-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 2.05fr) minmax(300px, 0.95fr);
+      gap: 24px;
+      align-items: start;
+    }
+
+    .main-column,
+    .priority-stories,
+    .sidebar {
+      display: grid;
+      gap: 18px;
+      min-width: 0;
+    }
+
+    .top-story,
+    .story-card {
+      padding: 22px;
+      display: grid;
+      gap: 15px;
+      min-width: 0;
+    }
+
+    .top-story {
+      border-color: rgba(36, 78, 216, 0.24);
+      box-shadow: var(--shadow);
+    }
+
+    .story-header {
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      align-items: flex-start;
+      min-width: 0;
+    }
+
+    .story-title-block,
+    .story-text-stack {
+      display: grid;
+      gap: 8px;
+      min-width: 0;
+    }
+
+    .story-title-block h2,
+    .story-title-block h3 {
+      overflow-wrap: anywhere;
+    }
+
+    .field-note { color: var(--muted); }
+    .field-note strong { color: var(--text); }
+
+    .takeaway {
+      border: 1px solid var(--border);
+      background: linear-gradient(180deg, #fbfcff, #f6f8fc);
+      border-radius: var(--radius-lg);
+      padding: 16px;
+      display: grid;
+      gap: 6px;
+    }
+
+    .takeaway strong {
+      font-size: 13px;
+      letter-spacing: 0.02em;
+    }
+
+    .score-strip {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 10px;
+      max-width: 100%;
+      min-width: 0;
+    }
+
+    .score-item {
+      --score: 1;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      background: var(--surface-soft);
+      padding: 12px;
+      display: grid;
+      gap: 8px;
+      min-height: 88px;
+      min-width: 0;
+      overflow: hidden;
+    }
+
+    .score-topline {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 6px;
+      min-width: 0;
+      max-width: 100%;
+    }
+
+    .score-value {
+      min-width: 0;
+      max-width: 100%;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      font-size: 24px;
+      line-height: 1;
+      font-weight: 900;
+      letter-spacing: -0.04em;
+    }
+
+    .score-max {
+      color: var(--muted-2);
+      font-size: 11px;
+      font-weight: 800;
+      flex: 0 0 auto;
+    }
+
+    .score-label {
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.15;
+      font-weight: 750;
+      overflow-wrap: anywhere;
+      hyphens: auto;
+    }
+
+    .meter {
+      width: 100%;
+      min-width: 0;
+      height: 7px;
+      border-radius: 999px;
+      background: #e4e9f2;
+      overflow: hidden;
+    }
+
+    .meter > span {
+      display: block;
+      height: 100%;
+      width: clamp(0%, calc(var(--score) * 20%), 100%);
+      max-width: 100%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, var(--accent), #1f7a4d);
+    }
+
+    .filter-panel {
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      background: rgba(255, 255, 255, 0.78);
+      box-shadow: var(--shadow-soft);
+      padding: 14px;
+      display: grid;
+      gap: 10px;
+    }
+
+    .filter-label {
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 850;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .filter-button {
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--muted);
+      padding: 8px 10px;
+      cursor: pointer;
+      transition: background 0.18s ease, color 0.18s ease, border-color 0.18s ease, transform 0.18s ease;
+    }
+
+    .filter-button:hover {
+      transform: translateY(-1px);
+      border-color: var(--border-strong);
+    }
+
+    .filter-button.active,
+    .filter-button[aria-pressed="true"] {
+      background: var(--text);
+      color: #ffffff;
+      border-color: var(--text);
+    }
+
+    .is-filtered-out { display: none !important; }
+
+    .filter-empty-state {
+      display: none;
+      border: 1px dashed var(--border-strong);
+      border-radius: var(--radius-lg);
+      background: rgba(255, 255, 255, 0.7);
+      padding: 16px;
+      color: var(--muted);
+    }
+
+    .filter-empty-state.is-visible { display: block; }
+
+    .sidebar-status-grid,
+    .compact-source-summary,
+    .compact-source-details,
+    .compact-role-row {
+      display: grid;
+      gap: 10px;
+    }
+
+    .sidebar-status-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .status-card {
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      background: var(--surface-soft);
+      padding: 12px;
+      display: grid;
+      gap: 5px;
+    }
+
+    .status-card-label {
+      font-size: 11px;
+      font-weight: 850;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--muted-2);
+    }
+
+    .status-card-value {
+      font-size: 14px;
+      font-weight: 800;
+      color: var(--text);
+    }
+
+    .compact-source-header {
+      display: grid;
+      gap: 8px;
+    }
+
+    .compact-source-stats {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .compact-source-list {
+      margin: 0;
+      padding-left: 18px;
+      color: var(--muted);
+      display: grid;
+      gap: 6px;
+    }
+
+    .compact-source-list a,
+    .compact-source-list .source-label-fallback {
+      font-weight: 750;
+    }
+
+    .story-card { box-shadow: var(--shadow-soft); }
+    .story-card[data-category="regulation"] { border-left: 5px solid var(--accent); }
+    .story-card[data-category="governance"] { border-left: 5px solid var(--success); }
+    .story-card[data-category="enterprise_ai"] { border-left: 5px solid #5b5fd6; }
+    .story-card[data-category="product"] { border-left: 5px solid #6b55c9; }
+    .story-card[data-category="global_eu"] { border-left: 5px solid #2d8aa6; }
+    .story-card[data-category="watchlist"] { border-left: 5px solid var(--watch); }
+
+    details.evidence {
+      border-top: 1px solid var(--border);
+      padding-top: 10px;
+    }
+
+    details.evidence summary,
+    .source-item summary {
+      cursor: pointer;
+      list-style: none;
+      color: var(--accent-strong);
+      font-size: 13px;
+      font-weight: 850;
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      align-items: center;
+    }
+
+    details.evidence summary::-webkit-details-marker,
+    .source-item summary::-webkit-details-marker { display: none; }
+
+    details.evidence summary::after,
+    .source-item summary::after {
+      content: "+";
+      display: grid;
+      place-items: center;
+      width: 22px;
+      height: 22px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: var(--accent-strong);
+      font-size: 15px;
+      line-height: 1;
+      flex: 0 0 auto;
+    }
+
+    details.evidence[open] summary::after,
+    .source-item details[open] summary::after { content: "–"; }
+
+    .sources {
+      margin-top: 10px;
+      display: grid;
+      gap: 8px;
+      padding: 12px;
+      border-radius: var(--radius-md);
+      background: var(--surface-soft);
+      border: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 13px;
+      min-width: 0;
+    }
+
+    .source-link-card {
+      display: grid;
+      gap: 7px;
+      padding: 10px;
+      border: 1px solid rgba(191, 202, 224, 0.75);
+      border-radius: var(--radius-sm);
+      background: #ffffff;
+      min-width: 0;
+    }
+
+    .source-link-card a,
+    .source-link-card .source-label-fallback {
+      font-weight: 850;
+      overflow-wrap: anywhere;
+    }
+
+    .source-label-fallback { color: var(--text); }
+
+    .source-pill {
+      align-self: start;
+      justify-self: start;
+      padding: 5px 7px;
+      border: 1px solid var(--border);
+      background: #eef2ff;
+      color: #3730a3;
+      font-size: 10.5px;
+      letter-spacing: 0.01em;
+    }
+
+    .source-meta {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 6px 10px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .source-meta span { overflow-wrap: anywhere; }
+    .source-meta strong { color: var(--text); }
+
+    .sidebar-block {
+      padding: 18px;
+      display: grid;
+      gap: 12px;
+    }
+
+    .watch-item,
+    .source-item,
+    .archive-item {
+      border: 1px solid var(--border);
+      background: var(--surface-soft);
+      border-radius: var(--radius-md);
+      padding: 13px;
+      display: grid;
+      gap: 7px;
+      min-width: 0;
+    }
+
+    .sidebar-meta {
+      color: var(--muted);
+      font-size: 13px;
+      overflow-wrap: anywhere;
+    }
+
+    .source-item { padding: 0; overflow: hidden; }
+    .source-item details { padding: 12px 13px; }
+    .source-item summary { color: var(--text); overflow-wrap: anywhere; }
+    .source-item .source-detail {
+      margin-top: 9px;
+      display: grid;
+      gap: 8px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+    .archive-item .relation-type { justify-self: start; background: #eef2ff; color: #3730a3; }
+
+    @media (max-width: 980px) {
+      body { padding: 18px; }
+      .hero, .top-story, .story-card, .sidebar-block { border-radius: var(--radius-lg); }
+      .main-layout { grid-template-columns: 1fr; }
+      .score-strip {
+        grid-template-columns: repeat(5, minmax(78px, 1fr));
+        gap: 7px;
+        overflow-x: auto;
+        overflow-y: hidden;
+        padding-bottom: 2px;
+        scrollbar-width: thin;
+      }
+      .score-item { min-height: 58px; padding: 7px 8px; gap: 5px; }
+      .score-value { font-size: 16px; }
+      .score-max { font-size: 10px; }
+      .score-label { font-size: 10px; line-height: 1.1; }
+      .meter { height: 4px; }
+      .chip, .badge, .filter-button { padding: 6px 8px; font-size: 11px; }
+      .filter-panel { padding: 12px; }
+      .filter-row { gap: 7px; }
+      .source-meta { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 560px) {
+      body { padding: 12px; }
+      .daily-briefing { gap: 14px; }
+      .hero { padding: 22px; }
+      .story-header { display: grid; gap: 10px; }
+      .story-meta { gap: 7px; }
+      .score-strip { grid-template-columns: repeat(5, minmax(72px, 1fr)); }
+      .score-item { min-height: 54px; padding: 6px 7px; }
+      .score-value { font-size: 15px; }
+      .score-max { font-size: 10px; }
+      .score-label { font-size: 9.5px; }
+      .filter-row {
+        display: flex;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        padding-bottom: 2px;
+        scrollbar-width: thin;
+      }
+      .filter-button { flex: 0 0 auto; }
+      .sources { padding: 10px; }
+      .source-link-card { padding: 9px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="daily-briefing">
+    <section class="hero">
+      <div class="eyebrow">Daily AI Intelligence Briefing</div>
+      <h1>Mistral Large 4 als EU-Flaggschiffmodell, SAP übernimmt TechWolf, neuer Bundesdatenschutzbeauftragter im Amt</h1>
+      <p class="briefing-summary">Mistral veröffentlichte Flaggschiffmodell Large 4 (1 Bio. Parameter). SAP kündigte auf SAP Connect eine TechWolf-Übernahme an. Die EU-Kommission will Normungsverfahren beschleunigen. Nachtrag: Hennemann trat am 01.10. als neuer Bundesdatenschutzbeauftragter an.</p>
+      <div class="meta-row">
+        <span class="chip">Datum: 2026-10-06</span>
+        <span class="chip">Fenster: Dienstag, 06.10.2026 (Tagesfenster)</span>
+        <span class="chip">Fokus: Deutschland / EU</span>
+        <span class="badge" data-trust="gemischt" data-ui-map="overall-trust" data-raw-value="gemischt">Status: gemischt</span>
+      </div>
+    </section>
+
+    <section class="main-layout">
+      <section class="main-column">
+        <article class="top-story">
+          <div class="story-header">
+            <div class="story-title-block">
+              <div class="story-kicker">Top Story</div>
+              <h2>Mistral veröffentlicht Large 4: souveränes EU-Flaggschiffmodell mit 1 Billion Parametern</h2>
+            </div>
+            <span class="chip" data-ui-map="priority" data-raw-value="P1">P1</span>
+          </div>
+          <p>Mistral stellte am 06.10. &#x27;Mistral Large 4&#x27; vor: 1 Billion Parameter gesamt, 49 Mrd. aktive Parameter, hybrides Instruct-und-Reasoning-MoE, nativ multimodal. Trainiert in Mistrals eigenen europäischen Rechenzentren (3.800 Nvidia-Grace-Blackwell-GPUs) &#x27;unter europäischem Recht&#x27;, Trainingsdaten umfassen alle EU-Amtssprachen (160+ Sprachen insgesamt). API-Vorschau ist sofort über Mistral Studio verfügbar, offene Gewichte sollen bis Ende Oktober folgen. Mistral beansprucht Topwerte bei Cybersicherheit (Artificial Analysis Cyber Index), Coding- und Agentic-Benchmarks sowie Vorteile gegenüber GPT-6-Astra bei visueller Verankerung sowie Finanz-/Rechts-Agentenbenchmarks.</p>
+          <div class="score-strip">
+            <div class="score-item" style="--score: 5"><div class="score-topline"><span class="score-value">5</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">EU / DE-Relevanz</div></div>
+            <div class="score-item" style="--score: 4"><div class="score-topline"><span class="score-value">4</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Business Impact</div></div>
+            <div class="score-item" style="--score: 1"><div class="score-topline"><span class="score-value">1</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Regulatorik</div></div>
+            <div class="score-item" style="--score: 5"><div class="score-topline"><span class="score-value">5</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Technologie</div></div>
+            <div class="score-item" style="--score: 4"><div class="score-topline"><span class="score-value">4</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Lernwert</div></div>
+          </div>
+          <div class="takeaway">
+            <strong>Einschätzung</strong>
+            <p class="field-note">Mit Large 4 untermauert Mistral den Anspruch auf ein komplett in Europa kontrolliertes Frontier-Modell – Existenz und technische Spezifikation sind herstellerseitig belegt, die Leistungsvergleiche zur US-Konkurrenz sind bislang unabhängig unbestätigte Eigenangaben.</p>
+          </div>
+          <details class="evidence">
+            <summary>Quellen</summary>
+            <div class="sources">
+              <article class="source-link-card">
+                <a href="https://mistral.ai/news/mistral-large-4/" target="_blank" rel="noopener noreferrer">Introducing Mistral Large 4</a>
+                <div class="source-meta-row">
+                  <span class="source-pill" data-ui-map="role" data-raw-value="produktquelle">produktquelle</span>
+                  <span class="source-pill" data-ui-map="source-type" data-raw-value="vendor">vendor</span>
+                </div>
+                <div class="source-meta">
+                  <span><strong>Publisher:</strong> Mistral AI</span>
+                  <span><strong>Veröffentlicht:</strong> 2026-10-06</span>
+                  <span><strong>Abgerufen:</strong> 2026-10-06</span>
+                </div>
+              </article>
+              <article class="source-link-card">
+                <a href="https://www.heise.de/news/Mistral-Large-4-Der-LLM-Brocken-aus-der-EU-will-zur-Konkurrenz-aufschliessen-11478121.html" target="_blank" rel="noopener noreferrer">Mistral Large 4: Der LLM-Brocken aus der EU will zur Konkurrenz aufschließen</a>
+                <div class="source-meta-row">
+                  <span class="source-pill" data-ui-map="role" data-raw-value="enterprise_signal">enterprise_signal</span>
+                  <span class="source-pill" data-ui-map="source-type" data-raw-value="media">media</span>
+                </div>
+                <div class="source-meta">
+                  <span><strong>Publisher:</strong> heise online</span>
+                  <span><strong>Veröffentlicht:</strong> 2026-10-06</span>
+                  <span><strong>Abgerufen:</strong> 2026-10-06</span>
+                </div>
+              </article>
+            </div>
+          </details>
+          <details class="evidence">
+            <summary>Weitere Recherche</summary>
+            <div class="sources">
+              <p class="field-note">Bestätigen unabhängige Benchmarks oder europäische Enterprise-/Behördenkunden Mistrals Leistungsangaben zu Large 4, und zu welchen Lizenzbedingungen erscheinen die angekündigten offenen Gewichte Ende Oktober?</p>
+            </div>
+          </details>
+        </article>
+
+        <section class="priority-stories">
+          <div class="section-label">Weitere priorisierte Entwicklungen</div>
+          <div class="filter-panel" aria-label="Story-Filter">
+            <div class="filter-label">Filter</div>
+            <div class="filter-row" id="story-filter-row">
+              <button class="filter-button active" type="button" data-filter="all" aria-pressed="true">Alle</button>
+            </div>
+          </div>
+
+          <article class="story-card" data-id="sap-connect-techwolf-acquisition" data-category="enterprise_ai" data-trust-status="mittel">
+            <div class="story-header">
+              <div class="story-title-block">
+                <div class="story-kicker">Joule Work + TechWolf-Zukauf</div>
+                <h3>SAP kündigt &#x27;Autonomous Enterprise&#x27; an und übernimmt belgisches Skills-Startup TechWolf</h3>
+              </div>
+              <div class="story-meta">
+                <span class="chip" data-ui-map="category" data-raw-value="enterprise_ai">enterprise_ai</span>
+                <span class="chip" data-ui-map="priority" data-raw-value="P2">P2</span>
+              </div>
+            </div>
+            <div class="story-text-stack">
+              <p>Auf der SAP Connect in Las Vegas (06.10.) stellte SAP seine &#x27;Autonomous Enterprise&#x27;-Strategie vor (Joule Work, Joule Assistants, SAP Business AI Platform) und kündigte die Übernahme des belgischen Skills-Intelligence-Startups TechWolf (Gent) an – laut SAP eine &#x27;evidenzbasierte Sicht auf Arbeit im KI-Zeitalter&#x27;.</p>
+              <p class="field-note"><strong>Warum relevant:</strong> Grenzüberschreitender Zukauf eines deutschen Enterprise-Softwarekonzerns in Belgien, direkt im Feld Enterprise-/Agentic-AI und Workforce-Intelligence.</p>
+              <p class="field-note"><strong>EU-/DE-Impact:</strong> Direkt – SAP (Deutschland) als Käufer, TechWolf (Belgien) als Zielunternehmen; relevant für europäische SAP-Kunden in HR/Workforce-Analytics.</p>
+              <p class="field-note"><strong>Einordnung:</strong> Die Existenz der Übernahme und der Plattform-Ankündigung ist herstellerseitig belegt; Kaufpreis, Konditionen und unabhängige Markteinschätzung fehlen bislang vollständig.</p>
+            </div>
+            <div class="score-strip">
+              <div class="score-item" style="--score: 4"><div class="score-topline"><span class="score-value">4</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">EU / DE-Relevanz</div></div>
+              <div class="score-item" style="--score: 3"><div class="score-topline"><span class="score-value">3</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Business Impact</div></div>
+              <div class="score-item" style="--score: 1"><div class="score-topline"><span class="score-value">1</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Regulatorik</div></div>
+              <div class="score-item" style="--score: 3"><div class="score-topline"><span class="score-value">3</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Technologie</div></div>
+              <div class="score-item" style="--score: 3"><div class="score-topline"><span class="score-value">3</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Lernwert</div></div>
+            </div>
+            <details class="evidence">
+              <summary>Quellen & Unsicherheit</summary>
+              <div class="sources">
+                <p class="field-note"><strong>Quellenlage:</strong> <span data-ui-map="trust" data-raw-value="mittel">mittel</span></p>
+                <article class="source-link-card">
+                  <a href="https://news.sap.com/2026/10/sap-to-acquire-techwolf-evidence-based-work-age-of-ai/" target="_blank" rel="noopener noreferrer">SAP to Acquire TechWolf, Giving Enterprises Evidence-Based View of Work in the Age of AI</a>
+                  <div class="source-meta-row">
+                    <span class="source-pill" data-ui-map="role" data-raw-value="unternehmensquelle">unternehmensquelle</span>
+                    <span class="source-pill" data-ui-map="source-type" data-raw-value="official">official</span>
+                  </div>
+                  <div class="source-meta">
+                    <span><strong>Publisher:</strong> SAP</span>
+                    <span><strong>Veröffentlicht:</strong> 2026-10-06</span>
+                    <span><strong>Abgerufen:</strong> 2026-10-06</span>
+                  </div>
+                </article>
+                <article class="source-link-card">
+                  <a href="https://news.sap.com/2026/10/sap-connect-sap-puts-autonomous-enterprise-to-work/" target="_blank" rel="noopener noreferrer">SAP Puts the Autonomous Enterprise to Work</a>
+                  <div class="source-meta-row">
+                    <span class="source-pill" data-ui-map="role" data-raw-value="unternehmensquelle">unternehmensquelle</span>
+                    <span class="source-pill" data-ui-map="source-type" data-raw-value="official">official</span>
+                  </div>
+                  <div class="source-meta">
+                    <span><strong>Publisher:</strong> SAP</span>
+                    <span><strong>Veröffentlicht:</strong> 2026-10-06</span>
+                    <span><strong>Abgerufen:</strong> 2026-10-06</span>
+                  </div>
+                </article>
+                <p class="field-note"><strong>Unsicherheit:</strong> Nur herstellereigene Quelle gefunden; keine unabhängige Markt- oder Finanzquelle zu Konditionen oder strategischer Einordnung bislang verfügbar.</p>
+              </div>
+            </details>
+            <details class="evidence">
+              <summary>Weitere Recherche</summary>
+              <div class="sources">
+                <p class="field-note">Werden Kaufpreis oder Integrationspläne bekannt, und berichten unabhängige Wirtschaftsmedien (Reuters, Handelsblatt) über die Übernahme?</p>
+              </div>
+            </details>
+          </article>
+          <article class="story-card" data-id="eu-standardisation-regulation-modernization" data-category="regulation" data-trust-status="hoch">
+            <div class="story-header">
+              <div class="story-title-block">
+                <div class="story-kicker">Normungsreform, nicht AI-Act-spezifisch</div>
+                <h3>EU-Kommission will Normungsverfahren beschleunigen – Entwicklungszeit von sechs auf vier Jahre verkürzt</h3>
+              </div>
+              <div class="story-meta">
+                <span class="chip" data-ui-map="category" data-raw-value="regulation">regulation</span>
+                <span class="chip" data-ui-map="priority" data-raw-value="P3">P3</span>
+              </div>
+            </div>
+            <div class="story-text-stack">
+              <p>Die EU-Kommission nahm am 06.10. einen Vorschlag zur Modernisierung des europäischen Normungssystems an: Normungsdauer von sechs auf vier Jahre verkürzt, neues &#x27;Expert Centre on European Standardisation&#x27;, sowie – infolge EuGH-Urteilen – freier öffentlicher Zugang zu EU-Normen. Nächster Schritt: Parlament und Rat.</p>
+              <p class="field-note"><strong>Warum relevant:</strong> Betrifft das gesamte europäische Normungssystem inkl. CEN-CENELEC/JTC 21 und damit potenziell künftige AI-Act-Normungsarbeit – dieser Zusammenhang wird in der Primärquelle aber nicht hergestellt.</p>
+              <p class="field-note"><strong>EU-/DE-Impact:</strong> Direkt auf EU-Ebene – allgemeine Normungsreform mit Relevanz für Standards-/Compliance-Berater, ohne bestätigten direkten AI-Act-Bezug in der Primärquelle.</p>
+              <p class="field-note"><strong>Einordnung:</strong> Die Kommission bestätigt die Reform selbst als Primärquelle; eine Verbindung zur AI-Act-Normungsverzögerung (EN 18286) ist bislang ausschließlich eine Einordnung dieses Briefings, keine Aussage der Kommission.</p>
+            </div>
+            <div class="score-strip">
+              <div class="score-item" style="--score: 4"><div class="score-topline"><span class="score-value">4</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">EU / DE-Relevanz</div></div>
+              <div class="score-item" style="--score: 2"><div class="score-topline"><span class="score-value">2</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Business Impact</div></div>
+              <div class="score-item" style="--score: 4"><div class="score-topline"><span class="score-value">4</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Regulatorik</div></div>
+              <div class="score-item" style="--score: 1"><div class="score-topline"><span class="score-value">1</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Technologie</div></div>
+              <div class="score-item" style="--score: 4"><div class="score-topline"><span class="score-value">4</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Lernwert</div></div>
+            </div>
+            <details class="evidence">
+              <summary>Quellen & Unsicherheit</summary>
+              <div class="sources">
+                <p class="field-note"><strong>Quellenlage:</strong> <span data-ui-map="trust" data-raw-value="hoch">hoch</span></p>
+                <article class="source-link-card">
+                  <a href="https://ec.europa.eu/commission/presscorner/detail/en/ip_26_2070" target="_blank" rel="noopener noreferrer">Commission adopts proposal to accelerate standards development and improve EU competitiveness</a>
+                  <div class="source-meta-row">
+                    <span class="source-pill" data-ui-map="role" data-raw-value="faktenanker">faktenanker</span>
+                    <span class="source-pill" data-ui-map="source-type" data-raw-value="official">official</span>
+                  </div>
+                  <div class="source-meta">
+                    <span><strong>Publisher:</strong> European Commission</span>
+                    <span><strong>Veröffentlicht:</strong> 2026-10-06</span>
+                    <span><strong>Abgerufen:</strong> 2026-10-06</span>
+                  </div>
+                </article>
+                <p class="field-note"><strong>Unsicherheit:</strong> Vorschlag selbst primärquellenbestätigt; ein AI-Act-/CEN-CENELEC-Bezug ist nicht belegt und wird hier explizit nur als eigene Einordnung markiert, nicht als Kommissionsaussage.</p>
+              </div>
+            </details>
+            <details class="evidence">
+              <summary>Weitere Recherche</summary>
+              <div class="sources">
+                <p class="field-note">Nimmt die Kommission oder CEN-CENELEC explizit Bezug auf diese Reform im Zusammenhang mit der noch nicht im Amtsblatt zitierten EN 18286?</p>
+              </div>
+            </details>
+          </article>
+          <article class="story-card" data-id="nachtrag-bfdi-hennemann-amtsantritt" data-category="governance" data-trust-status="hoch">
+            <div class="story-header">
+              <div class="story-title-block">
+                <div class="story-kicker">Neuer BfDI im Amt</div>
+                <h3>Nachtrag (01.10.): Moritz Hennemann tritt Amt als neuer Bundesdatenschutzbeauftragter an</h3>
+              </div>
+              <div class="story-meta">
+                <span class="chip" data-ui-map="category" data-raw-value="governance">governance</span>
+                <span class="chip" data-ui-map="priority" data-raw-value="P2">P2</span>
+              </div>
+            </div>
+            <div class="story-text-stack">
+              <p>Prof. Dr. Moritz Hennemann (Universität Freiburg) trat am 01.10. das Amt des Bundesbeauftragten für Datenschutz und Informationsfreiheit an, als Nachfolger von Louisa Specht-Riemenschneider (gesundheitsbedingter Rücktritt). Amtszeit: fünf Jahre; rund 370 Beschäftigte.</p>
+              <p class="field-note"><strong>Warum relevant:</strong> Personelle Neubesetzung der zentralen deutschen Datenschutz-Aufsichtsbehörde mitten in mehreren parallel laufenden Regulierungsprozessen (AI Act, DSGVO-Reform, neue KI-Marktüberwachung).</p>
+              <p class="field-note"><strong>EU-/DE-Impact:</strong> Direkt, Deutschland – BfDI als Faktenanker-Behörde für Datenschutz und KI-Governance auf Bundesebene.</p>
+              <p class="field-note"><strong>Einordnung:</strong> Der Amtsantritt ist über die Behörde selbst und mehrere unabhängige Medien bestätigt; wie Hennemann inhaltlich zu KI-/AI-Act-Themen Position bezieht, ist noch offen.</p>
+            </div>
+            <div class="score-strip">
+              <div class="score-item" style="--score: 4"><div class="score-topline"><span class="score-value">4</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">EU / DE-Relevanz</div></div>
+              <div class="score-item" style="--score: 3"><div class="score-topline"><span class="score-value">3</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Business Impact</div></div>
+              <div class="score-item" style="--score: 3"><div class="score-topline"><span class="score-value">3</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Regulatorik</div></div>
+              <div class="score-item" style="--score: 1"><div class="score-topline"><span class="score-value">1</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Technologie</div></div>
+              <div class="score-item" style="--score: 3"><div class="score-topline"><span class="score-value">3</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Lernwert</div></div>
+            </div>
+            <details class="evidence">
+              <summary>Quellen & Unsicherheit</summary>
+              <div class="sources">
+                <p class="field-note"><strong>Quellenlage:</strong> <span data-ui-map="trust" data-raw-value="hoch">hoch</span></p>
+                <article class="source-link-card">
+                  <a href="https://www.bfdi.bund.de/SharedDocs/Pressemitteilungen/DE/2026/14_Amtsantritt_Hennemann.html?nn&#x3D;251944" target="_blank" rel="noopener noreferrer">Moritz Hennemann tritt Amt als Bundesbeauftragter für den Datenschutz und die Informationsfreiheit an</a>
+                  <div class="source-meta-row">
+                    <span class="source-pill" data-ui-map="role" data-raw-value="faktenanker">faktenanker</span>
+                    <span class="source-pill" data-ui-map="source-type" data-raw-value="official">official</span>
+                  </div>
+                  <div class="source-meta">
+                    <span><strong>Publisher:</strong> BfDI</span>
+                    <span><strong>Veröffentlicht:</strong> 2026-10-01</span>
+                    <span><strong>Abgerufen:</strong> 2026-10-06</span>
+                  </div>
+                </article>
+                <article class="source-link-card">
+                  <a href="https://netzpolitik.org/2026/moritz-hennemann-neuer-bundesbeauftragter-fuer-datenschutz-und-informationsfreiheit-gewaehlt/" target="_blank" rel="noopener noreferrer">Moritz Hennemann: Neuer Bundesbeauftragter für Datenschutz und Informationsfreiheit gewählt</a>
+                  <div class="source-meta-row">
+                    <span class="source-pill" data-ui-map="role" data-raw-value="enterprise_signal">enterprise_signal</span>
+                    <span class="source-pill" data-ui-map="source-type" data-raw-value="media">media</span>
+                  </div>
+                  <div class="source-meta">
+                    <span><strong>Publisher:</strong> netzpolitik.org</span>
+                    <span><strong>Veröffentlicht:</strong> 2026-06-25</span>
+                    <span><strong>Abgerufen:</strong> 2026-10-06</span>
+                  </div>
+                </article>
+                <p class="field-note"><strong>Unsicherheit:</strong> Datum 01.10., als Nachtrag behandelt, da keine Daily zwischen 01.10. und 05.10. diese Personalie aufgriff.</p>
+              </div>
+            </details>
+            <details class="evidence">
+              <summary>Weitere Recherche</summary>
+              <div class="sources">
+                <p class="field-note">Welche ersten inhaltlichen Schwerpunkte zu KI-Aufsicht oder AI-Act-Durchsetzung setzt Hennemann in seinen ersten Wochen im Amt?</p>
+              </div>
+            </details>
+          </article>
+          <div class="filter-empty-state" id="story-filter-empty-state">
+            Keine Stories für diesen Filter sichtbar. Wähle einen anderen Filter oder prüfe, ob in diesem Lauf nur andere Kategorien vorkommen.
+          </div>
+        </section>
+      </section>
+
+      <aside class="sidebar">
+        <section class="sidebar-block">
+          <h3>Tageslage</h3>
+          <p class="sidebar-meta">Mistral veröffentlichte Flaggschiffmodell Large 4 (1 Bio. Parameter). SAP kündigte auf SAP Connect eine TechWolf-Übernahme an. Die EU-Kommission will Normungsverfahren beschleunigen. Nachtrag: Hennemann trat am 01.10. als neuer Bundesdatenschutzbeauftragter an.</p>
+          <div class="sidebar-status-grid">
+            <div class="status-card">
+              <span class="status-card-label">Fenster</span>
+              <span class="status-card-value">Dienstag, 06.10.2026 (Tagesfenster)</span>
+            </div>
+            <div class="status-card">
+              <span class="status-card-label">Quellenlage</span>
+              <span class="status-card-value" data-ui-map="trust" data-raw-value="gemischt">gemischt</span>
+            </div>
+          </div>
+        </section>
+
+        <section class="sidebar-block watchlist">
+          <h3>Watchlist</h3>
+          <article class="watch-item" data-id="anthropic-pentagon-meta-microsoft-contradiction">
+            <div class="story-meta"><span class="badge" data-trust="niedrig" data-ui-map="trust" data-raw-value="niedrig">niedrig</span></div>
+            <h4>Anthropic/Pentagon: DoD meldet Claude-Ausstieg &#x27;vollendet&#x27; – widersprüchliche Berichte zu fortlaufender Nutzung</h4>
+            <p class="sidebar-meta">Pentagon erklärte, Claude nicht mehr zu nutzen; andere Berichte (BBC) beschreiben fortgesetzte Nutzung. The Information (05.10., anonym) berichtete zudem von Nutzungskürzung bei Meta/Microsoft – unbestätigt.</p>
+            <p class="sidebar-meta"><strong>Warum beobachten:</strong> Widersprüchliche Faktenlage zu einem Präzedenzfall für staatliche KI-Beschaffung; möglicher Bezug zur EU-Souveränitätsdebatte, bislang nur eigene Einordnung, nicht quellengestützt.</p>
+            <p class="sidebar-meta"><strong>Nächstes Signal:</strong> Eine offizielle Anthropic- oder DoD-Stellungnahme, die den Widerspruch auflöst, oder eine bestätigte Meta-/Microsoft-Aussage.</p>
+          </article>
+          <article class="watch-item" data-id="eu-standardisierung-en18286-non-link">
+            <div class="story-meta"><span class="badge" data-trust="watchlist" data-ui-map="trust" data-raw-value="watchlist">watchlist</span></div>
+            <h4>EU-Normungsreform (06.10.) ohne bestätigten Bezug zu EN 18286/AI Act</h4>
+            <p class="sidebar-meta">Die neue Kommissions-Normungsreform erwähnt den AI Act oder CEN-CENELEC JTC 21 nicht ausdrücklich; die seit 12.07. zugelassene EN 18286 wartet weiterhin auf Amtsblatt-Zitierung.</p>
+            <p class="sidebar-meta"><strong>Warum beobachten:</strong> Mögliche spätere Verknüpfung beider Prozesse durch die Kommission oder CEN-CENELEC, die derzeit nicht belegt ist.</p>
+            <p class="sidebar-meta"><strong>Nächstes Signal:</strong> Eine Kommissions- oder CEN-CENELEC-Aussage, die beide Prozesse ausdrücklich verbindet, oder die Amtsblatt-Zitierung von EN 18286.</p>
+          </article>
+          <article class="watch-item" data-id="sap-techwolf-deal-terms">
+            <div class="story-meta"><span class="badge" data-trust="mittel" data-ui-map="trust" data-raw-value="mittel">mittel</span></div>
+            <h4>SAP/TechWolf: Kaufpreis und Konditionen weiterhin nicht offengelegt</h4>
+            <p class="sidebar-meta">SAP bestätigte die Übernahme von TechWolf (06.10.) ohne Angabe von Kaufpreis oder Konditionen; keine unabhängige Finanz- oder Wirtschaftsquelle bislang gefunden.</p>
+            <p class="sidebar-meta"><strong>Warum beobachten:</strong> Einordnung der Größenordnung und strategischen Bedeutung des Zukaufs im europäischen HR-Tech-/Workforce-Intelligence-Markt.</p>
+            <p class="sidebar-meta"><strong>Nächstes Signal:</strong> Eine Reuters-, Bloomberg- oder Handelsblatt-Meldung mit Kaufpreis oder Transaktionsdetails.</p>
+          </article>
+          <article class="watch-item" data-id="gpai-systemic-risk-deadline-still-open">
+            <div class="story-meta"><span class="badge" data-trust="watchlist" data-ui-map="trust" data-raw-value="watchlist">watchlist</span></div>
+            <h4>GPAI-Systemrisiko-Frist (15.09.): weiterhin kein sichtbares Ergebnis</h4>
+            <p class="sidebar-meta">Rund drei Wochen nach der Frist weiterhin keine Bestätigung eingegangener Berichte oder einer Kommissions-/KI-Büro-Stellungnahme gefunden.</p>
+            <p class="sidebar-meta"><strong>Warum beobachten:</strong> Erster echter Testfall der Art.-55-Vollzugsarchitektur des AI Act.</p>
+            <p class="sidebar-meta"><strong>Nächstes Signal:</strong> Eine Bestätigung eingegangener Berichte oder eine offizielle Stellungnahme.</p>
+          </article>
+          <article class="watch-item" data-id="recurring-fabrication-140-specialists">
+            <div class="story-meta"><span class="badge" data-trust="niedrig" data-ui-map="trust" data-raw-value="niedrig">niedrig</span></div>
+            <h4>Weiterhin unbelegt: &#x27;140 KI-Büro-Prüfspezialisten&#x27; und &#x27;erste Prüfwelle&#x27;</h4>
+            <p class="sidebar-meta">SEO-Aggregatoren wiederholen weiterhin die unbelegte Zahl &#x27;140 Prüfspezialisten&#x27; und eine angebliche &#x27;erste Prüfwelle&#x27; – bereits mehrfach als Fehlinformation identifiziert.</p>
+            <p class="sidebar-meta"><strong>Warum beobachten:</strong> Wiederkehrende Falschbehauptung, die ohne Primärquelle nicht übernommen werden darf.</p>
+            <p class="sidebar-meta"><strong>Nächstes Signal:</strong> Eine tatsächliche primäre EU-Kommissions-/KI-Büro-Quelle zu Personalstand oder Prüftätigkeit.</p>
+          </article>
+          <article class="watch-item" data-id="noyb-schrems-iii-filing">
+            <div class="story-meta"><span class="badge" data-trust="mittel" data-ui-map="trust" data-raw-value="mittel">mittel</span></div>
+            <h4>noyb/&#x27;Schrems III&#x27;: Klage weiterhin nicht eingereicht</h4>
+            <p class="sidebar-meta">Weiterhin keine formelle Klageeinreichung gefunden, mehr als drei Monate nach noybs eigener &#x27;binnen Wochen&#x27;-Ankündigung vom 30.06.</p>
+            <p class="sidebar-meta"><strong>Warum beobachten:</strong> Mögliche neue Rechtsunsicherheit für EU-US-Datentransfers bei KI-Diensten.</p>
+            <p class="sidebar-meta"><strong>Nächstes Signal:</strong> Tatsächliche Klageeinreichung oder ein CJEU-Aktenzeichen.</p>
+          </article>
+          <article class="watch-item" data-id="aleph-alpha-cohere-merger-clearance">
+            <div class="story-meta"><span class="badge" data-trust="mittel" data-ui-map="trust" data-raw-value="mittel">mittel</span></div>
+            <h4>Aleph Alpha × Cohere: Fusion weiterhin ohne Kartellfreigabe</h4>
+            <p class="sidebar-meta">Bundeskartellamt, EU-Kommission und kanadische Wettbewerbsbehörde haben die 20-Mrd.-Fusion weiterhin nicht freigegeben.</p>
+            <p class="sidebar-meta"><strong>Warum beobachten:</strong> Zentrale europäische Souveränitäts-KI-Konsolidierung mit noch offenem Ausgang.</p>
+            <p class="sidebar-meta"><strong>Nächstes Signal:</strong> Eine Freigabeentscheidung einer der drei Behörden.</p>
+          </article>
+          <article class="watch-item" data-id="anthropic-ipo-status">
+            <div class="story-meta"><span class="badge" data-trust="mittel" data-ui-map="trust" data-raw-value="mittel">mittel</span></div>
+            <h4>Anthropic-IPO: weiterhin kein öffentliches S-1</h4>
+            <p class="sidebar-meta">Weiterhin nur vertrauliche Entwurfsunterlagen; zuletzt kursierte ein Investorentag-Termin 14.10. ohne neue Bestätigung.</p>
+            <p class="sidebar-meta"><strong>Warum beobachten:</strong> Größte anstehende KI-Börsennotierung mit möglicher Signalwirkung für europäische Investoren.</p>
+            <p class="sidebar-meta"><strong>Nächstes Signal:</strong> Ein öffentlich eingereichtes S-1 oder ein bestätigtes Börsengangsdatum.</p>
+          </article>
+        </section>
+
+        <section class="sidebar-block archive-panel">
+          <h3>Archivbezug</h3>
+          <article class="archive-item" data-id="mistral-munich-hub-0928">
+            <span class="badge relation-type" data-ui-map="relation-type" data-raw-value="recurring_theme">recurring_theme</span>
+            <h4>Mistral eröffnete Münchner Industrial-AI-Hub (28.09.)</h4>
+            <p class="sidebar-meta">Large 4 reiht sich in Mistrals europäische Souveränitäts-Linie ein, die mit dem Münchner Hub begann und zuletzt auch Aleph Alphas Kolibri (03.10.) umfasste.</p>
+          </article>
+          <article class="archive-item" data-id="aleph-alpha-kolibri-sovereign-model">
+            <span class="badge relation-type" data-ui-map="relation-type" data-raw-value="precedent">precedent</span>
+            <h4>Aleph Alpha veröffentlichte souveränes Modell Kolibri (03.10.)</h4>
+            <p class="sidebar-meta">Zweites europäisches Souveränitäts-Modell binnen weniger Tage – Large 4 und Kolibri verstärken gemeinsam den Trend eigenständiger EU-Frontier-Modelle.</p>
+          </article>
+          <article class="archive-item" data-id="bfdi-predecessor-departure">
+            <span class="badge relation-type" data-ui-map="relation-type" data-raw-value="follow_up">follow_up</span>
+            <h4>Vorgängerin Specht-Riemenschneider schied gesundheitsbedingt aus dem BfDI-Amt</h4>
+            <p class="sidebar-meta">Hennemanns Amtsantritt (01.10.) schließt die Führungslücke an der Spitze der zentralen deutschen Datenschutz-Aufsichtsbehörde.</p>
+          </article>
+        </section>
+      </aside>
+    </section>
+  </main>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const labelMaps = {
+        category: {
+          regulation: 'Regulierung',
+          product: 'Produkte & Plattformen',
+          global_eu: 'Global mit EU-Impact',
+          enterprise_ai: 'Enterprise AI',
+          governance: 'Governance',
+          watchlist: 'Watchlist'
+        },
+        priority: {
+          P1: 'Sehr wichtig',
+          P2: 'Relevant',
+          P3: 'Kurz notiert'
+        },
+        trust: {
+          hoch: 'Hohe Quellenlage',
+          mittel: 'Mittlere Quellenlage',
+          niedrig: 'Niedrige Quellenlage',
+          gemischt: 'Gemischte Quellenlage',
+          watchlist: 'Watchlist'
+        },
+        role: {
+          faktenanker: 'Faktenanker',
+          policy_interpretation: 'Policy-Interpretation',
+          marktverifikation: 'Marktverifikation',
+          produktquelle: 'Produktquelle',
+          enterprise_signal: 'Enterprise-Signal',
+          'frühindikator': 'Frühindikator',
+          unternehmensquelle: 'Unternehmensquelle',
+          developer_dokumentation: 'Entwicklerdokumentation'
+        },
+        'source-type': {
+          official: 'Offizielle Quelle',
+          vendor: 'Anbieterquelle',
+          media: 'Medienbericht',
+          research: 'Research',
+          community: 'Community',
+          documentation: 'Dokumentation',
+          legal: 'Rechtstext'
+        },
+        'relation-type': {
+          follow_up: 'Follow-up',
+          recurring_theme: 'Wiederkehrendes Thema',
+          precedent: 'Präzedenzfall',
+          trendline: 'Trendlinie'
+        }
+      };
+
+      const mapLabel = (group, rawValue) => {
+        if (!rawValue) return '';
+        return (labelMaps[group] && labelMaps[group][rawValue]) || rawValue;
+      };
+
+      document.querySelectorAll('[data-ui-map]').forEach((element) => {
+        const group = element.dataset.uiMap;
+        const rawValue = element.dataset.rawValue || element.textContent.trim();
+        const mappedValue = mapLabel(group === 'overall-trust' ? 'trust' : group, rawValue);
+
+        if (group === 'overall-trust') {
+          element.textContent = `Status: ${mappedValue}`;
+          return;
+        }
+
+        element.textContent = mappedValue;
+      });
+
+      document.querySelectorAll('[data-derived-from-story]').forEach((element) => {
+        const rawValue = element.dataset.derivedFromStory;
+        element.textContent = rawValue === 'true' ? 'Aus Story-Quellen abgeleitet' : 'Eigenständig zusammengeführt';
+      });
+
+      document.querySelectorAll('.source-item').forEach((item) => {
+        const roleSummary = item.querySelector('[data-role-summary]');
+        const roleNodes = Array.from(item.querySelectorAll('[data-source-role]'));
+        const sourceCountNode = item.querySelector('[data-source-count]');
+        const uniqueRoles = [...new Set(roleNodes.map((node) => node.dataset.rawValue).filter(Boolean))];
+
+        if (sourceCountNode) sourceCountNode.textContent = String(roleNodes.length);
+
+        if (roleSummary) {
+          roleSummary.innerHTML = '';
+          uniqueRoles.forEach((role) => {
+            const pill = document.createElement('span');
+            pill.className = 'source-pill';
+            pill.textContent = mapLabel('role', role);
+            roleSummary.appendChild(pill);
+          });
+        }
+      });
+
+      const cards = Array.from(document.querySelectorAll('.priority-stories .story-card'));
+      const filterRow = document.getElementById('story-filter-row');
+      const emptyState = document.getElementById('story-filter-empty-state');
+      const categoryCounts = cards.reduce((acc, card) => {
+        const category = card.dataset.category;
+        if (!category) return acc;
+        acc[category] = (acc[category] || 0) + 1;
+        return acc;
+      }, {});
+
+      const createButton = (filter, label) => {
+        const button = document.createElement('button');
+        button.type = 'button';
+        button.className = 'filter-button';
+        button.dataset.filter = filter;
+        button.setAttribute('aria-pressed', 'false');
+        button.textContent = label;
+        return button;
+      };
+
+      Object.keys(categoryCounts).forEach((category) => {
+        const button = createButton(category, `${mapLabel('category', category)} · ${categoryCounts[category]}`);
+        filterRow.appendChild(button);
+      });
+
+      const buttons = Array.from(document.querySelectorAll('.filter-button'));
+
+      const applyFilter = (filter) => {
+        buttons.forEach((button) => {
+          const isActive = button.dataset.filter === filter;
+          button.classList.toggle('active', isActive);
+          button.setAttribute('aria-pressed', isActive ? 'true' : 'false');
+        });
+
+        let visibleCount = 0;
+        cards.forEach((card) => {
+          const isVisible = filter === 'all' || card.dataset.category === filter;
+          card.classList.toggle('is-filtered-out', !isVisible);
+          if (isVisible) visibleCount += 1;
+        });
+
+        if (emptyState) {
+          emptyState.classList.toggle('is-visible', visibleCount === 0);
+        }
+      };
+
+      buttons.forEach((button) => {
+        button.addEventListener('click', () => applyFilter(button.dataset.filter || 'all'));
+      });
+
+      applyFilter('all');
+    });
+  </script>
+</body>
+</html>
