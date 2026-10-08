@@ -1,0 +1,1223 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NTT Data eröffnet KI-Testlabor München, Bitkom-Umfrage zu KI-Büchern, Google öffnet SynthID-Detektor</title>
+  <style>
+    :root {
+      --bg: #eef3f9;
+      --bg-radial: radial-gradient(circle at top left, rgba(49, 91, 217, 0.14), transparent 32rem), radial-gradient(circle at top right, rgba(31, 122, 77, 0.10), transparent 28rem), #eef3f9;
+      --surface: #ffffff;
+      --surface-soft: #f7f9fd;
+      --surface-blue: #f1f5ff;
+      --text: #111b2e;
+      --muted: #66748c;
+      --muted-2: #8190a8;
+      --border: #d9e2ef;
+      --border-strong: #bfcae0;
+      --accent: #244ed8;
+      --accent-strong: #1739a8;
+      --accent-soft: #e8efff;
+      --success: #1f7a4d;
+      --success-soft: #e7f5ee;
+      --warning: #b26a00;
+      --warning-soft: #fff3dc;
+      --risk: #a63f3f;
+      --risk-soft: #fdecec;
+      --watch: #2563eb;
+      --watch-soft: #eaf1ff;
+      --shadow: 0 18px 45px rgba(17, 30, 58, 0.10);
+      --shadow-soft: 0 8px 24px rgba(17, 30, 58, 0.07);
+      --radius-xl: 26px;
+      --radius-lg: 18px;
+      --radius-md: 14px;
+      --radius-sm: 10px;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      padding: 34px;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--bg-radial);
+      color: var(--text);
+      line-height: 1.55;
+    }
+
+    h1, h2, h3, h4, p { margin: 0; }
+    h1 { max-width: 920px; font-size: clamp(32px, 5vw, 56px); line-height: 0.98; letter-spacing: -0.045em; }
+    h2 { font-size: clamp(22px, 3vw, 34px); line-height: 1.08; letter-spacing: -0.03em; }
+    h3 { font-size: 20px; line-height: 1.18; letter-spacing: -0.02em; }
+    h4 { font-size: 15px; line-height: 1.25; }
+    a { color: var(--accent-strong); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    .daily-briefing {
+      max-width: 1220px;
+      margin: 0 auto;
+      display: grid;
+      gap: 24px;
+    }
+
+    .hero,
+    .top-story,
+    .story-card,
+    .sidebar-block {
+      background: rgba(255, 255, 255, 0.92);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow-soft);
+      backdrop-filter: blur(12px);
+    }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      padding: 30px;
+      display: grid;
+      gap: 18px;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      height: 5px;
+      background: linear-gradient(90deg, #244ed8, #1f7a4d, #b26a00);
+      pointer-events: none;
+    }
+
+    .hero > * { position: relative; }
+
+    .eyebrow,
+    .story-kicker,
+    .section-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      line-height: 1;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-weight: 800;
+    }
+
+    .eyebrow::before,
+    .section-label::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 0 5px var(--accent-soft);
+      flex: 0 0 auto;
+    }
+
+    .briefing-summary {
+      max-width: 880px;
+      color: var(--muted);
+      font-size: 17px;
+    }
+
+    .meta-row,
+    .story-meta,
+    .filter-row,
+    .source-meta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .chip,
+    .badge,
+    .filter-button,
+    .source-pill {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 800;
+      line-height: 1;
+      white-space: nowrap;
+    }
+
+    .chip {
+      padding: 9px 11px;
+      background: var(--accent-soft);
+      color: var(--accent-strong);
+      border: 1px solid rgba(36, 78, 216, 0.12);
+    }
+
+    .badge {
+      padding: 8px 10px;
+      border: 1px solid var(--border);
+      background: var(--surface-soft);
+      color: var(--muted);
+    }
+
+    .badge[data-trust="hoch"] { background: var(--success-soft); color: var(--success); border-color: rgba(31, 122, 77, 0.20); }
+    .badge[data-trust="mittel"], .badge[data-trust="gemischt"] { background: var(--warning-soft); color: var(--warning); border-color: rgba(178, 106, 0, 0.22); }
+    .badge[data-trust="niedrig"] { background: var(--risk-soft); color: var(--risk); border-color: rgba(166, 63, 63, 0.22); }
+    .badge[data-trust="watchlist"] { background: var(--watch-soft); color: var(--watch); border-color: rgba(37, 99, 235, 0.18); }
+
+    .main-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 2.05fr) minmax(300px, 0.95fr);
+      gap: 24px;
+      align-items: start;
+    }
+
+    .main-column,
+    .priority-stories,
+    .sidebar {
+      display: grid;
+      gap: 18px;
+      min-width: 0;
+    }
+
+    .top-story,
+    .story-card {
+      padding: 22px;
+      display: grid;
+      gap: 15px;
+      min-width: 0;
+    }
+
+    .top-story {
+      border-color: rgba(36, 78, 216, 0.24);
+      box-shadow: var(--shadow);
+    }
+
+    .story-header {
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      align-items: flex-start;
+      min-width: 0;
+    }
+
+    .story-title-block,
+    .story-text-stack {
+      display: grid;
+      gap: 8px;
+      min-width: 0;
+    }
+
+    .story-title-block h2,
+    .story-title-block h3 {
+      overflow-wrap: anywhere;
+    }
+
+    .field-note { color: var(--muted); }
+    .field-note strong { color: var(--text); }
+
+    .takeaway {
+      border: 1px solid var(--border);
+      background: linear-gradient(180deg, #fbfcff, #f6f8fc);
+      border-radius: var(--radius-lg);
+      padding: 16px;
+      display: grid;
+      gap: 6px;
+    }
+
+    .takeaway strong {
+      font-size: 13px;
+      letter-spacing: 0.02em;
+    }
+
+    .score-strip {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 10px;
+      max-width: 100%;
+      min-width: 0;
+    }
+
+    .score-item {
+      --score: 1;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      background: var(--surface-soft);
+      padding: 12px;
+      display: grid;
+      gap: 8px;
+      min-height: 88px;
+      min-width: 0;
+      overflow: hidden;
+    }
+
+    .score-topline {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 6px;
+      min-width: 0;
+      max-width: 100%;
+    }
+
+    .score-value {
+      min-width: 0;
+      max-width: 100%;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      font-size: 24px;
+      line-height: 1;
+      font-weight: 900;
+      letter-spacing: -0.04em;
+    }
+
+    .score-max {
+      color: var(--muted-2);
+      font-size: 11px;
+      font-weight: 800;
+      flex: 0 0 auto;
+    }
+
+    .score-label {
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.15;
+      font-weight: 750;
+      overflow-wrap: anywhere;
+      hyphens: auto;
+    }
+
+    .meter {
+      width: 100%;
+      min-width: 0;
+      height: 7px;
+      border-radius: 999px;
+      background: #e4e9f2;
+      overflow: hidden;
+    }
+
+    .meter > span {
+      display: block;
+      height: 100%;
+      width: clamp(0%, calc(var(--score) * 20%), 100%);
+      max-width: 100%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, var(--accent), #1f7a4d);
+    }
+
+    .filter-panel {
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      background: rgba(255, 255, 255, 0.78);
+      box-shadow: var(--shadow-soft);
+      padding: 14px;
+      display: grid;
+      gap: 10px;
+    }
+
+    .filter-label {
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 850;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .filter-button {
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--muted);
+      padding: 8px 10px;
+      cursor: pointer;
+      transition: background 0.18s ease, color 0.18s ease, border-color 0.18s ease, transform 0.18s ease;
+    }
+
+    .filter-button:hover {
+      transform: translateY(-1px);
+      border-color: var(--border-strong);
+    }
+
+    .filter-button.active,
+    .filter-button[aria-pressed="true"] {
+      background: var(--text);
+      color: #ffffff;
+      border-color: var(--text);
+    }
+
+    .is-filtered-out { display: none !important; }
+
+    .filter-empty-state {
+      display: none;
+      border: 1px dashed var(--border-strong);
+      border-radius: var(--radius-lg);
+      background: rgba(255, 255, 255, 0.7);
+      padding: 16px;
+      color: var(--muted);
+    }
+
+    .filter-empty-state.is-visible { display: block; }
+
+    .sidebar-status-grid,
+    .compact-source-summary,
+    .compact-source-details,
+    .compact-role-row {
+      display: grid;
+      gap: 10px;
+    }
+
+    .sidebar-status-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .status-card {
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      background: var(--surface-soft);
+      padding: 12px;
+      display: grid;
+      gap: 5px;
+    }
+
+    .status-card-label {
+      font-size: 11px;
+      font-weight: 850;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--muted-2);
+    }
+
+    .status-card-value {
+      font-size: 14px;
+      font-weight: 800;
+      color: var(--text);
+    }
+
+    .compact-source-header {
+      display: grid;
+      gap: 8px;
+    }
+
+    .compact-source-stats {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .compact-source-list {
+      margin: 0;
+      padding-left: 18px;
+      color: var(--muted);
+      display: grid;
+      gap: 6px;
+    }
+
+    .compact-source-list a,
+    .compact-source-list .source-label-fallback {
+      font-weight: 750;
+    }
+
+    .story-card { box-shadow: var(--shadow-soft); }
+    .story-card[data-category="regulation"] { border-left: 5px solid var(--accent); }
+    .story-card[data-category="governance"] { border-left: 5px solid var(--success); }
+    .story-card[data-category="enterprise_ai"] { border-left: 5px solid #5b5fd6; }
+    .story-card[data-category="product"] { border-left: 5px solid #6b55c9; }
+    .story-card[data-category="global_eu"] { border-left: 5px solid #2d8aa6; }
+    .story-card[data-category="watchlist"] { border-left: 5px solid var(--watch); }
+
+    details.evidence {
+      border-top: 1px solid var(--border);
+      padding-top: 10px;
+    }
+
+    details.evidence summary,
+    .source-item summary {
+      cursor: pointer;
+      list-style: none;
+      color: var(--accent-strong);
+      font-size: 13px;
+      font-weight: 850;
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      align-items: center;
+    }
+
+    details.evidence summary::-webkit-details-marker,
+    .source-item summary::-webkit-details-marker { display: none; }
+
+    details.evidence summary::after,
+    .source-item summary::after {
+      content: "+";
+      display: grid;
+      place-items: center;
+      width: 22px;
+      height: 22px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: var(--accent-strong);
+      font-size: 15px;
+      line-height: 1;
+      flex: 0 0 auto;
+    }
+
+    details.evidence[open] summary::after,
+    .source-item details[open] summary::after { content: "–"; }
+
+    .sources {
+      margin-top: 10px;
+      display: grid;
+      gap: 8px;
+      padding: 12px;
+      border-radius: var(--radius-md);
+      background: var(--surface-soft);
+      border: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 13px;
+      min-width: 0;
+    }
+
+    .source-link-card {
+      display: grid;
+      gap: 7px;
+      padding: 10px;
+      border: 1px solid rgba(191, 202, 224, 0.75);
+      border-radius: var(--radius-sm);
+      background: #ffffff;
+      min-width: 0;
+    }
+
+    .source-link-card a,
+    .source-link-card .source-label-fallback {
+      font-weight: 850;
+      overflow-wrap: anywhere;
+    }
+
+    .source-label-fallback { color: var(--text); }
+
+    .source-pill {
+      align-self: start;
+      justify-self: start;
+      padding: 5px 7px;
+      border: 1px solid var(--border);
+      background: #eef2ff;
+      color: #3730a3;
+      font-size: 10.5px;
+      letter-spacing: 0.01em;
+    }
+
+    .source-meta {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 6px 10px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .source-meta span { overflow-wrap: anywhere; }
+    .source-meta strong { color: var(--text); }
+
+    .sidebar-block {
+      padding: 18px;
+      display: grid;
+      gap: 12px;
+    }
+
+    .watch-item,
+    .source-item,
+    .archive-item {
+      border: 1px solid var(--border);
+      background: var(--surface-soft);
+      border-radius: var(--radius-md);
+      padding: 13px;
+      display: grid;
+      gap: 7px;
+      min-width: 0;
+    }
+
+    .sidebar-meta {
+      color: var(--muted);
+      font-size: 13px;
+      overflow-wrap: anywhere;
+    }
+
+    .source-item { padding: 0; overflow: hidden; }
+    .source-item details { padding: 12px 13px; }
+    .source-item summary { color: var(--text); overflow-wrap: anywhere; }
+    .source-item .source-detail {
+      margin-top: 9px;
+      display: grid;
+      gap: 8px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+    .archive-item .relation-type { justify-self: start; background: #eef2ff; color: #3730a3; }
+
+    @media (max-width: 980px) {
+      body { padding: 18px; }
+      .hero, .top-story, .story-card, .sidebar-block { border-radius: var(--radius-lg); }
+      .main-layout { grid-template-columns: 1fr; }
+      .score-strip {
+        grid-template-columns: repeat(5, minmax(78px, 1fr));
+        gap: 7px;
+        overflow-x: auto;
+        overflow-y: hidden;
+        padding-bottom: 2px;
+        scrollbar-width: thin;
+      }
+      .score-item { min-height: 58px; padding: 7px 8px; gap: 5px; }
+      .score-value { font-size: 16px; }
+      .score-max { font-size: 10px; }
+      .score-label { font-size: 10px; line-height: 1.1; }
+      .meter { height: 4px; }
+      .chip, .badge, .filter-button { padding: 6px 8px; font-size: 11px; }
+      .filter-panel { padding: 12px; }
+      .filter-row { gap: 7px; }
+      .source-meta { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 560px) {
+      body { padding: 12px; }
+      .daily-briefing { gap: 14px; }
+      .hero { padding: 22px; }
+      .story-header { display: grid; gap: 10px; }
+      .story-meta { gap: 7px; }
+      .score-strip { grid-template-columns: repeat(5, minmax(72px, 1fr)); }
+      .score-item { min-height: 54px; padding: 6px 7px; }
+      .score-value { font-size: 15px; }
+      .score-max { font-size: 10px; }
+      .score-label { font-size: 9.5px; }
+      .filter-row {
+        display: flex;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        padding-bottom: 2px;
+        scrollbar-width: thin;
+      }
+      .filter-button { flex: 0 0 auto; }
+      .sources { padding: 10px; }
+      .source-link-card { padding: 9px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="daily-briefing">
+    <section class="hero">
+      <div class="eyebrow">Daily AI Intelligence Briefing</div>
+      <h1>NTT Data eröffnet KI-Testlabor München, Bitkom-Umfrage zu KI-Büchern, Google öffnet SynthID-Detektor</h1>
+      <p class="briefing-summary">Ruhiger Regulierungstag ohne neue AI-Act-/Datenschutz-Primärquelle. NTT Data eröffnete ein KI-Testlabor in München, Bitkom befragte Deutsche zu KI in Büchern, McKinsey bezifferte Digital-Health-Potenzial, Google öffnete seinen SynthID-Detektor.</p>
+      <div class="meta-row">
+        <span class="chip">Datum: 2026-10-07</span>
+        <span class="chip">Fenster: Mittwoch, 07.10.2026 (Tagesfenster)</span>
+        <span class="chip">Fokus: Deutschland / EU</span>
+        <span class="badge" data-trust="gemischt" data-ui-map="overall-trust" data-raw-value="gemischt">Status: gemischt</span>
+      </div>
+    </section>
+
+    <section class="main-layout">
+      <section class="main-column">
+        <article class="top-story">
+          <div class="story-header">
+            <div class="story-title-block">
+              <div class="story-kicker">Top Story</div>
+              <h2>NTT Data eröffnet KI-Testlabor in München-Lohhof mit Mistral, Dell und Red Hat</h2>
+            </div>
+            <span class="chip" data-ui-map="priority" data-raw-value="P1">P1</span>
+          </div>
+          <p>NTT Data eröffnete am 07.10. in München-Lohhof ein Testlabor, in dem Unternehmen KI-Anwendungen vor dem Produktiveinsatz unter realistischen Hardwarebedingungen prüfen können – Performance, Sicherheit und Governance. Technischer Aufbau: offene Mistral-Modelle, Red Hat OpenShift sowie Dell-AI-Factory-Hardware (Nvidia Blackwell, AMD Instinct MI355X/EPYC, Axelera Europa für Inferenz). Kunden können eigene Racks mitbringen oder isoliert ohne Netzwerkzugang testen. Bayerns Digitalminister Fabian Mehring nahm an der Eröffnung teil. NTT Data bewirbt das Angebot mit &#x27;voller Souveränität&#x27; über Daten und Anwendungen der Kunden.</p>
+          <div class="score-strip">
+            <div class="score-item" style="--score: 4"><div class="score-topline"><span class="score-value">4</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">EU / DE-Relevanz</div></div>
+            <div class="score-item" style="--score: 3"><div class="score-topline"><span class="score-value">3</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Business Impact</div></div>
+            <div class="score-item" style="--score: 1"><div class="score-topline"><span class="score-value">1</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Regulatorik</div></div>
+            <div class="score-item" style="--score: 3"><div class="score-topline"><span class="score-value">3</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Technologie</div></div>
+            <div class="score-item" style="--score: 3"><div class="score-topline"><span class="score-value">3</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Lernwert</div></div>
+          </div>
+          <div class="takeaway">
+            <strong>Einschätzung</strong>
+            <p class="field-note">Eröffnung, Standort, Technik-Stack und Ministeranwesenheit sind über heise konkret und überprüfbar belegt; die Souveränitätsaussage ist NTT Datas eigene Vermarktungssprache und bislang unabhängig nicht bestätigt – es werden auch noch keine Kunden genannt.</p>
+          </div>
+          <details class="evidence">
+            <summary>Quellen</summary>
+            <div class="sources">
+              <article class="source-link-card">
+                <a href="https://www.heise.de/news/Testlabor-fuer-KI-Anwendungen-von-NTT-Data-in-Muenchen-eroeffnet-11479710.html" target="_blank" rel="noopener noreferrer">Testlabor für KI-Anwendungen von NTT Data in München eröffnet</a>
+                <div class="source-meta-row">
+                  <span class="source-pill" data-ui-map="role" data-raw-value="enterprise_signal">enterprise_signal</span>
+                  <span class="source-pill" data-ui-map="source-type" data-raw-value="media">media</span>
+                </div>
+                <div class="source-meta">
+                  <span><strong>Publisher:</strong> heise online</span>
+                  <span><strong>Veröffentlicht:</strong> 2026-10-07</span>
+                  <span><strong>Abgerufen:</strong> 2026-10-07</span>
+                </div>
+              </article>
+            </div>
+          </details>
+          <details class="evidence">
+            <summary>Weitere Recherche</summary>
+            <div class="sources">
+              <p class="field-note">Welche Unternehmen nutzen das Labor als erste Referenzkunden, und bestätigt eine unabhängige Quelle NTT Datas Souveränitätsversprechen für Daten und Workloads?</p>
+            </div>
+          </details>
+        </article>
+
+        <section class="priority-stories">
+          <div class="section-label">Weitere priorisierte Entwicklungen</div>
+          <div class="filter-panel" aria-label="Story-Filter">
+            <div class="filter-label">Filter</div>
+            <div class="filter-row" id="story-filter-row">
+              <button class="filter-button active" type="button" data-filter="all" aria-pressed="true">Alle</button>
+            </div>
+          </div>
+
+          <article class="story-card" data-id="bitkom-survey-ai-books-translation" data-category="governance" data-trust-status="mittel">
+            <div class="story-header">
+              <div class="story-title-block">
+                <div class="story-kicker">Vor der Frankfurter Buchmesse</div>
+                <h3>Bitkom-Umfrage: Deutsche lehnen KI-geschriebene Bücher ab, KI-Übersetzungen sind akzeptiert</h3>
+              </div>
+              <div class="story-meta">
+                <span class="chip" data-ui-map="category" data-raw-value="governance">governance</span>
+                <span class="chip" data-ui-map="priority" data-raw-value="P2">P2</span>
+              </div>
+            </div>
+            <div class="story-text-stack">
+              <p>Repräsentative Bitkom-Umfrage (n&#x3D;1.006, ab 16 Jahren), veröffentlicht am 07.10. vor der Frankfurter Buchmesse: Nur 29% würden ein vollständig KI-geschriebenes Buch lesen, 58% erkennen KI-Texte nicht. 79% befürworten KI-Übersetzung. 72% fordern Kennzeichnungspflicht für KI in Büchern.</p>
+              <p class="field-note"><strong>Warum relevant:</strong> Deutschlandspezifisches Stimmungsbild zu KI-Transparenz und -Akzeptanz, methodisch ungewöhnlich gut dokumentiert für eine Verbandsumfrage.</p>
+              <p class="field-note"><strong>EU-/DE-Impact:</strong> Direkt, Deutschland – Verbraucher:innensicht auf KI-Kennzeichnung, die der Logik der AI-Act-Transparenzpflichten aus Art. 50 entspricht; dieser Bezug ist unsere eigene Einordnung, keine Aussage von Bitkom.</p>
+              <p class="field-note"><strong>Einordnung:</strong> Zahlen und Methodik sind über Bitkom/heise solide belegt; als Branchenverband hat Bitkom ein eigenes Interesse an der Einordnung, die Rohdaten selbst wirken aber sauber dokumentiert.</p>
+            </div>
+            <div class="score-strip">
+              <div class="score-item" style="--score: 3"><div class="score-topline"><span class="score-value">3</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">EU / DE-Relevanz</div></div>
+              <div class="score-item" style="--score: 2"><div class="score-topline"><span class="score-value">2</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Business Impact</div></div>
+              <div class="score-item" style="--score: 2"><div class="score-topline"><span class="score-value">2</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Regulatorik</div></div>
+              <div class="score-item" style="--score: 1"><div class="score-topline"><span class="score-value">1</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Technologie</div></div>
+              <div class="score-item" style="--score: 3"><div class="score-topline"><span class="score-value">3</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Lernwert</div></div>
+            </div>
+            <details class="evidence">
+              <summary>Quellen & Unsicherheit</summary>
+              <div class="sources">
+                <p class="field-note"><strong>Quellenlage:</strong> <span data-ui-map="trust" data-raw-value="mittel">mittel</span></p>
+                <article class="source-link-card">
+                  <a href="https://www.heise.de/news/Umfrage-Deutsche-wollen-keine-KI-generierten-Buecher-KI-Uebersetzungen-sind-okay-11479414.html" target="_blank" rel="noopener noreferrer">Umfrage: Deutsche wollen keine KI-generierten Bücher, KI-Übersetzungen sind okay</a>
+                  <div class="source-meta-row">
+                    <span class="source-pill" data-ui-map="role" data-raw-value="enterprise_signal">enterprise_signal</span>
+                    <span class="source-pill" data-ui-map="source-type" data-raw-value="media">media</span>
+                  </div>
+                  <div class="source-meta">
+                    <span><strong>Publisher:</strong> heise online</span>
+                    <span><strong>Veröffentlicht:</strong> 2026-10-07</span>
+                    <span><strong>Abgerufen:</strong> 2026-10-07</span>
+                  </div>
+                </article>
+                <p class="field-note"><strong>Unsicherheit:</strong> Bitkom ist Interessenvertretung der Digitalwirtschaft, keine neutrale Forschungseinrichtung; Methodik (Stichprobe, Feldzeit) ist jedoch transparent angegeben.</p>
+              </div>
+            </details>
+            <details class="evidence">
+              <summary>Weitere Recherche</summary>
+              <div class="sources">
+                <p class="field-note">Greifen Verlage oder der Börsenverein des Deutschen Buchhandels die Kennzeichnungsforderung auf der Buchmesse auf?</p>
+              </div>
+            </details>
+          </article>
+          <article class="story-card" data-id="google-synthid-detector-public-access" data-category="product" data-trust-status="hoch">
+            <div class="story-header">
+              <div class="story-title-block">
+                <div class="story-kicker">180 Mrd. markierte Inhalte</div>
+                <h3>Google öffnet SynthID-Wasserzeichen-Detektor für (fast) alle</h3>
+              </div>
+              <div class="story-meta">
+                <span class="chip" data-ui-map="category" data-raw-value="product">product</span>
+                <span class="chip" data-ui-map="priority" data-raw-value="P2">P2</span>
+              </div>
+            </div>
+            <div class="story-text-stack">
+              <p>Google öffnete seinen bislang wartelistenbeschränkten SynthID-Detektor breit. Er erkennt unsichtbare Google-Wasserzeichen in Gemini-/Veo-/Lyria-Inhalten. Laut Google über 180 Mrd. markierte Inhalte, ~1 Mio. Prüfanfragen täglich. Google: &#x27;kein universeller KI-Detektor&#x27;, erkennt nur eigenes Wasserzeichen.</p>
+              <p class="field-note"><strong>Warum relevant:</strong> Unabhängig von zwei Klasse-A-Fachmedien (the-decoder, heise) übereinstimmend berichtet; berührt das Thema KI-Kennzeichnung, das für den AI-Act-Transparenzartikel 50 zentral ist.</p>
+              <p class="field-note"><strong>EU-/DE-Impact:</strong> Indirekt – weder the-decoder noch heise erwähnen den AI Act, Art. 50 oder den Transparenz-Code-of-Practice; ein Bezug dorthin ist ausschließlich unsere eigene Einordnung, keine Aussage von Google oder einer Behörde.</p>
+              <p class="field-note"><strong>Einordnung:</strong> Die Existenz und Nutzungszahlen des Tools sind durch zwei unabhängige Quellen bestätigt; ein AI-Act-Bezug wäre reine Spekulation und wird hier bewusst nicht behauptet.</p>
+            </div>
+            <div class="score-strip">
+              <div class="score-item" style="--score: 2"><div class="score-topline"><span class="score-value">2</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">EU / DE-Relevanz</div></div>
+              <div class="score-item" style="--score: 3"><div class="score-topline"><span class="score-value">3</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Business Impact</div></div>
+              <div class="score-item" style="--score: 2"><div class="score-topline"><span class="score-value">2</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Regulatorik</div></div>
+              <div class="score-item" style="--score: 4"><div class="score-topline"><span class="score-value">4</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Technologie</div></div>
+              <div class="score-item" style="--score: 3"><div class="score-topline"><span class="score-value">3</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Lernwert</div></div>
+            </div>
+            <details class="evidence">
+              <summary>Quellen & Unsicherheit</summary>
+              <div class="sources">
+                <p class="field-note"><strong>Quellenlage:</strong> <span data-ui-map="trust" data-raw-value="hoch">hoch</span></p>
+                <article class="source-link-card">
+                  <a href="https://the-decoder.de/ueber-180-milliarden-inhalte-markiert-google-oeffnet-seinen-ki-wasserzeichen-detektor-fuer-alle/" target="_blank" rel="noopener noreferrer">Über 180 Milliarden Inhalte markiert: Google öffnet seinen KI-Wasserzeichen-Detektor für alle</a>
+                  <div class="source-meta-row">
+                    <span class="source-pill" data-ui-map="role" data-raw-value="enterprise_signal">enterprise_signal</span>
+                    <span class="source-pill" data-ui-map="source-type" data-raw-value="media">media</span>
+                  </div>
+                  <div class="source-meta">
+                    <span><strong>Publisher:</strong> The Decoder</span>
+                    <span><strong>Veröffentlicht:</strong> 2026-10-07</span>
+                    <span><strong>Abgerufen:</strong> 2026-10-07</span>
+                  </div>
+                </article>
+                <article class="source-link-card">
+                  <a href="https://www.heise.de/news/Googles-KI-Detektor-SynthID-ist-jetzt-fuer-fast-alle-zugaenglich-11479824.html" target="_blank" rel="noopener noreferrer">Googles KI-Detektor SynthID ist jetzt für (fast) alle zugänglich</a>
+                  <div class="source-meta-row">
+                    <span class="source-pill" data-ui-map="role" data-raw-value="enterprise_signal">enterprise_signal</span>
+                    <span class="source-pill" data-ui-map="source-type" data-raw-value="media">media</span>
+                  </div>
+                  <div class="source-meta">
+                    <span><strong>Publisher:</strong> heise online</span>
+                    <span><strong>Veröffentlicht:</strong> 2026-10-07</span>
+                    <span><strong>Abgerufen:</strong> 2026-10-07</span>
+                  </div>
+                </article>
+                <p class="field-note"><strong>Unsicherheit:</strong> Faktenlage (Zahlen, Funktionsweise) ist gut belegt; jeglicher AI-Act-Zusammenhang ist unbestätigte, selbst hinzugefügte Einordnung.</p>
+              </div>
+            </details>
+            <details class="evidence">
+              <summary>Weitere Recherche</summary>
+              <div class="sources">
+                <p class="field-note">Nennt die EU-Kommission oder ein AI-Act-Signatar SynthID im Kontext der Transparenzpflichten oder des Code of Practice?</p>
+              </div>
+            </details>
+          </article>
+          <article class="story-card" data-id="mckinsey-digital-health-potential-2026" data-category="enterprise_ai" data-trust-status="mittel">
+            <div class="story-header">
+              <div class="story-title-block">
+                <div class="story-kicker">Davon 22,8 Mrd. Euro durch KI</div>
+                <h3>McKinsey beziffert ungenutztes Digital-Health-Potenzial in Deutschland auf 80 Mrd. Euro pro Jahr</h3>
+              </div>
+              <div class="story-meta">
+                <span class="chip" data-ui-map="category" data-raw-value="enterprise_ai">enterprise_ai</span>
+                <span class="chip" data-ui-map="priority" data-raw-value="P2">P2</span>
+              </div>
+            </div>
+            <div class="story-text-stack">
+              <p>Neues McKinsey-Modell (28 Technologien): ungenutztes Digital-Health-Potenzial in Deutschland von rund 80 Mrd. Euro/Jahr, davon 22,8 Mrd. Euro durch KI. Ersetzt nicht den E-Health-Monitor 2022 (42 Mrd., 26 Technologien). Co-Autorin Sickmüller: &#x27;erhoffter Brutto-Vorteil&#x27;, Investitionen nicht gegengerechnet.</p>
+              <p class="field-note"><strong>Warum relevant:</strong> Konkrete, auf Deutschland bezogene Größenordnung für Enterprise-AI-Wirkung im Gesundheitswesen – mit expliziter Einordnung als Brutto-Potenzial statt Prognose.</p>
+              <p class="field-note"><strong>EU-/DE-Impact:</strong> Direkt, Deutschland – Gesundheitswesen und elektronische Patientenakte als zentraler Hebel.</p>
+              <p class="field-note"><strong>Einordnung:</strong> Die Zahl stammt aus einem von heise zitierten McKinsey-Modell mit Co-Autorin-Zitat; der Originalbericht war nicht direkt auffindbar, daher bleibt sie auf Sekundärquelle gestützt.</p>
+            </div>
+            <div class="score-strip">
+              <div class="score-item" style="--score: 3"><div class="score-topline"><span class="score-value">3</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">EU / DE-Relevanz</div></div>
+              <div class="score-item" style="--score: 4"><div class="score-topline"><span class="score-value">4</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Business Impact</div></div>
+              <div class="score-item" style="--score: 1"><div class="score-topline"><span class="score-value">1</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Regulatorik</div></div>
+              <div class="score-item" style="--score: 2"><div class="score-topline"><span class="score-value">2</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Technologie</div></div>
+              <div class="score-item" style="--score: 3"><div class="score-topline"><span class="score-value">3</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Lernwert</div></div>
+            </div>
+            <details class="evidence">
+              <summary>Quellen & Unsicherheit</summary>
+              <div class="sources">
+                <p class="field-note"><strong>Quellenlage:</strong> <span data-ui-map="trust" data-raw-value="mittel">mittel</span></p>
+                <article class="source-link-card">
+                  <a href="https://www.heise.de/news/Digital-Health-McKinsey-sieht-80-Milliarden-Euro-ungenutztes-Potenzial-pro-Jahr-11478052.html" target="_blank" rel="noopener noreferrer">Digital Health: McKinsey sieht 80 Milliarden Euro ungenutztes Potenzial pro Jahr</a>
+                  <div class="source-meta-row">
+                    <span class="source-pill" data-ui-map="role" data-raw-value="enterprise_signal">enterprise_signal</span>
+                    <span class="source-pill" data-ui-map="source-type" data-raw-value="media">media</span>
+                  </div>
+                  <div class="source-meta">
+                    <span><strong>Publisher:</strong> heise online</span>
+                    <span><strong>Veröffentlicht:</strong> 2026-10-07</span>
+                    <span><strong>Abgerufen:</strong> 2026-10-07</span>
+                  </div>
+                </article>
+                <p class="field-note"><strong>Unsicherheit:</strong> Originalbericht nicht direkt verifizierbar, nur über heise referenziert; Zahl ist Brutto-Potenzial ohne Investitionskosten, keine Netto-Einsparprognose.</p>
+              </div>
+            </details>
+            <details class="evidence">
+              <summary>Weitere Recherche</summary>
+              <div class="sources">
+                <p class="field-note">Veröffentlicht McKinsey den vollständigen Bericht mit Methodik, und wie ordnen Krankenkassen oder das BMG die 80-Mrd.-Zahl ein?</p>
+              </div>
+            </details>
+          </article>
+          <article class="story-card" data-id="nachtrag-eu-citizens-initiative-sovereign-ai-domains" data-category="regulation" data-trust-status="hoch">
+            <div class="story-header">
+              <div class="story-title-block">
+                <div class="story-kicker">&#x27;.IA&#x27;-Domain-Initiative</div>
+                <h3>Nachtrag (06.10.): EU-Kommission registriert Bürgerinitiative für souveräne europäische KI-Domains</h3>
+              </div>
+              <div class="story-meta">
+                <span class="chip" data-ui-map="category" data-raw-value="regulation">regulation</span>
+                <span class="chip" data-ui-map="priority" data-raw-value="P3">P3</span>
+              </div>
+            </div>
+            <div class="story-text-stack">
+              <p>Am 06.10. registrierte die EU-Kommission eine Europäische Bürgerinitiative für einen europäischen digitalen Raum für KI-Governance, einschließlich einer &#x27;.IA&#x27;-Domain. Diese Meldung fehlte in der Daily vom 06.10. und wird hier als Nachtrag nachgetragen.</p>
+              <p class="field-note"><strong>Warum relevant:</strong> Primärquelle zu einer neuen, auf EU-KI-Souveränität zielenden Bürgerinitiative – thematisch zentral für diesen Fokus, aber am 06.10. übersehen.</p>
+              <p class="field-note"><strong>EU-/DE-Impact:</strong> Direkt, EU-Ebene – Bürgerinitiativen benötigen 1 Mio. Unterschriften aus mindestens 7 Mitgliedstaaten, bevor die Kommission inhaltlich reagieren muss.</p>
+              <p class="field-note"><strong>Einordnung:</strong> Die Registrierung selbst ist über die Kommission primärquellenbestätigt; ob die Initiative die Unterschriftenschwelle erreicht, ist offen.</p>
+            </div>
+            <div class="score-strip">
+              <div class="score-item" style="--score: 5"><div class="score-topline"><span class="score-value">5</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">EU / DE-Relevanz</div></div>
+              <div class="score-item" style="--score: 2"><div class="score-topline"><span class="score-value">2</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Business Impact</div></div>
+              <div class="score-item" style="--score: 3"><div class="score-topline"><span class="score-value">3</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Regulatorik</div></div>
+              <div class="score-item" style="--score: 1"><div class="score-topline"><span class="score-value">1</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Technologie</div></div>
+              <div class="score-item" style="--score: 3"><div class="score-topline"><span class="score-value">3</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Lernwert</div></div>
+            </div>
+            <details class="evidence">
+              <summary>Quellen & Unsicherheit</summary>
+              <div class="sources">
+                <p class="field-note"><strong>Quellenlage:</strong> <span data-ui-map="trust" data-raw-value="hoch">hoch</span></p>
+                <article class="source-link-card">
+                  <a href="https://digital-strategy.ec.europa.eu/en/news/commission-registers-european-citizens-initiative-sovereign-european-ai-domains" target="_blank" rel="noopener noreferrer">Commission registers European Citizens&#x27; Initiative for sovereign European AI domains</a>
+                  <div class="source-meta-row">
+                    <span class="source-pill" data-ui-map="role" data-raw-value="faktenanker">faktenanker</span>
+                    <span class="source-pill" data-ui-map="source-type" data-raw-value="official">official</span>
+                  </div>
+                  <div class="source-meta">
+                    <span><strong>Publisher:</strong> European Commission</span>
+                    <span><strong>Veröffentlicht:</strong> 2026-10-06</span>
+                    <span><strong>Abgerufen:</strong> 2026-10-07</span>
+                  </div>
+                </article>
+                <p class="field-note"><strong>Unsicherheit:</strong> Nur die Registrierung ist bestätigt; Erfolgsaussichten und nächste Verfahrensschritte sind offen.</p>
+              </div>
+            </details>
+            <details class="evidence">
+              <summary>Weitere Recherche</summary>
+              <div class="sources">
+                <p class="field-note">Erreicht die Initiative innerhalb der Sammelfrist die nötigen Unterschriften, und positioniert sich die Kommission inhaltlich zur &#x27;.IA&#x27;-Domain-Idee?</p>
+              </div>
+            </details>
+          </article>
+          <article class="story-card" data-id="product-roundup-anthropic-openai-2026-10-07" data-category="product" data-trust-status="mittel">
+            <div class="story-header">
+              <div class="story-title-block">
+                <div class="story-kicker">Globale Produktnews, ohne EU-Spezifika</div>
+                <h3>Produktupdates: Claude Haiku 5.5, erweitertes Anthropic-Cyberprogramm, GPT-6 &#x27;Intelligent UI&#x27; und OpenAI Decisions API</h3>
+              </div>
+              <div class="story-meta">
+                <span class="chip" data-ui-map="category" data-raw-value="product">product</span>
+                <span class="chip" data-ui-map="priority" data-raw-value="P3">P3</span>
+              </div>
+            </div>
+            <div class="story-text-stack">
+              <p>Anthropic erweiterte sein Cyber Verification Program (reduzierte Filter für geprüfte Sicherheitsfachleute) und launchte Claude Haiku 5.5. OpenAI zeigte laut the-decoder GPT-6 mit &#x27;Intelligent UI&#x27; (interaktive Elemente) sowie eine Decisions API für Ja/Nein-Scores statt Text.</p>
+              <p class="field-note"><strong>Warum relevant:</strong> Breite Plattform-/Produktentwicklung bei den beiden wichtigsten US-Anbietern, relevant für Enterprise-AI-Kostenplanung und Agentic-/Dual-Use-Governance.</p>
+              <p class="field-note"><strong>EU-/DE-Impact:</strong> Keines der vier Updates nennt eine EU-Kundin, eine europäische Behördenreaktion oder EU-spezifische Verfügbarkeitsdetails – rein globaler Produktkontext.</p>
+              <p class="field-note"><strong>Einordnung:</strong> Anthropics Updates sind herstellerseitig primärbelegt; die beiden OpenAI-Punkte stützen sich bislang nur auf eine Sekundärquelle (the-decoder), ohne eigene OpenAI-Primärquelle geprüft zu haben.</p>
+            </div>
+            <div class="score-strip">
+              <div class="score-item" style="--score: 1"><div class="score-topline"><span class="score-value">1</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">EU / DE-Relevanz</div></div>
+              <div class="score-item" style="--score: 3"><div class="score-topline"><span class="score-value">3</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Business Impact</div></div>
+              <div class="score-item" style="--score: 1"><div class="score-topline"><span class="score-value">1</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Regulatorik</div></div>
+              <div class="score-item" style="--score: 3"><div class="score-topline"><span class="score-value">3</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Technologie</div></div>
+              <div class="score-item" style="--score: 3"><div class="score-topline"><span class="score-value">3</span><span class="score-max">/5</span></div><div class="meter"><span></span></div><div class="score-label">Lernwert</div></div>
+            </div>
+            <details class="evidence">
+              <summary>Quellen & Unsicherheit</summary>
+              <div class="sources">
+                <p class="field-note"><strong>Quellenlage:</strong> <span data-ui-map="trust" data-raw-value="mittel">mittel</span></p>
+                <article class="source-link-card">
+                  <a href="https://www.anthropic.com/news/cyber-verification-program" target="_blank" rel="noopener noreferrer">Expanding the Cyber Verification Program</a>
+                  <div class="source-meta-row">
+                    <span class="source-pill" data-ui-map="role" data-raw-value="unternehmensquelle">unternehmensquelle</span>
+                    <span class="source-pill" data-ui-map="source-type" data-raw-value="official">official</span>
+                  </div>
+                  <div class="source-meta">
+                    <span><strong>Publisher:</strong> Anthropic</span>
+                    <span><strong>Veröffentlicht:</strong> 2026-10-06</span>
+                    <span><strong>Abgerufen:</strong> 2026-10-07</span>
+                  </div>
+                </article>
+                <article class="source-link-card">
+                  <a href="https://www.anthropic.com/claude-haiku-5-5" target="_blank" rel="noopener noreferrer">Introducing Claude Haiku 5.5</a>
+                  <div class="source-meta-row">
+                    <span class="source-pill" data-ui-map="role" data-raw-value="unternehmensquelle">unternehmensquelle</span>
+                    <span class="source-pill" data-ui-map="source-type" data-raw-value="official">official</span>
+                  </div>
+                  <div class="source-meta">
+                    <span><strong>Publisher:</strong> Anthropic</span>
+                    <span><strong>Veröffentlicht:</strong> 2026-10-07</span>
+                    <span><strong>Abgerufen:</strong> 2026-10-07</span>
+                  </div>
+                </article>
+                <article class="source-link-card">
+                  <a href="https://the-decoder.de/intelligent-ui-openai-bringt-gpt-6-mit-neuer-interaktiver-oberflaeche-in-chatgpt/" target="_blank" rel="noopener noreferrer">&quot;Intelligent UI&quot;: OpenAI bringt GPT-6 mit neuer interaktiver Oberfläche in ChatGPT</a>
+                  <div class="source-meta-row">
+                    <span class="source-pill" data-ui-map="role" data-raw-value="enterprise_signal">enterprise_signal</span>
+                    <span class="source-pill" data-ui-map="source-type" data-raw-value="media">media</span>
+                  </div>
+                  <div class="source-meta">
+                    <span><strong>Publisher:</strong> The Decoder</span>
+                    <span><strong>Veröffentlicht:</strong> 2026-10-07</span>
+                    <span><strong>Abgerufen:</strong> 2026-10-07</span>
+                  </div>
+                </article>
+                <article class="source-link-card">
+                  <a href="https://the-decoder.de/neue-openai-schnittstelle-trifft-schnelle-entscheidungen-statt-texte-zu-generieren/" target="_blank" rel="noopener noreferrer">Neue OpenAI-Schnittstelle trifft schnelle Entscheidungen statt Texte zu generieren</a>
+                  <div class="source-meta-row">
+                    <span class="source-pill" data-ui-map="role" data-raw-value="enterprise_signal">enterprise_signal</span>
+                    <span class="source-pill" data-ui-map="source-type" data-raw-value="media">media</span>
+                  </div>
+                  <div class="source-meta">
+                    <span><strong>Publisher:</strong> The Decoder</span>
+                    <span><strong>Veröffentlicht:</strong> 2026-10-07</span>
+                    <span><strong>Abgerufen:</strong> 2026-10-07</span>
+                  </div>
+                </article>
+                <p class="field-note"><strong>Unsicherheit:</strong> Anthropic-Punkte primärquellenbelegt; OpenAI-Punkte nur über the-decoder, nicht gegen OpenAIs eigene Quellen geprüft.</p>
+              </div>
+            </details>
+            <details class="evidence">
+              <summary>Weitere Recherche</summary>
+              <div class="sources">
+                <p class="field-note">Veröffentlicht OpenAI eigene Release Notes zu &#x27;Intelligent UI&#x27; und der Decisions API, und zeigen sich EU-Kund:innen zu Preis oder Zugriff der neuen Anthropic-Stufen?</p>
+              </div>
+            </details>
+          </article>
+          <div class="filter-empty-state" id="story-filter-empty-state">
+            Keine Stories für diesen Filter sichtbar. Wähle einen anderen Filter oder prüfe, ob in diesem Lauf nur andere Kategorien vorkommen.
+          </div>
+        </section>
+      </section>
+
+      <aside class="sidebar">
+        <section class="sidebar-block">
+          <h3>Tageslage</h3>
+          <p class="sidebar-meta">Ruhiger Regulierungstag ohne neue AI-Act-/Datenschutz-Primärquelle. NTT Data eröffnete ein KI-Testlabor in München, Bitkom befragte Deutsche zu KI in Büchern, McKinsey bezifferte Digital-Health-Potenzial, Google öffnete seinen SynthID-Detektor.</p>
+          <div class="sidebar-status-grid">
+            <div class="status-card">
+              <span class="status-card-label">Fenster</span>
+              <span class="status-card-value">Mittwoch, 07.10.2026 (Tagesfenster)</span>
+            </div>
+            <div class="status-card">
+              <span class="status-card-label">Quellenlage</span>
+              <span class="status-card-value" data-ui-map="trust" data-raw-value="gemischt">gemischt</span>
+            </div>
+          </div>
+        </section>
+
+        <section class="sidebar-block watchlist">
+          <h3>Watchlist</h3>
+          <article class="watch-item" data-id="common-sense-media-chatgpt-teens-unacceptable-risk">
+            <div class="story-meta"><span class="badge" data-trust="watchlist" data-ui-map="trust" data-raw-value="watchlist">watchlist</span></div>
+            <h4>Common Sense Media: ChatGPT für Jugendliche &#x27;inakzeptables Risiko&#x27; – ohne EU-Bezug</h4>
+            <p class="sidebar-meta">Neue Studie (4.000+ Testeingaben): fehlende Eltern-Alarme bei Suizid-/Selbstverletzungsgesprächen, fehlende Krisenverweise, fehlschlagende Alterserkennung bei ChatGPT. OpenAI widerspricht den Ergebnissen.</p>
+            <p class="sidebar-meta"><strong>Warum beobachten:</strong> Setzt das KI-Kindersicherheitsthema fort (vgl. EU-Kinderschutzgremium), aber Quelle nennt keinen EU-/deutschen Bezug, nur einen Florida-Rechtsstreit.</p>
+            <p class="sidebar-meta"><strong>Nächstes Signal:</strong> Eine EU-Datenschutzbehörde, BfDI-Äußerung oder DSA-Bezug zu dieser oder einer vergleichbaren Studie.</p>
+          </article>
+          <article class="watch-item" data-id="meta-sierra-personal-agent-protocol">
+            <div class="story-meta"><span class="badge" data-trust="watchlist" data-ui-map="trust" data-raw-value="watchlist">watchlist</span></div>
+            <h4>Meta/Sierra: &#x27;Personal Agent Protocol&#x27; als Konkurrenz zu Visas Agentic-Commerce-Standard</h4>
+            <p class="sidebar-meta">Meta und Sierra stellten laut heise ein offenes Protokoll vor, über das persönliche KI-Agenten mit Unternehmen interagieren sollen – als Gegenentwurf zu Visas Trusted Agent Protocol.</p>
+            <p class="sidebar-meta"><strong>Warum beobachten:</strong> Fortsetzung des &#x27;Agentic Payments&#x27;-Themas; Partnerliste (u.a. Shopify, Stripe, Walmart) nur über ungeprüfte Sekundärquelle, kein EU-Händler oder PSD2/PSD3-Bezug gefunden.</p>
+            <p class="sidebar-meta"><strong>Nächstes Signal:</strong> Ein EU-Händler oder Zahlungsdienstleister, der das Protokoll nutzt, oder eine PSD2/PSD3/DORA-Einordnung.</p>
+          </article>
+          <article class="watch-item" data-id="gpai-systemic-risk-deadline-still-open">
+            <div class="story-meta"><span class="badge" data-trust="watchlist" data-ui-map="trust" data-raw-value="watchlist">watchlist</span></div>
+            <h4>GPAI-Systemrisiko-Frist (15.09.): weiterhin kein sichtbares Ergebnis</h4>
+            <p class="sidebar-meta">Rund drei Wochen nach der Frist weiterhin keine Bestätigung eingegangener Berichte oder einer Kommissions-/KI-Büro-Stellungnahme gefunden.</p>
+            <p class="sidebar-meta"><strong>Warum beobachten:</strong> Erster echter Testfall der Art.-55-Vollzugsarchitektur des AI Act.</p>
+            <p class="sidebar-meta"><strong>Nächstes Signal:</strong> Eine Bestätigung eingegangener Berichte oder eine offizielle Stellungnahme.</p>
+          </article>
+          <article class="watch-item" data-id="sap-techwolf-deal-terms">
+            <div class="story-meta"><span class="badge" data-trust="mittel" data-ui-map="trust" data-raw-value="mittel">mittel</span></div>
+            <h4>SAP/TechWolf: Kaufpreis und Konditionen weiterhin nicht offengelegt</h4>
+            <p class="sidebar-meta">SAP bestätigte die Übernahme von TechWolf (06.10.) ohne Angabe von Kaufpreis oder Konditionen; keine unabhängige Finanz- oder Wirtschaftsquelle bislang gefunden.</p>
+            <p class="sidebar-meta"><strong>Warum beobachten:</strong> Einordnung der Größenordnung und strategischen Bedeutung des Zukaufs im europäischen HR-Tech-/Workforce-Intelligence-Markt.</p>
+            <p class="sidebar-meta"><strong>Nächstes Signal:</strong> Eine Reuters-, Bloomberg- oder Handelsblatt-Meldung mit Kaufpreis oder Transaktionsdetails.</p>
+          </article>
+          <article class="watch-item" data-id="noyb-schrems-iii-filing">
+            <div class="story-meta"><span class="badge" data-trust="mittel" data-ui-map="trust" data-raw-value="mittel">mittel</span></div>
+            <h4>noyb/&#x27;Schrems III&#x27;: Klage weiterhin nicht eingereicht</h4>
+            <p class="sidebar-meta">Weiterhin keine formelle Klageeinreichung gefunden, mehr als drei Monate nach noybs eigener &#x27;binnen Wochen&#x27;-Ankündigung vom 30.06.</p>
+            <p class="sidebar-meta"><strong>Warum beobachten:</strong> Mögliche neue Rechtsunsicherheit für EU-US-Datentransfers bei KI-Diensten.</p>
+            <p class="sidebar-meta"><strong>Nächstes Signal:</strong> Tatsächliche Klageeinreichung oder ein CJEU-Aktenzeichen.</p>
+          </article>
+          <article class="watch-item" data-id="aleph-alpha-cohere-merger-clearance">
+            <div class="story-meta"><span class="badge" data-trust="mittel" data-ui-map="trust" data-raw-value="mittel">mittel</span></div>
+            <h4>Aleph Alpha × Cohere: Fusion weiterhin ohne Kartellfreigabe</h4>
+            <p class="sidebar-meta">Bundeskartellamt, EU-Kommission und kanadische Wettbewerbsbehörde haben die 20-Mrd.-Fusion weiterhin nicht freigegeben.</p>
+            <p class="sidebar-meta"><strong>Warum beobachten:</strong> Zentrale europäische Souveränitäts-KI-Konsolidierung mit noch offenem Ausgang.</p>
+            <p class="sidebar-meta"><strong>Nächstes Signal:</strong> Eine Freigabeentscheidung einer der drei Behörden.</p>
+          </article>
+          <article class="watch-item" data-id="anthropic-ipo-status">
+            <div class="story-meta"><span class="badge" data-trust="mittel" data-ui-map="trust" data-raw-value="mittel">mittel</span></div>
+            <h4>Anthropic-IPO: weiterhin kein öffentliches S-1</h4>
+            <p class="sidebar-meta">Weiterhin nur vertrauliche Entwurfsunterlagen; zuletzt kursierte ein Investorentag-Termin 14.10. ohne neue Bestätigung.</p>
+            <p class="sidebar-meta"><strong>Warum beobachten:</strong> Größte anstehende KI-Börsennotierung mit möglicher Signalwirkung für europäische Investoren.</p>
+            <p class="sidebar-meta"><strong>Nächstes Signal:</strong> Ein öffentlich eingereichtes S-1 oder ein bestätigtes Börsengangsdatum.</p>
+          </article>
+          <article class="watch-item" data-id="anthropic-pentagon-meta-microsoft-contradiction">
+            <div class="story-meta"><span class="badge" data-trust="niedrig" data-ui-map="trust" data-raw-value="niedrig">niedrig</span></div>
+            <h4>Anthropic/Pentagon: DoD meldet Claude-Ausstieg &#x27;vollendet&#x27; – widersprüchliche Berichte</h4>
+            <p class="sidebar-meta">Pentagon erklärte, Claude nicht mehr zu nutzen; andere Berichte (BBC) beschreiben fortgesetzte Nutzung. The Information berichtete zudem von Nutzungskürzung bei Meta/Microsoft – unbestätigt.</p>
+            <p class="sidebar-meta"><strong>Warum beobachten:</strong> Widersprüchliche Faktenlage zu einem Präzedenzfall für staatliche KI-Beschaffung; möglicher Bezug zur EU-Souveränitätsdebatte, bislang nur eigene Einordnung.</p>
+            <p class="sidebar-meta"><strong>Nächstes Signal:</strong> Eine offizielle Anthropic- oder DoD-Stellungnahme, die den Widerspruch auflöst, oder eine bestätigte Meta-/Microsoft-Aussage.</p>
+          </article>
+        </section>
+
+        <section class="sidebar-block archive-panel">
+          <h3>Archivbezug</h3>
+          <article class="archive-item" data-id="munich-sovereign-ai-infrastructure-cluster">
+            <span class="badge relation-type" data-ui-map="relation-type" data-raw-value="recurring_theme">recurring_theme</span>
+            <h4>München als Cluster für souveräne KI-Infrastruktur (Mistral-Hub 28.09., Aleph-Alpha-Kolibri 03.10.)</h4>
+            <p class="sidebar-meta">NTT Datas Testlabor (07.10.) reiht sich in eine Serie Münchner Enterprise-/Souveränitäts-KI-Signale ein, ohne dass die Quellen diesen Zusammenhang selbst herstellen.</p>
+          </article>
+          <article class="archive-item" data-id="eu-ai-transparency-code-of-practice-signatories">
+            <span class="badge relation-type" data-ui-map="relation-type" data-raw-value="precedent">precedent</span>
+            <h4>EU-Transparenz-Code-of-Practice-Signatarliste (31.07., ~190 Organisationen inkl. Google)</h4>
+            <p class="sidebar-meta">Googles SynthID-Öffnung (07.10.) berührt dasselbe Themenfeld wie der AI-generated-content Code of Practice, ohne dass Google selbst diesen Bezug herstellt.</p>
+          </article>
+          <article class="archive-item" data-id="mckinsey-ehealth-monitor-2022-baseline">
+            <span class="badge relation-type" data-ui-map="relation-type" data-raw-value="trendline">trendline</span>
+            <h4>McKinsey E-Health-Monitor 2022 (42 Mrd. Euro Potenzial, 26 Technologien)</h4>
+            <p class="sidebar-meta">Das neue 80-Mrd.-Modell (07.10., 28 Technologien) aktualisiert diese frühere Schätzung mit größerem Scope, ersetzt sie aber nicht direkt.</p>
+          </article>
+        </section>
+      </aside>
+    </section>
+  </main>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const labelMaps = {
+        category: {
+          regulation: 'Regulierung',
+          product: 'Produkte & Plattformen',
+          global_eu: 'Global mit EU-Impact',
+          enterprise_ai: 'Enterprise AI',
+          governance: 'Governance',
+          watchlist: 'Watchlist'
+        },
+        priority: {
+          P1: 'Sehr wichtig',
+          P2: 'Relevant',
+          P3: 'Kurz notiert'
+        },
+        trust: {
+          hoch: 'Hohe Quellenlage',
+          mittel: 'Mittlere Quellenlage',
+          niedrig: 'Niedrige Quellenlage',
+          gemischt: 'Gemischte Quellenlage',
+          watchlist: 'Watchlist'
+        },
+        role: {
+          faktenanker: 'Faktenanker',
+          policy_interpretation: 'Policy-Interpretation',
+          marktverifikation: 'Marktverifikation',
+          produktquelle: 'Produktquelle',
+          enterprise_signal: 'Enterprise-Signal',
+          'frühindikator': 'Frühindikator',
+          unternehmensquelle: 'Unternehmensquelle',
+          developer_dokumentation: 'Entwicklerdokumentation'
+        },
+        'source-type': {
+          official: 'Offizielle Quelle',
+          vendor: 'Anbieterquelle',
+          media: 'Medienbericht',
+          research: 'Research',
+          community: 'Community',
+          documentation: 'Dokumentation',
+          legal: 'Rechtstext'
+        },
+        'relation-type': {
+          follow_up: 'Follow-up',
+          recurring_theme: 'Wiederkehrendes Thema',
+          precedent: 'Präzedenzfall',
+          trendline: 'Trendlinie'
+        }
+      };
+
+      const mapLabel = (group, rawValue) => {
+        if (!rawValue) return '';
+        return (labelMaps[group] && labelMaps[group][rawValue]) || rawValue;
+      };
+
+      document.querySelectorAll('[data-ui-map]').forEach((element) => {
+        const group = element.dataset.uiMap;
+        const rawValue = element.dataset.rawValue || element.textContent.trim();
+        const mappedValue = mapLabel(group === 'overall-trust' ? 'trust' : group, rawValue);
+
+        if (group === 'overall-trust') {
+          element.textContent = `Status: ${mappedValue}`;
+          return;
+        }
+
+        element.textContent = mappedValue;
+      });
+
+      document.querySelectorAll('[data-derived-from-story]').forEach((element) => {
+        const rawValue = element.dataset.derivedFromStory;
+        element.textContent = rawValue === 'true' ? 'Aus Story-Quellen abgeleitet' : 'Eigenständig zusammengeführt';
+      });
+
+      document.querySelectorAll('.source-item').forEach((item) => {
+        const roleSummary = item.querySelector('[data-role-summary]');
+        const roleNodes = Array.from(item.querySelectorAll('[data-source-role]'));
+        const sourceCountNode = item.querySelector('[data-source-count]');
+        const uniqueRoles = [...new Set(roleNodes.map((node) => node.dataset.rawValue).filter(Boolean))];
+
+        if (sourceCountNode) sourceCountNode.textContent = String(roleNodes.length);
+
+        if (roleSummary) {
+          roleSummary.innerHTML = '';
+          uniqueRoles.forEach((role) => {
+            const pill = document.createElement('span');
+            pill.className = 'source-pill';
+            pill.textContent = mapLabel('role', role);
+            roleSummary.appendChild(pill);
+          });
+        }
+      });
+
+      const cards = Array.from(document.querySelectorAll('.priority-stories .story-card'));
+      const filterRow = document.getElementById('story-filter-row');
+      const emptyState = document.getElementById('story-filter-empty-state');
+      const categoryCounts = cards.reduce((acc, card) => {
+        const category = card.dataset.category;
+        if (!category) return acc;
+        acc[category] = (acc[category] || 0) + 1;
+        return acc;
+      }, {});
+
+      const createButton = (filter, label) => {
+        const button = document.createElement('button');
+        button.type = 'button';
+        button.className = 'filter-button';
+        button.dataset.filter = filter;
+        button.setAttribute('aria-pressed', 'false');
+        button.textContent = label;
+        return button;
+      };
+
+      Object.keys(categoryCounts).forEach((category) => {
+        const button = createButton(category, `${mapLabel('category', category)} · ${categoryCounts[category]}`);
+        filterRow.appendChild(button);
+      });
+
+      const buttons = Array.from(document.querySelectorAll('.filter-button'));
+
+      const applyFilter = (filter) => {
+        buttons.forEach((button) => {
+          const isActive = button.dataset.filter === filter;
+          button.classList.toggle('active', isActive);
+          button.setAttribute('aria-pressed', isActive ? 'true' : 'false');
+        });
+
+        let visibleCount = 0;
+        cards.forEach((card) => {
+          const isVisible = filter === 'all' || card.dataset.category === filter;
+          card.classList.toggle('is-filtered-out', !isVisible);
+          if (isVisible) visibleCount += 1;
+        });
+
+        if (emptyState) {
+          emptyState.classList.toggle('is-visible', visibleCount === 0);
+        }
+      };
+
+      buttons.forEach((button) => {
+        button.addEventListener('click', () => applyFilter(button.dataset.filter || 'all'));
+      });
+
+      applyFilter('all');
+    });
+  </script>
+</body>
+</html>
