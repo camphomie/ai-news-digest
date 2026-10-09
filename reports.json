@@ -1,6 +1,23 @@
 {
   "reports": [
     {
+      "id": "daily-2026-10-08",
+      "mode": "daily",
+      "title": "Daily Briefing 08.10.2026",
+      "date_label": "08.10.2026",
+      "window_start": "2026-10-08",
+      "window_end": "2026-10-08",
+      "public_url": "https://ai-news.camphausen.eu/daily/2026-10-08.html",
+      "published_at": "2026-10-09T06:11:56Z",
+      "summary": "Ecosia trennt sich von Mistral AI zugunsten chinesischer Open-Source-Modelle; Nachträge zu Googles gestopptem Rechenzentrumsbau in Finnland und OpenAIs EU-Textwasserzeichen.",
+      "trust_status": "gemischt",
+      "tags": [
+        "AI Act",
+        "Enterprise AI",
+        "EU-Souveränität"
+      ]
+    },
+    {
       "id": "daily-2026-10-07",
       "mode": "daily",
       "title": "Daily Briefing 07.10.2026",
