@@ -72,6 +72,24 @@
       ]
     },
     {
+      "id": "weekly-2026-W41",
+      "mode": "weekly",
+      "title": "Wochenbericht KW 41: EU weitet Auskunftsersuchen aus, geleakter DSGVO-KI-Entwurf, Mistral vs. Ecosia",
+      "date_label": "05.-11.10.2026",
+      "window_start": "2026-10-05",
+      "window_end": "2026-10-11",
+      "public_url": "https://ai-news.camphausen.eu/weekly/2026-W41.html",
+      "published_at": "2026-10-12T07:21:57Z",
+      "summary": "Brüssel befragt OpenAI, Anthropic und erstmals chinesische KI-Firmen zu KI-Cyberangriffen. Ein noyb-Leak zeigt einen Ratsentwurf, der KI-Training von der DSGVO-Einwilligung befreien würde. Mistral und Aleph Alpha stärken EU-Souveränität, Ecosia wechselt zu chinesischen Modellen.",
+      "trust_status": "gemischt",
+      "tags": [
+        "AI Act",
+        "Datenschutz",
+        "Souveränität",
+        "Enterprise AI"
+      ]
+    },
+    {
       "id": "daily-2026-10-05",
       "mode": "daily",
       "title": "Telekom will mit KI bis 2030 2,5 Mrd. Euro sparen – Nachträge zu ChatGPT-Werbewarnung und Aleph Alphas Kolibri",
