@@ -1,6 +1,23 @@
 {
   "reports": [
     {
+      "id": "daily-2026-10-13",
+      "mode": "daily",
+      "title": "Daily Briefing 13.10.2026",
+      "date_label": "13.10.2026",
+      "window_start": "2026-10-13",
+      "window_end": "2026-10-13",
+      "public_url": "https://ai-news.camphausen.eu/daily/2026-10-13.html",
+      "published_at": "2026-10-14T05:14:16Z",
+      "summary": "Mozilla startet Firefox Enterprise zuerst in Europa gegen Schatten-KI, Wildbergers KI-Steuer-Vorstoß und Googles Gemini 4 Argon.",
+      "trust_status": "gemischt",
+      "tags": [
+        "Enterprise AI",
+        "Governance",
+        "Produktupdate"
+      ]
+    },
+    {
       "id": "daily-2026-10-12",
       "mode": "daily",
       "title": "Daily Briefing 12.10.2026",
