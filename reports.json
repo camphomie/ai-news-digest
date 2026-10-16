@@ -1,6 +1,23 @@
 {
   "reports": [
     {
+      "id": "daily-2026-10-15",
+      "mode": "daily",
+      "title": "Daily Briefing 15.10.2026",
+      "date_label": "15.10.2026",
+      "window_start": "2026-10-15",
+      "window_end": "2026-10-15",
+      "public_url": "https://ai-news.camphausen.eu/daily/2026-10-15.html",
+      "published_at": "2026-10-16T04:31:44Z",
+      "summary": "Nachtrag: LG-Köln-Urteil gegen Snaps KI-Chatbot-Werbung, Freiburger Bildmodell FLUX 3, Anthropics Wachstum bremst vor IPO",
+      "trust_status": "gemischt",
+      "tags": [
+        "Datenschutz",
+        "Governance",
+        "Produkt"
+      ]
+    },
+    {
       "id": "daily-2026-10-14",
       "mode": "daily",
       "title": "Nvidia pumpt weitere 2 Mrd. USD in Europas KI, EU meldet Adoptions-Sprung, Schatten-KI im Recruiting",
