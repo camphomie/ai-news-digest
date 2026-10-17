@@ -1,6 +1,23 @@
 {
   "reports": [
     {
+      "id": "daily-2026-10-16",
+      "mode": "daily",
+      "title": "Daily Briefing 16.10.2026",
+      "date_label": "16.10.2026",
+      "window_start": "2026-10-16",
+      "window_end": "2026-10-16",
+      "public_url": "https://ai-news.camphausen.eu/daily/2026-10-16.html",
+      "published_at": "2026-10-17T04:25:12Z",
+      "summary": "Erste AI-Act-Norm EN 18286 im Amtsblatt zitiert, KI-Büro befragt laut Medienberichten OpenAI/Anthropic zu Kontrollverlust, RAISE-Pledging-Start in Dublin",
+      "trust_status": "gemischt",
+      "tags": [
+        "AI Act",
+        "Standards",
+        "Governance"
+      ]
+    },
+    {
       "id": "daily-2026-10-15",
       "mode": "daily",
       "title": "Daily Briefing 15.10.2026",
