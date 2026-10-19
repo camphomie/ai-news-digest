@@ -73,6 +73,24 @@
       ]
     },
     {
+      "id": "weekly-2026-W42",
+      "mode": "weekly",
+      "title": "Wochenbericht KW 42: Googles KI-Haftung vor Gericht, AI Act auf zwei Gleisen, Investitionsschub vor Berlin",
+      "date_label": "12.-18.10.2026",
+      "window_start": "2026-10-12",
+      "window_end": "2026-10-18",
+      "public_url": "https://ai-news.camphausen.eu/weekly/2026-W42.html",
+      "published_at": "2026-10-19T06:09:07Z",
+      "summary": "LG Aachen wendet die Münchner Google-KI-Haftungslinie zum zweiten Mal an. Der AI Act rückt auf zwei Gleisen vor: erste Amtsblatt-Norm, erste Auskunftsersuchen an OpenAI/Anthropic. Agentic-AI-Kontrollverlust bleibt Dauerthema, während Europas KI-Investitionen sich vor dem Berliner Nvidia-Gipfel verdichten.",
+      "trust_status": "gemischt",
+      "tags": [
+        "AI Act",
+        "Haftung",
+        "Agentic AI",
+        "Investitionen"
+      ]
+    },
+    {
       "id": "daily-2026-10-12",
       "mode": "daily",
       "title": "Daily Briefing 12.10.2026",
