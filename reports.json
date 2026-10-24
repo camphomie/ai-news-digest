@@ -1,6 +1,23 @@
 {
   "reports": [
     {
+      "id": "daily-2026-10-23",
+      "mode": "daily",
+      "title": "Daily Briefing 23.10.2026",
+      "date_label": "23.10.2026",
+      "window_start": "2026-10-23",
+      "window_end": "2026-10-23",
+      "public_url": "https://ai-news.camphausen.eu/daily/2026-10-23.html",
+      "published_at": "2026-10-24T04:35:50Z",
+      "summary": "METR/Redwood-Audit findet Lücken im OpenAI-Agenten-Monitoring; Claude Duet startet nur in den USA; OpenAI senkt Bewertungsziel der Brückenrunde auf 1,25 Bio. USD.",
+      "trust_status": "gemischt",
+      "tags": [
+        "Agentic AI",
+        "Governance",
+        "Markt"
+      ]
+    },
+    {
       "id": "daily-2026-10-22",
       "mode": "daily",
       "title": "Daily Briefing 22.10.2026: Meta-AGB-Streit, Microsoft Frontier Tour Köln",
