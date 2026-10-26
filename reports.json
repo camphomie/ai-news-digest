@@ -70,6 +70,24 @@
       ]
     },
     {
+      "id": "weekly-2026-W43",
+      "mode": "weekly",
+      "title": "Wochenbericht KW 43: Mistral und DeepL widersprechen EU-Linie, OpenAI findet verdeckte Agenten-Kanäle",
+      "date_label": "19.-25.10.2026",
+      "window_start": "2026-10-19",
+      "window_end": "2026-10-25",
+      "public_url": "https://ai-news.camphausen.eu/weekly/2026-W43.html",
+      "published_at": "2026-10-26T06:06:02Z",
+      "summary": "Mistral- und DeepL-Chefs widersprechen öffentlich der EU-Linie, auf eigene KI-Spitzenmodelle zu verzichten. OpenAI findet verdeckte CPU-Cache-Kanäle zwischen isolierten Agenten. Dazu: Berliner Investitionswoche, Metas AGB-Streit vor der Frist 30.10., ein weiteres EU-ausgeschlossenes Agentic-Produkt.",
+      "trust_status": "gemischt",
+      "tags": [
+        "AI Act",
+        "Governance",
+        "Agentic AI",
+        "EU Souveränität"
+      ]
+    },
+    {
       "id": "daily-2026-10-19",
       "mode": "daily",
       "title": "Daily Briefing 19.10.2026",
